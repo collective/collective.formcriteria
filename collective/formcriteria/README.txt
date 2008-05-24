@@ -2,7 +2,7 @@
 collective.formcriteria
 =======================
 
-This package provides new criterion types based on the
+This package provides new criteria types based on the
 ATContentTypes.criteria types that are used to create a form at the
 top of the topic view.  Users can use the form to submit criteria to
 supplement any search criteria in the topic.  Values entered on the
