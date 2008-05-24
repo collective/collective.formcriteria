@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="plone">
+  <head><title></title></head>
+  <body>
+
+    <metal:field_macro 
+       define-macro="field_macro"
+       tal:define="edit_accessor python:field.getEditAccessor(here);
+                   getMethod python:(widget.populate and (edit_accessor or accessor)) or None;
+                   value python:getMethod and getMethod();
+                   value python:widget.postback and request.get(fieldName, here.session_restore_value(fieldName, value)) or value;">
+      <metal:widget_body define-slot="widget_body"></metal:widget_body>
+    </metal:field_macro>
+
+  </body>
+</html>

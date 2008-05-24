@@ -1,0 +1,11 @@
+form[id=formcriteria_search] input.blurrable:blur {
+    action-cancel: kssValidateField;
+}
+
+form[id=formcriteria_search] select.blurrable:blur {
+    action-cancel: kssValidateField;
+}
+
+form[id=formcriteria_search] textarea.blurrable:blur {
+    action-cancel: kssValidateField;
+}

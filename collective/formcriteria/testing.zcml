@@ -1,0 +1,13 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+   i18n_domain="collective.customer">
+  
+  <genericsetup:registerProfile
+     name="testing"
+     title="Topic Criteria Test Fixture"
+     description="Set up the test fixture for collective.formcriteria"
+     provides="Products.GenericSetup.interfaces.EXTENSION"
+     />
+  
+</configure>

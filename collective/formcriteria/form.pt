@@ -1,0 +1,62 @@
+<metal:block use-macro="here/global_defines/macros/defines" />
+
+<tal:comment content="nothing">
+  Copied from CMFPlone/skins/plone_forms/search_form.pt
+</tal:comment>
+<form action="."
+      class="enableAutoFocus"
+      method="get"
+      name="formcriteria_search"
+      id="formcriteria_search"
+      tal:attributes="action view/name|template/getId;"
+      tal:define="errors options/state/getErrors|python:{}"
+      tal:condition="view/formCriteria">
+
+  <fieldset>
+
+    <legend i18n:translate="legend_search_terms">Search Terms</legend>
+
+    <tal:criteria repeat="criterion view/formCriteria">
+
+      <tal:comment content="nothing">
+        Copied from ATContentTypes/skins/ATContentTypes/atct_macros.pt
+      </tal:comment>
+      <tal:define-block
+	 tal:define="field_macro nocall:context/formcriteria_macros/field_macro;
+		     field python:criterion.getField('value');
+		     index python:here.portal_atct.getIndex(criterion.Field());
+		     criterionid criterion/getId;">
+        <div class="field">
+	  <label
+	     tal:content="python:index.friendlyName or index.index"
+	     tal:attributes="for criterion/Field;"
+	     i18n:translate="">
+	    Label
+	  </label>
+	  <div class="formHelp" tal:content="index/description"
+	       i18n:translate="">
+	    Help
+	  </div>
+
+	  <metal:fieldMacro
+	     use-macro="python: criterion.widget(criterion.Field(), field=field, mode='search')"/>
+
+        </div>
+
+      </tal:define-block>
+    </tal:criteria>
+
+    <div class="visualClear" id="clear-space-before-submit"><!-- --></div>
+
+    <div class="formControls">
+      <input class="context"
+	     type="submit"
+	     name="submit"
+	     value="Search"
+	     i18n:attributes="value label_search;"
+	     />
+    </div>
+
+  </fieldset>
+
+</form>

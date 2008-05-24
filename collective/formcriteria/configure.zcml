@@ -1,0 +1,44 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.customer">
+
+  <browser:viewlet
+     name="collective.formcriteria.searchform"
+     for="Products.ATContentTypes.interface.IATTopic"
+     manager="plone.app.layout.viewlets.interfaces.IAboveContentBody"
+     class=".form.SearchFormView"
+     template="form.pt"
+     permission="zope2.View" 
+     />
+
+  <browser:page
+     for="*"
+     name="formcriteria_macros"
+     template="form_macros.pt"
+     permission="cmf.ListFolderContents" />
+
+  <browser:page
+     for="*"
+     class=".foldercontents.FolderContentsView"
+     name="folder_contents_view"
+     template="foldercontents.pt"
+     permission="cmf.ListFolderContents" />
+
+  <browser:resource
+     name="formcriteria.kss"
+     file="formcriteria.kss"
+     />
+
+  <genericsetup:registerProfile
+     name="default"
+     title="Form Criteria"
+     description="Add forms for user enterable search criteria to collections/topic/smart folders."
+     provides="Products.GenericSetup.interfaces.EXTENSION"
+     />
+  
+  <five:registerPackage package="." initialize=".initialize" />
+
+</configure>
