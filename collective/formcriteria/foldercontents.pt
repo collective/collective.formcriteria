@@ -46,7 +46,10 @@
             tal:attributes="action context/absolute_url"
             class="kssattr-serveraction-foldercontents_update_table">
         <div tal:replace="structure view/contents_table"></div>
-        <input tal:replace="structure context/@@authenticator/authenticator" />
+        <input
+           tal:define="authenticator context/@@authenticator/authenticator|nothing;"
+           tal:condition="authenticator"
+           tal:replace="structure authenticator" />
       </form>
 
       <div tal:replace="structure provider:plone.belowcontentbody" />
