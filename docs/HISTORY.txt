@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.2 - 2008-05-27
+----------------
+
+* Fix i18n_domain in ZCML
+* Make the authenticator view conditional for Plone 3.0 compatibility
+
 0.1 - 2008-05-24
 ----------------
 
