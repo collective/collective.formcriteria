@@ -1,15 +1,15 @@
 from Testing import ZopeTestCase
-from Products.PloneTestCase import ptc as plone_ptc
+from Products.PloneTestCase import ptc
 
 from Products.Five import zcml, fiveconfigure
 
-from collective.testcaselayer import ptc
+from collective.testcaselayer import ptc as tcl_ptc
 
 from collective import formcriteria
 
-plone_ptc.setupPloneSite()
+ptc.setupPloneSite()
 
-class FormCriteriaLayer(ptc.BasePTCLayer):
+class FormCriteriaLayer(tcl_ptc.BasePTCLayer):
     """Install collective.formcriteria"""
 
     def afterSetUp(self):
@@ -23,4 +23,4 @@ class FormCriteriaLayer(ptc.BasePTCLayer):
         self.addProfile('collective.formcriteria:testing')
 
 formcriteria_layer = FormCriteriaLayer(
-    [plone_ptc.PloneTestCase.layer])
+    [ptc.PloneTestCase.layer])
