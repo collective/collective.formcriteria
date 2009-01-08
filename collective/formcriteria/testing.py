@@ -1,3 +1,5 @@
+from Products.CMFPlone import utils as plone_utils
+
 from Testing import ZopeTestCase
 from Products.PloneTestCase import ptc
 
@@ -22,5 +24,18 @@ class FormCriteriaLayer(tcl_ptc.BasePTCLayer):
         self.addProfile('collective.formcriteria:default')
         self.addProfile('collective.formcriteria:testing')
 
-formcriteria_layer = FormCriteriaLayer(
-    [ptc.PloneTestCase.layer])
+        self.login()
+        home = self.portal.portal_membership.getHomeFolder(
+            ptc.default_user)
+        plone_utils._createObjectByType(
+            container=home, type_name='Topic',
+            id='foo-topic-title', title='Foo Topic Title')
+        
+        home.invokeFactory(
+            type_name='Document',
+            id='bar-document-title', title='Bar Document Title')
+        home.invokeFactory(
+            type_name='Document',
+            id='baz-document-title', title='Baz Document Title')
+
+formcriteria_layer = FormCriteriaLayer([tcl_ptc.ptc_layer])

@@ -16,24 +16,18 @@ contents table and can still display the search form viewlet.
 Form Criteria
 =============
 
-Create a topic as a normal user.
+Start with a collection and some content for search results.
 
     >>> from Products.PloneTestCase import ptc
-    >>> from Products.CMFPlone import utils as plone_utils
     >>> self.login()
     >>> home = portal.portal_membership.getHomeFolder(ptc.default_user)
-    >>> foo_topic = plone_utils._createObjectByType(
-    ...     container=home, type_name='Topic',
-    ...     id='foo-topic-title', title='Foo Topic Title')
-
-Create some documents so that we have some search results.
-
-    >>> bar_document = plone_utils._createObjectByType(
-    ...     container=home, type_name='Document',
-    ...     id='bar-document-title', title='Bar Document Title')
-    >>> baz_document = plone_utils._createObjectByType(
-    ...     container=home, type_name='Document',
-    ...     id='baz-document-title', title='Baz Document Title')
+    >>> foo_topic = home['foo-topic-title']
+    >>> foo_topic
+    <ATTopic at /plone/Members/test_user_1_/foo-topic-title>
+    >>> home['bar-document-title']
+    <ATDocument at /plone/Members/test_user_1_/bar-document-title>
+    >>> home['baz-document-title']
+    <ATDocument at /plone/Members/test_user_1_/baz-document-title>
 
 Create the browser object we'll be using.
 
