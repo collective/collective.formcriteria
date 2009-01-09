@@ -12,6 +12,7 @@ optionflags = (doctest.NORMALIZE_WHITESPACE|
 
 def test_suite():
     suite = ZopeTestCase.FunctionalDocFileSuite(
+        'criteria.txt',
         'README.txt',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
