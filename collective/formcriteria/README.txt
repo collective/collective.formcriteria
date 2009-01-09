@@ -57,7 +57,7 @@ tab.
     >>> browser.getLink('Criteria').click()
     >>> browser.getControl('Search Text').selected = True
     >>> browser.getControl(name="criterion_type", index=0).getControl(
-    ...     'Form Text').selected = True
+    ...     'Form: Text').selected = True
     >>> browser.getControl('Add criteria').click()
     >>> print browser.contents
     <...

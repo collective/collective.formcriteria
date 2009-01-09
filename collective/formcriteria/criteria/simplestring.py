@@ -9,7 +9,7 @@ class SimpleStringFormCriterion(
 
     meta_type      = 'SimpleStringFormCriterion'
     archetype_name = 'Simple String Form Criterion'
-    shortDesc = 'Form Text'
+    shortDesc = 'Form: Text'
 
 criteria.registerCriterion(
     SimpleStringFormCriterion,
