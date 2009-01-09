@@ -51,3 +51,28 @@ for the field with the default values selected.
     >>> browser.getControl('Event')
     <ItemControl name='Type:list' type='checkbox' optionValue='Event'
     selected=False>
+
+By default the criterion values determine the search results.
+
+    >>> browser.getLink('Bar Document Title')
+    <Link text='Bar Document Title'
+    url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
+    >>> browser.getLink('Baz Event Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+
+Change the checked values and search
+
+    >>> browser.getControl('Page').selected = False
+    >>> browser.getControl('Event').selected = True
+    >>> form = browser.getForm(name="formcriteria_search")
+    >>> form.getControl(name='submit').click()
+
+Now the default has been overriden by the submitted query.
+
+    >>> browser.getLink('Bar Document Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+    >>> browser.getLink('Baz Event Title')
+    <Link text='Baz Event Title'
+    url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
