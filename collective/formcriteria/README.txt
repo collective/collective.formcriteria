@@ -25,8 +25,8 @@ Start with a collection and some content for search results.
     <ATTopic at /plone/Members/test_user_1_/foo-topic-title>
     >>> self.folder['bar-document-title']
     <ATDocument at /plone/Members/test_user_1_/bar-document-title>
-    >>> self.folder['baz-document-title']
-    <ATDocument at /plone/Members/test_user_1_/baz-document-title>
+    >>> self.folder['baz-event-title']
+    <ATEvent at /plone/Members/test_user_1_/baz-event-title>
 
 Create the browser object we'll be using.
 
@@ -77,7 +77,7 @@ Set a default search term.
 
 If no form value have been submitted, such as on a fresh load of the
 topic view, the default term will be used in the query returning only
-one of the documents.
+one of the content objects.
 
     >>> len(foo_topic.queryCatalog())
     1
@@ -86,7 +86,7 @@ one of the documents.
     >>> browser.getLink('Bar Document Title')
     <Link text='Bar Document Title'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
-    >>> browser.getLink('Baz Document Title')
+    >>> browser.getLink('Baz Event Title')
     Traceback (most recent call last):
     LinkNotFoundError
 
@@ -96,16 +96,16 @@ search form.
     >>> form = browser.getForm(name="formcriteria_search")
 
 Enter a search term and submit the query.  The topic will now list the
-other document.
+other content object.
 
     >>> form.getControl(name='SearchableText').value = 'baz'
     >>> form.getControl(name='submit').click()
     >>> browser.getLink('Bar Document Title')
     Traceback (most recent call last):
     LinkNotFoundError
-    >>> browser.getLink('Baz Document Title')
-    <Link text='Baz Document Title'
-    url='http://nohost/plone/Members/test_user_1_/baz-document-title'>
+    >>> browser.getLink('Baz Event Title')
+    <Link text='Baz Event Title'
+    url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
 
 The search form also reflects the search term submitted rather than
 the default value submitted on the criteria tab.
@@ -135,9 +135,9 @@ The topic contents are listed in the contents table form.
     <ItemControl name='paths:list' type='checkbox'
     optionValue='/plone/Members/test_user_1_/bar-document-title'
     selected=False>
-    >>> browser.getControl('Baz Document Title')
+    >>> browser.getControl('Baz Event Title')
     Traceback (most recent call last):
-    LookupError: label 'Baz Document Title'
+    LookupError: label 'Baz Event Title'
 
 The search form is also rendered if form criteria are present.
 
@@ -150,7 +150,7 @@ The contents view also reflects user submitted criteria.
     >>> browser.getControl('Bar Document Title')
     Traceback (most recent call last):
     LookupError: label 'Bar Document Title'
-    >>> browser.getControl('Baz Document Title')
+    >>> browser.getControl('Baz Event Title')
     <ItemControl name='paths:list' type='checkbox'
-    optionValue='/plone/Members/test_user_1_/baz-document-title'
+    optionValue='/plone/Members/test_user_1_/baz-event-title'
     selected=False>

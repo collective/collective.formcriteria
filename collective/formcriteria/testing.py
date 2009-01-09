@@ -35,7 +35,7 @@ class FormCriteriaLayer(tcl_ptc.BasePTCLayer):
             type_name='Document',
             id='bar-document-title', title='Bar Document Title')
         home.invokeFactory(
-            type_name='Document',
-            id='baz-document-title', title='Baz Document Title')
+            type_name='Event',
+            id='baz-event-title', title='Baz Event Title')
 
 formcriteria_layer = FormCriteriaLayer([tcl_ptc.ptc_layer])
