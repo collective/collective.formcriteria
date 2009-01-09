@@ -20,13 +20,12 @@ Start with a collection and some content for search results.
 
     >>> from Products.PloneTestCase import ptc
     >>> self.login()
-    >>> home = portal.portal_membership.getHomeFolder(ptc.default_user)
-    >>> foo_topic = home['foo-topic-title']
+    >>> foo_topic = self.folder['foo-topic-title']
     >>> foo_topic
     <ATTopic at /plone/Members/test_user_1_/foo-topic-title>
-    >>> home['bar-document-title']
+    >>> self.folder['bar-document-title']
     <ATDocument at /plone/Members/test_user_1_/bar-document-title>
-    >>> home['baz-document-title']
+    >>> self.folder['baz-document-title']
     <ATDocument at /plone/Members/test_user_1_/baz-document-title>
 
 Create the browser object we'll be using.
