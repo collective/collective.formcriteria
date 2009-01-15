@@ -1,3 +1,4 @@
+<tal:if condition="view/formCriteria">
 <metal:block use-macro="here/global_defines/macros/defines" />
 
 <tal:comment content="nothing">
@@ -9,8 +10,7 @@
       name="formcriteria_search"
       id="formcriteria_search"
       tal:attributes="action view/name|template/getId;"
-      tal:define="errors options/state/getErrors|python:{}"
-      tal:condition="view/formCriteria">
+      tal:define="errors options/state/getErrors|python:{}">
 
   <fieldset>
 
@@ -68,3 +68,4 @@
   </fieldset>
 
 </form>
+</tal:if>
