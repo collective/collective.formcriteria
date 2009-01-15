@@ -17,18 +17,17 @@
     <legend i18n:translate="legend_search_terms">Search Terms</legend>
     <dl>
 
-      <tal:criteria tal:repeat="criterion view/formCriteria">
+      <tal:criteria tal:repeat="criterion view/criteriaFields">
         <dt>
           
-          <div class="field"
-	       tal:define="index python:here.portal_atct.getIndex(criterion.Field());">
+          <div class="field">
  	    <label
-	       tal:content="python:index.friendlyName or index.index"
-	       tal:attributes="for criterion/Field;"
+	       tal:content="criterion/friendlyName"
+	       tal:attributes="for criterion/field;"
 	       i18n:translate="">
 	      Label
 	    </label>
-	    <div class="formHelp" tal:content="index/description"
+	    <div class="formHelp" tal:content="criterion/description"
 	         i18n:translate="">
 	      Help
 	    </div>
@@ -39,16 +38,11 @@
           Copied from ATContentTypes/skins/ATContentTypes/atct_macros.pt
         </tal:comment>
         
-        <tal:fields 
-           define="schematas criterion/Schemata;
-                   fieldsets python:[key for key in schematas.keys() if key != 'metadata'];
-                   default_fieldset python:(not schematas or schematas.has_key('default')) and 'default' or fieldsets[0];
-                   fieldset request/fieldset|options/fieldset|default_fieldset;"
-           repeat="field python: schematas[fieldset].fields()">
-          <dd tal:define="fieldName string:${criterion/getId}.${field/getName};"
+        <tal:fields repeat="field view/fields">
+          <dd tal:define="fieldName string:${criterion/id}.${field/getName};"
               tal:condition="python:field.mode != 'r'">
             <metal:fieldMacro
-               use-macro="python:criterion.widget(fieldName, field=field, mode='edit')" />
+               use-macro="python:criterion['widget'](fieldName, field=field, mode='edit')" />
           </dd>
         </tal:fields>
       </tal:criteria>
