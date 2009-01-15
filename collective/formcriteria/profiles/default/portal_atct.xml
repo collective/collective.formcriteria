@@ -92,5 +92,58 @@
    <criteria>ATReferenceCriterion</criteria>
    <criteria>ReferenceCheckboxFormCriterion</criteria>
   </index>
+  <index name="created" description="The time and date an item was created"
+     enabled="True" friendlyName="Creation Date"
+     i18n:attributes="description; friendlyName">
+   <criteria>ATFriendlyDateCriteria</criteria>
+   <criteria>ATDateRangeCriterion</criteria>
+   <criteria>DateRangeFormCriterion</criteria>
+  </index>
+  <index name="Date"
+     description="The time and date an item was last modified"
+     enabled="False" friendlyName="Modification Date"
+     i18n:attributes="description; friendlyName">
+   <criteria>ATFriendlyDateCriteria</criteria>
+   <criteria>ATDateRangeCriterion</criteria>
+   <criteria>DateRangeFormCriterion</criteria>
+  </index>
+  <index name="effective"
+     description="The time and date an item becomes publicly available"
+     enabled="True" friendlyName="Effective Date"
+     i18n:attributes="description; friendlyName">
+   <criteria>ATFriendlyDateCriteria</criteria>
+   <criteria>ATDateRangeCriterion</criteria>
+   <criteria>DateRangeFormCriterion</criteria>
+  </index>
+  <index name="end" description="The end date and time of an event"
+     enabled="True" friendlyName="End Date"
+     i18n:attributes="description; friendlyName">
+   <criteria>ATFriendlyDateCriteria</criteria>
+   <criteria>ATDateRangeCriterion</criteria>
+   <criteria>DateRangeFormCriterion</criteria>
+  </index>
+  <index name="expires"
+     description="The time and date an item is no longer publicly available"
+     enabled="True" friendlyName="Expiration Date"
+     i18n:attributes="description; friendlyName">
+   <criteria>ATFriendlyDateCriteria</criteria>
+   <criteria>ATDateRangeCriterion</criteria>
+   <criteria>DateRangeFormCriterion</criteria>
+  </index>
+  <index name="modified"
+     description="The time and date an item was last modified" enabled="True"
+     friendlyName="Modification Date"
+     i18n:attributes="description; friendlyName">
+   <criteria>ATFriendlyDateCriteria</criteria>
+   <criteria>ATDateRangeCriterion</criteria>
+   <criteria>DateRangeFormCriterion</criteria>
+  </index>
+  <index name="start" description="The start date and time of an event"
+     enabled="True" friendlyName="Start Date"
+     i18n:attributes="description; friendlyName">
+   <criteria>ATFriendlyDateCriteria</criteria>
+   <criteria>ATDateRangeCriterion</criteria>
+   <criteria>DateRangeFormCriterion</criteria>
+  </index>
  </topic_indexes>
 </atcttool>
