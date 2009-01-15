@@ -5,6 +5,7 @@
   <index name="Creator" description="" enabled="True" friendlyName="Creator"
      i18n:attributes="description; friendlyName">
    <criteria>ATSelectionCriterion</criteria>
+   <criteria>CheckboxFormCriterion</criteria>
    <criteria>ATCurrentAuthorCriterion</criteria>
    <criteria>ATSimpleStringCriterion</criteria>
    <criteria>SimpleStringFormCriterion</criteria>
@@ -19,7 +20,9 @@
    <criteria>ATCurrentAuthorCriterion</criteria>
    <criteria>ATListCriterion</criteria>
    <criteria>ATReferenceCriterion</criteria>
+   <criteria>ReferenceCheckboxFormCriterion</criteria>
    <criteria>ATSelectionCriterion</criteria>
+   <criteria>CheckboxFormCriterion</criteria>
    <criteria>ATSimpleIntCriterion</criteria>
    <criteria>ATSimpleStringCriterion</criteria>
    <criteria>SimpleStringFormCriterion</criteria>
@@ -44,6 +47,7 @@
      friendlyName="State"
      i18n:attributes="description; friendlyName">
    <criteria>ATSelectionCriterion</criteria>
+   <criteria>CheckboxFormCriterion</criteria>
    <criteria>ATSimpleStringCriterion</criteria>
    <criteria>SimpleStringFormCriterion</criteria>
    <criteria>ATListCriterion</criteria>
@@ -58,6 +62,7 @@
      enabled="True" friendlyName="Categories"
      i18n:attributes="description; friendlyName">
    <criteria>ATSelectionCriterion</criteria>
+   <criteria>CheckboxFormCriterion</criteria>
    <criteria>ATSimpleStringCriterion</criteria>
    <criteria>SimpleStringFormCriterion</criteria>
    <criteria>ATListCriterion</criteria>
@@ -67,6 +72,25 @@
      i18n:attributes="description; friendlyName">
    <criteria>ATSimpleStringCriterion</criteria>
    <criteria>SimpleStringFormCriterion</criteria>
+  </index>
+  <index name="portal_type" description="" enabled="False"
+     friendlyName="Item Type (internal)"
+     i18n:attributes="description; friendlyName">
+   <criteria>ATPortalTypeCriterion</criteria>
+   <criteria>PortalTypeCheckboxFormCriterion</criteria>
+  </index>
+  <index name="Type" description="An item's type (e.g. Event)" enabled="True"
+     friendlyName="Item Type"
+     i18n:attributes="description; friendlyName">
+   <criteria>ATPortalTypeCriterion</criteria>
+   <criteria>PortalTypeCheckboxFormCriterion</criteria>
+  </index>
+  <index name="getRawRelatedItems"
+     description="Find items related to the selected items" enabled="True"
+     friendlyName="Related To"
+     i18n:attributes="description; friendlyName">
+   <criteria>ATReferenceCriterion</criteria>
+   <criteria>ReferenceCheckboxFormCriterion</criteria>
   </index>
  </topic_indexes>
 </atcttool>
