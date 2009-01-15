@@ -1,3 +1,4 @@
+import DateTime
 from Products.CMFPlone import utils as plone_utils
 
 from Testing import ZopeTestCase
@@ -30,12 +31,13 @@ class FormCriteriaLayer(tcl_ptc.BasePTCLayer):
         plone_utils._createObjectByType(
             container=home, type_name='Topic',
             id='foo-topic-title', title='Foo Topic Title')
-        
+
+        self.now = DateTime.DateTime()
         home.invokeFactory(
-            type_name='Document',
+            type_name='Document', effectiveDate=self.now-2,
             id='bar-document-title', title='Bar Document Title')
         home.invokeFactory(
-            type_name='Event',
+            type_name='Event', effectiveDate=self.now,
             id='baz-event-title', title='Baz Event Title')
 
 formcriteria_layer = FormCriteriaLayer([tcl_ptc.ptc_layer])

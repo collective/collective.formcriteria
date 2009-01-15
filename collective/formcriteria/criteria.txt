@@ -35,8 +35,8 @@ Add a checkbox criterion for the portal type.
     <PortalTypeCheckboxFormCriterion at
     /plone/Members/test_user_1_/foo-topic-title/crit__Type_PortalTypeCheckboxFormCriterion>
 
-The values set on the criterion are the default values which will be
-checked on the search form.
+The values set on the criterion are the default values checked on the
+search form.
 
     >>> foo_topic.getCriterion(
     ...     'Type_PortalTypeCheckboxFormCriterion').setValue(['Page'])
@@ -47,11 +47,11 @@ for the field with the default values selected.
     >>> browser.open(foo_topic.absolute_url())
     >>> browser.getControl('Page')
     <ItemControl
-    name='crit__Type_PortalTypeCheckboxFormCriterion.value:record:list'
+    name='crit__Type_PortalTypeCheckboxFormCriterion.value:list'
     type='checkbox' optionValue='Page' selected=True>
     >>> browser.getControl('Event')
     <ItemControl
-    name='crit__Type_PortalTypeCheckboxFormCriterion.value:record:list'
+    name='crit__Type_PortalTypeCheckboxFormCriterion.value:list'
     type='checkbox' optionValue='Event' selected=False>
 
 The portal type checkbox form criterion doesn't allow using "and" as a
@@ -59,11 +59,11 @@ query operator since it wouldn't make any sense.  As such the operator
 field isn't rendered on the search form.
 
     >>> browser.getControl(
-    ...     name='crit__Type_PortalTypeCheckboxFormCriterion'
-    ...     '.operator:record')
+    ...     name=
+    ...     'crit__Type_PortalTypeCheckboxFormCriterion.operator')
     Traceback (most recent call last):
     LookupError: name
-    'crit__Type_PortalTypeCheckboxFormCriterion.operator:record'
+    'crit__Type_PortalTypeCheckboxFormCriterion.operator'
 
 By default the criterion values determine the search results.
 
@@ -78,6 +78,127 @@ Change the checked values and search
 
     >>> browser.getControl('Page').selected = False
     >>> browser.getControl('Event').selected = True
+    >>> form = browser.getForm(name="formcriteria_search")
+    >>> form.getControl(name='submit').click()
+
+Now the default has been overriden by the submitted query.
+
+    >>> browser.getLink('Bar Document Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+    >>> browser.getLink('Baz Event Title')
+    <Link text='Baz Event Title'
+    url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
+
+Date Range
+----------
+
+A criterion is provided for rendering two calendar widgets on the
+search form to specify two dates for a date range query.
+
+Add a date range criterion for the effective date
+
+    >>> foo_topic.deleteCriterion(
+    ...     'crit__Type_PortalTypeCheckboxFormCriterion')
+    >>> foo_topic.addCriterion(
+    ...     'effective', 'DateRangeFormCriterion')
+    <DateRangeFormCriterion at
+    /plone/Members/test_user_1_/foo-topic-title/crit__effective_DateRangeFormCriterion>
+
+The values set on the criterion are the default values on the search
+form.
+
+    >>> from collective.formcriteria import testing
+    >>> now = testing.formcriteria_layer.now
+    >>> foo_topic.getCriterion(
+    ...     'effective_DateRangeFormCriterion').setStart(now-3)
+    >>> foo_topic.getCriterion(
+    ...     'effective_DateRangeFormCriterion').setEnd(now-1)
+
+When viewing the collection in a browser the date widgets will be rendered
+for the index with the default values.
+
+    >>> browser.open(foo_topic.absolute_url())
+
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.start_day'
+    ...     ).getControl(str((now-3).day()).zfill(2)).selected
+    True
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.start_hour'
+    ...     ).getControl(str((now-3).h_12()).zfill(2)).selected
+    True
+    >>> minute = (now-3).minute()
+    >>> rounded = minute + (5 - (minute % 5))
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.start_minute'
+    ...     ).getControl(str(rounded).zfill(2)).selected
+    True
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.start_ampm'
+    ...     ).getControl((now-3).ampm().upper()).selected
+    True
+
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.end_day'
+    ...     ).getControl(str((now-1).day()).zfill(2)).selected
+    True
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.end_hour'
+    ...     ).getControl(str((now-1).h_12()).zfill(2)).selected
+    True
+    >>> minute = (now-1).minute()
+    >>> rounded = minute + (5 - (minute % 5))
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.end_minute'
+    ...     ).getControl(str(rounded).zfill(2)).selected
+    True
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.end_ampm'
+    ...     ).getControl((now-1).ampm().upper()).selected
+    True
+
+By default the criterion values determine the search results.
+
+    >>> browser.getLink('Bar Document Title')
+    <Link text='Bar Document Title'
+    url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
+    >>> browser.getLink('Baz Event Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+
+Change the date range and search
+
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.start_day'
+    ...     ).getControl(str((now-1).day()).zfill(2)).selected = True
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.start_hour'
+    ...     ).getControl(str((now-1).h_12()).zfill(2)).selected = True
+    >>> minute = (now-1).minute()
+    >>> rounded = minute - (minute % 5)
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.start_minute'
+    ...     ).getControl(str(rounded).zfill(2)).selected = True
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.start_ampm'
+    ...     ).getControl((now-1).ampm().upper()).selected = True
+
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.end_day'
+    ...     ).getControl(str((now+1).day()).zfill(2)).selected = True
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.end_hour'
+    ...     ).getControl(str((now+1).h_12()).zfill(2)).selected = True
+    >>> minute = (now+1).minute()
+    >>> rounded = minute + (5 - (minute % 5))
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.end_minute'
+    ...     ).getControl(str(rounded).zfill(2)).selected = True
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.end_ampm'
+    ...     ).getControl((now+1).ampm().upper()).selected = True
+
     >>> form = browser.getForm(name="formcriteria_search")
     >>> form.getControl(name='submit').click()
 
