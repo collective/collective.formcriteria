@@ -32,7 +32,7 @@ class FormCriteriaLayer(tcl_ptc.BasePTCLayer):
             container=home, type_name='Topic',
             id='foo-topic-title', title='Foo Topic Title')
 
-        self.now = DateTime.DateTime()
+        self.now = DateTime.DateTime('Jan 15, 2009')
         home.invokeFactory(
             type_name='Document', effectiveDate=self.now-2,
             id='bar-document-title', title='Bar Document Title')

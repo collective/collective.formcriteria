@@ -120,10 +120,10 @@ form.
 
     >>> from collective.formcriteria import testing
     >>> now = testing.formcriteria_layer.now
-    >>> foo_topic.getCriterion(
-    ...     'effective_DateRangeFormCriterion').setStart(now-3)
-    >>> foo_topic.getCriterion(
-    ...     'effective_DateRangeFormCriterion').setEnd(now-1)
+    >>> criterion = foo_topic.getCriterion(
+    ...     'effective_DateRangeFormCriterion')
+    >>> criterion.setStart(now-3)
+    >>> criterion.setEnd(now-1)
 
 When viewing the collection in a browser the date widgets will be rendered
 for the index with the default values.
@@ -131,41 +131,29 @@ for the index with the default values.
     >>> browser.open(foo_topic.absolute_url())
 
     >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.start_year'
+    ...     ).getControl('2009').selected
+    True
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.start_month'
+    ...     ).getControl('January').selected
+    True
+    >>> browser.getControl(
     ...     name='crit__effective_DateRangeFormCriterion.start_day'
-    ...     ).getControl(str((now-3).day()).zfill(2)).selected
-    True
-    >>> browser.getControl(
-    ...     name='crit__effective_DateRangeFormCriterion.start_hour'
-    ...     ).getControl(str((now-3).h_12()).zfill(2)).selected
-    True
-    >>> minute = (now-3).minute()
-    >>> rounded = minute + (5 - (minute % 5))
-    >>> browser.getControl(
-    ...     name='crit__effective_DateRangeFormCriterion.start_minute'
-    ...     ).getControl(str(rounded).zfill(2)).selected
-    True
-    >>> browser.getControl(
-    ...     name='crit__effective_DateRangeFormCriterion.start_ampm'
-    ...     ).getControl((now-3).ampm().upper()).selected
+    ...     ).getControl('12').selected
     True
 
     >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.end_year'
+    ...     ).getControl('2009').selected
+    True
+    >>> browser.getControl(
+    ...     name='crit__effective_DateRangeFormCriterion.end_month'
+    ...     ).getControl('January').selected
+    True
+    >>> browser.getControl(
     ...     name='crit__effective_DateRangeFormCriterion.end_day'
-    ...     ).getControl(str((now-1).day()).zfill(2)).selected
-    True
-    >>> browser.getControl(
-    ...     name='crit__effective_DateRangeFormCriterion.end_hour'
-    ...     ).getControl(str((now-1).h_12()).zfill(2)).selected
-    True
-    >>> minute = (now-1).minute()
-    >>> rounded = minute + (5 - (minute % 5))
-    >>> browser.getControl(
-    ...     name='crit__effective_DateRangeFormCriterion.end_minute'
-    ...     ).getControl(str(rounded).zfill(2)).selected
-    True
-    >>> browser.getControl(
-    ...     name='crit__effective_DateRangeFormCriterion.end_ampm'
-    ...     ).getControl((now-1).ampm().upper()).selected
+    ...     ).getControl('14').selected
     True
 
 The widget helper JavaScript and CSS will also be included on the page
@@ -191,33 +179,11 @@ Change the date range and search
 
     >>> browser.getControl(
     ...     name='crit__effective_DateRangeFormCriterion.start_day'
-    ...     ).getControl(str((now-1).day()).zfill(2)).selected = True
-    >>> browser.getControl(
-    ...     name='crit__effective_DateRangeFormCriterion.start_hour'
-    ...     ).getControl(str((now-1).h_12()).zfill(2)).selected = True
-    >>> minute = (now-1).minute()
-    >>> rounded = minute - (minute % 5)
-    >>> browser.getControl(
-    ...     name='crit__effective_DateRangeFormCriterion.start_minute'
-    ...     ).getControl(str(rounded).zfill(2)).selected = True
-    >>> browser.getControl(
-    ...     name='crit__effective_DateRangeFormCriterion.start_ampm'
-    ...     ).getControl((now-1).ampm().upper()).selected = True
+    ...     ).getControl('14').selected = True
 
     >>> browser.getControl(
     ...     name='crit__effective_DateRangeFormCriterion.end_day'
-    ...     ).getControl(str((now+1).day()).zfill(2)).selected = True
-    >>> browser.getControl(
-    ...     name='crit__effective_DateRangeFormCriterion.end_hour'
-    ...     ).getControl(str((now+1).h_12()).zfill(2)).selected = True
-    >>> minute = (now+1).minute()
-    >>> rounded = minute + (5 - (minute % 5))
-    >>> browser.getControl(
-    ...     name='crit__effective_DateRangeFormCriterion.end_minute'
-    ...     ).getControl(str(rounded).zfill(2)).selected = True
-    >>> browser.getControl(
-    ...     name='crit__effective_DateRangeFormCriterion.end_ampm'
-    ...     ).getControl((now+1).ampm().upper()).selected = True
+    ...     ).getControl('16').selected = True
 
     >>> form = browser.getForm(name="formcriteria_search")
     >>> form.getControl(name='submit').click()
