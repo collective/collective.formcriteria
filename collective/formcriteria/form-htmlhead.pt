@@ -1,4 +1,4 @@
-<tal:if condition="view/formCriteria">
+<tal:if condition="view/ifHead">
 <tal:define define="fields view/fields;">
 <metal:block use-macro="here/global_defines/macros/defines" />
 

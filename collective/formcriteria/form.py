@@ -44,3 +44,9 @@ class SearchFormView(object):
         for criterion in self.criteriaFields():
             results.extend(criterion['fields'])
         return results
+
+    def ifHead(self):
+        return (
+            getattr(self._parent, '_data', {}).get(
+                'template_id') != 'criterion_edit_form'
+            and self.formCriteria())
