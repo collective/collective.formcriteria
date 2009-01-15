@@ -9,7 +9,7 @@ Changelog
 * Use the widgets to process the form values
 * Add checkbox criterion based on ATSelectionCriterion,
   ATPortalTypeCriterion, and ATReferenceCriterion
-* Add a date range form criterion
+* Add a date range form criterion (JS calendar not working yet)
 
 0.2 - 2008-05-27
 ----------------
