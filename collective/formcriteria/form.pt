@@ -38,7 +38,7 @@
           Copied from ATContentTypes/skins/ATContentTypes/atct_macros.pt
         </tal:comment>
         
-        <tal:fields repeat="field view/fields">
+        <tal:fields repeat="field criterion/fields">
           <dd tal:define="fieldName string:${criterion/id}.${field/getName};"
               tal:condition="python:field.mode != 'r'">
             <metal:fieldMacro
