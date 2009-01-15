@@ -96,6 +96,16 @@ Date Range
 A criterion is provided for rendering two calendar widgets on the
 search form to specify two dates for a date range query.
 
+Before a criterion requiring JavaScript or CSS helpers has been added,
+the collection view does not include any such helpers.
+
+    >>> 'calendar_stripped.js' in browser.contents
+    False
+    >>> 'calendar_en.js' in browser.contents
+    False
+    >>> 'calendar-system.css' in browser.contents
+    False
+
 Add a date range criterion for the effective date
 
     >>> foo_topic.deleteCriterion(
@@ -156,6 +166,16 @@ for the index with the default values.
     >>> browser.getControl(
     ...     name='crit__effective_DateRangeFormCriterion.end_ampm'
     ...     ).getControl((now-1).ampm().upper()).selected
+    True
+
+The widget helper JavaScript and CSS will also be included on the page
+when the search form is present and fields require it.
+
+    >>> 'calendar_stripped.js' in browser.contents
+    True
+    >>> 'calendar-en.js' in browser.contents
+    True
+    >>> 'calendar-system.css' in browser.contents
     True
 
 By default the criterion values determine the search results.

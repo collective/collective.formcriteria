@@ -6,6 +6,15 @@
     i18n_domain="collective.formcriteria">
 
   <browser:viewlet
+     name="collective.formcriteria.htmlhead"
+     for="Products.ATContentTypes.interface.IATTopic"
+     manager="plone.app.layout.viewlets.interfaces.IHtmlHeadLinks"
+     class=".form.SearchFormView"
+     template="form-htmlhead.pt"
+     permission="zope2.View" 
+     />
+
+  <browser:viewlet
      name="collective.formcriteria.searchform"
      for="Products.ATContentTypes.interface.IATTopic"
      manager="plone.app.layout.viewlets.interfaces.IAboveContentBody"
