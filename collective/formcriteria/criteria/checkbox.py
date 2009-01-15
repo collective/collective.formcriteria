@@ -31,6 +31,7 @@ class PortalTypeCheckboxFormCriterion(
 
     schema = portaltype.ATPortalTypeCriterion.schema.copy()
     schema['value'].widget.format = 'checkbox'
+    schema['operator'].mode = 'r'
 
 criteria.registerCriterion(
     PortalTypeCheckboxFormCriterion,

@@ -46,11 +46,24 @@ for the field with the default values selected.
 
     >>> browser.open(foo_topic.absolute_url())
     >>> browser.getControl('Page')
-    <ItemControl name='Type:list' type='checkbox' optionValue='Page'
-    selected=True>
+    <ItemControl
+    name='crit__Type_PortalTypeCheckboxFormCriterion.value:record:list'
+    type='checkbox' optionValue='Page' selected=True>
     >>> browser.getControl('Event')
-    <ItemControl name='Type:list' type='checkbox' optionValue='Event'
-    selected=False>
+    <ItemControl
+    name='crit__Type_PortalTypeCheckboxFormCriterion.value:record:list'
+    type='checkbox' optionValue='Event' selected=False>
+
+The portal type checkbox form criterion doesn't allow using "and" as a
+query operator since it wouldn't make any sense.  As such the operator
+field isn't rendered on the search form.
+
+    >>> browser.getControl(
+    ...     name='crit__Type_PortalTypeCheckboxFormCriterion'
+    ...     '.operator:record')
+    Traceback (most recent call last):
+    LookupError: name
+    'crit__Type_PortalTypeCheckboxFormCriterion.operator:record'
 
 By default the criterion values determine the search results.
 
