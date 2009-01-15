@@ -16,12 +16,6 @@
 
   <browser:page
      for="*"
-     name="formcriteria_macros"
-     template="form_macros.pt"
-     permission="cmf.ListFolderContents" />
-
-  <browser:page
-     for="*"
      class=".foldercontents.FolderContentsView"
      name="folder_contents_view"
      template="foldercontents.pt"

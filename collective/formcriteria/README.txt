@@ -98,7 +98,9 @@ search form.
 Enter a search term and submit the query.  The topic will now list the
 other content object.
 
-    >>> form.getControl(name='SearchableText').value = 'baz'
+    >>> form.getControl(
+    ...     name='crit__SearchableText_SimpleStringFormCriterion'
+    ...     '.value:record').value = 'baz'
     >>> form.getControl(name='submit').click()
     >>> browser.getLink('Bar Document Title')
     Traceback (most recent call last):
@@ -111,7 +113,8 @@ The search form also reflects the search term submitted rather than
 the default value submitted on the criteria tab.
 
     >>> browser.getForm(name="formcriteria_search").getControl(
-    ...     name='SearchableText').value
+    ...     name='crit__SearchableText_SimpleStringFormCriterion'
+    ...     '.value:record').value
     'baz'
 
 Contents View
@@ -145,7 +148,9 @@ The search form is also rendered if form criteria are present.
 
 The contents view also reflects user submitted criteria.
 
-    >>> form.getControl(name='SearchableText').value = 'baz'
+    >>> form.getControl(
+    ...     name='crit__SearchableText_SimpleStringFormCriterion'
+    ...     '.value:record').value = 'baz'
     >>> form.getControl(name='submit').click()
     >>> browser.getControl('Bar Document Title')
     Traceback (most recent call last):

@@ -15,36 +15,44 @@
   <fieldset>
 
     <legend i18n:translate="legend_search_terms">Search Terms</legend>
+    <dl>
 
-    <tal:criteria repeat="criterion view/formCriteria">
-
-      <tal:comment content="nothing">
-        Copied from ATContentTypes/skins/ATContentTypes/atct_macros.pt
-      </tal:comment>
-      <tal:define-block
-	 tal:define="field_macro nocall:context/formcriteria_macros/field_macro;
-		     field python:criterion.getField('value');
-		     index python:here.portal_atct.getIndex(criterion.Field());
-		     criterionid criterion/getId;">
-        <div class="field">
-	  <label
-	     tal:content="python:index.friendlyName or index.index"
-	     tal:attributes="for criterion/Field;"
-	     i18n:translate="">
-	    Label
-	  </label>
-	  <div class="formHelp" tal:content="index/description"
+      <tal:criteria tal:repeat="criterion view/formCriteria">
+        <dt>
+          
+          <div class="field"
+	       tal:define="index python:here.portal_atct.getIndex(criterion.Field());">
+ 	    <label
+	       tal:content="python:index.friendlyName or index.index"
+	       tal:attributes="for criterion/Field;"
 	       i18n:translate="">
-	    Help
-	  </div>
-
-	  <metal:fieldMacro
-	     use-macro="python: criterion.widget(criterion.Field(), field=field, mode='search')"/>
-
-        </div>
-
-      </tal:define-block>
-    </tal:criteria>
+	      Label
+	    </label>
+	    <div class="formHelp" tal:content="index/description"
+	         i18n:translate="">
+	      Help
+	    </div>
+          </div>
+        </dt>
+        
+        <tal:comment content="nothing">
+          Copied from ATContentTypes/skins/ATContentTypes/atct_macros.pt
+        </tal:comment>
+        
+        <tal:fields 
+           define="schematas criterion/Schemata;
+                   fieldsets python:[key for key in schematas.keys() if key != 'metadata'];
+                   default_fieldset python:(not schematas or schematas.has_key('default')) and 'default' or fieldsets[0];
+                   fieldset request/fieldset|options/fieldset|default_fieldset;"
+           repeat="field python: schematas[fieldset].fields()">
+          <dd tal:define="fieldName string:${criterion/getId}.${field/getName}:record;"
+              tal:condition="python:field.mode != 'r'">
+            <metal:fieldMacro
+               use-macro="python:criterion.widget(fieldName, field=field, mode='edit')" />
+          </dd>
+        </tal:fields>
+      </tal:criteria>
+    </dl>
 
     <div class="visualClear" id="clear-space-before-submit"><!-- --></div>
 
