@@ -45,7 +45,7 @@
                    default_fieldset python:(not schematas or schematas.has_key('default')) and 'default' or fieldsets[0];
                    fieldset request/fieldset|options/fieldset|default_fieldset;"
            repeat="field python: schematas[fieldset].fields()">
-          <dd tal:define="fieldName string:${criterion/getId}.${field/getName}:record;"
+          <dd tal:define="fieldName string:${criterion/getId}.${field/getName};"
               tal:condition="python:field.mode != 'r'">
             <metal:fieldMacro
                use-macro="python:criterion.widget(fieldName, field=field, mode='edit')" />

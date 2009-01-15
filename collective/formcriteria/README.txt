@@ -100,7 +100,7 @@ other content object.
 
     >>> form.getControl(
     ...     name='crit__SearchableText_SimpleStringFormCriterion'
-    ...     '.value:record').value = 'baz'
+    ...     '.value').value = 'baz'
     >>> form.getControl(name='submit').click()
     >>> browser.getLink('Bar Document Title')
     Traceback (most recent call last):
@@ -114,7 +114,7 @@ the default value submitted on the criteria tab.
 
     >>> browser.getForm(name="formcriteria_search").getControl(
     ...     name='crit__SearchableText_SimpleStringFormCriterion'
-    ...     '.value:record').value
+    ...     '.value').value
     'baz'
 
 Contents View
@@ -150,7 +150,7 @@ The contents view also reflects user submitted criteria.
 
     >>> form.getControl(
     ...     name='crit__SearchableText_SimpleStringFormCriterion'
-    ...     '.value:record').value = 'baz'
+    ...     '.value').value = 'baz'
     >>> form.getControl(name='submit').click()
     >>> browser.getControl('Bar Document Title')
     Traceback (most recent call last):
