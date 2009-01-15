@@ -4,6 +4,12 @@ Changelog
 0.3 - Unreleased
 ----------------
 
+* Fully re-use the AT edit widgets
+* Support criteria with multiple fields
+* Use the widgets to process the form values
+* Add checkbox criterion based on ATSelectionCriterion,
+  ATPortalTypeCriterion, and ATReferenceCriterion
+
 0.2 - 2008-05-27
 ----------------
 
