@@ -23,7 +23,7 @@ criteria.registerCriterion(
 
 class PortalTypeCheckboxFormCriterion(
     common.FormCriterion, portaltype.ATPortalTypeCriterion):
-    """A checkbox form criterion"""
+    """A portal_types checkbox form criterion"""
 
     meta_type = 'PortalTypeCheckboxFormCriterion'
     archetype_name = 'Portal Types Checkbox Form Criterion'
@@ -40,7 +40,7 @@ criteria.registerCriterion(
 
 class ReferenceCheckboxFormCriterion(
     common.FormCriterion, reference.ATReferenceCriterion):
-    """A checkbox form criterion"""
+    """A reference checkbox form criterion"""
 
     meta_type = 'ReferenceCheckboxFormCriterion'
     archetype_name = 'Portal Types Checkbox Form Criterion'
