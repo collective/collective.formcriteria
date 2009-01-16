@@ -4,7 +4,8 @@ Changelog
 0.4 - Unreleased
 ----------------
 
-* Add selection criteria
+* Add list criterion
+* Add selection criterion
 
 0.3 - 2009-01-15
 ----------------

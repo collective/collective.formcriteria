@@ -21,6 +21,68 @@ Open a browser and log in as a normal user.
     ...     'Password').value = ptc.default_password
     >>> browser.getControl('Log in').click()
 
+Lists
+---------------
+
+The ListFormCriterion is provided for rendering lists on the search
+form.
+
+Add a list criterion for the subject/keywords.
+
+    >>> foo_topic.addCriterion(
+    ...     'Subject', 'ListFormCriterion')
+    <ListFormCriterion at
+    /plone/Members/test_user_1_/foo-topic-title/crit__Subject_ListFormCriterion>
+
+The values set on the criterion are the default values checked on the
+search form.
+
+    >>> foo_topic.getCriterion(
+    ...     'Subject_ListFormCriterion').setValue(['bah'])
+
+When viewing the collection in a browser lists will be rendered
+for the field with the default values selected.
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> ctrl = browser.getControl(
+    ...     name='crit__Subject_ListFormCriterion.value:lines')
+    >>> ctrl
+    <Control name='crit__Subject_ListFormCriterion.value:lines'
+    type='textarea'>
+    >>> ctrl.value
+    'bah'
+
+By default the criterion values determine the search results.
+
+    >>> browser.getLink('Bar Document Title')
+    <Link text='Bar Document Title'
+    url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
+    >>> browser.getLink('Baz Event Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+
+Change the checked values and search
+
+    >>> browser.getControl(
+    ...     name='crit__Subject_ListFormCriterion.value:lines'
+    ...     ).value = 'quux'
+    >>> form = browser.getForm(name="formcriteria_search")
+    >>> form.getControl(name='submit').click()
+
+Now the default has been overriden by the submitted query.
+
+    >>> browser.getLink('Bar Document Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+    >>> browser.getLink('Baz Event Title')
+    <Link text='Baz Event Title'
+    url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
+
+Remove the criterion.
+
+    >>> foo_topic.deleteCriterion(
+    ...     'crit__Subject_ListFormCriterion')
+
 Selection Lists
 ---------------
 
@@ -35,13 +97,13 @@ Add a selection criterion for the subject/keywords.
     <SelectionFormCriterion at
     /plone/Members/test_user_1_/foo-topic-title/crit__Subject_SelectionFormCriterion>
 
-The values set on the criterion are the default values checked on the
+The values set on the criterion are the default values selected on the
 search form.
 
     >>> foo_topic.getCriterion(
     ...     'Subject_SelectionFormCriterion').setValue(['bah'])
 
-When viewing the collection in a browser selectiones will be rendered
+When viewing the collection in a browser selections will be rendered
 for the field with the default values selected.
 
     >>> browser.open(foo_topic.absolute_url())
@@ -63,7 +125,7 @@ By default the criterion values determine the search results.
     Traceback (most recent call last):
     LinkNotFoundError
 
-Change the checked values and search
+Change the selected values and search
 
     >>> browser.getControl('bah').selected = False
     >>> browser.getControl('quux').selected = True
