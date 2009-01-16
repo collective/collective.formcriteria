@@ -10,6 +10,8 @@ TODO
 
 * Form sort criteria
 
+* Fix folder_contents view to support deleting, etc.
+
 * Use subcollections to support AdvancedQuery operations
 
   Collections will act as grouping/parenthesis *and* operators.  IOW,
