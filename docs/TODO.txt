@@ -3,19 +3,18 @@ TODO
 
 * Additional Criteria
 
-Currently the only form criterion is the simple string criterion.  The
-intention is to add form criteria for the rest of the ATCT criteria as
-well.  I'm only likely to get to the ones that I need without any
-further input, so if you want one in particular let me know.
+  Currently only some criteria have form criteria equivalents.  The
+  intention is to add form criteria for the rest of the ATCT criteria as
+  well.  I'm only likely to get to the ones that I need without any
+  further input, so if you want one in particular let me know.
 
-There are some caveats about implementing form criteria.  The name of
-the criterion fields do not actually correspond to name of the index
-queried.  For most criterion, the field rendered to collect the index
-value is the "value" field of the criterion, regardless of what index
-it's used for.  For some of the more complex criteria, it may not be
-true that all that is needed is to render the "value" field with the
-name of the index to be queried.  Form criteria will still be
-possible, but more complex.  In summary, implementation will be simple
-for criteria that need only render the "value" field which can be
-given the criterion.Field() as its name attribute and still work with
-the catalog query.
+* Form sort criteria
+
+* Use subcollections to support AdvancedQuery operations
+
+  Collections will act as grouping/parenthesis *and* operators.  IOW,
+  a collection will have a boolean field to set whether it uses AND or
+  OR to find the intersection or union of its result sets.
+  Sub-collections will not acquire criteria but instead parent
+  collections will treat sub-collections as criteria groupings.  Not
+  yet sure how to handle sorting.
