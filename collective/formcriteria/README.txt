@@ -75,6 +75,12 @@ Set a default search term.
     <...
     ...Changes saved...
 
+Open another browser as an anymous user.
+
+    >>> anon_browser = Browser()
+    >>> anon_browser.handleErrors = False
+    >>> anon_browser.open(foo_topic.absolute_url())
+
 If no form value have been submitted, such as on a fresh load of the
 topic view, the default term will be used in the query returning only
 one of the content objects.
@@ -82,18 +88,17 @@ one of the content objects.
     >>> len(foo_topic.queryCatalog())
     1
 
-    >>> browser.getLink('View').click()
-    >>> browser.getLink('Bar Document Title')
+    >>> anon_browser.getLink('Bar Document Title')
     <Link text='Bar Document Title'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
-    >>> browser.getLink('Baz Event Title')
+    >>> anon_browser.getLink('Baz Event Title')
     Traceback (most recent call last):
     LinkNotFoundError
 
 Now that a form criterion has been added, the topic view displays the
 search form.
 
-    >>> form = browser.getForm(name="formcriteria_search")
+    >>> form = anon_browser.getForm(name="formcriteria_search")
 
 Enter a search term and submit the query.  The topic will now list the
 other content object.
@@ -102,17 +107,17 @@ other content object.
     ...     name='crit__SearchableText_SimpleStringFormCriterion'
     ...     '.value').value = 'baz'
     >>> form.getControl(name='submit').click()
-    >>> browser.getLink('Bar Document Title')
+    >>> anon_browser.getLink('Bar Document Title')
     Traceback (most recent call last):
     LinkNotFoundError
-    >>> browser.getLink('Baz Event Title')
+    >>> anon_browser.getLink('Baz Event Title')
     <Link text='Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
 
 The search form also reflects the search term submitted rather than
 the default value submitted on the criteria tab.
 
-    >>> browser.getForm(name="formcriteria_search").getControl(
+    >>> anon_browser.getForm(name="formcriteria_search").getControl(
     ...     name='crit__SearchableText_SimpleStringFormCriterion'
     ...     '.value').value
     'baz'
@@ -122,6 +127,7 @@ Contents View
 
 Change the topic's display layout to the contents view.
 
+    >>> browser.open(foo_topic.absolute_url())
     >>> browser.getLink('folder_contents_view').click()
     >>> print browser.contents
     <...

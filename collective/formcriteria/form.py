@@ -26,13 +26,18 @@ class SearchFormView(object):
                 (not schematas or schematas.has_key('default'))
                 and 'default' or fieldsets[0])
             fieldset = self.request.get('fieldset', default_fieldset)
+            fields = []
+            for field in schematas[fieldset].fields():
+                new_field = field.copy()
+                new_field.write_permission = field.read_permission
+                fields.append(new_field)
 
             result = {
                 'id': crit_id,
                 'field': field,
                 'friendlyName': index.friendlyName or index.index,
                 'description': index.description,
-                'fields': schematas[fieldset].fields(),
+                'fields': fields,
                 'widget': criterion.widget,
                 }
 

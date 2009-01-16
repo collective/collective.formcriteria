@@ -43,4 +43,13 @@ class FormCriteriaLayer(tcl_ptc.BasePTCLayer):
             # For Events eventType == subject
             eventType=['qux', 'quux'])
 
+        self.loginAsPortalOwner()
+        self.portal.portal_workflow.doActionFor(
+            home['foo-topic-title'], 'publish')
+        self.portal.portal_workflow.doActionFor(
+            home['bar-document-title'], 'publish')
+        self.portal.portal_workflow.doActionFor(
+            home['baz-event-title'], 'publish')
+        self.login()
+
 formcriteria_layer = FormCriteriaLayer([tcl_ptc.ptc_layer])
