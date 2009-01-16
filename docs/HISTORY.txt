@@ -1,11 +1,12 @@
 Changelog
 =========
 
-0.4 - Unreleased
+0.4 - 2009-01-15
 ----------------
 
 * Add list criterion
 * Add selection criterion
+* Fix the form for access by anonymous users
 
 0.3 - 2009-01-15
 ----------------
