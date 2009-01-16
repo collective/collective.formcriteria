@@ -9,7 +9,7 @@ class DateRangeFormCriterion(
 
     meta_type      = 'DateRangeFormCriterion'
     archetype_name = 'Date Range Form Criterion'
-    shortDesc = 'Form: Date range'
+    shortDesc = 'Form: ' + daterange.ATDateRangeCriterion.shortDesc
 
     Value = daterange.ATDateRangeCriterion.Value
 
