@@ -4,6 +4,8 @@ Changelog
 0.4 - Unreleased
 ----------------
 
+* Add selection criteria
+
 0.3 - 2009-01-15
 ----------------
 

@@ -21,6 +21,69 @@ Open a browser and log in as a normal user.
     ...     'Password').value = ptc.default_password
     >>> browser.getControl('Log in').click()
 
+Selection Lists
+---------------
+
+Three criterion are provided for rendering selection lists on the
+search form: SelectionFormCriterion, PortalTypeSelectionFormCriterion,
+ReferenceSelectionFormCriterion.
+
+Add a selection criterion for the subject/keywords.
+
+    >>> foo_topic.addCriterion(
+    ...     'Subject', 'SelectionFormCriterion')
+    <SelectionFormCriterion at
+    /plone/Members/test_user_1_/foo-topic-title/crit__Subject_SelectionFormCriterion>
+
+The values set on the criterion are the default values checked on the
+search form.
+
+    >>> foo_topic.getCriterion(
+    ...     'Subject_SelectionFormCriterion').setValue(['bah'])
+
+When viewing the collection in a browser selectiones will be rendered
+for the field with the default values selected.
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> browser.getControl('bah')
+    <ItemControl
+    name='crit__Subject_SelectionFormCriterion.value:list'
+    type='select' optionValue='bah' selected=True>
+    >>> browser.getControl('quux')
+    <ItemControl
+    name='crit__Subject_SelectionFormCriterion.value:list'
+    type='select' optionValue='quux' selected=False>
+
+By default the criterion values determine the search results.
+
+    >>> browser.getLink('Bar Document Title')
+    <Link text='Bar Document Title'
+    url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
+    >>> browser.getLink('Baz Event Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+
+Change the checked values and search
+
+    >>> browser.getControl('bah').selected = False
+    >>> browser.getControl('quux').selected = True
+    >>> form = browser.getForm(name="formcriteria_search")
+    >>> form.getControl(name='submit').click()
+
+Now the default has been overriden by the submitted query.
+
+    >>> browser.getLink('Bar Document Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+    >>> browser.getLink('Baz Event Title')
+    <Link text='Baz Event Title'
+    url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
+
+Remove the criterion.
+
+    >>> foo_topic.deleteCriterion(
+    ...     'crit__Subject_SelectionFormCriterion')
+
 Checkboxes
 ----------
 
@@ -90,6 +153,11 @@ Now the default has been overriden by the submitted query.
     <Link text='Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
 
+Remove the criterion.
+
+    >>> foo_topic.deleteCriterion(
+    ...     'crit__Type_PortalTypeCheckboxFormCriterion')
+
 Date Range
 ----------
 
@@ -108,8 +176,6 @@ the collection view does not include any such helpers.
 
 Add a date range criterion for the effective date
 
-    >>> foo_topic.deleteCriterion(
-    ...     'crit__Type_PortalTypeCheckboxFormCriterion')
     >>> foo_topic.addCriterion(
     ...     'effective', 'DateRangeFormCriterion')
     <DateRangeFormCriterion at

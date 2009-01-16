@@ -5,6 +5,7 @@
   <index name="Creator" description="" enabled="True" friendlyName="Creator"
      i18n:attributes="description; friendlyName">
    <criteria>ATSelectionCriterion</criteria>
+   <criteria>SelectionFormCriterion</criteria>
    <criteria>CheckboxFormCriterion</criteria>
    <criteria>ATCurrentAuthorCriterion</criteria>
    <criteria>ATSimpleStringCriterion</criteria>
@@ -22,6 +23,7 @@
    <criteria>ATReferenceCriterion</criteria>
    <criteria>ReferenceCheckboxFormCriterion</criteria>
    <criteria>ATSelectionCriterion</criteria>
+   <criteria>SelectionFormCriterion</criteria>
    <criteria>CheckboxFormCriterion</criteria>
    <criteria>ATSimpleIntCriterion</criteria>
    <criteria>ATSimpleStringCriterion</criteria>
@@ -47,6 +49,7 @@
      friendlyName="State"
      i18n:attributes="description; friendlyName">
    <criteria>ATSelectionCriterion</criteria>
+   <criteria>SelectionFormCriterion</criteria>
    <criteria>CheckboxFormCriterion</criteria>
    <criteria>ATSimpleStringCriterion</criteria>
    <criteria>SimpleStringFormCriterion</criteria>
@@ -62,6 +65,7 @@
      enabled="True" friendlyName="Categories"
      i18n:attributes="description; friendlyName">
    <criteria>ATSelectionCriterion</criteria>
+   <criteria>SelectionFormCriterion</criteria>
    <criteria>CheckboxFormCriterion</criteria>
    <criteria>ATSimpleStringCriterion</criteria>
    <criteria>SimpleStringFormCriterion</criteria>
