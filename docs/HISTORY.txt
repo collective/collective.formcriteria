@@ -8,6 +8,8 @@ Changelog
   criterion should be rendered on the search form
 * Improve label handling.  Remove labels for 'value' field and
   "required" markers for all fields.
+* Make the search form collapsible and start collapsed when the form
+  has been submitted
 
 0.4 - 2009-01-15
 ----------------

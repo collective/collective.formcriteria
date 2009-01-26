@@ -129,6 +129,12 @@ search form.
 
     >>> form = anon_browser.getForm(name="formcriteria_search")
 
+Since the search form has not been submitted, the search form starts
+out expanded.
+
+    >>> 'collapsedOnLoad' in anon_browser.contents
+    False
+    
 Criterion fields that haven't been selected in "Form Fields" don't
 appear on the search form.
 
@@ -152,6 +158,12 @@ other content object.
     >>> anon_browser.getLink('Baz Event Title')
     <Link text='Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
+
+Since the search form has been submitted, the search form starts
+out collapsed.
+
+    >>> 'collapsedOnLoad' in anon_browser.contents
+    True
 
 The search form also reflects the search term submitted rather than
 the default value submitted on the criteria tab.

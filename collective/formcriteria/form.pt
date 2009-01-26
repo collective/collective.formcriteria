@@ -1,64 +1,68 @@
 <metal:block use-macro="here/global_defines/macros/defines" />
 
-<tal:comment content="nothing">
-  Copied from CMFPlone/skins/plone_forms/search_form.pt
-</tal:comment>
-<form action="."
-      class="enableAutoFocus"
-      method="get"
-      name="formcriteria_search"
-      id="formcriteria_search"
-      tal:attributes="action view/name|template/getId;"
-      tal:define="field_macro nocall:context/formcriteria_macros/field_macro;
-		  errors options/state/getErrors|python:{};">
+<dl class="collapsible"
+    tal:attributes="class python:'collapsible'+('submit' in request and ' collapsedOnLoad' or '');">
+  <dt class="collapsibleHeader">
+    Search Terms
+  </dt>
 
-  <fieldset>
+  <dd class="collapsibleContent">
 
-    <legend i18n:translate="legend_search_terms">Search Terms</legend>
-    <dl>
+    <tal:comment content="nothing">
+      Copied from CMFPlone/skins/plone_forms/search_form.pt
+    </tal:comment>
+    <form action="."
+          class="enableAutoFocus"
+          method="get"
+          name="formcriteria_search"
+          id="formcriteria_search"
+          tal:attributes="action view/name|template/getId;"
+          tal:define="field_macro nocall:context/formcriteria_macros/field_macro;
+		      errors options/state/getErrors|python:{};">
 
-      <tal:criteria tal:repeat="criterion view/criteriaFields">
-        <dt>
-          
-          <div class="field">
- 	    <label
-	       tal:content="criterion/friendlyName"
-	       tal:attributes="for criterion/field;"
-	       i18n:translate="">
-	      Label
-	    </label>
-	    <div class="formHelp" tal:content="criterion/description"
+      <dl>
+        <tal:criteria tal:repeat="criterion view/criteriaFields">
+          <dt>
+            
+            <div class="field">
+ 	      <label
+	         tal:content="criterion/friendlyName"
+	         tal:attributes="for criterion/field;"
 	         i18n:translate="">
-	      Help
-	    </div>
-          </div>
-        </dt>
-        
-        <tal:comment content="nothing">
-          Copied from ATContentTypes/skins/ATContentTypes/atct_macros.pt
-        </tal:comment>
-        
-        <tal:fields repeat="field criterion/fields">
-          <dd tal:define="fieldName string:${criterion/id}.${field/getName};"
-              tal:condition="python:field.mode != 'r'">
-            <metal:fieldMacro
-               use-macro="python:criterion['widget'](fieldName, field=field, mode='edit')" />
-          </dd>
-        </tal:fields>
-      </tal:criteria>
-    </dl>
+	        Label
+	      </label>
+	      <div class="formHelp" tal:content="criterion/description"
+	           i18n:translate="">
+	        Help
+	      </div>
+            </div>
+          </dt>
+          
+          <tal:comment content="nothing">
+            Copied from ATContentTypes/skins/ATContentTypes/atct_macros.pt
+          </tal:comment>
+          
+          <tal:fields repeat="field criterion/fields">
+            <dd tal:define="fieldName string:${criterion/id}.${field/getName};"
+                tal:condition="python:field.mode != 'r'">
+              <metal:fieldMacro
+                 use-macro="python:criterion['widget'](fieldName, field=field, mode='edit')" />
+            </dd>
+          </tal:fields>
+        </tal:criteria>
+      </dl>
 
-    <div class="visualClear" id="clear-space-before-submit"><!-- --></div>
+      <div class="visualClear" id="clear-space-before-submit"><!-- --></div>
 
-    <div class="formControls">
-      <input class="context"
-	     type="submit"
-	     name="submit"
-	     value="Search"
-	     i18n:attributes="value label_search;"
-	     />
-    </div>
+      <div class="formControls">
+        <input class="context"
+	       type="submit"
+	       name="submit"
+	       value="Search"
+	       i18n:attributes="value label_search;"
+	       />
+      </div>
 
-  </fieldset>
-
-</form>
+    </form>
+  </dd>
+</dl>
