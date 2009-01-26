@@ -1,4 +1,3 @@
-<tal:if condition="view/formCriteria">
 <metal:block use-macro="here/global_defines/macros/defines" />
 
 <tal:comment content="nothing">
@@ -62,4 +61,3 @@
   </fieldset>
 
 </form>
-</tal:if>

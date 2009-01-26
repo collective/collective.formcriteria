@@ -6,6 +6,11 @@ from collective.formcriteria import interfaces
 
 class SearchFormView(object):
 
+    def render(self, *args, **kw):
+        if self.formCriteria():
+            return super(SearchFormView, self).render(*args, **kw)
+        return ''
+
     @view.memoize
     def formCriteria(self):
         return [
