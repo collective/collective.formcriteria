@@ -1,135 +1,43 @@
 <?xml version="1.0"?>
 <atcttool
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <topic_indexes i18n:domain="plone">
-  <index name="Creator" description="" enabled="True" friendlyName="Creator"
-     i18n:attributes="description; friendlyName">
-   <criteria>ATSelectionCriterion</criteria>
-   <criteria>SelectionFormCriterion</criteria>
-   <criteria>CheckboxFormCriterion</criteria>
-   <criteria>ATCurrentAuthorCriterion</criteria>
-   <criteria>ATSimpleStringCriterion</criteria>
-   <criteria>SimpleStringFormCriterion</criteria>
-   <criteria>ATListCriterion</criteria>
-   <criteria>ListFormCriterion</criteria>
-  </index>
-  <index name="Description" description="" enabled="True" friendlyName="Description"
-     i18n:attributes="description; friendlyName">
-   <criteria>ATSimpleStringCriterion</criteria>
-   <criteria>SimpleStringFormCriterion</criteria>
-  </index>
-  <index name="getEventType" description="" enabled="False" friendlyName="">
-   <criteria>ATCurrentAuthorCriterion</criteria>
-   <criteria>ATListCriterion</criteria>
-   <criteria>ListFormCriterion</criteria>
-   <criteria>ATReferenceCriterion</criteria>
-   <criteria>ReferenceCheckboxFormCriterion</criteria>
-   <criteria>ATSelectionCriterion</criteria>
-   <criteria>SelectionFormCriterion</criteria>
-   <criteria>CheckboxFormCriterion</criteria>
-   <criteria>ATSimpleIntCriterion</criteria>
-   <criteria>ATSimpleStringCriterion</criteria>
-   <criteria>SimpleStringFormCriterion</criteria>
-  </index>
-  <index name="getId"
-     description="The short name of an item (used in the url)" enabled="True"
-     friendlyName="Short Name"
-     i18n:attributes="description; friendlyName">
-   <criteria>ATSimpleStringCriterion</criteria>
-   <criteria>SimpleStringFormCriterion</criteria>
-   <criteria>ATListCriterion</criteria>
-   <criteria>ListFormCriterion</criteria>
-  </index>
-  <index name="id" description="The short name of an item (used in the url)"
-     enabled="False" friendlyName="Short Name"
-     i18n:attributes="description; friendlyName">
-   <criteria>ATSimpleStringCriterion</criteria>
-   <criteria>SimpleStringFormCriterion</criteria>
-   <criteria>ATListCriterion</criteria>
-   <criteria>ListFormCriterion</criteria>
-  </index>
-  <index name="review_state"
-     description="An item's workflow state (e.g.published)" enabled="True"
-     friendlyName="State"
-     i18n:attributes="description; friendlyName">
-   <criteria>ATSelectionCriterion</criteria>
-   <criteria>SelectionFormCriterion</criteria>
-   <criteria>CheckboxFormCriterion</criteria>
-   <criteria>ATSimpleStringCriterion</criteria>
-   <criteria>SimpleStringFormCriterion</criteria>
-   <criteria>ATListCriterion</criteria>
-   <criteria>ListFormCriterion</criteria>
-  </index>
-  <index name="SearchableText" description="Text search of an item's contents"
-     enabled="True" friendlyName="Search Text"
-     i18n:attributes="description; friendlyName">
-   <criteria>ATSimpleStringCriterion</criteria>
-   <criteria>SimpleStringFormCriterion</criteria>
-  </index>
-  <index name="Subject" description="The keywords used to describe an item"
-     enabled="True" friendlyName="Categories"
-     i18n:attributes="description; friendlyName">
-   <criteria>ATSelectionCriterion</criteria>
-   <criteria>SelectionFormCriterion</criteria>
-   <criteria>CheckboxFormCriterion</criteria>
-   <criteria>ATSimpleStringCriterion</criteria>
-   <criteria>SimpleStringFormCriterion</criteria>
-   <criteria>ATListCriterion</criteria>
-   <criteria>ListFormCriterion</criteria>
-  </index>
-  <index name="Title" description="Text search of an item's title"
-     enabled="True" friendlyName="Title"
-     i18n:attributes="description; friendlyName">
-   <criteria>ATSimpleStringCriterion</criteria>
-   <criteria>SimpleStringFormCriterion</criteria>
-  </index>
-  <index name="portal_type" description="" enabled="False"
-     friendlyName="Item Type (internal)"
-     i18n:attributes="description; friendlyName">
-   <criteria>ATPortalTypeCriterion</criteria>
-   <criteria>PortalTypeCheckboxFormCriterion</criteria>
-  </index>
-  <index name="Type" description="An item's type (e.g. Event)" enabled="True"
-     friendlyName="Item Type"
-     i18n:attributes="description; friendlyName">
-   <criteria>ATPortalTypeCriterion</criteria>
-   <criteria>PortalTypeCheckboxFormCriterion</criteria>
-  </index>
-  <index name="getRawRelatedItems"
-     description="Find items related to the selected items" enabled="True"
-     friendlyName="Related To"
-     i18n:attributes="description; friendlyName">
-   <criteria>ATReferenceCriterion</criteria>
-   <criteria>ReferenceCheckboxFormCriterion</criteria>
-  </index>
   <index name="created" description="The time and date an item was created"
      enabled="True" friendlyName="Creation Date"
      i18n:attributes="description; friendlyName">
    <criteria>ATFriendlyDateCriteria</criteria>
-   <criteria>ATDateRangeCriterion</criteria>
    <criteria>DateRangeFormCriterion</criteria>
+  </index>
+  <index name="Creator" description="" enabled="True" friendlyName="Creator"
+     i18n:attributes="description; friendlyName">
+   <criteria>SelectionFormCriterion</criteria>
+   <criteria>CheckboxFormCriterion</criteria>
+   <criteria>ATCurrentAuthorCriterion</criteria>
+   <criteria>SimpleStringFormCriterion</criteria>
+   <criteria>ListFormCriterion</criteria>
   </index>
   <index name="Date"
      description="The time and date an item was last modified"
      enabled="False" friendlyName="Modification Date"
      i18n:attributes="description; friendlyName">
    <criteria>ATFriendlyDateCriteria</criteria>
-   <criteria>ATDateRangeCriterion</criteria>
    <criteria>DateRangeFormCriterion</criteria>
+  </index>
+  <index name="Description" description="" enabled="True" friendlyName="Description"
+     i18n:attributes="description; friendlyName">
+   <criteria>SimpleStringFormCriterion</criteria>
   </index>
   <index name="effective"
      description="The time and date an item becomes publicly available"
      enabled="True" friendlyName="Effective Date"
      i18n:attributes="description; friendlyName">
    <criteria>ATFriendlyDateCriteria</criteria>
-   <criteria>ATDateRangeCriterion</criteria>
    <criteria>DateRangeFormCriterion</criteria>
   </index>
   <index name="end" description="The end date and time of an event"
      enabled="True" friendlyName="End Date"
      i18n:attributes="description; friendlyName">
    <criteria>ATFriendlyDateCriteria</criteria>
-   <criteria>ATDateRangeCriterion</criteria>
    <criteria>DateRangeFormCriterion</criteria>
   </index>
   <index name="expires"
@@ -137,23 +45,89 @@
      enabled="True" friendlyName="Expiration Date"
      i18n:attributes="description; friendlyName">
    <criteria>ATFriendlyDateCriteria</criteria>
-   <criteria>ATDateRangeCriterion</criteria>
    <criteria>DateRangeFormCriterion</criteria>
+  </index>
+  <index name="getEventType" description="" enabled="False" friendlyName="">
+   <criteria>ATCurrentAuthorCriterion</criteria>
+   <criteria>ListFormCriterion</criteria>
+   <criteria>ReferenceSelectionFormCriterion</criteria>
+   <criteria>ReferenceCheckboxFormCriterion</criteria>
+   <criteria>SelectionFormCriterion</criteria>
+   <criteria>CheckboxFormCriterion</criteria>
+   <criteria>ATSimpleIntCriterion</criteria>
+   <criteria>SimpleStringFormCriterion</criteria>
+  </index>
+  <index name="getId"
+     description="The short name of an item (used in the url)" enabled="True"
+     friendlyName="Short Name"
+     i18n:attributes="description; friendlyName">
+   <criteria>SimpleStringFormCriterion</criteria>
+   <criteria>ListFormCriterion</criteria>
+  </index>
+  <index name="getRawRelatedItems"
+     description="Find items related to the selected items" enabled="True"
+     friendlyName="Related To"
+     i18n:attributes="description; friendlyName">
+   <criteria>ReferenceSelectionFormCriterion</criteria>
+   <criteria>ReferenceCheckboxFormCriterion</criteria>
+  </index>
+  <index name="id" description="The short name of an item (used in the url)"
+     enabled="False" friendlyName="Short Name"
+     i18n:attributes="description; friendlyName">
+   <criteria>SimpleStringFormCriterion</criteria>
+   <criteria>ListFormCriterion</criteria>
   </index>
   <index name="modified"
      description="The time and date an item was last modified" enabled="True"
      friendlyName="Modification Date"
      i18n:attributes="description; friendlyName">
    <criteria>ATFriendlyDateCriteria</criteria>
-   <criteria>ATDateRangeCriterion</criteria>
    <criteria>DateRangeFormCriterion</criteria>
+  </index>
+  <index name="portal_type" description="" enabled="False"
+     friendlyName="Item Type (internal)"
+     i18n:attributes="description; friendlyName">
+   <criteria>PortalTypeSelectionFormCriterion</criteria>
+   <criteria>PortalTypeCheckboxFormCriterion</criteria>
+  </index>
+  <index name="review_state"
+     description="An item's workflow state (e.g.published)" enabled="True"
+     friendlyName="State"
+     i18n:attributes="description; friendlyName">
+   <criteria>SelectionFormCriterion</criteria>
+   <criteria>CheckboxFormCriterion</criteria>
+   <criteria>SimpleStringFormCriterion</criteria>
+   <criteria>ListFormCriterion</criteria>
+  </index>
+  <index name="SearchableText" description="Text search of an item's contents"
+     enabled="True" friendlyName="Search Text"
+     i18n:attributes="description; friendlyName">
+   <criteria>SimpleStringFormCriterion</criteria>
   </index>
   <index name="start" description="The start date and time of an event"
      enabled="True" friendlyName="Start Date"
      i18n:attributes="description; friendlyName">
    <criteria>ATFriendlyDateCriteria</criteria>
-   <criteria>ATDateRangeCriterion</criteria>
    <criteria>DateRangeFormCriterion</criteria>
+  </index>
+  <index name="Subject" description="The keywords used to describe an item"
+     enabled="True" friendlyName="Categories"
+     i18n:attributes="description; friendlyName">
+   <criteria>SelectionFormCriterion</criteria>
+   <criteria>CheckboxFormCriterion</criteria>
+   <criteria>SimpleStringFormCriterion</criteria>
+   <criteria>ListFormCriterion</criteria>
+  </index>
+  <index name="Title" description="Text search of an item's title"
+     enabled="True" friendlyName="Title"
+     i18n:attributes="description; friendlyName">
+   <criteria>SimpleStringFormCriterion</criteria>
+  </index>
+  <index name="Type" description="An item's type (e.g. Event)" enabled="True"
+     friendlyName="Item Type"
+     i18n:attributes="description; friendlyName">
+   <criteria>PortalTypeSelectionFormCriterion</criteria>
+   <criteria>PortalTypeCheckboxFormCriterion</criteria>
   </index>
  </topic_indexes>
 </atcttool>

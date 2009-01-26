@@ -4,55 +4,63 @@ from Products.ATContentTypes.criteria import portaltype
 from Products.ATContentTypes.criteria import reference
 
 from collective.formcriteria.criteria import common
+from collective.formcriteria.criteria import (
+    selection as form_selection)
 
 class CheckboxFormCriterion(
     common.FormCriterion, selection.ATSelectionCriterion):
-    """A checkbox form criterion"""
+    """A checkbox criterion"""
 
-    meta_type = 'CheckboxFormCriterion'
-    archetype_name = 'Checkbox Form Criterion'
-    shortDesc = 'Form: Check values'
+    archetype_name = 'Checkbox Criterion'
+    shortDesc = 'Check values'
 
-    schema = selection.ATSelectionCriterion.schema.copy()
+    schema = selection.ATSelectionCriterion.schema.copy(
+        ) + common.FormCriterion.schema.copy()
     schema['value'].widget.format = 'checkbox'
     schema['value'].widget.hide_form_label = True
+    schema['formFields'].vocabulary = common.makeVocabularyForFields(
+        schema['value'], schema['operator'])
 
 criteria.registerCriterion(
     CheckboxFormCriterion,
     criteria._criterionRegistry.indicesByCriterion(
-        selection.ATSelectionCriterion.meta_type))
+        form_selection.SelectionFormCriterion.meta_type))
 
 class PortalTypeCheckboxFormCriterion(
     common.FormCriterion, portaltype.ATPortalTypeCriterion):
-    """A portal_types checkbox form criterion"""
+    """A portal_types checkbox criterion"""
 
-    meta_type = 'PortalTypeCheckboxFormCriterion'
-    archetype_name = 'Portal Types Checkbox Form Criterion'
-    shortDesc = 'Form: Check content types'
+    archetype_name = 'Portal Types Checkbox Criterion'
+    shortDesc = 'Check content types'
 
-    schema = portaltype.ATPortalTypeCriterion.schema.copy()
+    schema = portaltype.ATPortalTypeCriterion.schema.copy(
+        ) + common.FormCriterion.schema.copy()
     schema['value'].widget.format = 'checkbox'
     schema['value'].widget.hide_form_label = True
     schema['operator'].mode = 'r'
+    schema['formFields'].vocabulary = common.makeVocabularyForFields(
+        schema['value'])
 
 criteria.registerCriterion(
     PortalTypeCheckboxFormCriterion,
     criteria._criterionRegistry.indicesByCriterion(
-        portaltype.ATPortalTypeCriterion.meta_type))
+        form_selection.PortalTypeSelectionFormCriterion.meta_type))
 
 class ReferenceCheckboxFormCriterion(
     common.FormCriterion, reference.ATReferenceCriterion):
-    """A reference checkbox form criterion"""
+    """A reference checkbox criterion"""
 
-    meta_type = 'ReferenceCheckboxFormCriterion'
-    archetype_name = 'Portal Types Checkbox Form Criterion'
-    shortDesc = 'Form: Check referenced content'
+    archetype_name = 'Portal Types Checkbox Criterion'
+    shortDesc = 'Check referenced content'
 
-    schema = portaltype.ATPortalTypeCriterion.schema.copy()
+    schema = portaltype.ATPortalTypeCriterion.schema.copy(
+        ) + common.FormCriterion.schema.copy()
     schema['value'].widget.format = 'checkbox'
     schema['value'].widget.hide_form_label = True
+    schema['formFields'].vocabulary = common.makeVocabularyForFields(
+        schema['value'], schema['operator'])
 
 criteria.registerCriterion(
     ReferenceCheckboxFormCriterion,
     criteria._criterionRegistry.indicesByCriterion(
-        reference.ATReferenceCriterion.meta_type))
+        form_selection.ReferenceSelectionFormCriterion.meta_type))

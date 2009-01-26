@@ -4,6 +4,8 @@ Changelog
 0.5 - Unreleased
 ----------------
 
+* Form criteria are now designated by selecting which fields of each
+  criterion should be rendered on the search form
 * Improve label handling.  Remove labels for 'value' field and
   "required" markers for all fields.
 

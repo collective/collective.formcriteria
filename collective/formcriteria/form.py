@@ -2,8 +2,6 @@
 
 from plone.memoize import view
 
-from collective.formcriteria import interfaces
-
 class SearchFormView(object):
 
     def render(self, *args, **kw):
@@ -15,7 +13,7 @@ class SearchFormView(object):
     def formCriteria(self):
         return [
             criterion for criterion in self.context.listCriteria()
-            if interfaces.IFormCriterion.providedBy(criterion)]
+            if getattr(criterion, 'getFormFields', lambda : False)()]
 
     @view.memoize
     def criteriaFields(self):

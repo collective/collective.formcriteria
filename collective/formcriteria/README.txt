@@ -4,11 +4,13 @@
 collective.formcriteria
 =======================
 
-This package provides new criteria types based on the
-ATContentTypes.criteria types that are used to create a form at the
-top of the topic view.  Users can use the form to submit criteria to
-supplement any search criteria in the topic.  Values entered on the
-criteria tab for the topic become the default values on the form.
+This package provides extends the Products.ATContentTypes.criteria
+types to create a search form at the top of the topic view.  If any of
+the criterion fields are selected in the criterion's "Form Fields"
+field, then those fields will be rendered on the search form.  Users
+can use the form to submit criteria to supplement any search criteria
+in the topic.  Values entered on the criteria tab for the topic become
+the default values on the form.
 
 Also provided is an alternative display layout that uses the folder
 contents table and can still display the search form viewlet.
@@ -66,23 +68,30 @@ Then set the query term to return only published content.
 Before the topic has any form criteria, the serach form is not
 present.
 
-    >>> browser.open(foo_topic.absolute_url())
+    >>> browser.getLink('View').click()
     >>> browser.getForm(name="formcriteria_search")
     Traceback (most recent call last):
     LookupError
 
-Add a simple string form criterion for searchable text on the criteria
-tab.
+Add a simple string criterion for searchable text on the criteria tab.
 
     >>> browser.getLink('Criteria').click()
-    >>> browser.getControl('Search Text').selected = True
-    >>> browser.getControl(name="criterion_type", index=0).getControl(
-    ...     'Form: Text').selected = True
-    >>> browser.getControl('Add criteria').click()
+    >>> form = browser.getForm(name='criteria_select')
+    >>> form.getControl('Search Text').selected = True
+    >>> form.getControl(name="criterion_type").getControl(
+    ...     'Text').selected = True
+    >>> form.getControl('Add criteria').click()
     >>> print browser.contents
     <...
     ...Search Text...
-    ...A simple string form criterion...
+    ...A simple string criterion...
+
+Select the criterion's 'value' field as a form field so it will appear
+on the search form.
+
+    >>> browser.getControl(
+    ...     name='crit__SearchableText_SimpleStringFormCriterion'
+    ...     '_formFields:list').getControl('Value').selected = True
 
 Set a default search term.
 

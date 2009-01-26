@@ -1,20 +1,17 @@
-from Products.ATContentTypes import criteria
 from Products.ATContentTypes.criteria import list as list_
 
 from collective.formcriteria.criteria import common
 
 class ListFormCriterion(
     common.FormCriterion, list_.ATListCriterion):
+    __doc__ = list_.ATListCriterion.__doc__
     """A list form criterion"""
 
-    meta_type = 'ListFormCriterion'
-    archetype_name = 'List Form Criterion'
-    shortDesc = 'Form: ' + list_.ATListCriterion.shortDesc
-
-    schema = list_.ATListCriterion.schema.copy()
+    schema = list_.ATListCriterion.schema.copy(
+        ) + common.FormCriterion.schema.copy()
     schema['value'].widget.hide_form_label = True
+    schema['formFields'].vocabulary = common.makeVocabularyForFields(
+        schema['value'])
 
-criteria.registerCriterion(
-    ListFormCriterion,
-    criteria._criterionRegistry.indicesByCriterion(
-        list_.ATListCriterion.meta_type))
+common.replaceCriterionRegistration(
+    list_.ATListCriterion, ListFormCriterion)

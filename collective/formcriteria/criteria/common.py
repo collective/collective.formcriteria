@@ -1,12 +1,35 @@
 from zope import interface
 
+from Products.Archetypes import atapi
+from Products.ATContentTypes import criteria
+
 from collective.formcriteria import interfaces
 
 missing = object()
 
+def makeVocabularyForFields(*fields):
+    return atapi.DisplayList(
+        (field.getName(), field.widget.label)
+        for field in fields)
+
+def replaceCriterionRegistration(old, new):
+    criteria.registerCriterion(
+        new, criteria._criterionRegistry.indicesByCriterion(
+            old.meta_type))
+    criteria.unregisterCriterion(old)
+
 class FormCriterion(object):
     """A criterion that generates a search form field."""
     interface.implements(interfaces.IFormCriterion)
+
+    schema = atapi.Schema((
+        atapi.LinesField(
+            'formFields',
+            widget=atapi.MultiSelectionWidget(
+                label=u'Form Fields',
+                description=
+                u'Select any fields for this criterion that should'
+                u'appear on a search form')),))
 
     def getFormFieldValue(self, field_name, REQUEST=None, **kw):
         """

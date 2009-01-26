@@ -1,15 +1,15 @@
-from Products.ATContentTypes import criteria
 from Products.ATContentTypes.criteria import daterange
 
 from collective.formcriteria.criteria import common
 
 class DateRangeFormCriterion(
     common.FormCriterion, daterange.ATDateRangeCriterion):
-    """A date range form criterion"""
+    __doc__ = daterange.ATDateRangeCriterion.__doc__
 
-    meta_type      = 'DateRangeFormCriterion'
-    archetype_name = 'Date Range Form Criterion'
-    shortDesc = 'Form: ' + daterange.ATDateRangeCriterion.shortDesc
+    schema = daterange.ATDateRangeCriterion.schema.copy(
+        ) + common.FormCriterion.schema.copy()
+    schema['formFields'].vocabulary = common.makeVocabularyForFields(
+        schema['start'], schema['end'])
 
     Value = daterange.ATDateRangeCriterion.Value
 
@@ -19,7 +19,5 @@ class DateRangeFormCriterion(
     def getEnd(self, **kw):
         return self.getFormFieldValue('end', **kw)
 
-criteria.registerCriterion(
-    DateRangeFormCriterion,
-    criteria._criterionRegistry.indicesByCriterion(
-        daterange.ATDateRangeCriterion.meta_type))
+common.replaceCriterionRegistration(
+    daterange.ATDateRangeCriterion, DateRangeFormCriterion)
