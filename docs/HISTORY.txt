@@ -9,6 +9,7 @@ Changelog
 * Fix criterion label to point to the correct form input
 * Allow widget special help/description to appear even if the label
   isn't rendered and use this for the comma widget
+* Fix the handling of postbacks in the comma widget
 
 0.5 - 2009-01-25
 ----------------

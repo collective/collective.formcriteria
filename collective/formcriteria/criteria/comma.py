@@ -11,7 +11,6 @@ class CommaWidget(atapi.LinesWidget):
         'maxlength' : '255',
         'blurrable' : True,
         'show_form_help': True,
-        'postback': False, # TODO
         })
 
     def process_form(self, *args, **kw):

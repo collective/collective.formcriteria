@@ -21,7 +21,7 @@
                size="30"
                tal:attributes="name fieldName;
                                id fieldName;
-                               value python:', '.join(value);
+                               value python:widget.postback and fieldName in request and value or ', '.join(value);
                                size widget/size;
                                maxlength widget/maxlength;"
                />
