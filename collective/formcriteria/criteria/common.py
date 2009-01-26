@@ -4,6 +4,7 @@ from Products.Archetypes import atapi
 from Products.ATContentTypes import criteria
 
 from collective.formcriteria import interfaces
+from collective.formcriteria import form
 
 missing = object()
 
@@ -31,6 +32,8 @@ class FormCriterion(object):
                 u'Select any fields for this criterion that should'
                 u'appear on a search form')),))
 
+    makeFormKey = form.makeFormKey
+
     def getFormFieldValue(self, field_name, raw=False, REQUEST=None,
                           **kw):
         """
@@ -42,12 +45,12 @@ class FormCriterion(object):
             REQUEST = self.REQUEST
 
         field = self.getField(field_name)
-        full_name = self.getId() + '.' + field_name
+        full_name = self.makeFormKey(self.getId(), field_name)
 
         # Remove the criterion ids from and relevant request keys
         form = dict(
             (key.replace(full_name, field_name, 1), REQUEST[key])
-            for key in REQUEST.keys() if field_name in key)
+            for key in REQUEST.keys() if key.startswith(full_name))
 
         if not form:
             if raw:

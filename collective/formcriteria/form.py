@@ -2,6 +2,9 @@
 
 from plone.memoize import view
 
+def makeFormKey(self, crit_id, field_name):
+    return 'form_%s_%s' % (crit_id, field_name)
+
 class SearchFormView(object):
 
     def render(self, *args, **kw):
@@ -53,3 +56,5 @@ class SearchFormView(object):
             getattr(self._parent, '_data', {}).get(
                 'template_id') != 'criterion_edit_form'
             and self.formCriteria())
+
+    makeFormKey = makeFormKey

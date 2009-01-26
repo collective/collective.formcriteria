@@ -96,9 +96,8 @@ on the search form.
 Set a default search term.
 
     >>> browser.getControl(
-    ...     name=
-    ...     "crit__SearchableText_SimpleStringFormCriterion_value"
-    ...     ).value = 'bar'
+    ...     name="crit__SearchableText_SimpleStringFormCriterion"
+    ...     "_value").value = 'bar'
     >>> browser.getControl(name="form.button.Save").click()
     >>> print browser.contents
     <...
@@ -139,18 +138,18 @@ Criterion fields that haven't been selected in "Form Fields" don't
 appear on the search form.
 
     >>> form.getControl(
-    ...     name='crit__SearchableText_SimpleStringFormCriterion'
-    ...     '.formFields:list')
+    ...     name='form_crit__SearchableText_SimpleStringFormCriterion'
+    ...     '_formFields:list')
     Traceback (most recent call last):
     LookupError: name
-    'crit__SearchableText_SimpleStringFormCriterion.formFields:list'
+    'form_crit__SearchableText_SimpleStringFormCriterion_formFields:list'
 
 Enter a search term and submit the query.  The topic will now list the
 other content object.
 
     >>> form.getControl(
-    ...     name='crit__SearchableText_SimpleStringFormCriterion'
-    ...     '.value').value = 'baz'
+    ...     name='form_crit__SearchableText_SimpleStringFormCriterion'
+    ...     '_value').value = 'baz'
     >>> form.getControl(name='submit').click()
     >>> anon_browser.getLink('Bar Document Title')
     Traceback (most recent call last):
@@ -169,8 +168,8 @@ The search form also reflects the search term submitted rather than
 the default value submitted on the criteria tab.
 
     >>> anon_browser.getForm(name="formcriteria_search").getControl(
-    ...     name='crit__SearchableText_SimpleStringFormCriterion'
-    ...     '.value').value
+    ...     name='form_crit__SearchableText_SimpleStringFormCriterion'
+    ...     '_value').value
     'baz'
 
 Contents View
@@ -206,8 +205,8 @@ The search form is also rendered if form criteria are present.
 The contents view also reflects user submitted criteria.
 
     >>> form.getControl(
-    ...     name='crit__SearchableText_SimpleStringFormCriterion'
-    ...     '.value').value = 'baz'
+    ...     name='form_crit__SearchableText_SimpleStringFormCriterion'
+    ...     '_value').value = 'baz'
     >>> form.getControl(name='submit').click()
     >>> browser.getControl('Bar Document Title')
     Traceback (most recent call last):

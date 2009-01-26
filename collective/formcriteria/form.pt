@@ -43,7 +43,7 @@
           </tal:comment>
           
           <tal:fields repeat="field criterion/fields">
-            <dd tal:define="fieldName string:${criterion/id}.${field/getName};"
+            <dd tal:define="fieldName python:view.makeFormKey(criterion['id'], field.getName());"
                 tal:condition="python:field.mode != 'r'">
               <metal:fieldMacro
                  use-macro="python:criterion['widget'](fieldName, field=field, mode='edit')" />
