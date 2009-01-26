@@ -43,6 +43,26 @@ Log in as a normal user.
     ...     'Password').value = ptc.default_password
     >>> browser.getControl('Log in').click()
 
+Add a criterion for the workflow state that won't appear on the form.
+Then set the query term to return only published content.
+
+    >>> browser.open(foo_topic.absolute_url()+'/criterion_edit_form')
+    >>> form = browser.getForm(name='criteria_select')
+    >>> form.getControl('State').selected = True
+    >>> form.getControl(
+    ...     'Select values from list', index=0).selected = True
+    >>> form.getControl('Add criteria').click()
+    >>> print browser.contents
+    <...
+    ...State...
+    ...Select values from list...
+
+    >>> browser.getControl('published').selected = True
+    >>> browser.getControl('Save', index=0).click()
+    >>> print browser.contents
+    <...
+    ...Changes saved...
+
 Before the topic has any form criteria, the serach form is not
 present.
 
