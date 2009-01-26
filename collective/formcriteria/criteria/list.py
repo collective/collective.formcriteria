@@ -11,7 +11,8 @@ class ListFormCriterion(
         ) + common.FormCriterion.schema.copy()
     schema['value'].widget.hide_form_label = True
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
-        schema['value'])
+        schema['value'], schema['operator'])
+    schema['formFields'].widget.format = 'checkbox'
 
 common.replaceCriterionRegistration(
     list_.ATListCriterion, ListFormCriterion)

@@ -13,6 +13,7 @@ class SelectionFormCriterion(
     schema['value'].widget.hide_form_label = True
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'], schema['operator'])
+    schema['formFields'].widget.format = 'checkbox'
 
 common.replaceCriterionRegistration(
     selection.ATSelectionCriterion, SelectionFormCriterion)
@@ -27,6 +28,7 @@ class PortalTypeSelectionFormCriterion(
     schema['operator'].mode = 'r'
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'])
+    schema['formFields'].widget.format = 'checkbox'
 
 common.replaceCriterionRegistration(
     portaltype.ATPortalTypeCriterion, PortalTypeSelectionFormCriterion)
@@ -41,6 +43,7 @@ class ReferenceSelectionFormCriterion(
     schema['value'].widget.hide_form_label = True
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'], schema['operator'])
+    schema['formFields'].widget.format = 'checkbox'
 
 common.replaceCriterionRegistration(
     reference.ATReferenceCriterion, ReferenceSelectionFormCriterion)
