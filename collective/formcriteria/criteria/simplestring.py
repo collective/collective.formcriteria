@@ -12,6 +12,9 @@ class SimpleStringFormCriterion(
     shortDesc = (
         'Form: ' + simplestring.ATSimpleStringCriterion.shortDesc)
 
+    schema = simplestring.ATSimpleStringCriterion.schema.copy()
+    schema['value'].widget.hide_form_label = True
+
 criteria.registerCriterion(
     SimpleStringFormCriterion,
     criteria._criterionRegistry.indicesByCriterion(

@@ -11,6 +11,9 @@ class ListFormCriterion(
     archetype_name = 'List Form Criterion'
     shortDesc = 'Form: ' + list_.ATListCriterion.shortDesc
 
+    schema = list_.ATListCriterion.schema.copy()
+    schema['value'].widget.hide_form_label = True
+
 criteria.registerCriterion(
     ListFormCriterion,
     criteria._criterionRegistry.indicesByCriterion(

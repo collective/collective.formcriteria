@@ -61,6 +61,8 @@ redundant.
 
     >>> 'Values</label>' in browser.contents
     False
+    >>> 'crit__Subject_ListFormCriterion.value_help' in browser.contents
+    False
 
 Change the checked values and search
 

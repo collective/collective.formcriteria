@@ -13,6 +13,9 @@ class SelectionFormCriterion(
     archetype_name = 'Selection Form Criterion'
     shortDesc = 'Form: ' + selection.ATSelectionCriterion.shortDesc
 
+    schema = selection.ATSelectionCriterion.schema.copy()
+    schema['value'].widget.hide_form_label = True
+
 criteria.registerCriterion(
     SelectionFormCriterion,
     criteria._criterionRegistry.indicesByCriterion(
@@ -28,6 +31,7 @@ class PortalTypeSelectionFormCriterion(
 
     schema = portaltype.ATPortalTypeCriterion.schema.copy()
     schema['operator'].mode = 'r'
+    schema['value'].widget.hide_form_label = True
 
 criteria.registerCriterion(
     PortalTypeSelectionFormCriterion,
@@ -41,6 +45,9 @@ class ReferenceSelectionFormCriterion(
     meta_type = 'ReferenceSelectionFormCriterion'
     archetype_name = 'Portal Types Selection Form Criterion'
     shortDesc = 'Form: ' + reference.ATReferenceCriterion.shortDesc
+
+    schema = reference.ATReferenceCriterion.schema.copy()
+    schema['value'].widget.hide_form_label = True
 
 criteria.registerCriterion(
     ReferenceSelectionFormCriterion,

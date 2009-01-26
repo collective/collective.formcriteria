@@ -15,6 +15,7 @@ class CheckboxFormCriterion(
 
     schema = selection.ATSelectionCriterion.schema.copy()
     schema['value'].widget.format = 'checkbox'
+    schema['value'].widget.hide_form_label = True
 
 criteria.registerCriterion(
     CheckboxFormCriterion,
@@ -31,6 +32,7 @@ class PortalTypeCheckboxFormCriterion(
 
     schema = portaltype.ATPortalTypeCriterion.schema.copy()
     schema['value'].widget.format = 'checkbox'
+    schema['value'].widget.hide_form_label = True
     schema['operator'].mode = 'r'
 
 criteria.registerCriterion(
@@ -48,6 +50,7 @@ class ReferenceCheckboxFormCriterion(
 
     schema = portaltype.ATPortalTypeCriterion.schema.copy()
     schema['value'].widget.format = 'checkbox'
+    schema['value'].widget.hide_form_label = True
 
 criteria.registerCriterion(
     ReferenceCheckboxFormCriterion,
