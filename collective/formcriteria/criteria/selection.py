@@ -6,7 +6,7 @@ from collective.formcriteria.criteria import common
 
 class SelectionFormCriterion(
     common.FormCriterion, selection.ATSelectionCriterion):
-    """A selection form criterion"""
+    __doc__ = selection.ATSelectionCriterion.__doc__
 
     schema = selection.ATSelectionCriterion.schema.copy(
         ) + common.FormCriterion.schema.copy()
@@ -20,7 +20,7 @@ common.replaceCriterionRegistration(
 
 class PortalTypeSelectionFormCriterion(
     common.FormCriterion, portaltype.ATPortalTypeCriterion):
-    """A portal_types form criterion"""
+    __doc__ = portaltype.ATPortalTypeCriterion.__doc__
 
     schema = portaltype.ATPortalTypeCriterion.schema.copy(
         ) + common.FormCriterion.schema.copy()
@@ -35,7 +35,7 @@ common.replaceCriterionRegistration(
 
 class ReferenceSelectionFormCriterion(
     common.FormCriterion, reference.ATReferenceCriterion):
-    """A selection form criterion"""
+    __doc__ = reference.ATReferenceCriterion.__doc__
 
     schema = reference.ATReferenceCriterion.schema.copy(
         ) + common.FormCriterion.schema.copy()

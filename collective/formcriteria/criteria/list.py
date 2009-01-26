@@ -5,7 +5,6 @@ from collective.formcriteria.criteria import common
 class ListFormCriterion(
     common.FormCriterion, list_.ATListCriterion):
     __doc__ = list_.ATListCriterion.__doc__
-    """A list form criterion"""
 
     schema = list_.ATListCriterion.schema.copy(
         ) + common.FormCriterion.schema.copy()
