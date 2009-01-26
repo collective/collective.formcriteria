@@ -22,6 +22,12 @@
      template="form.pt"
      permission="zope2.View" 
      />
+ 
+   <browser:page
+      for="Products.ATContentTypes.interface.IATTopic"
+      name="formcriteria_macros"
+      template="form_macros.pt"
+      permission="zope2.View" />
 
   <browser:page
      for="*"

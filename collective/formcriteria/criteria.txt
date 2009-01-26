@@ -55,6 +55,13 @@ By default the criterion values determine the search results.
     Traceback (most recent call last):
     LinkNotFoundError
 
+Also note that criteria that use a 'value' field as the primary search
+value do not render the label for the value field as it would be
+redundant.
+
+    >>> 'Values</label>' in browser.contents
+    False
+
 Change the checked values and search
 
     >>> browser.getControl(
@@ -287,6 +294,12 @@ when the search form is present and fields require it.
     True
     >>> 'calendar-system.css' in browser.contents
     True
+
+Though the fields are required for editing criteria, they are not
+marked as required on the search form.
+
+    >>> '(Required)' in browser.contents
+    False
 
 By default the criterion values determine the search results.
 
