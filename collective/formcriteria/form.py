@@ -23,14 +23,9 @@ class SearchFormView(object):
             field = criterion.Field()
             index = self.context.portal_atct.getIndex(field)
 
-            schematas = criterion.Schemata()
-            fieldsets = [key for key in schematas.keys() if key != 'metadata']
-            default_fieldset = (
-                (not schematas or schematas.has_key('default'))
-                and 'default' or fieldsets[0])
-            fieldset = self.request.get('fieldset', default_fieldset)
             fields = []
-            for field in schematas[fieldset].fields():
+            for field_name in criterion.getFormFields():
+                field = criterion.getField(field_name)
                 new_field = field.copy()
                 new_field.write_permission = field.read_permission
                 fields.append(new_field)

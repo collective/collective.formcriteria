@@ -129,6 +129,16 @@ search form.
 
     >>> form = anon_browser.getForm(name="formcriteria_search")
 
+Criterion fields that haven't been selected in "Form Fields" don't
+appear on the search form.
+
+    >>> form.getControl(
+    ...     name='crit__SearchableText_SimpleStringFormCriterion'
+    ...     '.formFields:list')
+    Traceback (most recent call last):
+    LookupError: name
+    'crit__SearchableText_SimpleStringFormCriterion.formFields:list'
+
 Enter a search term and submit the query.  The topic will now list the
 other content object.
 
