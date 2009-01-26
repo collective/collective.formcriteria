@@ -31,37 +31,37 @@
                             or (mode=='search' and field.checkPermission('r',here))"
              tal:attributes="class python: (error_id and ('field error ' + 'Archetypes' + widget.getName()) or ('field ' + 'Archetypes' + widget.getName())) + ' ' + kss_class; 
                              id python: 'archetypes-fieldname-' + fieldName">
-          <tal:labels tal:condition="not:widget/hide_form_label|nothing">
-            <span metal:define-slot="widget_body_label_prefix"></span>
-            <label class="formQuestion" i18n:translate=""
-                   tal:content="python:widget.Label(here)"
-                   tal:attributes="for python:fieldName">
-            </label>
-            <div class="formHelp"
-                 tal:define="description python:widget.Description(here)"
-                 tal:content="structure description"
-                 tal:attributes="id string:${fieldName}_help"
-                 i18n:translate="">
-              Help
-            </div>
-            <span tal:condition="field/workflowable | nothing"
-                  tal:omit-tag="">
-              State:
-              <a href="#"
-                 tal:define="wf_tool here/portal_workflow;
-                             obj python:accessor();
-                             review_state python:wf_tool.getInfoFor(obj, 'review_state', '')"
-                 tal:attributes="href string:${obj/absolute_url}/content_status_history;
-                                 class python:test(review_state, review_state, 'private')"
-                 tal:content="review_state">
-                review_state
-              </a>
-            </span>
-            <div class="fieldErrorBox"
-                 tal:content="error_id" i18n:translate="">
-              Validation Error
-            </div>
-          </tal:labels>
+          <span metal:define-slot="widget_body_label_prefix"></span>
+          <label class="formQuestion" i18n:translate=""
+                 tal:condition="not:widget/hide_form_label|nothing"
+                 tal:content="python:widget.Label(here)"
+                 tal:attributes="for python:fieldName">
+          </label>
+          <div class="formHelp"
+               tal:condition="python:not getattr(widget, 'hide_form_label', False) or getattr(widget, 'show_form_help', False)"
+               tal:define="description python:widget.Description(here)"
+               tal:content="structure description"
+               tal:attributes="id string:${fieldName}_help"
+               i18n:translate="">
+            Help
+          </div>
+          <span tal:condition="python:not getattr(widget, 'hide_form_label', False) and getattr(field, 'workflowable', None)"
+                tal:omit-tag="">
+            State:
+            <a href="#"
+               tal:define="wf_tool here/portal_workflow;
+                           obj python:accessor();
+                           review_state python:wf_tool.getInfoFor(obj, 'review_state', '')"
+               tal:attributes="href string:${obj/absolute_url}/content_status_history;
+                               class python:test(review_state, review_state, 'private')"
+               tal:content="review_state">
+              review_state
+            </a>
+          </span>
+          <div class="fieldErrorBox"
+               tal:content="error_id" i18n:translate="">
+            Validation Error
+          </div>
           <div metal:define-slot="widget_body"></div>
         </div>
       </tal:condition>

@@ -404,9 +404,13 @@ redundant.
 
     >>> 'Values</label>' in browser.contents
     False
+
+Since the comma widget require special input syntax, however, the help
+text is rendered.
+
     >>> ('form_crit__Subject_CommaFormCriterion_value_help'
     ...  in browser.contents)
-    False
+    True
 
 Change the checked values and search
 
