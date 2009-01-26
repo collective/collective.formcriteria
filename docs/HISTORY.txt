@@ -1,7 +1,10 @@
 Changelog
 =========
 
-0.5 - Unreleased
+0.6 - Unreleased
+----------------
+
+0.5 - 2009-01-25
 ----------------
 
 * Form criteria are now designated by selecting which fields of each
