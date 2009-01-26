@@ -144,12 +144,15 @@ appear on the search form.
     LookupError: name
     'form_crit__SearchableText_SimpleStringFormCriterion_formFields:list'
 
+The label for the criterion corresponds to the form element for the
+firs criterion field.
+
+    >>> ctl = form.getControl('Search Text')
+
 Enter a search term and submit the query.  The topic will now list the
 other content object.
 
-    >>> form.getControl(
-    ...     name='form_crit__SearchableText_SimpleStringFormCriterion'
-    ...     '_value').value = 'baz'
+    >>> ctl.value = 'baz'
     >>> form.getControl(name='submit').click()
     >>> anon_browser.getLink('Bar Document Title')
     Traceback (most recent call last):

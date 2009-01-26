@@ -27,7 +27,7 @@
             <div class="field">
  	      <label
 	         tal:content="criterion/friendlyName"
-	         tal:attributes="for criterion/field;"
+	         tal:attributes="for python:view.makeFormKey(criterion['id'], criterion['fields'][0].getName());"
 	         i18n:translate="">
 	        Label
 	      </label>
