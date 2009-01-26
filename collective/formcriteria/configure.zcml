@@ -36,6 +36,13 @@
      template="foldercontents.pt"
      permission="cmf.ListFolderContents" />
 
+  <browser:page
+     for="*"
+     name="comma_widget"
+     class=".comma.CommaWidgetView"
+     template="comma.pt"
+     permission="zope2.View" />
+
   <browser:resource
      name="formcriteria.kss"
      file="formcriteria.kss"

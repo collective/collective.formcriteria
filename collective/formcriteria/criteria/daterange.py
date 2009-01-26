@@ -17,8 +17,14 @@ class DateRangeFormCriterion(
     def getStart(self, **kw):
         return self.getFormFieldValue('start', **kw)
 
+    def getRawStart(self, **kw):
+        return self.getFormFieldValue('start', raw=True, **kw)
+
     def getEnd(self, **kw):
         return self.getFormFieldValue('end', **kw)
+
+    def getRawEnd(self, **kw):
+        return self.getFormFieldValue('end', raw=True, **kw)
 
 common.replaceCriterionRegistration(
     daterange.ATDateRangeCriterion, DateRangeFormCriterion)

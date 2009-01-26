@@ -31,7 +31,8 @@ class FormCriterion(object):
                 u'Select any fields for this criterion that should'
                 u'appear on a search form')),))
 
-    def getFormFieldValue(self, field_name, REQUEST=None, **kw):
+    def getFormFieldValue(self, field_name, raw=False, REQUEST=None,
+                          **kw):
         """
         Get the field value from the request.
 
@@ -49,6 +50,8 @@ class FormCriterion(object):
             for key in REQUEST.keys() if field_name in key)
 
         if not form:
+            if raw:
+                return field.getRaw(self, **kw)
             return field.get(self, **kw)
 
         result = field.widget.process_form(
@@ -63,3 +66,6 @@ class FormCriterion(object):
 
     def Value(self, **kw):
         return self.getFormFieldValue('value', **kw)
+
+    def getRawValue(self, **kw):
+        return self.getFormFieldValue('value', raw=True, **kw)

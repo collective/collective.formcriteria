@@ -10,6 +10,7 @@ Changelog
   "required" markers for all fields.
 * Make the search form collapsible and start collapsed when the form
   has been submitted
+* Add a comma separated criterion
 
 0.4 - 2009-01-15
 ----------------

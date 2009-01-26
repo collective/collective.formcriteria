@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="plone">
+  <head><title></title></head>
+  <body>
+
+    <metal:view define-macro="view">
+      <metal:lines use-macro="context/widgets/lines/macros/view" />
+    </metal:view>
+
+    <metal:define define-macro="edit">
+      <metal:use use-macro="field_macro | here/widgets/field/macros/edit">
+        <input metal:fill-slot="widget_body"
+               type="text"
+               name=""
+               class="blurrable firstToFocus"
+               id=""
+               value=""
+               size="30"
+               tal:attributes="name fieldName;
+                               id fieldName;
+                               value python:', '.join(value);
+                               size widget/size;
+                               maxlength widget/maxlength;"
+               />
+      </metal:use>
+    </metal:define>
+
+    <metal:search define-macro="search">
+      <metal:string use-macro="context/comma_widget/macros/view" />
+    </metal:search>
+
+  </body>
+</html>

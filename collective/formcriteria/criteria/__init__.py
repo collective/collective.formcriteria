@@ -6,6 +6,9 @@ simplestring # import to register
 from collective.formcriteria.criteria import list as list_
 list_ # import to register
 
+from collective.formcriteria.criteria import comma
+comma # import to register
+
 from collective.formcriteria.criteria import selection
 selection # import to register
 
