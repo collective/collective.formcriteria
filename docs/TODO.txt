@@ -1,13 +1,6 @@
 TODO
 ====
 
-* Additional Criteria
-
-  Currently only some criteria have form criteria equivalents.  The
-  intention is to add form criteria for the rest of the ATCT criteria as
-  well.  I'm only likely to get to the ones that I need without any
-  further input, so if you want one in particular let me know.
-
 * Form sort criteria
 
 * Fix folder_contents view to support deleting, etc.
