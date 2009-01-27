@@ -110,7 +110,7 @@
      enabled="True" friendlyName="Location"
      i18n:attributes="description; friendlyName">
    <criteria>PathFormCriterion</criteria>
-   <criteria>ATRelativePathCriterion</criteria>
+   <criteria>RelativePathFormCriterion</criteria>
   </index>
   <index name="portal_type" description="" enabled="False"
      friendlyName="Item Type (internal)"

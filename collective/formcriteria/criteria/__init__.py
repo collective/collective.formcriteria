@@ -26,3 +26,6 @@ date # import to register
 
 from collective.formcriteria.criteria import path
 path # import to register
+
+from collective.formcriteria.criteria import relativepath
+relativepath # import to register
