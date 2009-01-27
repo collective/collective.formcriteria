@@ -11,7 +11,6 @@ class PathFormCriterion(
     schema['value'].widget.hide_form_label = True
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'], schema['recurse'])
-    schema['formFields'].widget.format = 'checkbox'
 
 common.replaceCriterionRegistration(
     path.ATPathCriterion, PathFormCriterion)

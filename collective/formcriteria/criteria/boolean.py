@@ -11,7 +11,6 @@ class BooleanFormCriterion(
     schema['bool'].widget.hide_form_label = True
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['bool'])
-    schema['formFields'].widget.format = 'checkbox'
 
 common.replaceCriterionRegistration(
     boolean.ATBooleanCriterion, BooleanFormCriterion)

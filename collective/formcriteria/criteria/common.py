@@ -30,7 +30,8 @@ class FormCriterion(object):
                 label=u'Form Fields',
                 description=
                 u'Select any fields for this criterion that should'
-                u'appear on a search form')),))
+                u'appear on a search form',
+                format='checkbox')),))
 
     makeFormKey = form.makeFormKey
 

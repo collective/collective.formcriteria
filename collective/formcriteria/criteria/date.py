@@ -10,7 +10,6 @@ class DateFormCriterion(
         ) + common.FormCriterion.schema.copy()
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'], schema['dateRange'], schema['operation'])
-    schema['formFields'].widget.format = 'checkbox'
 
 common.replaceCriterionRegistration(
     date.ATDateCriteria, DateFormCriterion)

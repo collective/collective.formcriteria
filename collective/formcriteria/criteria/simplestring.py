@@ -11,7 +11,6 @@ class SimpleStringFormCriterion(
     schema['value'].widget.hide_form_label = True
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'])
-    schema['formFields'].widget.format = 'checkbox'
 
 common.replaceCriterionRegistration(
     simplestring.ATSimpleStringCriterion, SimpleStringFormCriterion)

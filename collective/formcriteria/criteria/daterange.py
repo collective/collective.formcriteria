@@ -10,7 +10,6 @@ class DateRangeFormCriterion(
         ) + common.FormCriterion.schema.copy()
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['start'], schema['end'])
-    schema['formFields'].widget.format = 'checkbox'
 
     Value = daterange.ATDateRangeCriterion.Value
 
