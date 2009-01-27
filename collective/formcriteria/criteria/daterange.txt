@@ -1,0 +1,129 @@
+.. -*-doctest-*-
+
+==========
+Date Range
+==========
+
+A criterion is provided for rendering two calendar widgets on the
+search form to specify two dates for a date range query.
+
+We start with a topic.
+
+    >>> foo_topic = self.folder['foo-topic-title']
+
+Open a browser as an anonymous user.
+
+    >>> from Products.Five.testbrowser import Browser
+    >>> from Products.PloneTestCase import ptc
+    >>> browser = Browser()
+    >>> browser.handleErrors = False
+
+Before a criterion requiring JavaScript or CSS helpers has been added,
+the collection view does not include any such helpers.
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> 'calendar_stripped.js' in browser.contents
+    False
+    >>> 'calendar_en.js' in browser.contents
+    False
+    >>> 'calendar-system.css' in browser.contents
+    False
+
+Add a date range criterion for the effective date
+
+    >>> foo_topic.addCriterion(
+    ...     'effective', 'DateRangeFormCriterion')
+    <DateRangeFormCriterion at
+    /plone/Members/test_user_1_/foo-topic-title/crit__effective_DateRangeFormCriterion>
+
+Designate the criterion's field as a form field.
+
+    >>> criterion = foo_topic.getCriterion(
+    ...     'effective_DateRangeFormCriterion')
+    >>> criterion.setFormFields(['start', 'end'])
+
+The values set on the criterion are the default values on the search
+form.
+
+    >>> from collective.formcriteria import testing
+    >>> now = testing.formcriteria_layer.now
+    >>> criterion.setStart(now-3)
+    >>> criterion.setEnd(now-1)
+
+When viewing the collection in a browser the date widgets will be
+rendered for the index with the default values.
+
+    >>> browser.open(foo_topic.absolute_url())
+
+    >>> browser.getControl(
+    ...     name='form_crit__effective_DateRangeFormCriterion'
+    ...     '_start_year').getControl('2009').selected
+    True
+    >>> browser.getControl(
+    ...     name='form_crit__effective_DateRangeFormCriterion'
+    ...     '_start_month').getControl('January').selected
+    True
+    >>> browser.getControl(
+    ...     name='form_crit__effective_DateRangeFormCriterion'
+    ...     '_start_day').getControl('12').selected
+    True
+
+    >>> browser.getControl(
+    ...     name='form_crit__effective_DateRangeFormCriterion'
+    ...     '_end_year').getControl('2009').selected
+    True
+    >>> browser.getControl(
+    ...     name='form_crit__effective_DateRangeFormCriterion'
+    ...     '_end_month').getControl('January').selected
+    True
+    >>> browser.getControl(
+    ...     name='form_crit__effective_DateRangeFormCriterion'
+    ...     '_end_day').getControl('14').selected
+    True
+
+The widget helper JavaScript and CSS will also be included on the page
+when the search form is present and fields require it.
+
+    >>> 'calendar_stripped.js' in browser.contents
+    True
+    >>> 'calendar-en.js' in browser.contents
+    True
+    >>> 'calendar-system.css' in browser.contents
+    True
+
+Though the fields are required for editing criteria, they are not
+marked as required on the search form.
+
+    >>> '(Required)' in browser.contents
+    False
+
+By default the criterion values determine the search results.
+
+    >>> browser.getLink('Bar Document Title')
+    <Link text='Bar Document Title'
+    url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
+    >>> browser.getLink('Baz Event Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+
+Change the date range and search
+
+    >>> browser.getControl(
+    ...     name='form_crit__effective_DateRangeFormCriterion_'
+    ...     'start_day').getControl('14').selected = True
+
+    >>> browser.getControl(
+    ...     name='form_crit__effective_DateRangeFormCriterion_end_day'
+    ...     ).getControl('16').selected = True
+
+    >>> form = browser.getForm(name="formcriteria_search")
+    >>> form.getControl(name='submit').click()
+
+Now the default has been overriden by the submitted query.
+
+    >>> browser.getLink('Bar Document Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+    >>> browser.getLink('Baz Event Title')
+    <Link text='Baz Event Title'
+    url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
