@@ -13,6 +13,7 @@ Changelog
 * Use a "Search Form" view that only renders the search form
 * Added boolean criteria
 * Added date criteria
+* Added path criteria
 
 0.5 - 2009-01-25
 ----------------

@@ -23,3 +23,6 @@ boolean # import to register
 
 from collective.formcriteria.criteria import date
 date # import to register
+
+from collective.formcriteria.criteria import path
+path # import to register

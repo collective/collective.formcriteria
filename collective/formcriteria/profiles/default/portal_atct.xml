@@ -106,6 +106,12 @@
    <criteria>DateFormCriteria</criteria>
    <criteria>DateRangeFormCriterion</criteria>
   </index>
+  <index name="path" description="The location of an item in the site (path)"
+     enabled="True" friendlyName="Location"
+     i18n:attributes="description; friendlyName">
+   <criteria>PathFormCriterion</criteria>
+   <criteria>ATRelativePathCriterion</criteria>
+  </index>
   <index name="portal_type" description="" enabled="False"
      friendlyName="Item Type (internal)"
      i18n:attributes="description; friendlyName">
