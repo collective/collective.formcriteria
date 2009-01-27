@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.6 - Unreleased
+0.6 - 2009-01-26
 ----------------
 
 * Use a form prefix for the search form.  Fixes calendar JavaScript
