@@ -5,7 +5,7 @@
   <index name="created" description="The time and date an item was created"
      enabled="True" friendlyName="Creation Date"
      i18n:attributes="description; friendlyName">
-   <criteria>ATFriendlyDateCriteria</criteria>
+   <criteria>DateFormCriteria</criteria>
    <criteria>DateRangeFormCriterion</criteria>
   </index>
   <index name="Creator" description="" enabled="True" friendlyName="Creator"
@@ -21,7 +21,7 @@
      description="The time and date an item was last modified"
      enabled="False" friendlyName="Modification Date"
      i18n:attributes="description; friendlyName">
-   <criteria>ATFriendlyDateCriteria</criteria>
+   <criteria>DateFormCriteria</criteria>
    <criteria>DateRangeFormCriterion</criteria>
   </index>
   <index name="Description" description="" enabled="True" friendlyName="Description"
@@ -32,20 +32,26 @@
      description="The time and date an item becomes publicly available"
      enabled="True" friendlyName="Effective Date"
      i18n:attributes="description; friendlyName">
-   <criteria>ATFriendlyDateCriteria</criteria>
+   <criteria>DateFormCriteria</criteria>
    <criteria>DateRangeFormCriterion</criteria>
+  </index>
+  <index name="effectiveRange"
+     description="All items publicly available on a certain date"
+     enabled="False" friendlyName="Effective Range"
+     i18n:attributes="description; friendlyName">
+   <criteria>DateFormCriteria</criteria>
   </index>
   <index name="end" description="The end date and time of an event"
      enabled="True" friendlyName="End Date"
      i18n:attributes="description; friendlyName">
-   <criteria>ATFriendlyDateCriteria</criteria>
+   <criteria>DateFormCriteria</criteria>
    <criteria>DateRangeFormCriterion</criteria>
   </index>
   <index name="expires"
      description="The time and date an item is no longer publicly available"
      enabled="True" friendlyName="Expiration Date"
      i18n:attributes="description; friendlyName">
-   <criteria>ATFriendlyDateCriteria</criteria>
+   <criteria>DateFormCriteria</criteria>
    <criteria>DateRangeFormCriterion</criteria>
   </index>
   <index name="getEventType" description="" enabled="False" friendlyName="">
@@ -97,7 +103,7 @@
      description="The time and date an item was last modified" enabled="True"
      friendlyName="Modification Date"
      i18n:attributes="description; friendlyName">
-   <criteria>ATFriendlyDateCriteria</criteria>
+   <criteria>DateFormCriteria</criteria>
    <criteria>DateRangeFormCriterion</criteria>
   </index>
   <index name="portal_type" description="" enabled="False"
@@ -124,7 +130,7 @@
   <index name="start" description="The start date and time of an event"
      enabled="True" friendlyName="Start Date"
      i18n:attributes="description; friendlyName">
-   <criteria>ATFriendlyDateCriteria</criteria>
+   <criteria>DateFormCriteria</criteria>
    <criteria>DateRangeFormCriterion</criteria>
   </index>
   <index name="Subject" description="The keywords used to describe an item"

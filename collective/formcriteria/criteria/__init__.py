@@ -20,3 +20,6 @@ daterange # import to register
 
 from collective.formcriteria.criteria import boolean
 boolean # import to register
+
+from collective.formcriteria.criteria import date
+date # import to register
