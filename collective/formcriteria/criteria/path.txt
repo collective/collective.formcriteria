@@ -1,8 +1,8 @@
 .. -*-doctest-*-
 
-================
+=============
 Path Criteria
-================
+=============
 
 The PathFormCriterion is provided for rendering paths on the search
 form.
