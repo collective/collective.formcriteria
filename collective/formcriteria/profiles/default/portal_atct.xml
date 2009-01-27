@@ -62,7 +62,7 @@
    <criteria>ReferenceCheckboxFormCriterion</criteria>
    <criteria>SelectionFormCriterion</criteria>
    <criteria>CheckboxFormCriterion</criteria>
-   <criteria>ATSimpleIntCriterion</criteria>
+   <criteria>SimpleIntFormCriterion</criteria>
    <criteria>SimpleStringFormCriterion</criteria>
   </index>
   <index name="getId"
@@ -72,6 +72,12 @@
    <criteria>SimpleStringFormCriterion</criteria>
    <criteria>ListFormCriterion</criteria>
    <criteria>CommaFormCriterion</criteria>
+  </index>
+  <index name="getObjPositionInParent"
+     description="The order of an item in its parent folder" enabled="False"
+     friendlyName="Order in folder"
+     i18n:attributes="description; friendlyName">
+   <criteria>SimpleIntFormCriterion</criteria>
   </index>
   <index name="getRawRelatedItems"
      description="Find items related to the selected items" enabled="True"

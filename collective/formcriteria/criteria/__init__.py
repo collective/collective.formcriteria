@@ -3,6 +3,9 @@
 from collective.formcriteria.criteria import simplestring
 simplestring # import to register
 
+from collective.formcriteria.criteria import simpleint
+simpleint # import to register
+
 from collective.formcriteria.criteria import list as list_
 list_ # import to register
 

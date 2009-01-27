@@ -15,6 +15,7 @@ Changelog
 * Added date criteria
 * Added path criteria
 * Added relative path criteria
+* Added integer criteria
 
 0.5 - 2009-01-25
 ----------------
