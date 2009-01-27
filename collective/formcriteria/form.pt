@@ -16,7 +16,7 @@
           method="get"
           name="formcriteria_search"
           id="formcriteria_search"
-          tal:attributes="action view/name|template/getId;"
+          tal:attributes="action view/action;"
           tal:define="field_macro nocall:context/formcriteria_macros/field_macro;
 		      errors options/state/getErrors|python:{};">
 

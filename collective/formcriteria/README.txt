@@ -5,12 +5,25 @@ collective.formcriteria
 =======================
 
 This package provides extends the Products.ATContentTypes.criteria
-types to create a search form at the top of the topic view.  If any of
-the criterion fields are selected in the criterion's "Form Fields"
-field, then those fields will be rendered on the search form.  Users
-can use the form to submit criteria to supplement any search criteria
-in the topic.  Values entered on the criteria tab for the topic become
-the default values on the form.
+types to create a search form at the top of the collection view.  If
+any of the criterion fields are selected in the criterion's "Form
+Fields" field, then those fields will be rendered on the search form.
+
+A new "Search Form" display layout is provided that renders the search
+form fully expanded and the collection body text but no results.  When
+this layout is used, the search form will display results using the
+layout specified in the "Form Results Layout" collection field.
+Otherwise the search form always displays results using the layout it
+was rendered on and always starts out collapsed.  In this way, the
+collection creator can determine whether the collection should have a
+default view of just the search form or should use a results listing
+as a default view.  Likewise, users of the collection can use any
+collection layout to view results and can modify their search terms
+easily by expanding the search form.
+
+Users can use the form to submit criteria to supplement any search
+criteria in the topic.  Values entered on the criteria tab for the
+topic become the default values on the form.
 
 Also provided is an alternative display layout that uses the folder
 contents table and can still display the search form viewlet.
@@ -24,7 +37,7 @@ Start with a collection and some content for search results.
     >>> self.login()
     >>> foo_topic = self.folder['foo-topic-title']
     >>> foo_topic
-    <ATTopic at /plone/Members/test_user_1_/foo-topic-title>
+    <Topic at /plone/Members/test_user_1_/foo-topic-title>
     >>> self.folder['bar-document-title']
     <ATDocument at /plone/Members/test_user_1_/bar-document-title>
     >>> self.folder['baz-event-title']
@@ -45,10 +58,29 @@ Log in as a normal user.
     ...     'Password').value = ptc.default_password
     >>> browser.getControl('Log in').click()
 
-Add a criterion for the workflow state that won't appear on the form.
-Then set the query term to return only published content.
+Change the display layout of the collection to the "Search Form".
 
-    >>> browser.open(foo_topic.absolute_url()+'/criterion_edit_form')
+    >>> browser.open(foo_topic.absolute_url())
+    >>> browser.getLink('Search Form').click()
+    >>> print browser.contents
+    <...
+    ...View changed...
+
+Go to the collection's edit tab and set the "Form Results Layout"
+field.
+
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl('Collection').selected = True
+    >>> browser.getControl('Save').click()
+    >>> print browser.contents
+    <...
+    ...Changes saved...
+
+Go to the "Criteria" tab and add a criterion for the workflow state
+that won't appear on the form.  Then set the query term to return only
+published content.
+
+    >>> browser.getLink('Criteria').click()
     >>> form = browser.getForm(name='criteria_select')
     >>> form.getControl('State').selected = True
     >>> form.getControl(
@@ -65,17 +97,21 @@ Then set the query term to return only published content.
     <...
     ...Changes saved...
 
+Open another browser as an anymous user.
+
+    >>> anon_browser = Browser()
+    >>> anon_browser.handleErrors = False
+
 Before the topic has any form criteria, the serach form is not
 present.
 
-    >>> browser.getLink('View').click()
-    >>> browser.getForm(name="formcriteria_search")
+    >>> anon_browser.open(foo_topic.absolute_url())
+    >>> anon_browser.getForm(name="formcriteria_search")
     Traceback (most recent call last):
     LookupError
 
 Add a simple string criterion for searchable text on the criteria tab.
 
-    >>> browser.getLink('Criteria').click()
     >>> form = browser.getForm(name='criteria_select')
     >>> form.getControl('Search Text').selected = True
     >>> form.getControl(name="criterion_type").getControl(
@@ -103,12 +139,6 @@ Set a default search term.
     <...
     ...Changes saved...
 
-Open another browser as an anymous user.
-
-    >>> anon_browser = Browser()
-    >>> anon_browser.handleErrors = False
-    >>> anon_browser.open(foo_topic.absolute_url())
-
 If no form value have been submitted, such as on a fresh load of the
 topic view, the default term will be used in the query returning only
 one of the content objects.
@@ -116,6 +146,7 @@ one of the content objects.
     >>> len(foo_topic.queryCatalog())
     1
 
+    >>> anon_browser.open(foo_topic.absolute_url()+'/atct_topic_view')
     >>> anon_browser.getLink('Bar Document Title')
     <Link text='Bar Document Title'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
@@ -128,8 +159,8 @@ search form.
 
     >>> form = anon_browser.getForm(name="formcriteria_search")
 
-Since the search form has not been submitted, the search form starts
-out expanded.
+Since the "Search Form" layout is used, the search form starts out
+expanded.
 
     >>> 'collapsedOnLoad' in anon_browser.contents
     False
@@ -161,19 +192,34 @@ other content object.
     <Link text='Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
 
-Since the search form has been submitted, the search form starts
-out collapsed.
+Since the search form has been submitted from the "Search Form"
+layout, the results are rendered on the layout specified by the "Form
+Results Layout" field and the search form starts out collapsed.
 
+    >>> anon_browser.url.startswith(
+    ...     'http://nohost/plone/Members/test_user_1_/foo-topic-title'
+    ...     '/atct_topic_view')
+    True
     >>> 'collapsedOnLoad' in anon_browser.contents
     True
 
 The search form also reflects the search term submitted rather than
 the default value submitted on the criteria tab.
 
-    >>> anon_browser.getForm(name="formcriteria_search").getControl(
-    ...     name='form_crit__SearchableText_SimpleStringFormCriterion'
-    ...     '_value').value
+    >>> form = anon_browser.getForm(name="formcriteria_search")
+    >>> ctl = form.getControl('Search Text')
+    >>> ctl.value
     'baz'
+
+If the search form is submitted from this page, the results are still
+rendered on the same view.
+
+    >>> ctl.value = 'bar'
+    >>> form.getControl(name='submit').click()
+    >>> anon_browser.url.startswith(
+    ...     'http://nohost/plone/Members/test_user_1_/foo-topic-title'
+    ...     '/atct_topic_view')
+    True
 
 Contents View
 =============

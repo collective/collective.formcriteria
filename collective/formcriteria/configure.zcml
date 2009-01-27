@@ -1,9 +1,9 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:browser="http://namespaces.zope.org/browser"
-    xmlns:five="http://namespaces.zope.org/five"
-    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    i18n_domain="collective.formcriteria">
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   xmlns:five="http://namespaces.zope.org/five"
+   xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+   i18n_domain="collective.formcriteria">
 
   <browser:viewlet
      name="collective.formcriteria.htmlhead"
@@ -22,19 +22,32 @@
      template="form.pt"
      permission="zope2.View" 
      />
- 
-   <browser:page
-      for="Products.ATContentTypes.interface.IATTopic"
-      name="formcriteria_macros"
-      template="form_macros.pt"
-      permission="zope2.View" />
+  
+  <browser:page
+     for="Products.ATContentTypes.interface.IATTopic"
+     name="formcriteria_macros"
+     template="form_macros.pt"
+     permission="zope2.View" />
 
   <browser:page
-     for="*"
+     for="Products.ATContentTypes.interface.IATTopic"
      class=".foldercontents.FolderContentsView"
      name="folder_contents_view"
      template="foldercontents.pt"
      permission="cmf.ListFolderContents" />
+  
+  <browser:page
+     for="Products.ATContentTypes.interface.IATTopic"
+     name="search_form"
+     template="search_form.pt"
+     permission="zope2.View" />
+
+  <browser:menuItem
+     for="Products.ATContentTypes.interface.IATTopic"
+     menu="plone_displayviews"
+     title="Search Form"
+     action="search_form"
+     description="Renders the expanded criteria search form" />
 
   <browser:page
      for="*"

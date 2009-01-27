@@ -58,3 +58,15 @@ class SearchFormView(object):
             and self.formCriteria())
 
     makeFormKey = makeFormKey
+
+    def action(self):
+        name = self._parent.__name__
+        if name == 'plone':
+            name = self._parent._data['template_id']
+
+        if name == 'search_form':
+            return '%s/%s' % (
+                self.context.absolute_url(),
+                self.context.getFormLayout())
+
+        return name

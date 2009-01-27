@@ -10,6 +10,7 @@ Changelog
 * Allow widget special help/description to appear even if the label
   isn't rendered and use this for the comma widget
 * Fix the handling of postbacks in the comma widget
+* Use a "Search Form" view that only renders the search form
 
 0.5 - 2009-01-25
 ----------------

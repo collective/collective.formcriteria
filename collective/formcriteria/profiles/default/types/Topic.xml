@@ -6,9 +6,9 @@
  <property name="description"
      i18n:translate="">An automatically updated stored search that can be used to display items matching criteria you specify.</property>
  <property name="content_icon">topic_icon.gif</property>
- <property name="content_meta_type">ATTopic</property>
- <property name="product">ATContentTypes</property>
- <property name="factory">addATTopic</property>
+ <property name="content_meta_type">Topic</property>
+ <property name="product">collective.formcriteria</property>
+ <property name="factory">addTopic</property>
  <property name="immediate_view">atct_topic_view</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
@@ -24,6 +24,7 @@
   <element value="atct_album_view"/>
   <element value="atct_topic_view"/>
   <element value="folder_contents_view"/>
+  <element value="search_form"/>
  </property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="atct_edit"/>
