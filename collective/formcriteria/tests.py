@@ -18,6 +18,7 @@ def test_suite():
         'criteria/checkbox.txt',
         'criteria/daterange.txt',
         'criteria/comma.txt',
+        'criteria/boolean.txt',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
     suite.layer = testing.formcriteria_layer

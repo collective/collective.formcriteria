@@ -17,3 +17,6 @@ checkbox # import to register
 
 from collective.formcriteria.criteria import daterange
 daterange # import to register
+
+from collective.formcriteria.criteria import boolean
+boolean # import to register

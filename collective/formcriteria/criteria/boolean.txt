@@ -1,0 +1,49 @@
+.. -*-doctest-*-
+
+================
+Boolean Criteria
+================
+
+The BooleanFormCriterion is provided for rendering booleans on the search
+form.
+
+We start with a topic.
+
+    >>> foo_topic = self.folder['foo-topic-title']
+
+Open a browser as an anonymous user.
+
+    >>> from Products.Five.testbrowser import Browser
+    >>> from Products.PloneTestCase import ptc
+    >>> browser = Browser()
+    >>> browser.handleErrors = False
+
+Add a boolean criterion for the subject/keywords.
+
+    >>> foo_topic.addCriterion(
+    ...     'is_folderish', 'BooleanFormCriterion')
+    <BooleanFormCriterion at
+    /plone/Members/test_user_1_/foo-topic-title/crit__is_folderish_BooleanFormCriterion>
+
+Designate the criterion's field as a form field.
+
+    >>> crit = foo_topic.getCriterion('is_folderish_BooleanFormCriterion')
+    >>> crit.setFormFields(['bool'])
+    
+When viewing the collection in a browser boolean fields will be
+rendered for the field.
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> browser.getControl('Folder-like')
+    <ItemControl
+    name='form_crit__is_folderish_BooleanFormCriterion_bool:boolean'
+    type='checkbox' optionValue='on' selected=False>
+
+Also note that the primary 'bool' field does not render the label for
+the value field as it would be redundant.
+
+    >>> 'Value</label>' in browser.contents
+    False
+    >>> ('form_crit__is_folderish_BooleanFormCriterion_bool_help'
+    ...  in browser.contents)
+    False

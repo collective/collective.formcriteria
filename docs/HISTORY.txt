@@ -11,6 +11,7 @@ Changelog
   isn't rendered and use this for the comma widget
 * Fix the handling of postbacks in the comma widget
 * Use a "Search Form" view that only renders the search form
+* Added boolean criteria
 
 0.5 - 2009-01-25
 ----------------
