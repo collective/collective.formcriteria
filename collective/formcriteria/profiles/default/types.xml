@@ -4,4 +4,30 @@
     name="title">Controls the available content types in your portal</property>
  <object name="Topic"
     meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="BooleanFormCriterion"
+    meta_type="Factory-based Type Information"/>
+ <object name="DateFormCriterion" meta_type="Factory-based Type Information"/>
+ <object name="DateRangeFormCriterion"
+    meta_type="Factory-based Type Information"/>
+ <object name="ListFormCriterion" meta_type="Factory-based Type Information"/>
+ <object name="PathFormCriterion" meta_type="Factory-based Type Information"/>
+ <object name="RelativePathFormCriterion" meta_type="Factory-based Type Information"/>
+ <object name="PortalTypeSelectionFormCriterion"
+    meta_type="Factory-based Type Information"/>
+ <object name="PortalTypeCheckboxFormCriterion"
+    meta_type="Factory-based Type Information"/>
+ <object name="ReferenceSelectionFormCriterion"
+    meta_type="Factory-based Type Information"/>
+ <object name="ReferenceCheckboxFormCriterion"
+    meta_type="Factory-based Type Information"/>
+ <object name="SelectionFormCriterion"
+    meta_type="Factory-based Type Information"/>
+ <object name="CheckboxFormCriterion"
+    meta_type="Factory-based Type Information"/>
+ <object name="SimpleIntFormCriterion"
+    meta_type="Factory-based Type Information"/>
+ <object name="SimpleStringFormCriterion"
+    meta_type="Factory-based Type Information"/>
+ <object name="CommaFormCriterion"
+    meta_type="Factory-based Type Information"/>
 </object>
