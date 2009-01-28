@@ -20,6 +20,6 @@ class Topic(topic.ATTopic):
         """Return all valid form results display laouts"""
         return atapi.DisplayList(
             layout for layout in self.getAvailableLayouts()
-            if layout[0] != 'search_form')
+            if layout[0] != 'criteria_form')
     
 atapi.registerType(Topic, 'collective.formcriteria')

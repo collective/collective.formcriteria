@@ -24,7 +24,7 @@
   <element value="atct_album_view"/>
   <element value="atct_topic_view"/>
   <element value="folder_contents_view"/>
-  <element value="search_form"/>
+  <element value="criteria_form"/>
  </property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="atct_edit"/>

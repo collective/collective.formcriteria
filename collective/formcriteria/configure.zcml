@@ -38,15 +38,15 @@
   
   <browser:page
      for="Products.ATContentTypes.interface.IATTopic"
-     name="search_form"
-     template="search_form.pt"
+     name="criteria_form"
+     template="criteria_form.pt"
      permission="zope2.View" />
 
   <browser:menuItem
      for="Products.ATContentTypes.interface.IATTopic"
      menu="plone_displayviews"
      title="Search Form"
-     action="search_form"
+     action="criteria_form"
      description="Renders the expanded criteria search form" />
 
   <browser:page

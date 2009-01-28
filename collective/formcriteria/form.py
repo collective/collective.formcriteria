@@ -64,7 +64,7 @@ class SearchFormView(object):
         if name == 'plone':
             name = self._parent._data['template_id']
 
-        if name == 'search_form':
+        if name == 'criteria_form':
             return '%s/%s' % (
                 self.context.absolute_url(),
                 self.context.getFormLayout())
