@@ -14,10 +14,10 @@ def makeVocabularyForFields(*fields):
         for field in fields)
 
 def replaceCriterionRegistration(old, new):
-    criteria.registerCriterion(
-        new, criteria._criterionRegistry.indicesByCriterion(
-            old.meta_type))
+    indices = criteria._criterionRegistry.indicesByCriterion(
+        old.meta_type)
     criteria.unregisterCriterion(old)
+    criteria.registerCriterion(new, indices)
 
 class FormCriterion(object):
     """A criterion that generates a search form field."""

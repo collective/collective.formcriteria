@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
-<object name="ListFormCriterion" meta_type="Factory-based Type Information"
+<object name="ATPortalTypeCheckboxCriterion"
+   meta_type="Factory-based Type Information"
    i18n:domain="plone" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">List Criterion</property>
+ <property name="title" i18n:translate="">Portal Types Checkbox Criterion</property>
  <property name="description"
-     i18n:translate="">A list criterion</property>
+     i18n:translate="">A portal_types checkbox criterion</property>
  <property name="content_icon">document_icon.gif</property>
- <property name="content_meta_type">ListFormCriterion</property>
+ <property name="content_meta_type">ATPortalTypeCheckboxCriterion</property>
  <property name="product">collective.formcriteria</property>
- <property name="factory">addListFormCriterion</property>
+ <property name="factory">addATPortalTypeCheckboxCriterion</property>
  <property name="immediate_view">base_edit</property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">False</property>

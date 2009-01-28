@@ -1,14 +1,13 @@
 <?xml version="1.0"?>
-<object name="PortalTypeCheckboxFormCriterion"
-   meta_type="Factory-based Type Information"
+<object name="ATRelativePathCriterion" meta_type="Factory-based Type Information"
    i18n:domain="plone" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">Portal Types Checkbox Criterion</property>
+ <property name="title" i18n:translate="">Relative Path Criterion</property>
  <property name="description"
-     i18n:translate="">A portal_types checkbox criterion</property>
+     i18n:translate="">A relative path criterion</property>
  <property name="content_icon">document_icon.gif</property>
- <property name="content_meta_type">PortalTypeCheckboxFormCriterion</property>
+ <property name="content_meta_type">ATRelativePathCriterion</property>
  <property name="product">collective.formcriteria</property>
- <property name="factory">addPortalTypeCheckboxFormCriterion</property>
+ <property name="factory">addATRelativePathCriterion</property>
  <property name="immediate_view">base_edit</property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">False</property>
@@ -23,6 +22,11 @@
  <action title="Edit" action_id="edit" category="object" condition_expr=""
     url_expr="string:${object_url}/base_edit" visible="True"
     i18n:attributes="title">
+  <permission value="Modify portal content"/>
+ </action>
+ <action title="Properties" action_id="metadata" category="object"
+    condition_expr="" url_expr="string:${object_url}/base_metadata"
+    visible="False" i18n:attributes="title">
   <permission value="Modify portal content"/>
  </action>
  <action title="References" action_id="references" category="object"

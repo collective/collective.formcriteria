@@ -5,8 +5,8 @@ Checkboxes
 ==========
 
 Three criterion are provided for rendering checkboxes on the search
-form: CheckboxFormCriterion, PortalTypeCheckboxFormCriterion,
-ReferenceCheckboxFormCriterion.
+form: ATCheckboxCriterion, ATPortalTypeCheckboxCriterion,
+ATReferenceCheckboxCriterion.
 
 We start with a topic.
 
@@ -22,14 +22,14 @@ Open a browser as an anonymous user.
 Add a checkbox criterion for the portal type.
 
     >>> foo_topic.addCriterion(
-    ...     'Type', 'PortalTypeCheckboxFormCriterion')
-    <PortalTypeCheckboxFormCriterion at
-    /plone/Members/test_user_1_/foo-topic-title/crit__Type_PortalTypeCheckboxFormCriterion>
+    ...     'Type', 'ATPortalTypeCheckboxCriterion')
+    <ATPortalTypeCheckboxCriterion at
+    /plone/Members/test_user_1_/foo-topic-title/crit__Type_ATPortalTypeCheckboxCriterion>
 
 Designate the criterion's field as a form field.
 
     >>> crit = foo_topic.getCriterion(
-    ...     'Type_PortalTypeCheckboxFormCriterion')
+    ...     'Type_ATPortalTypeCheckboxCriterion')
     >>> crit.setFormFields(['value'])
 
 The values set on the criterion are the default values checked on the
@@ -43,11 +43,11 @@ for the field with the default values selected.
     >>> browser.open(foo_topic.absolute_url())
     >>> browser.getControl('Page')
     <ItemControl
-    name='form_crit__Type_PortalTypeCheckboxFormCriterion_value:list'
+    name='form_crit__Type_ATPortalTypeCheckboxCriterion_value:list'
     type='checkbox' optionValue='Page' selected=True>
     >>> browser.getControl('Event')
     <ItemControl
-    name='form_crit__Type_PortalTypeCheckboxFormCriterion_value:list'
+    name='form_crit__Type_ATPortalTypeCheckboxCriterion_value:list'
     type='checkbox' optionValue='Event' selected=False>
 
 The portal type checkbox form criterion doesn't allow using "and" as a
@@ -55,11 +55,11 @@ query operator since it wouldn't make any sense.  As such the operator
 field isn't rendered on the search form.
 
     >>> browser.getControl(
-    ...     name='form_crit__Type_PortalTypeCheckboxFormCriterion'
+    ...     name='form_crit__Type_ATPortalTypeCheckboxCriterion'
     ...     '_operator')
     Traceback (most recent call last):
     LookupError: name
-    'form_crit__Type_PortalTypeCheckboxFormCriterion_operator'
+    'form_crit__Type_ATPortalTypeCheckboxCriterion_operator'
 
 By default the criterion values determine the search results.
 

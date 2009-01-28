@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
-<object name="PathFormCriterion" meta_type="Factory-based Type Information"
+<object name="ATBooleanCriterion" meta_type="Factory-based Type Information"
    i18n:domain="plone" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">Path Criterion</property>
- <property name="description"
-     i18n:translate="">A path criterion</property>
+ <property name="title" i18n:translate="">Boolean Criterion</property>
+ <property name="description" i18n:translate="">A boolean criterion</property>
  <property name="content_icon">document_icon.gif</property>
- <property name="content_meta_type">PathFormCriterion</property>
+ <property name="content_meta_type">ATBooleanCriterion</property>
  <property name="product">collective.formcriteria</property>
- <property name="factory">addPathFormCriterion</property>
+ <property name="factory">addATBooleanCriterion</property>
  <property name="immediate_view">base_edit</property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">False</property>

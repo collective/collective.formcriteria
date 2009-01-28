@@ -2,7 +2,7 @@ from Products.ATContentTypes.criteria import list as list_
 
 from collective.formcriteria.criteria import common
 
-class ListFormCriterion(
+class ATListCriterion(
     common.FormCriterion, list_.ATListCriterion):
     __doc__ = list_.ATListCriterion.__doc__
 
@@ -13,4 +13,4 @@ class ListFormCriterion(
         schema['value'], schema['operator'])
 
 common.replaceCriterionRegistration(
-    list_.ATListCriterion, ListFormCriterion)
+    list_.ATListCriterion, ATListCriterion)

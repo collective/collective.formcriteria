@@ -2,7 +2,7 @@ from Products.ATContentTypes.criteria import simpleint
 
 from collective.formcriteria.criteria import common
 
-class SimpleIntFormCriterion(
+class ATSimpleIntCriterion(
     common.FormCriterion, simpleint.ATSimpleIntCriterion):
     __doc__ = simpleint.ATSimpleIntCriterion.__doc__
 
@@ -13,4 +13,4 @@ class SimpleIntFormCriterion(
         schema['value'], schema['value2'], schema['direction'])
 
 common.replaceCriterionRegistration(
-    simpleint.ATSimpleIntCriterion, SimpleIntFormCriterion)
+    simpleint.ATSimpleIntCriterion, ATSimpleIntCriterion)

@@ -23,19 +23,19 @@ class CommaWidget(atapi.LinesWidget):
         value = [item.strip() for item in value.split(',')]
         return value, mutator_kw
 
-class CommaFormCriterion(list_.ListFormCriterion):
+class ATCommaCriterion(list_.ATListCriterion):
     """A comma separated criterion"""
 
     archetype_name = 'Comma Separated Criterion'
     shortDesc = 'Enter comma separated values'
 
-    schema = list_.ListFormCriterion.schema.copy()
+    schema = list_.ATListCriterion.schema.copy()
     schema['value'].widget = CommaWidget(
         label=schema['value'].widget.label,
         description=u'Values, separated by commas.',
         hide_form_label=True)
 
 criteria.registerCriterion(
-    CommaFormCriterion,
+    ATCommaCriterion,
     criteria._criterionRegistry.indicesByCriterion(
-        list_.ListFormCriterion.meta_type))
+        list_.ATListCriterion.meta_type))

@@ -3,23 +3,17 @@
  <object name="navtree_properties" meta_type="Plone Property Sheet">
   <property name="metaTypesNotToList" type="lines">
    <element value="ATBooleanCriterion"/>
-   <element value="BooleanFormCriterion"/>
    <element value="ATDateCriteria"/>
-   <element value="DateFormCriterion"/>
    <element value="ATDateRangeCriterion"/>
-   <element value="DateRangeFormCriterion"/>
    <element value="ATListCriterion"/>
-   <element value="ListFormCriterion"/>
    <element value="ATPortalTypeCriterion"/>
-   <element value="PortalTypeSelectionFormCriterion"/>
+   <element value="ATPortalTypeCheckboxCriterion"/>
    <element value="ATReferenceCriterion"/>
-   <element value="ReferenceFormCriterion"/>
+   <element value="ATReferenceCheckboxCriterion"/>
    <element value="ATSelectionCriterion"/>
-   <element value="SelectionFormCriterion"/>
+   <element value="ATCheckboxCriterion"/>
    <element value="ATSimpleIntCriterion"/>
-   <element value="SimpleIntFormCriterion"/>
    <element value="ATSimpleStringCriterion"/>
-   <element value="SimpleStringFormCriterion"/>
    <element value="ATSortCriterion"/>
    <element value="ChangeSet"/>
    <element value="Discussion Item"/>
@@ -27,29 +21,21 @@
    <element value="TempFolder"/>
    <element value="ATCurrentAuthorCriterion"/>
    <element value="ATPathCriterion"/>
-   <element value="PathFormCriterion"/>
    <element value="ATRelativePathCriterion"/>
-   <element value="RelativePathFormCriterion"/>
   </property>
   <property name="types_not_searched" type="lines">
    <element value="ATBooleanCriterion"/>
-   <element value="BooleanFormCriterion"/>
    <element value="ATDateCriteria"/>
-   <element value="DateFormCriterion"/>
    <element value="ATDateRangeCriterion"/>
-   <element value="DateRangeFormCriterion"/>
    <element value="ATListCriterion"/>
-   <element value="ListFormCriterion"/>
    <element value="ATPortalTypeCriterion"/>
-   <element value="PortalTypeSelectionFormCriterion"/>
+   <element value="ATPortalTypeCheckboxCriterion"/>
    <element value="ATReferenceCriterion"/>
-   <element value="ReferenceFormCriterion"/>
+   <element value="ATReferenceCheckboxCriterion"/>
    <element value="ATSelectionCriterion"/>
-   <element value="SelectionFormCriterion"/>
+   <element value="ATCheckboxCriterion"/>
    <element value="ATSimpleIntCriterion"/>
-   <element value="SimpleIntFormCriterion"/>
    <element value="ATSimpleStringCriterion"/>
-   <element value="SimpleStringFormCriterion"/>
    <element value="ATSortCriterion"/>
    <element value="ChangeSet"/>
    <element value="Discussion Item"/>
@@ -57,9 +43,7 @@
    <element value="TempFolder"/>
    <element value="ATCurrentAuthorCriterion"/>
    <element value="ATPathCriterion"/>
-   <element value="PathFormCriterion"/>
    <element value="ATRelativePathCriterion"/>
-   <element value="RelativePathFormCriterion"/>
   </property>
  </object>
 </object>

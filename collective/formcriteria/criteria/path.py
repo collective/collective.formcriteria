@@ -2,7 +2,7 @@ from Products.ATContentTypes.criteria import path
 
 from collective.formcriteria.criteria import common
 
-class PathFormCriterion(
+class ATPathCriterion(
     common.FormCriterion, path.ATPathCriterion):
     __doc__ = path.ATPathCriterion.__doc__
 
@@ -13,4 +13,4 @@ class PathFormCriterion(
         schema['value'], schema['recurse'])
 
 common.replaceCriterionRegistration(
-    path.ATPathCriterion, PathFormCriterion)
+    path.ATPathCriterion, ATPathCriterion)

@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<object name="ReferenceFormCriterion" meta_type="Factory-based Type Information"
+<object name="ATReferenceCriterion" meta_type="Factory-based Type Information"
    i18n:domain="plone" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title" i18n:translate="">Reference Criterion</property>
  <property name="description"
      i18n:translate="">A reference criterion</property>
  <property name="content_icon">document_icon.gif</property>
- <property name="content_meta_type">ReferenceFormCriterion</property>
+ <property name="content_meta_type">ATReferenceCriterion</property>
  <property name="product">collective.formcriteria</property>
- <property name="factory">addReferenceFormCriterion</property>
+ <property name="factory">addATReferenceCriterion</property>
  <property name="immediate_view">base_edit</property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">False</property>

@@ -7,7 +7,7 @@ from collective.formcriteria.criteria import common
 from collective.formcriteria.criteria import (
     selection as form_selection)
 
-class CheckboxFormCriterion(
+class ATCheckboxCriterion(
     common.FormCriterion, selection.ATSelectionCriterion):
     """A checkbox criterion"""
 
@@ -22,11 +22,11 @@ class CheckboxFormCriterion(
         schema['value'], schema['operator'])
 
 criteria.registerCriterion(
-    CheckboxFormCriterion,
+    ATCheckboxCriterion,
     criteria._criterionRegistry.indicesByCriterion(
-        form_selection.SelectionFormCriterion.meta_type))
+        form_selection.ATSelectionCriterion.meta_type))
 
-class PortalTypeCheckboxFormCriterion(
+class ATPortalTypeCheckboxCriterion(
     common.FormCriterion, portaltype.ATPortalTypeCriterion):
     """A portal_types checkbox criterion"""
 
@@ -42,11 +42,11 @@ class PortalTypeCheckboxFormCriterion(
         schema['value'])
 
 criteria.registerCriterion(
-    PortalTypeCheckboxFormCriterion,
+    ATPortalTypeCheckboxCriterion,
     criteria._criterionRegistry.indicesByCriterion(
-        form_selection.PortalTypeSelectionFormCriterion.meta_type))
+        form_selection.ATPortalTypeCriterion.meta_type))
 
-class ReferenceCheckboxFormCriterion(
+class ATReferenceCheckboxCriterion(
     common.FormCriterion, reference.ATReferenceCriterion):
     """A reference checkbox criterion"""
 
@@ -61,6 +61,6 @@ class ReferenceCheckboxFormCriterion(
         schema['value'], schema['operator'])
 
 criteria.registerCriterion(
-    ReferenceCheckboxFormCriterion,
+    ATReferenceCheckboxCriterion,
     criteria._criterionRegistry.indicesByCriterion(
-        form_selection.ReferenceSelectionFormCriterion.meta_type))
+        form_selection.ATReferenceCriterion.meta_type))

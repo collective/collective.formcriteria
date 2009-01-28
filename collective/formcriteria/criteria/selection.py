@@ -4,7 +4,7 @@ from Products.ATContentTypes.criteria import reference
 
 from collective.formcriteria.criteria import common
 
-class SelectionFormCriterion(
+class ATSelectionCriterion(
     common.FormCriterion, selection.ATSelectionCriterion):
     __doc__ = selection.ATSelectionCriterion.__doc__
 
@@ -15,9 +15,9 @@ class SelectionFormCriterion(
         schema['value'], schema['operator'])
 
 common.replaceCriterionRegistration(
-    selection.ATSelectionCriterion, SelectionFormCriterion)
+    selection.ATSelectionCriterion, ATSelectionCriterion)
 
-class PortalTypeSelectionFormCriterion(
+class ATPortalTypeCriterion(
     common.FormCriterion, portaltype.ATPortalTypeCriterion):
     __doc__ = portaltype.ATPortalTypeCriterion.__doc__
 
@@ -29,9 +29,9 @@ class PortalTypeSelectionFormCriterion(
         schema['value'])
 
 common.replaceCriterionRegistration(
-    portaltype.ATPortalTypeCriterion, PortalTypeSelectionFormCriterion)
+    portaltype.ATPortalTypeCriterion, ATPortalTypeCriterion)
 
-class ReferenceSelectionFormCriterion(
+class ATReferenceCriterion(
     common.FormCriterion, reference.ATReferenceCriterion):
     __doc__ = reference.ATReferenceCriterion.__doc__
 
@@ -43,4 +43,4 @@ class ReferenceSelectionFormCriterion(
         schema['value'], schema['operator'])
 
 common.replaceCriterionRegistration(
-    reference.ATReferenceCriterion, ReferenceSelectionFormCriterion)
+    reference.ATReferenceCriterion, ATReferenceCriterion)

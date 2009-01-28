@@ -2,7 +2,7 @@ from Products.ATContentTypes.criteria import date
 
 from collective.formcriteria.criteria import common
 
-class DateFormCriterion(
+class ATDateCriteria(
     common.FormCriterion, date.ATDateCriteria):
     __doc__ = date.ATDateCriteria.__doc__
 
@@ -12,4 +12,4 @@ class DateFormCriterion(
         schema['value'], schema['dateRange'], schema['operation'])
 
 common.replaceCriterionRegistration(
-    date.ATDateCriteria, DateFormCriterion)
+    date.ATDateCriteria, ATDateCriteria)

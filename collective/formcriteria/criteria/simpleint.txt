@@ -4,7 +4,7 @@
 Integer Criteria
 ================
 
-The SimpleIntFormCriterion is provided for rendering integer search
+The ATSimpleIntCriterion is provided for rendering integer search
 widgets on the search form.
 
 We start with a topic.
@@ -21,14 +21,14 @@ Open a browser as an anonymous user.
 Add a list criterion for the subject/keywords.
 
     >>> foo_topic.addCriterion(
-    ...     'getObjPositionInParent', 'SimpleIntFormCriterion')
-    <SimpleIntFormCriterion at
-    /plone/Members/test_user_1_/foo-topic-title/crit__getObjPositionInParent_SimpleIntFormCriterion>
+    ...     'getObjPositionInParent', 'ATSimpleIntCriterion')
+    <ATSimpleIntCriterion at
+    /plone/Members/test_user_1_/foo-topic-title/crit__getObjPositionInParent_ATSimpleIntCriterion>
 
 Designate the criterion's field as a form field.
 
     >>> crit = foo_topic.getCriterion(
-    ...     'getObjPositionInParent_SimpleIntFormCriterion')
+    ...     'getObjPositionInParent_ATSimpleIntCriterion')
     >>> crit.setFormFields(['value', 'value2', 'direction'])
 
 When viewing the collection in a browser the fields will be rendered.
@@ -36,7 +36,7 @@ When viewing the collection in a browser the fields will be rendered.
     >>> browser.open(foo_topic.absolute_url())
     >>> browser.getControl('Order in folder')
     <Control
-    name='form_crit__getObjPositionInParent_SimpleIntFormCriterion_value'
+    name='form_crit__getObjPositionInParent_ATSimpleIntCriterion_value'
     type='text'>
 
 Also note that criteria that use a 'value' field as the primary search
@@ -45,6 +45,6 @@ redundant.
 
     >>> '>Value</label>' in browser.contents
     False
-    >>> ('form_crit__getObjPositionInParent_SimpleIntFormCriterion_value_help'
+    >>> ('form_crit__getObjPositionInParent_ATSimpleIntCriterion_value_help'
     ...  in browser.contents)
     False

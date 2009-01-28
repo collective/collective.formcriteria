@@ -2,7 +2,7 @@ from Products.ATContentTypes.criteria import boolean
 
 from collective.formcriteria.criteria import common
 
-class BooleanFormCriterion(
+class ATBooleanCriterion(
     common.FormCriterion, boolean.ATBooleanCriterion):
     __doc__ = boolean.ATBooleanCriterion.__doc__
 
@@ -13,4 +13,4 @@ class BooleanFormCriterion(
         schema['bool'])
 
 common.replaceCriterionRegistration(
-    boolean.ATBooleanCriterion, BooleanFormCriterion)
+    boolean.ATBooleanCriterion, ATBooleanCriterion)

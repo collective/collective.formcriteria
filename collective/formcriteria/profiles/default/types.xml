@@ -4,30 +4,30 @@
     name="title">Controls the available content types in your portal</property>
  <object name="Topic"
     meta_type="Factory-based Type Information with dynamic views"/>
- <object name="BooleanFormCriterion"
+ <object name="ATBooleanCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="DateFormCriterion" meta_type="Factory-based Type Information"/>
- <object name="DateRangeFormCriterion"
+ <object name="ATDateCriteria" meta_type="Factory-based Type Information"/>
+ <object name="ATDateRangeCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="ListFormCriterion" meta_type="Factory-based Type Information"/>
- <object name="PathFormCriterion" meta_type="Factory-based Type Information"/>
- <object name="RelativePathFormCriterion" meta_type="Factory-based Type Information"/>
- <object name="PortalTypeSelectionFormCriterion"
+ <object name="ATListCriterion" meta_type="Factory-based Type Information"/>
+ <object name="ATPathCriterion" meta_type="Factory-based Type Information"/>
+ <object name="ATRelativePathCriterion" meta_type="Factory-based Type Information"/>
+ <object name="ATPortalTypeCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="PortalTypeCheckboxFormCriterion"
+ <object name="ATPortalTypeCheckboxCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="ReferenceSelectionFormCriterion"
+ <object name="ATReferenceCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="ReferenceCheckboxFormCriterion"
+ <object name="ATReferenceCheckboxCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="SelectionFormCriterion"
+ <object name="ATSelectionCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="CheckboxFormCriterion"
+ <object name="ATCheckboxCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="SimpleIntFormCriterion"
+ <object name="ATSimpleIntCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="SimpleStringFormCriterion"
+ <object name="ATSimpleStringCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="CommaFormCriterion"
+ <object name="ATCommaCriterion"
     meta_type="Factory-based Type Information"/>
 </object>

@@ -21,13 +21,13 @@ Open a browser as an anonymous user.
 Add a list criterion for the subject/keywords.
 
     >>> foo_topic.addCriterion(
-    ...     'Subject', 'CommaFormCriterion')
-    <CommaFormCriterion at
-    /plone/Members/test_user_1_/foo-topic-title/crit__Subject_CommaFormCriterion>
+    ...     'Subject', 'ATCommaCriterion')
+    <ATCommaCriterion at
+    /plone/Members/test_user_1_/foo-topic-title/crit__Subject_ATCommaCriterion>
 
 Designate the criterion's field as a form field.
 
-    >>> crit = foo_topic.getCriterion('Subject_CommaFormCriterion')
+    >>> crit = foo_topic.getCriterion('Subject_ATCommaCriterion')
     >>> crit.setValue(['foobar', 'bax'])
     >>> crit.setFormFields(['value'])
 
@@ -36,9 +36,9 @@ for the field with the default values selected.
 
     >>> browser.open(foo_topic.absolute_url())
     >>> ctrl = browser.getControl(
-    ...     name='form_crit__Subject_CommaFormCriterion_value')
+    ...     name='form_crit__Subject_ATCommaCriterion_value')
     >>> ctrl
-    <Control name='form_crit__Subject_CommaFormCriterion_value'
+    <Control name='form_crit__Subject_ATCommaCriterion_value'
     type='text'>
     >>> ctrl.value
     'foobar, bax'
@@ -62,14 +62,14 @@ redundant.
 Since the comma widget require special input syntax, however, the help
 text is rendered.
 
-    >>> ('form_crit__Subject_CommaFormCriterion_value_help'
+    >>> ('form_crit__Subject_ATCommaCriterion_value_help'
     ...  in browser.contents)
     True
 
 Change the checked values and search
 
     >>> browser.getControl(
-    ...     name='form_crit__Subject_CommaFormCriterion_value'
+    ...     name='form_crit__Subject_ATCommaCriterion_value'
     ...     ).value = 'bah, quux'
     >>> form = browser.getForm(name="formcriteria_search")
     >>> form.getControl(name='submit').click()
@@ -86,6 +86,6 @@ Now the default has been overriden by the submitted query.
 The form reflects the submitted value.
 
     >>> browser.getControl(
-    ...     name='form_crit__Subject_CommaFormCriterion_value'
+    ...     name='form_crit__Subject_ATCommaCriterion_value'
     ...     ).value
     'bah, quux'

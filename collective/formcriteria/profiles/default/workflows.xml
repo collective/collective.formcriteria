@@ -1,17 +1,9 @@
 <?xml version="1.0"?>
 <object name="portal_workflow" meta_type="Plone Workflow Tool">
  <bindings>
-  <type type_id="BooleanFormCriterion"/>
-  <type type_id="ATCurrentAuthorCriterion"/>
-  <type type_id="DateFormCriterion"/>
-  <type type_id="DateRangeFormCriterion"/>
-  <type type_id="ListFormCriterion"/>
-  <type type_id="PathFormCriterion"/>
-  <type type_id="RelativePathFormCriterion"/>
-  <type type_id="PortalTypeSelectionFormCriterion"/>
-  <type type_id="ReferenceFormCriterion"/>
-  <type type_id="SelectionFormCriterion"/>
-  <type type_id="SimpleIntFormCriterion"/>
-  <type type_id="SimpleStringFormCriterion"/>
+  <type type_id="ATPortalTypeCheckboxCriterion"/>
+  <type type_id="ATReferenceCheckboxCriterion"/>
+  <type type_id="ATCheckboxCriterion"/>
+  <type type_id="ATCommaCriterion"/>
  </bindings>
 </object>

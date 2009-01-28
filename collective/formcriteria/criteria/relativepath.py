@@ -2,7 +2,7 @@ from Products.ATContentTypes.criteria import relativepath
 
 from collective.formcriteria.criteria import common
 
-class RelativePathFormCriterion(
+class ATRelativePathCriterion(
     common.FormCriterion, relativepath.ATRelativePathCriterion):
     __doc__ = relativepath.ATRelativePathCriterion.__doc__
 
@@ -12,4 +12,4 @@ class RelativePathFormCriterion(
         schema['relativePath'], schema['recurse'])
 
 common.replaceCriterionRegistration(
-    relativepath.ATRelativePathCriterion, RelativePathFormCriterion)
+    relativepath.ATRelativePathCriterion, ATRelativePathCriterion)
