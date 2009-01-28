@@ -1,8 +1,13 @@
 Changelog
 =========
 
-0.7 - Unreleased
+0.7 - 2009-01-28
 ----------------
+
+* Change to use the same names as ATCT where appropriate to avoid some
+  problems where the ATCT names are expected.
+* Flesh out the GenericSetup profile with all other bits in the Plone
+  profile that make reference to criteria.
 
 0.6 - 2009-01-26
 ----------------
