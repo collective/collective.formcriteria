@@ -84,15 +84,16 @@ published content.
     >>> form = browser.getForm(name='criteria_select')
     >>> form.getControl('State').selected = True
     >>> form.getControl(
-    ...     'Select values from list', index=0).selected = True
+    ...     'Select values from list').selected = True
     >>> form.getControl('Add criteria').click()
     >>> print browser.contents
     <...
     ...State...
     ...Select values from list...
 
-    >>> browser.getControl('published').selected = True
-    >>> browser.getControl('Save', index=0).click()
+    >>> form = browser.getForm(action="criterion_edit_form", index=0)
+    >>> form.getControl('published').selected = True
+    >>> form.getControl('Save').click()
     >>> print browser.contents
     <...
     ...Changes saved...
