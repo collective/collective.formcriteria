@@ -148,6 +148,14 @@ batch.
     <Link text='Effective Date'
     url='http://nohost/plone/Members/test_user_1_/foo-topic-title/atct_topic_view?test=&crit__effective_ATSortCriterion:boolean=True'>
 
+Ensure that the extended sort criteria work inside previously created
+ATTopic instances.
+
+    >>> topic = portal.events.aggregator
+    >>> topic.setSortCriterion('effective', True)
+    >>> topic.queryCatalog()[0].getObject()
+    <ATEvent at /plone/Members/test_user_1_/baz-event-title>
+
 Form Sort
 ---------
 

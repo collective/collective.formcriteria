@@ -1,8 +1,11 @@
 Changelog
 =========
 
-0.9 - Unreleased
+0.9 - 2009-01-29
 ----------------
+
+* Fix incompatibility when extended sort criterion were added to
+  existing ATCT ATTopic instances
 
 0.8 - 2009-01-29
 ----------------

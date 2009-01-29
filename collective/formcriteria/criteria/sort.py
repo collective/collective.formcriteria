@@ -3,6 +3,7 @@ import Acquisition
 from Products.ATContentTypes import criteria
 from Products.ATContentTypes.criteria import sort
 
+from collective.formcriteria import interfaces
 from collective.formcriteria import topic
 from collective.formcriteria.criteria import common
 
@@ -15,9 +16,12 @@ class ATSortCriterion(
 
     def getCriteriaItems(self):
         """Only use this sort if it is the default or is specified"""
-        if self.Field() != 'unsorted' and (
-            self.getId() in self.REQUEST or Acquisition.aq_base(self)
-            is Acquisition.aq_base(self.listSortCriteria()[0])):
+        topic = Acquisition.aq_parent(Acquisition.aq_inner(self))
+        if not interfaces.IFormTopic.providedBy(topic) or (
+            self.Field() != 'unsorted' and (
+                self.getId() in self.REQUEST or
+                Acquisition.aq_base(self) is Acquisition.aq_base(
+                    topic.listSortCriteria()[0]))):
             return super(ATSortCriterion, self).getCriteriaItems()
         return ()
     
