@@ -3,6 +3,8 @@ TODO
 
 * Form sort criteria
 
+* Ensure that only formFields are taken from the request
+
 * Fix folder_contents view to support deleting, etc.
 
 * Use subcollections to support AdvancedQuery operations
