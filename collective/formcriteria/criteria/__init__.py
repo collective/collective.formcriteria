@@ -32,3 +32,6 @@ path # import to register
 
 from collective.formcriteria.criteria import relativepath
 relativepath # import to register
+
+from collective.formcriteria.criteria import sort
+sort # import to register

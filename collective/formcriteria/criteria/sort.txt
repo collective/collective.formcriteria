@@ -1,0 +1,184 @@
+.. -*-doctest-*-
+
+=======
+Sorting
+=======
+
+Two kinds of sort criteria are supported.  Multiple fixed sort
+criteria can be defined allowing the user to select from among them
+using links on the batch macro.  One form sort criterion can be added
+per collection to allows the user to specify a sort on the sort form.
+If both are used, and the user has both submitted a sort from the form
+and selected a sort from the batch links, the latter criterion in the
+list of criteria takes effect.
+
+Form sort criteria are not yet implemented.
+
+Fixed Sort Criteria
+-------------------
+
+Set the item count to 1 so that batches will only have one item.
+
+    >>> foo_topic = self.folder['foo-topic-title']
+    >>> foo_topic.setItemCount(1)
+
+Open a browser and log in as a normal user.
+
+    >>> from Products.Five.testbrowser import Browser
+    >>> from Products.PloneTestCase import ptc
+    >>> browser = Browser()
+    >>> browser.handleErrors = False
+    >>> browser.open(portal.absolute_url())
+    >>> browser.getLink('Log in').click()
+    >>> browser.getControl('Login Name').value = ptc.default_user
+    >>> browser.getControl(
+    ...     'Password').value = ptc.default_password
+    >>> browser.getControl('Log in').click()
+
+Load the edit form of a collection.
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> browser.getLink('Criteria').click()
+
+The sort selection form has been removed from the criteria tab.
+
+    >>> browser.getForm(action="criterion_edit_form", index=1)
+    Traceback (most recent call last):
+    IndexError: list index out of range
+
+Instead, multiple sort criteria can be added to a collection using the
+normal criterion add form on the criteria tab.
+
+    >>> form = browser.getForm(name="criteria_select")
+    >>> form.getControl('Relevance').selected = True
+    >>> form.getControl('Sort results').selected = True
+    >>> form.getControl('Add criteria').click()
+    >>> print browser.contents
+    <...
+    ...Added criterion ATSortCriterion for field unsorted...
+
+Add another sort criterion for the Date field reversed.
+
+    >>> form = browser.getForm(name="criteria_select")
+    >>> form.getControl('Effective Date').selected = True
+    >>> form.getControl('Sort results').selected = True
+    >>> form.getControl('Add criteria').click()
+    >>> print browser.contents
+    <...
+    ...Added criterion ATSortCriterion for field effective...
+
+    >>> form = browser.getForm(action="criterion_edit_form", index=0)
+    >>> form.getControl(
+    ...     name="crit__effective_ATSortCriterion_reversed:boolean"
+    ...     ).getControl(value='on').selected = True
+    >>> form.getControl('Save').click()
+    >>> print browser.contents
+    <...
+    ...Changes saved...
+
+Change the display layout of the collection to the "Search Form" then
+submit a search criteria to test that the sort links preserve search
+criteria.
+
+    >>> foo_topic.setLayout('criteria_form')
+    >>> foo_topic.addCriterion(
+    ...     'SearchableText','ATSimpleStringCriterion'
+    ...     ).setFormFields(['value'])
+    >>> browser.getLink('View').click()
+    >>> form = browser.getForm(name="formcriteria_search")
+    >>> form.getControl('Search Text').value = 'blah'
+    >>> form.getControl(name='submit').click()
+
+When the batch macro is rendered on a collection view, such as one of
+the listings, it includes links to the different possible sorts in
+order.  By default, the first sort criteria is selected.
+
+    >>> print browser.contents
+    <...
+    ...Sort order:...
+    ...selected...
+    ...Relevance...
+    ...Effective Date...
+    >>> browser.getLink('Relevance')
+    Traceback (most recent call last):
+    LinkNotFoundError
+
+The results are listed in order of weight.
+
+    >>> browser.getLink('Baz Event Title')
+    <Link text='Baz Event Title'
+    url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
+    >>> browser.getLink('Bar Document Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+
+When a sort link is clicked, that sort will show as selected and
+results will be sorted according to the sort criteria.
+
+    >>> browser.getLink('Effective Date').click()
+    >>> print browser.contents
+    <...
+    ...Sort on:...
+    ...Relevance...
+    ...selected...
+    ...Effective Date...
+    >>> browser.getLink('Effective Date')
+    Traceback (most recent call last):
+    LinkNotFoundError
+    >>> browser.getLink('Relevance')
+    <Link XXX>
+
+The results reflect that the search query is preserved across the new
+sort selection.
+
+    >>> browser.getLink('Bar Document Title')
+    <Link text='Bar Document Title'
+    url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
+    >>> browser.getLink('Baz Event Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+
+If the next batch is selected the sort and search query are
+preserved.
+
+    >>> browser.getLink('Next 1 items').click()
+    >>> browser.getLink('Bar Document Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+    >>> browser.getLink('Baz Event Title')
+    <Link text='Baz Event Title'
+    url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
+
+Form Sort
+---------
+
+TODO: Not implemented yet
+
+An widget is avialable for selecting which of the possible
+sort fields should be available for sorting on.  The InAndOutWidget is
+used so that the order can be specified.
+
+    TODO >>> print browser.contents
+    <...
+    <div class="field ArchetypesInAndOutWidget
+    kssattr-atfieldname-sortFields"
+    id="archetypes-fieldname-sortFields">...
+    ...>Relevance</option>...
+    ...>Effective Date</option>...
+
+The InAndOutWidget uses JavaScript so we'll set the field manually for
+testing.
+
+    TODO >>> self.login()
+    TODO >>> foo_topic.setSortFields(['', 'effective', 'Type'])
+
+    TODO >>> form = browser.getForm(name="criteria_select")
+    TODO >>> form.getControl('Sort Order').selected = True
+
+Form sort criteria default to sorting on the "Relevance" field
+corresponds to a sort by weight for searches that include queries
+against indexs that support weighted results.
+
+    TODO >>> form = browser.getForm(action="criterion_edit_form", index=0)
+    TODO >>> form.getControl('Relevance').selected
+    True

@@ -1,5 +1,9 @@
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import topic
+from Products.ATContentTypes import criteria
+from Products.CMFPlone import CatalogTool
+
+fake_sort_indices = ('unsorted', 'sort_on')
 
 class Topic(topic.ATTopic):
     """A collection supporting form criteria"""
@@ -21,5 +25,17 @@ class Topic(topic.ATTopic):
         return atapi.DisplayList(
             layout for layout in self.getAvailableLayouts()
             if layout[0] != 'criteria_form')
+
+    def criteriaByIndexId(self, indexId):
+        catalog_tool = getattr(self, CatalogTool.CatalogTool.id)
+
+        if indexId in fake_sort_indices:
+            meta_type = indexId
+        else:
+            meta_type = catalog_tool.Indexes[indexId].meta_type
+
+        results = criteria._criterionRegistry.criteriaByIndex(
+            meta_type)
+        return results
     
 atapi.registerType(Topic, 'collective.formcriteria')
