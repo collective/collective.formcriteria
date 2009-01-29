@@ -2,6 +2,7 @@
    xmlns="http://namespaces.zope.org/zope"
    xmlns:browser="http://namespaces.zope.org/browser"
    xmlns:five="http://namespaces.zope.org/five"
+   xmlns:cmf="http://namespaces.zope.org/cmf"
    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
    i18n_domain="collective.formcriteria">
 
@@ -60,6 +61,8 @@
      name="formcriteria.kss"
      file="formcriteria.kss"
      />
+
+  <cmf:registerDirectory name="formcriteria"/>
 
   <genericsetup:registerProfile
      name="default"
