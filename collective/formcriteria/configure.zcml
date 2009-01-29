@@ -8,7 +8,7 @@
 
   <browser:viewlet
      name="collective.formcriteria.htmlhead"
-     for="Products.ATContentTypes.interface.IATTopic"
+     for=".interfaces.IFormTopic"
      manager="plone.app.layout.viewlets.interfaces.IHtmlHeadLinks"
      class=".form.SearchFormView"
      template="form-htmlhead.pt"
@@ -17,7 +17,7 @@
 
   <browser:viewlet
      name="collective.formcriteria.searchform"
-     for="Products.ATContentTypes.interface.IATTopic"
+     for=".interfaces.IFormTopic"
      manager="plone.app.layout.viewlets.interfaces.IAboveContentBody"
      class=".form.SearchFormView"
      template="form.pt"
@@ -25,26 +25,26 @@
      />
   
   <browser:page
-     for="Products.ATContentTypes.interface.IATTopic"
+     for=".interfaces.IFormTopic"
      name="formcriteria_macros"
      template="form_macros.pt"
      permission="zope2.View" />
 
   <browser:page
-     for="Products.ATContentTypes.interface.IATTopic"
+     for=".interfaces.IFormTopic"
      class=".foldercontents.FolderContentsView"
      name="folder_contents_view"
      template="foldercontents.pt"
      permission="cmf.ListFolderContents" />
   
   <browser:page
-     for="Products.ATContentTypes.interface.IATTopic"
+     for=".interfaces.IFormTopic"
      name="criteria_form"
      template="criteria_form.pt"
      permission="zope2.View" />
 
   <browser:menuItem
-     for="Products.ATContentTypes.interface.IATTopic"
+     for=".interfaces.IFormTopic"
      menu="plone_displayviews"
      title="Search Form"
      action="criteria_form"
@@ -58,7 +58,7 @@
      permission="zope2.View" />
 
   <browser:page
-     for="Products.ATContentTypes.interface.IATTopic"
+     for=".interfaces.IFormTopic"
      name="sort_info"
      class=".sort.SortView"
      permission="zope2.View" />

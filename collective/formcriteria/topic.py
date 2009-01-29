@@ -1,3 +1,5 @@
+from zope import interface
+
 from Products.Archetypes import atapi
 from Products.ATContentTypes import interfaces as atct_ifaces
 from Products.ATContentTypes import config 
@@ -5,11 +7,14 @@ from Products.ATContentTypes.content import topic
 from Products.ATContentTypes import criteria
 from Products.CMFPlone import CatalogTool
 
+from collective.formcriteria import interfaces
+
 fake_sort_indices = {'unsorted': 'Relevance',
                      'sort_on': 'User Selected'}
 
 class Topic(topic.ATTopic):
     """A collection supporting form criteria"""
+    interface.implements(interfaces.IFormTopic)
 
     schema = topic.ATTopic.schema.copy() + atapi.Schema((
         atapi.StringField(

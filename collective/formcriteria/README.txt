@@ -269,3 +269,8 @@ The contents view also reflects user submitted criteria.
     <ItemControl name='paths:list' type='checkbox'
     optionValue='/plone/Members/test_user_1_/baz-event-title'
     selected=False>
+
+Make sure none of the collective.formcriteria extensions interfere
+with existing ATTopic instances.
+
+    >>> browser.open(portal.events.aggregator.absolute_url())
