@@ -17,13 +17,13 @@ class ATSortCriterion(
         """Only use this sort if it is the default or is specified"""
         if self.Field() != 'unsorted' and (
             self.getId() in self.REQUEST or Acquisition.aq_base(self)
-            is Acquisition.aq_base(
-                Acquisition.aq_parent(self).getSortCriterion())):
+            is Acquisition.aq_base(self.listSortCriteria()[0])):
             return super(ATSortCriterion, self).getCriteriaItems()
         return ()
-
+    
 indices = criteria._criterionRegistry.indicesByCriterion(
     sort.ATSortCriterion.meta_type)
 criteria.unregisterCriterion(sort.ATSortCriterion)
 criteria.registerCriterion(
-    ATSortCriterion, indices+topic.fake_sort_indices)
+    ATSortCriterion,
+    indices + tuple(topic.fake_sort_indices.keys()))

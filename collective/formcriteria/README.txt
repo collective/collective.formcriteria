@@ -5,9 +5,9 @@ collective.formcriteria
 =======================
 
 This package provides extends the Products.ATContentTypes.criteria
-types to create a search form at the top of the collection view.  If
-any of the criterion fields are selected in the criterion's "Form
-Fields" field, then those fields will be rendered on the search form.
+types to create a search forms.  If any of the criterion fields are
+selected in the criterion's "Form Fields" field, then those fields
+will be rendered on the search form.
 
 A new "Search Form" display layout is provided that renders the search
 form fully expanded and the collection body text but no results.  When
@@ -24,6 +24,10 @@ easily by expanding the search form.
 Users can use the form to submit criteria to supplement any search
 criteria in the topic.  Values entered on the criteria tab for the
 topic become the default values on the form.
+
+Multiple sort criteria can also be added that will render user
+selectable sort links on the batch macro.  See
+collective/formcriteria/criteria/sort.txt for more details.
 
 Also provided is an alternative display layout that uses the folder
 contents table and can still display the search form viewlet.

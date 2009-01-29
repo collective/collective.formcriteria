@@ -13,8 +13,11 @@
                      template_id template_id|template/getId;
                      mq python:modules['ZTUtils'].make_query;
                      url batch_base_url | string:${here/absolute_url}/${template_id};
-                     currentpage batch/pagenumber;"
-         tal:condition="python: batch.next or  batch.previous">
+                     currentpage batch/pagenumber;
+                     sort_info context/@@sort_info/getSortInfo|nothing;
+                     form sort_info/form|nothing;
+                     sorts sort_info/sorts|nothing;"
+         tal:condition="python: batch.next or  batch.previous or sorts">
       <!-- TODO tesdal needs to have a look at these
            <metal:rellinks fill-slot="rel_slot">
              <link rel="first" href="" title="First page" tal:attributes="href string:author" />
@@ -23,6 +26,16 @@
              <link rel="next" href="" title="Next page" tal:attributes="href string:author" />
            </metal:rellinks>
            -->
+
+      <span tal:condition="sorts">
+        Sort on:
+        <a tal:repeat="sort sorts"
+           tal:attributes="href python:not sort.get('selected') and '%s?%s' % (url, mq(form, {sort['id']: True})) or None"
+           tal:content="sort/name">
+          Field
+        </a>
+      </span>
+
       <span class="previous"
             tal:define="p batch/previous | nothing"
             tal:condition="p">

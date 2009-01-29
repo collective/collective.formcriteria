@@ -57,6 +57,12 @@
      template="comma.pt"
      permission="zope2.View" />
 
+  <browser:page
+     for="Products.ATContentTypes.interface.IATTopic"
+     name="sort_info"
+     class=".sort.SortView"
+     permission="zope2.View" />
+
   <browser:resource
      name="formcriteria.kss"
      file="formcriteria.kss"
