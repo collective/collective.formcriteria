@@ -4,6 +4,8 @@ Changelog
 0.8 - Unreleased
 ----------------
 
+* Added multiple sort links to the batch macro
+
 0.7 - 2009-01-28
 ----------------
 
