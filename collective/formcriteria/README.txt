@@ -5,32 +5,38 @@ collective.formcriteria
 =======================
 
 This package extends the Products.ATContentTypes.criteria types to
-create a search forms.  If any of the criterion fields are selected in
-the criterion's "Form Fields" field, then those fields will be
-rendered on the search form.
+create a search forms.  Specifically, any criterion fields which are
+selected in each criterion's "Form Fields", then those fields will be
+rendered on the search form.  The values set on the criteria edit form
+become the default values on the search form.  Search terms submitted
+through the search form supplement any criteria not on the search
+form.  IOW, criteria not appearing on the form become the base query
+built into the search form.
 
 A new "Search Form" display layout is provided that renders the search
-form fully expanded and the collection body text but no results.  When
-this layout is used, the search form will display results using the
-layout specified in the "Form Results Layout" collection field.
-Otherwise the search form always displays results using the layout it
-was rendered on and always starts out collapsed.  In this way, the
-collection creator can determine whether the collection should have a
-default view of just the search form or should use a results listing
-as a default view.  Likewise, users of the collection can use any
-collection layout to view results and can modify their search terms
-easily by expanding the search form.
+form and the collection body text but no results.  The search form on
+this layout will display results using the layout specified in the
+"Form Results Layout" field of the collection's edit form.
 
-Users can use the form to submit criteria to supplement any search
-criteria in the topic.  Values entered on the criteria tab for the
-topic become the default values on the form.
+The search form can also be rendered in a portlet assigned in the
+context of a collection.  The portlet will not render on the search
+form view or the criteria edit form but will render on any collections
+results layout.
+
+Thus the collection can use either the search form or a results
+listing as the display layout.  Users can initiate searches using
+either the form or the portlet.  The portlet also reflects any
+submitted search terms and thus provides a convenient way for users to
+refine their searches.
 
 Multiple sort criteria can also be added that will render user
 selectable sort links on the batch macro.  See
 collective/formcriteria/criteria/sort.txt for more details.
 
 Also provided is an alternative display layout that uses the folder
-contents table and can still display the search form viewlet.
+contents table and can still display the search form viewlet.  This
+layout is not yet fully functional but provides the basis for some
+very rich site admin functionality.
 
 Form Criteria
 =============
