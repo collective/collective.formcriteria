@@ -4,10 +4,10 @@
 collective.formcriteria
 =======================
 
-This package provides extends the Products.ATContentTypes.criteria
-types to create a search forms.  If any of the criterion fields are
-selected in the criterion's "Form Fields" field, then those fields
-will be rendered on the search form.
+This package extends the Products.ATContentTypes.criteria types to
+create a search forms.  If any of the criterion fields are selected in
+the criterion's "Form Fields" field, then those fields will be
+rendered on the search form.
 
 A new "Search Form" display layout is provided that renders the search
 form fully expanded and the collection body text but no results.  When
