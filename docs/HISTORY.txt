@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.9.3 - Unreleased
+0.9.3 - 2009-01-31
 ------------------
 
 * Fix widget JavaScript and CSS for search form portlet
