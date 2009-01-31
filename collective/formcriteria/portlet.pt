@@ -3,7 +3,7 @@
                     macros nocall:form/macros;">
   <metal:form use-macro="macros/form">
 
-    <dl class="portlet portletCollection"
+    <dl class="portlet portletCriteriaForm"
         i18n:domain="plone"
         metal:fill-slot="fieldset"
         tal:define="collection_url view/collection_url;
