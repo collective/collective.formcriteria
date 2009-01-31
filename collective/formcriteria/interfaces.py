@@ -5,3 +5,6 @@ class IFormTopic(interface.Interface):
 
 class IFormCriterion(interface.Interface):
     """A criterion that generates a search form field."""
+
+class IFormCriteriaPortlet(interface.Interface):
+    """The form criteria search form portlet."""

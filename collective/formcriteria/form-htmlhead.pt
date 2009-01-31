@@ -1,5 +1,5 @@
-<tal:if condition="view/ifHead">
-<tal:define define="fields view/fields;">
+<tal:define define="fields view/fields;"
+            condition="fields">
 <metal:block use-macro="here/global_defines/macros/defines" />
 
   <tal:block define="macro context/archetypes_custom_js/macros/javascript_head | nothing"
@@ -35,4 +35,4 @@
   </tal:block>
 
 </tal:define>
-</tal:if>
+

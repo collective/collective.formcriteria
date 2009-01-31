@@ -14,9 +14,8 @@
 
   <browser:viewlet
      name="collective.formcriteria.htmlhead"
-     for=".interfaces.IFormTopic"
      manager="plone.app.layout.viewlets.interfaces.IHtmlHeadLinks"
-     class=".form.SearchFormView"
+     class=".form.SearchFormHeadView"
      template="form-htmlhead.pt"
      permission="zope2.View" 
      />

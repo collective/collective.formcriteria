@@ -70,7 +70,7 @@ class CriteriaLayer(tcl_ptc.BasePTCLayer):
     def afterSetUp(self):
         topic = self.folder['foo-topic-title']
         site_path_len = len(self.portal.getPhysicalPath())
-        manager = topic.restrictedTraverse(
+        manager = self.folder.restrictedTraverse(
             '++contextportlets++plone.rightcolumn')
         assignment = portlet.Assignment(
             target_collection='/'.join(

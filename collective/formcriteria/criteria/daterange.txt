@@ -147,3 +147,14 @@ Now the default has been overriden by the submitted query.
     >>> browser.getLink('Baz Event Title')
     <Link text='Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
+
+The widget helper JavaScript and CSS will also be included when the
+search form portlet is rendered outside the context of the collection.
+
+    >>> browser.open(folder.absolute_url())
+    >>> 'calendar_stripped.js' in browser.contents
+    True
+    >>> 'calendar-en.js' in browser.contents
+    True
+    >>> 'calendar-system.css' in browser.contents
+    True

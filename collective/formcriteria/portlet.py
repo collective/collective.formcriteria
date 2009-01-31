@@ -1,4 +1,4 @@
-from zope.interface import implements
+from zope import interface
 from zope import schema
 from zope.formlib import form
 from zope.cachedescriptors import property
@@ -10,6 +10,8 @@ from plone.portlet.collection import collection
 from plone.portlet.collection import PloneMessageFactory as _
 
 from Products.ATContentTypes import interface as atct_ifaces
+
+from collective.formcriteria import interfaces
 
 class ICriteriaFormPortlet(portlets_ifaces.IPortletDataProvider):
     """A search form based on the criteria in a collection."""
@@ -30,11 +32,12 @@ class ICriteriaFormPortlet(portlets_ifaces.IPortletDataProvider):
 
 
 class Assignment(collection.Assignment):
-    implements(ICriteriaFormPortlet)
+    interface.implements(ICriteriaFormPortlet)
 
 
 class Renderer(collection.Renderer):
     """Portlet renderer."""
+    interface.implements(interfaces.IFormCriteriaPortlet)
 
     render = ViewPageTemplateFile('portlet.pt')
 
