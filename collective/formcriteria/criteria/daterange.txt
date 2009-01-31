@@ -81,6 +81,26 @@ rendered for the index with the default values.
     ...     '_end_day').getControl('14').selected
     True
 
+By default the hour and minute fields are hidden.
+
+    >>> browser.getControl(
+    ...     name='form_crit__effective_ATDateRangeCriterion'
+    ...     '_start_hour').type
+    'hidden'
+    >>> browser.getControl(
+    ...     name='form_crit__effective_ATDateRangeCriterion'
+    ...     '_start_minute').type
+    'hidden'
+
+    >>> browser.getControl(
+    ...     name='form_crit__effective_ATDateRangeCriterion'
+    ...     '_end_hour').type
+    'hidden'
+    >>> browser.getControl(
+    ...     name='form_crit__effective_ATDateRangeCriterion'
+    ...     '_end_minute').type
+    'hidden'
+
 The widget helper JavaScript and CSS will also be included on the page
 when the search form is present and fields require it.
 

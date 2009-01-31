@@ -8,6 +8,8 @@ class ATDateRangeCriterion(
 
     schema = daterange.ATDateRangeCriterion.schema.copy(
         ) + common.FormCriterion.schema.copy()
+    schema['start'].widget.show_hm = False
+    schema['end'].widget.show_hm = False
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['start'], schema['end'])
 

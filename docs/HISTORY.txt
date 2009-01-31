@@ -7,6 +7,7 @@ Changelog
 * Clarify selected sort
 * Make portlet usable outside the context of the collection
 * Fix portlet class
+* Don't render hour and minute fields on date 
 
 0.9.1 - 2009-01-30
 ------------------
