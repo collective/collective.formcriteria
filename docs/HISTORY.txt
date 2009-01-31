@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.9.1 - Unreleased
+0.9.1 - 2009-01-30
 ------------------
 
 * Move the search form viewlet into a portlet
