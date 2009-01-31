@@ -29,11 +29,17 @@
 
       <span tal:condition="sorts">
         Sort on:
-        <a tal:repeat="sort sorts"
-           tal:attributes="href python:not sort.get('selected') and '%s?%s' % (url, mq(form, {sort['id']: True})) or None"
-           tal:content="sort/name">
-          Field
-        </a>
+        <tal:sorts repeat="sort sorts">
+          <a tal:condition="not:sort/selected"
+             tal:attributes="href python:'%s?%s' % (url, mq(form, {sort['id']: True}))"
+             tal:content="sort/name">
+            Field
+          </a>
+          <span tal:condition="sort/selected"
+                tal:content="sort/name">
+            Field
+          </span>
+        </tal:sorts>
       </span>
 
       <span class="previous"

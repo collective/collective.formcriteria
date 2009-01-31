@@ -1,5 +1,3 @@
-from zope import interface
-
 class SortView(object):
 
     def getSortInfo(self):
@@ -10,7 +8,8 @@ class SortView(object):
         for crit in criteria:
             sort = dict(
                 id=crit.getId(),
-                name=self.context.getFriendlyName(crit.Field()))
+                name=self.context.getFriendlyName(crit.Field()),
+                selected=False)
             if sort['id'] in self.request:
                 form.pop(sort['id'])
                 selected = crit

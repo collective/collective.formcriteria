@@ -4,6 +4,7 @@ Changelog
 0.9.2 - Unreleased
 ------------------
 
+* Clarify selected sort
 * Make portlet usable outside the context of the collection
 * Fix portlet class
 
