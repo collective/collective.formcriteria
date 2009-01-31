@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.9.2'
+version = '0.9.3'
 
 tests_require = ['collective.testcaselayer']
 
