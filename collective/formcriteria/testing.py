@@ -9,10 +9,11 @@ from Products.Five import zcml, fiveconfigure
 from collective.testcaselayer import ptc as tcl_ptc
 
 from collective import formcriteria
+from collective.formcriteria import portlet
 
 ptc.setupPloneSite()
 
-class FormCriteriaLayer(tcl_ptc.BasePTCLayer):
+class Layer(tcl_ptc.BasePTCLayer):
     """Install collective.formcriteria"""
 
     def afterSetUp(self):
@@ -49,6 +50,7 @@ class FormCriteriaLayer(tcl_ptc.BasePTCLayer):
             eventType=['qux', 'quux'])
 
         self.loginAsPortalOwner()
+        self.portal.portal_workflow.doActionFor(home, 'publish')
         self.portal.portal_workflow.doActionFor(
             home['foo-topic-title'], 'publish')
         self.portal.portal_workflow.doActionFor(
@@ -57,4 +59,19 @@ class FormCriteriaLayer(tcl_ptc.BasePTCLayer):
             home['baz-event-title'], 'publish')
         self.login()
 
-formcriteria_layer = FormCriteriaLayer([tcl_ptc.ptc_layer])
+layer = Layer([tcl_ptc.ptc_layer])
+
+class CriteriaLayer(tcl_ptc.BasePTCLayer):
+    """Used for testing form criteria"""
+
+    def afterSetUp(self):
+        topic = self.folder['foo-topic-title']
+        site_path_len = len(self.portal.getPhysicalPath())
+        manager = topic.restrictedTraverse(
+            '++contextportlets++plone.rightcolumn')
+        assignment = portlet.Assignment(
+            target_collection='/'.join(
+                topic.getPhysicalPath()[site_path_len:]))
+        manager['foo-search-form-portlet'] = assignment
+
+criteria_layer = CriteriaLayer([layer])

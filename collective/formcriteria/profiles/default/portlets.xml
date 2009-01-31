@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<portlets>
+
+ <portlet
+    addview="collective.formcriteria.CriteriaFormPortlet"
+    title="Search form portlet"
+    description="A search form based on the criteria in a collection"
+   />
+
+</portlets>

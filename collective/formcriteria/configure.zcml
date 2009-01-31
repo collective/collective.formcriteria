@@ -4,7 +4,13 @@
    xmlns:five="http://namespaces.zope.org/five"
    xmlns:cmf="http://namespaces.zope.org/cmf"
    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+   xmlns:plone="http://namespaces.plone.org/plone"
    i18n_domain="collective.formcriteria">
+
+  <browser:resource
+     name="formcriteria.kss"
+     file="formcriteria.kss"
+     />
 
   <browser:viewlet
      name="collective.formcriteria.htmlhead"
@@ -14,20 +20,42 @@
      template="form-htmlhead.pt"
      permission="zope2.View" 
      />
-
-  <browser:viewlet
-     name="collective.formcriteria.searchform"
+  
+  <browser:page
      for=".interfaces.IFormTopic"
-     manager="plone.app.layout.viewlets.interfaces.IAboveContentBody"
+     name="criteria_form"
      class=".form.SearchFormView"
      template="form.pt"
      permission="zope2.View" 
      />
+
+  <browser:menuItem
+     for=".interfaces.IFormTopic"
+     menu="plone_displayviews"
+     title="Search Form"
+     action="criteria_form"
+     description="Renders the expanded criteria search form" />
   
   <browser:page
      for=".interfaces.IFormTopic"
      name="formcriteria_macros"
      template="form_macros.pt"
+     permission="zope2.View" />
+
+  <plone:portlet
+     name="collective.formcriteria.CriteriaFormPortlet"
+     interface=".portlet.ICriteriaFormPortlet"
+     assignment=".portlet.Assignment"
+     renderer=".portlet.Renderer"
+     view_permission="zope2.View"
+     edit_permission="cmf.ManagePortal"
+     addview=".portlet.AddForm"
+     editview=".portlet.EditForm" />
+
+  <browser:page
+     for=".interfaces.IFormTopic"
+     name="sort_info"
+     class=".sort.SortView"
      permission="zope2.View" />
 
   <browser:page
@@ -36,19 +64,6 @@
      name="folder_contents_view"
      template="foldercontents.pt"
      permission="cmf.ListFolderContents" />
-  
-  <browser:page
-     for=".interfaces.IFormTopic"
-     name="criteria_form"
-     template="criteria_form.pt"
-     permission="zope2.View" />
-
-  <browser:menuItem
-     for=".interfaces.IFormTopic"
-     menu="plone_displayviews"
-     title="Search Form"
-     action="criteria_form"
-     description="Renders the expanded criteria search form" />
 
   <browser:page
      for="*"
@@ -56,17 +71,6 @@
      class=".comma.CommaWidgetView"
      template="comma.pt"
      permission="zope2.View" />
-
-  <browser:page
-     for=".interfaces.IFormTopic"
-     name="sort_info"
-     class=".sort.SortView"
-     permission="zope2.View" />
-
-  <browser:resource
-     name="formcriteria.kss"
-     file="formcriteria.kss"
-     />
 
   <cmf:registerDirectory name="formcriteria"/>
 

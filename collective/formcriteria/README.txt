@@ -18,10 +18,11 @@ form and the collection body text but no results.  The search form on
 this layout will display results using the layout specified in the
 "Form Results Layout" field of the collection's edit form.
 
-The search form can also be rendered in a portlet assigned in the
-context of a collection.  The portlet will not render on the search
-form view or the criteria edit form but will render on any collections
-results layout.
+The search form can also be rendered in a search form portlet based on
+plone.portlet.collection.  The portlet will not render on the search
+form view or the criteria edit form but otherwise will render the
+search form for the designated collection according to the portlet
+settings.
 
 Thus the collection can use either the search form or a results
 listing as the display layout.  Users can initiate searches using
@@ -34,9 +35,8 @@ selectable sort links on the batch macro.  See
 collective/formcriteria/criteria/sort.txt for more details.
 
 Also provided is an alternative display layout that uses the folder
-contents table and can still display the search form viewlet.  This
-layout is not yet fully functional but provides the basis for some
-very rich site admin functionality.
+contents table.  This layout is not yet fully functional but provides
+the basis for some very rich site admin functionality.
 
 Form Criteria
 =============
@@ -76,6 +76,42 @@ Change the display layout of the collection to the "Search Form".
     <...
     ...View changed...
 
+Login as a user that can manage portlets.
+
+    >>> owner_browser = Browser()
+    >>> owner_browser.handleErrors = False
+    >>> owner_browser.open(portal.absolute_url())
+    >>> owner_browser.getLink('Log in').click()
+    >>> owner_browser.getControl(
+    ...     'Login Name').value = ptc.portal_owner
+    >>> owner_browser.getControl(
+    ...     'Password').value = ptc.default_password
+    >>> owner_browser.getControl('Log in').click()
+
+Add the search form portlet to this collection.
+
+    >>> owner_browser.open(foo_topic.absolute_url())
+    >>> owner_browser.getLink('Manage portlets').click()
+    >>> owner_browser.getControl(
+    ...     'Search form portlet', index=1).selected = True
+    >>> owner_browser.getForm(index=3).submit() # manually w/o JS
+    >>> print owner_browser.contents
+    <...
+    ...Add Search Form Portlet...
+
+    >>> header = owner_browser.getControl('Portlet header')
+    >>> header.value = 'Foo Search Form Title'
+    >>> foo_topic_path = '/'.join(
+    ...     ('',)+ foo_topic.getPhysicalPath()[
+    ...         len(portal.getPhysicalPath()):])
+    >>> header.mech_form.new_control(
+    ...     type='checkbox', name="form.target_collection",
+    ...     attrs=dict(checked='checked', value=foo_topic_path))
+    >>> owner_browser.getControl('Save').click()
+    >>> print owner_browser.contents
+    <...
+    ...Foo Search Form Title...
+
 Go to the collection's edit tab and set the "Form Results Layout"
 field.
 
@@ -108,20 +144,21 @@ published content.
     <...
     ...Changes saved...
 
-Open another browser as an anymous user.
+Open another browser as an anonymous user.
 
     >>> anon_browser = Browser()
     >>> anon_browser.handleErrors = False
 
-Before the topic has any form criteria, the serach form is not
+Before the topic has any form criteria, the search form is not
 present.
 
-    >>> anon_browser.open(foo_topic.absolute_url())
+    >>> anon_browser.open(foo_topic.absolute_url()+'/atct_topic_view')
     >>> anon_browser.getForm(name="formcriteria_search")
     Traceback (most recent call last):
     LookupError
 
-Add a simple string criterion for searchable text on the criteria tab.
+Add a simple string criterion for the SearchableText index on the
+criteria tab.
 
     >>> form = browser.getForm(name='criteria_select')
     >>> form.getControl('Search Text').selected = True
@@ -165,16 +202,11 @@ one of the content objects.
     Traceback (most recent call last):
     LinkNotFoundError
 
-Now that a form criterion has been added, the topic view displays the
-search form.
+Now that a form criterion has been added, the search form is
+rendered.
 
+    >>> anon_browser.open(foo_topic.absolute_url())
     >>> form = anon_browser.getForm(name="formcriteria_search")
-
-Since the "Search Form" layout is used, the search form starts out
-expanded.
-
-    >>> 'collapsedOnLoad' in anon_browser.contents
-    False
     
 Criterion fields that haven't been selected in "Form Fields" don't
 appear on the search form.
@@ -187,7 +219,7 @@ appear on the search form.
     'form_crit__SearchableText_ATSimpleStringCriterion_formFields:list'
 
 The label for the criterion corresponds to the form element for the
-firs criterion field.
+first criterion field.
 
     >>> ctl = form.getControl('Search Text')
 
@@ -203,19 +235,16 @@ other content object.
     <Link text='Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
 
-Since the search form has been submitted from the "Search Form"
-layout, the results are rendered on the layout specified by the "Form
-Results Layout" field and the search form starts out collapsed.
+Since the search form has been submitted, the results are rendered on
+the layout specified by the "Form Results Layout".
 
     >>> anon_browser.url.startswith(
     ...     'http://nohost/plone/Members/test_user_1_/foo-topic-title'
     ...     '/atct_topic_view')
     True
-    >>> 'collapsedOnLoad' in anon_browser.contents
-    True
 
-The search form also reflects the search term submitted rather than
-the default value submitted on the criteria tab.
+The search form portlet also reflects the search term submitted rather
+than the default value submitted on the criteria tab.
 
     >>> form = anon_browser.getForm(name="formcriteria_search")
     >>> ctl = form.getControl('Search Text')
@@ -235,8 +264,10 @@ rendered on the same view.
 Contents View
 =============
 
-Change the topic's display layout to the contents view.
+Change the topic's display layout and the search form results layout
+to the contents view.
 
+    >>> foo_topic.setFormLayout('folder_contents_view')
     >>> browser.open(foo_topic.absolute_url())
     >>> browser.getLink('folder_contents_view').click()
     >>> print browser.contents

@@ -7,11 +7,6 @@ def makeFormKey(self, crit_id, field_name):
 
 class SearchFormView(object):
 
-    def render(self, *args, **kw):
-        if self.formCriteria():
-            return super(SearchFormView, self).render(*args, **kw)
-        return ''
-
     @view.memoize
     def formCriteria(self):
         return [
@@ -60,13 +55,5 @@ class SearchFormView(object):
     makeFormKey = makeFormKey
 
     def action(self):
-        name = self._parent.__name__
-        if name == 'plone':
-            name = self._parent._data['template_id']
-
-        if name == 'criteria_form':
-            return '%s/%s' % (
-                self.context.absolute_url(),
-                self.context.getFormLayout())
-
-        return name
+        return '%s/%s' % (self.context.absolute_url(),
+                          self.context.getFormLayout())

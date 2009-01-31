@@ -1,0 +1,45 @@
+<metal:block use-macro="here/global_defines/macros/defines" />
+<tal:define define="form nocall:view/form;
+                    macros nocall:form/macros;">
+  <metal:form use-macro="macros/form">
+
+    <dl class="portlet portletCollection"
+        i18n:domain="plone"
+        metal:fill-slot="fieldset"
+        tal:define="collection_url view/collection_url;
+                    plone_view context/@@plone;
+                    toLocalizedTime nocall:plone_view/toLocalizedTime;
+                    getIcon nocall:plone_view/getIcon;">
+
+      <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <a tal:attributes="href collection_url" tal:omit-tag="not:view/data/show_more">
+          <span tal:content="view/data/header" />
+        </a>
+        <span class="portletTopRight"></span>
+      </dt>
+
+      <tal:criteria tal:repeat="criterion form/criteriaFields">
+        <dt class="portletItem">
+          <metal:label use-macro="macros/label" />
+        </dt>
+
+        <tal:fields repeat="field criterion/fields">
+          <dd class="portletItem">
+            <metal:label use-macro="macros/field" />
+          </dd>
+        </tal:fields>
+      </tal:criteria>
+
+      <dd class="portletFooter" tal:condition="view/data/show_more">
+        <span class="portletBottomLeft"></span>
+        <span metal:use-macro="macros/formControls">
+          Search
+        </span>
+        <span class="portletBottomRight"></span>
+      </dd>
+
+    </dl>
+
+  </metal:form>
+</tal:define>

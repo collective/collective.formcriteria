@@ -4,6 +4,8 @@ Changelog
 0.9.1 - Unreleased
 ------------------
 
+* Move the search form viewlet into a portlet
+
 0.9 - 2009-01-29
 ----------------
 
