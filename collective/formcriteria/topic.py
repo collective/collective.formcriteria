@@ -57,5 +57,11 @@ class Topic(topic.ATTopic):
         if index in fake_sort_indices:
             return fake_sort_indices[index]
         return getattr(self, config.TOOLNAME).getFriendlyName(index)
+
+    def addCriterion(self, field, criterion_type):
+        """Make sure that criteria are properly initialized."""
+        crit = super(Topic, self).addCriterion(field, criterion_type)
+        crit.initializeArchetype()
+        return crit
     
 atapi.registerType(Topic, 'collective.formcriteria')

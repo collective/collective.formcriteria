@@ -5,6 +5,10 @@ Changelog
 ------------------
 
 * Move the search form viewlet into a portlet
+* Patch the ATCT addCrierion method to properly initialize criteria so
+  that they can safely be created in code
+* Use the same mismatched meta_type ATCT for the
+  ATFriendlyDateCriteria
 
 0.9 - 2009-01-29
 ----------------

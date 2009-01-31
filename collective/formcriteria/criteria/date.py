@@ -6,6 +6,8 @@ class ATDateCriteria(
     common.FormCriterion, date.ATDateCriteria):
     __doc__ = date.ATDateCriteria.__doc__
 
+    meta_type = 'ATFriendlyDateCriteria'
+
     schema = date.ATDateCriteria.schema.copy(
         ) + common.FormCriterion.schema.copy()
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
