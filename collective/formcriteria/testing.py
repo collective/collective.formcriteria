@@ -34,8 +34,10 @@ class Layer(tcl_ptc.BasePTCLayer):
             id='foo-topic-title', title='Foo Topic Title')
 
         self.now = DateTime.DateTime('Jan 15, 2009')
+        tomorrow = DateTime.DateTime()+1
         home.invokeFactory(
             type_name='Event', effectiveDate=self.now-3,
+            startDate=tomorrow, endDate=tomorrow,
             id='foo-event-title', title='Foo Event Title')
         home.invokeFactory(
             type_name='Document', effectiveDate=self.now-2,
@@ -44,6 +46,7 @@ class Layer(tcl_ptc.BasePTCLayer):
         home.invokeFactory(
             type_name='Event', effectiveDate=self.now,
             id='baz-event-title', title='Baz Event Title',
+            startDate=tomorrow, endDate=tomorrow,
             # More relevant for a "blah" search
             description='blah blah',
             # For Events eventType == subject
