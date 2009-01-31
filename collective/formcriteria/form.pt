@@ -18,7 +18,7 @@
             metal:define-macro="form"
             tal:attributes="action form/action;"
             tal:define="form nocall:form|nocall:view;
-                        field_macro nocall:context/formcriteria_macros/field_macro;
+                        field_macro nocall:form/context/formcriteria_macros/field_macro;
                         errors options/state/getErrors|python:{};">
         <fieldset metal:define-slot="fieldset">
           <legend i18n:translate="legend_search_terms">Search Terms</legend>

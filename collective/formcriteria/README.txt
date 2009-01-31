@@ -88,9 +88,9 @@ Login as a user that can manage portlets.
     ...     'Password').value = ptc.default_password
     >>> owner_browser.getControl('Log in').click()
 
-Add the search form portlet to this collection.
+Add the search form portlet for this collection to the folder.
 
-    >>> owner_browser.open(foo_topic.absolute_url())
+    >>> owner_browser.open(folder.absolute_url())
     >>> owner_browser.getLink('Manage portlets').click()
     >>> owner_browser.getControl(
     ...     'Search form portlet', index=1).selected = True
@@ -260,6 +260,12 @@ rendered on the same view.
     ...     'http://nohost/plone/Members/test_user_1_/foo-topic-title'
     ...     '/atct_topic_view')
     True
+
+The search form portlet successfully renders when viewed on a context
+other than the portlet.
+
+    >>> anon_browser.open(folder.absolute_url())
+    >>> form = anon_browser.getForm(name="formcriteria_search")
 
 Contents View
 =============
