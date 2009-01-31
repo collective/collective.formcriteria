@@ -1,15 +1,14 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.9.1'
+version = '0.9.2'
 
 tests_require = ['collective.testcaselayer']
 
 setup(name='collective.formcriteria',
       version=version,
-      description=(
-          "Add forms for user enterable search criteria to "
-          "collections/topic/smart folders."),  
+      description=
+      "Add forms for user enterable search criteria to collections.",
       long_description='\n'.join(
           open(os.path.join(*path)).read() for path in [
               ("collective", "formcriteria", "README.txt"),
