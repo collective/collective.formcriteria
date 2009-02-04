@@ -1,6 +1,12 @@
 TODO
 ====
 
+* KeyError: u'unsorted'
+
+  <jonstahl> zenwryly: formcriteria 0.9.3 gives me
+  http://paste.plone.org/26150 in plone 3.1.7 on hitting "criteria"
+  tab for the stock "news" collection in a bare, new site.
+
 * Form sort criteria
 
 * Ensure that only formFields are taken from the request
