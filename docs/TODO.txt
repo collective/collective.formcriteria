@@ -7,9 +7,24 @@ TODO
   http://paste.plone.org/26150 in plone 3.1.7 on hitting "criteria"
   tab for the stock "news" collection in a bare, new site.
 
-* Form sort criteria
+* ArchetypesTool: Trying to register
+  "ATContentTypes.ATSimpleStringCriterion" which has already been
+  registered.  The new type
+  collective.formcriteria.criteria.simplestring.ATSimpleStringCriterion
+  is going to override
+  Products.ATContentTypes.criteria.simplestring.ATSimpleStringCriterion
+
+  Happens on startup for Plone sites that don't have
+  collective.formcriteria installed.  Look into not unregistering the
+  other types.
+
+* Add warnings about uninstall to docs (davisagli)
 
 * Ensure that only formFields are taken from the request
+
+* Form sort criteria
+
+* Add single selection (pulldown, radio) criteria (davisagli)
 
 * Fix folder_contents view to support deleting, etc.
 
