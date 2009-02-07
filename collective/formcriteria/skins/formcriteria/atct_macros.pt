@@ -13,7 +13,8 @@
                 default_fieldset python:(not schematas or schematas.has_key('default'))
                                          and 'default' or fieldsets[0];
                 fieldset request/fieldset|options/fieldset|default_fieldset;
-                index python:here.portal_atct.getIndex(criterion.Field());
+                getIndex nocall:context/getIndex|here/portal_atct/getIndex;
+                index python:getIndex(criterion.Field());
                 edit_macros here/edit_macros/macros;
                 criterionid criterion/getId;
                ">

@@ -4,6 +4,9 @@ Changelog
 0.9.4 - Unreleased
 ------------------
 
+* Fix KeyError: u'unsorted' bug for existing ATTopics as reported by
+  jonstahl
+
 0.9.3 - 2009-01-31
 ------------------
 

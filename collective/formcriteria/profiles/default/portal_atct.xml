@@ -169,16 +169,5 @@
    <criteria>ATPortalTypeCheckboxCriterion</criteria>
    <criteria>ATSortCriterion</criteria>
   </index>
-  <index 
-     name="unsorted" enabled="True" friendlyName="Relevance"
-     description="Sorted by result weight"
-     i18n:attributes="description; friendlyName">
-   <criteria>ATSortCriterion</criteria>
-  </index>
-  <index name="sort_on" description="The results sort order" enabled="True"
-     friendlyName="Sort Order"
-     i18n:attributes="description; friendlyName">
-   <criteria>ATSortCriterion</criteria>
-  </index>
  </topic_indexes>
 </atcttool>

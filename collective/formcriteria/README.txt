@@ -267,6 +267,20 @@ other than the portlet.
     >>> anon_browser.open(folder.absolute_url())
     >>> form = anon_browser.getForm(name="formcriteria_search")
 
+Ensure that collective.formcriteria doesn't break existing ATTopic
+instances such as those created by default in a Plone site.
+
+    >>> owner_browser.open(portal.news.absolute_url())
+    >>> print owner_browser.contents
+    <...
+    ...Site News...
+    ...There are currently no items in this folder...
+
+    >>> owner_browser.getLink('Criteria').click()
+    >>> print owner_browser.contents
+    <...
+    ...Criteria for News...
+
 Contents View
 =============
 
