@@ -65,6 +65,20 @@
      permission="cmf.ListFolderContents" />
 
   <browser:page
+     for=".interfaces.IFormTopic"
+     class=".grouped.GroupedListingView"
+     name="grouped_listing"
+     template="grouped.pt"
+     permission="cmf.ListFolderContents" />
+
+  <browser:menuItem
+     for=".interfaces.IFormTopic"
+     menu="plone_displayviews"
+     title="Grouped Listing"
+     action="grouped_listing"
+     description="Lists items grouped by the sort used" />
+
+  <browser:page
      for="*"
      name="comma_widget"
      class=".comma.CommaWidgetView"

@@ -25,6 +25,7 @@
   <element value="atct_topic_view"/>
   <element value="folder_contents_view"/>
   <element value="criteria_form"/>
+  <element value="grouped_listing"/>
  </property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="atct_edit"/>
