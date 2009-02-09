@@ -38,11 +38,13 @@ class Layer(tcl_ptc.BasePTCLayer):
         home.invokeFactory(
             type_name='Event', effectiveDate=self.now-3,
             startDate=tomorrow, endDate=tomorrow,
-            id='foo-event-title', title='Foo Event Title')
+            id='foo-event-title', title='Foo Event Title',
+            creators='foo_creator_id')
         home.invokeFactory(
             type_name='Document', effectiveDate=self.now-2,
             id='bar-document-title', title='Bar Document Title',
-            description='blah', subject=['bah', 'qux'])
+            description='blah', subject=['bah', 'qux'],
+            creators='foo_creator_id')
         home.invokeFactory(
             type_name='Event', effectiveDate=self.now,
             id='baz-event-title', title='Baz Event Title',
@@ -50,7 +52,8 @@ class Layer(tcl_ptc.BasePTCLayer):
             # More relevant for a "blah" search
             description='blah blah',
             # For Events eventType == subject
-            eventType=['qux', 'quux'])
+            eventType=['qux', 'quux'],
+            creators='bar_creator_id')
 
         self.loginAsPortalOwner()
         self.portal.portal_workflow.doActionFor(home, 'publish')

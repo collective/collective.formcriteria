@@ -4,6 +4,7 @@ Changelog
 0.9.4 - Unreleased
 ------------------
 
+* Add a layout that lists items grouped by the sort used
 * Fix KeyError: u'unsorted' bug for existing ATTopics as reported by
   jonstahl
 

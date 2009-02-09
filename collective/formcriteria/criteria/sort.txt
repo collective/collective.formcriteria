@@ -35,7 +35,7 @@ Open a browser and log in as a normal user.
     ...     'Password').value = ptc.default_password
     >>> browser.getControl('Log in').click()
 
-Load the edit form of a collection.
+Load the criteria edit form of a collection.
 
     >>> browser.open(foo_topic.absolute_url())
     >>> browser.getLink('Criteria').click()
@@ -155,6 +155,44 @@ ATTopic instances.
     >>> topic.setSortCriterion('effective', True)
     >>> topic.queryCatalog()[0].getObject()
     <ATEvent at /plone/Members/test_user_1_/baz-event-title>
+
+Grouped Listing
+---------------
+
+A variation on the default collection view is provided that lists
+items grouped by the sort used.  This requires that the index used for
+sorting is also in the catalog metadata columns and this available on
+the catalog brains.
+
+Sort by creator to that we get at least one group with multiple
+items.
+
+    >>> foo_topic.deleteCriterion('crit__unsorted_ATSortCriterion')
+    >>> foo_topic.setSortCriterion('Creator', False)
+
+Select the layout.
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> browser.getLink('Grouped Listing').click()
+    >>> print browser.contents
+    <...
+    ...View changed...
+
+Now the items are grouped by the sort values.
+
+    >>> print browser.contents
+    <...
+    ...<dl...
+    ...<dt...bar_creator_id...</dt>...
+    ...<dd...
+    ...Baz Event Title...
+    ...</dd...
+    ...<dt...foo_creator_id...</dt>...
+    ...<dd...
+    ...Foo Event Title...
+    ...Bar Document Title...
+    ...</dd...
+    ...</dl>...
 
 Form Sort
 ---------
