@@ -44,16 +44,7 @@
                 Download PDF
             </a>
             
-            <div metal:define-macro="text-field-view"
-                 id="parent-fieldname-text" class="stx"
-                 tal:define="kss_class python:getKssClasses('text',
-                             templateId=templateId, macro='text-field-view');
-                             text here/getText|nothing"
-                 tal:condition="text"
-                 tal:attributes="class python:test(here.Format() in ('text/structured',
-                                                       'text/x-rst', ), 'stx' + kss_class, 'plain' + kss_class)">
-                <div metal:define-slot="inside" tal:replace="structure text">The body</div>
-            </div>
+            <metal:text use-macro="context/atct_topic_view/macros/text-field-view" />
 
             <tal:default condition="not:here/getCustomView|nothing"
                          define="folderContents topicContents">
@@ -62,70 +53,6 @@
                 </metal:listing>
 
             </tal:default>
-
-            <tal:custom condition="here/getCustomView|nothing"
-                        define="vocab python:here.listMetaDataFields(False)">
-
-                <table class="listing"
-                       summary="Content listing"
-                       cellpadding="0" cellspacing="0" width="100%"
-                       i18n:attributes="summary summary_content_listing;">
-                     <thead>
-                        <tr>
-                            <th tal:repeat="field here/getCustomViewFields"
-                                tal:content="python:vocab.getValue(field, field)"
-                                i18n:translate=""/>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        <tal:brain tal:repeat="obj topicContents">
-                        <tr tal:define="oddrow repeat/obj/odd;"
-                            tal:attributes="class python:test(oddrow, 'even', 'odd')">
-                            <tal:fields repeat="field here/getCustomViewFields"
-                                        define="url obj/getURL;
-                                                obj_type obj/portal_type;
-                                                obj_typeinfo python: here.portal_types.getTypeInfo(obj_type);
-                                                icon python:portal_url+'/'+ obj_typeinfo.getIcon();
-                                                obj_wf_state obj/review_state|python: wtool.getInfoFor(obj, 'review_state', '');
-                                                obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);
-                                                title_or_id obj/pretty_title_or_id">
-                            <tal:block define="value python: getattr(obj, field, None)">
-                                <td tal:condition="python: field != 'Title'"
-                                    tal:content="python:here.formatCatalogMetadata(value)"
-                                    i18n:translate=""/>
-                                <td tal:condition="python: field == 'Title'">
-                                    <a href="#" tal:attributes="href url">
-                                        <img src="#"
-                                             height="16"
-                                             width="16"
-                                             tal:attributes="src icon;
-                                                             alt obj/Type|obj_type"/>
-                                    </a>
-
-                                    <a href="#" tal:condition="python: obj.portal_type not in ['Link', 'Image']"
-                                                tal:attributes="href url;
-                                                                class obj_wf_state_class"
-                                                tal:content="title_or_id" />
-
-                                    <a href="#" tal:condition="python: obj.portal_type == 'Image'"
-                                                tal:attributes="href string:${url}/view;
-                                                                class obj_wf_state_class"
-                                                tal:content="title_or_id" />
-
-                                    <a href="#"
-                                       tal:condition="python: obj.portal_type == 'Link'"
-                                       tal:attributes="href obj/getRemoteUrl;
-                                                       class obj_wf_state_class"
-                                       class="link-plain"
-                                       tal:content="title_or_id" />
-                                </td>
-                            </tal:block>
-                            </tal:fields>
-                        </tr>
-                        </tal:brain>
-                     </tbody>
-                </table>
-            </tal:custom>
 
             </tal:listing>
 
@@ -151,16 +78,7 @@
         </metal:listingmacro>
     </metal:body>
 
-    <metal:body define-macro="folderlisting_macro">
-        <tal:subtopics condition="here/hasSubtopics|nothing"
-                       define="folderContents here/getFolderContents">
-            <h2 i18n:domain="atcontenttypes"
-                i18n:translate="heading_contained_collections">
-                Contained Collections:
-            </h2>
-            <metal:list metal:use-macro="here/base/macros/folderlisting"/>
-        </tal:subtopics>
-    </metal:body>
+    <metal:subtopics use-macro="context/atct_topic_view/macros/folderlisting_macro" />
 
     <div tal:replace="structure provider:plone.belowcontentbody" />
 
