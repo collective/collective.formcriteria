@@ -64,6 +64,13 @@
      template="foldercontents.pt"
      permission="cmf.ListFolderContents" />
 
+  <browser:menuItem
+     for=".interfaces.IFormTopic"
+     menu="plone_displayviews"
+     title="Tabular Form"
+     action="folder_contents_view"
+     description="List items in a tabular form including object buttons" />
+
   <browser:page
      for=".interfaces.IFormTopic"
      class=".grouped.GroupedListingView"

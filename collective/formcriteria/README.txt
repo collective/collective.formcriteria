@@ -289,7 +289,7 @@ to the contents view.
 
     >>> foo_topic.setFormLayout('folder_contents_view')
     >>> browser.open(foo_topic.absolute_url())
-    >>> browser.getLink('folder_contents_view').click()
+    >>> browser.getLink('Tabular Form').click()
     >>> print browser.contents
     <...
     ...View changed...
