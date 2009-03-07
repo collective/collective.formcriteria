@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<object name="ATListCriterion" meta_type="Factory-based Type Information"
+<object name="FormDateRangeCriterion" meta_type="Factory-based Type Information"
    i18n:domain="plone" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">List Criterion</property>
+ <property name="title" i18n:translate="">Date Range Criterion</property>
  <property name="description"
-     i18n:translate="">A list criterion</property>
+     i18n:translate="">A date range criterion</property>
  <property name="content_icon">document_icon.gif</property>
- <property name="content_meta_type">ATListCriterion</property>
+ <property name="content_meta_type">FormDateRangeCriterion</property>
  <property name="product">collective.formcriteria</property>
- <property name="factory">addATListCriterion</property>
+ <property name="factory">addFormDateRangeCriterion</property>
  <property name="immediate_view">base_edit</property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">False</property>

@@ -130,7 +130,7 @@ published content.
     >>> form = browser.getForm(name='criteria_select')
     >>> form.getControl('State').selected = True
     >>> form.getControl(
-    ...     'Select values from list').selected = True
+    ...     'Select values from list', index=1).selected = True
     >>> form.getControl('Add criteria').click()
     >>> print browser.contents
     <...
@@ -163,7 +163,7 @@ criteria tab.
     >>> form = browser.getForm(name='criteria_select')
     >>> form.getControl('Search Text').selected = True
     >>> form.getControl(name="criterion_type").getControl(
-    ...     'Text').selected = True
+    ...     'Text', index=1).selected = True
     >>> form.getControl('Add criteria').click()
     >>> print browser.contents
     <...
@@ -174,13 +174,13 @@ Select the criterion's 'value' field as a form field so it will appear
 on the search form.
 
     >>> browser.getControl(
-    ...     name='crit__SearchableText_ATSimpleStringCriterion'
+    ...     name='crit__SearchableText_FormSimpleStringCriterion'
     ...     '_formFields:list').getControl('Value').selected = True
 
 Set a default search term.
 
     >>> browser.getControl(
-    ...     name="crit__SearchableText_ATSimpleStringCriterion"
+    ...     name="crit__SearchableText_FormSimpleStringCriterion"
     ...     "_value").value = 'bar'
     >>> browser.getControl(name="form.button.Save").click()
     >>> print browser.contents
@@ -212,11 +212,11 @@ Criterion fields that haven't been selected in "Form Fields" don't
 appear on the search form.
 
     >>> form.getControl(
-    ...     name='form_crit__SearchableText_ATSimpleStringCriterion'
+    ...     name='form_crit__SearchableText_FormSimpleStringCriterion'
     ...     '_formFields:list')
     Traceback (most recent call last):
     LookupError: name
-    'form_crit__SearchableText_ATSimpleStringCriterion_formFields:list'
+    'form_crit__SearchableText_FormSimpleStringCriterion_formFields:list'
 
 The label for the criterion corresponds to the form element for the
 first criterion field.
@@ -316,7 +316,7 @@ The search form is also rendered if form criteria are present.
 The contents view also reflects user submitted criteria.
 
     >>> form.getControl(
-    ...     name='form_crit__SearchableText_ATSimpleStringCriterion'
+    ...     name='form_crit__SearchableText_FormSimpleStringCriterion'
     ...     '_value').value = 'baz'
     >>> form.getControl(name='submit').click()
     >>> browser.getControl('Bar Document Title')

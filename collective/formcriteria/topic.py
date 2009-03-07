@@ -38,16 +38,16 @@ class Topic(topic.ATTopic):
             friendlyName='Relevance',
             description="Sorted by result weight",
             enabled=True,
-            criteria=('ATSortCriterion',)),
+            criteria=('FormSortCriterion',)),
         'sort_on': topic_tool.TopicIndex(
             index='sort_on',
             friendlyName='User Selected',
             description="The results sort order",
             enabled=True,
-            criteria=('ATSortCriterion',))}
+            criteria=('FormSortCriterion',))}
 
-    sort_vocab = atapi.DisplayList([(sort.ATSortCriterion.meta_type,
-                                     sort.ATSortCriterion.shortDesc)])
+    sort_vocab = atapi.DisplayList([(sort.FormSortCriterion.meta_type,
+                                     sort.FormSortCriterion.shortDesc)])
     
     def getPossibleFormLayouts(self):
         """Return all valid form results display laouts"""
@@ -76,10 +76,10 @@ class Topic(topic.ATTopic):
         except AttributeError:
             if (field in self.sort_indices
                 and self.validateAddCriterion(
-                    field, sort.ATSortCriterion.meta_type)):
+                    field, sort.FormSortCriterion.meta_type)):
                 if display_list:
                     return self.sort_vocab
-                return [sort.ATSortCriterion.meta_type]
+                return [sort.FormSortCriterion.meta_type]
 
     security.declareProtected(permission.ChangeTopics, 'getIndex')
     def getIndex(self, name):

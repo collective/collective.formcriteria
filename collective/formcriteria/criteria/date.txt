@@ -4,7 +4,7 @@
 Date Criteria
 =============
 
-The ATDateCriteria is provided for rendering relative date fields
+The FormDateCriterion is provided for rendering relative date fields
 on the search form.
 
 We start with a topic.
@@ -21,13 +21,13 @@ Open a browser as an anonymous user.
 Add a date criterion for the subject/keywords.
 
     >>> foo_topic.addCriterion(
-    ...     'effectiveRange', 'ATFriendlyDateCriteria')
-    <ATDateCriteria at
-    /plone/Members/test_user_1_/foo-topic-title/crit__effectiveRange_ATFriendlyDateCriteria>
+    ...     'effectiveRange', 'FormDateCriterion')
+    <FormDateCriterion at
+    /plone/Members/test_user_1_/foo-topic-title/crit__effectiveRange_FormDateCriterion>
 
 Designate the criterion's field as a form field.
 
-    >>> crit = foo_topic.getCriterion('effectiveRange_ATFriendlyDateCriteria')
+    >>> crit = foo_topic.getCriterion('effectiveRange_FormDateCriterion')
     >>> crit.setFormFields(['value', 'dateRange', 'operation'])
     
 When viewing the collection in a browser date fields will be
@@ -36,5 +36,5 @@ rendered for the field.
     >>> browser.open(foo_topic.absolute_url())
     >>> browser.getControl('Effective Range')
     <ListControl
-    name='form_crit__effectiveRange_ATFriendlyDateCriteria_value'
+    name='form_crit__effectiveRange_FormDateCriterion_value'
     type='select'>

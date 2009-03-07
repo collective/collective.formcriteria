@@ -2,7 +2,7 @@ from Products.ATContentTypes.criteria import simplestring
 
 from collective.formcriteria.criteria import common
 
-class ATSimpleStringCriterion(
+class FormSimpleStringCriterion(
     common.FormCriterion, simplestring.ATSimpleStringCriterion):
     __doc__ = simplestring.ATSimpleStringCriterion.__doc__
 
@@ -12,5 +12,5 @@ class ATSimpleStringCriterion(
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'])
 
-common.replaceCriterionRegistration(
-    simplestring.ATSimpleStringCriterion, ATSimpleStringCriterion)
+common.registerCriterion(FormSimpleStringCriterion,
+                         orig=simplestring.ATSimpleStringCriterion)

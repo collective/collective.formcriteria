@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
-<object name="ATBooleanCriterion" meta_type="Factory-based Type Information"
+<object name="FormCheckboxCriterion" meta_type="Factory-based Type Information"
    i18n:domain="plone" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">Boolean Criterion</property>
- <property name="description" i18n:translate="">A boolean criterion</property>
+ <property name="title" i18n:translate="">Checkbox Criterion</property>
+ <property name="description"
+     i18n:translate="">A checkbox criterion</property>
  <property name="content_icon">document_icon.gif</property>
- <property name="content_meta_type">ATBooleanCriterion</property>
+ <property name="content_meta_type">FormCheckboxCriterion</property>
  <property name="product">collective.formcriteria</property>
- <property name="factory">addATBooleanCriterion</property>
+ <property name="factory">addFormCheckboxCriterion</property>
  <property name="immediate_view">base_edit</property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">False</property>

@@ -5,7 +5,7 @@ from Products.ATContentTypes.criteria import sort
 from collective.formcriteria import interfaces
 from collective.formcriteria.criteria import common
 
-class ATSortCriterion(
+class FormSortCriterion(
     common.FormCriterion, sort.ATSortCriterion):
     __doc__ = sort.ATSortCriterion.__doc__
 
@@ -20,9 +20,7 @@ class ATSortCriterion(
                 self.getId() in self.REQUEST or
                 Acquisition.aq_base(self) is Acquisition.aq_base(
                     topic.listSortCriteria()[0]))):
-            return super(ATSortCriterion, self).getCriteriaItems()
+            return super(FormSortCriterion, self).getCriteriaItems()
         return ()
-    
 
-common.replaceCriterionRegistration(sort.ATSortCriterion,
-                                    ATSortCriterion)
+common.registerCriterion(FormSortCriterion, orig=sort.ATSortCriterion)

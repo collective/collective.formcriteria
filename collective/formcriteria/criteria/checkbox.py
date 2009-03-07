@@ -1,4 +1,3 @@
-from Products.ATContentTypes import criteria
 from Products.ATContentTypes.criteria import selection
 from Products.ATContentTypes.criteria import portaltype
 from Products.ATContentTypes.criteria import reference
@@ -7,7 +6,7 @@ from collective.formcriteria.criteria import common
 from collective.formcriteria.criteria import (
     selection as form_selection)
 
-class ATCheckboxCriterion(
+class FormCheckboxCriterion(
     common.FormCriterion, selection.ATSelectionCriterion):
     """A checkbox criterion"""
 
@@ -21,12 +20,10 @@ class ATCheckboxCriterion(
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'], schema['operator'])
 
-criteria.registerCriterion(
-    ATCheckboxCriterion,
-    criteria._criterionRegistry.indicesByCriterion(
-        form_selection.ATSelectionCriterion.meta_type))
+common.registerCriterion(FormCheckboxCriterion,
+                         orig=form_selection.FormSelectionCriterion)
 
-class ATPortalTypeCheckboxCriterion(
+class FormPortalTypeCheckboxCriterion(
     common.FormCriterion, portaltype.ATPortalTypeCriterion):
     """A portal_types checkbox criterion"""
 
@@ -41,12 +38,10 @@ class ATPortalTypeCheckboxCriterion(
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'])
 
-criteria.registerCriterion(
-    ATPortalTypeCheckboxCriterion,
-    criteria._criterionRegistry.indicesByCriterion(
-        form_selection.ATPortalTypeCriterion.meta_type))
+common.registerCriterion(FormPortalTypeCheckboxCriterion,
+                         orig=form_selection.FormPortalTypeCriterion)
 
-class ATReferenceCheckboxCriterion(
+class FormReferenceCheckboxCriterion(
     common.FormCriterion, reference.ATReferenceCriterion):
     """A reference checkbox criterion"""
 
@@ -60,7 +55,5 @@ class ATReferenceCheckboxCriterion(
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'], schema['operator'])
 
-criteria.registerCriterion(
-    ATReferenceCheckboxCriterion,
-    criteria._criterionRegistry.indicesByCriterion(
-        form_selection.ATReferenceCriterion.meta_type))
+common.registerCriterion(FormReferenceCheckboxCriterion,
+                         orig=form_selection.FormReferenceCriterion)

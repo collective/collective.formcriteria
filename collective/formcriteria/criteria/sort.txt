@@ -55,7 +55,7 @@ normal criterion add form on the criteria tab.
     >>> form.getControl('Add criteria').click()
     >>> print browser.contents
     <...
-    ...Added criterion ATSortCriterion for field unsorted...
+    ...Added criterion FormSortCriterion for field unsorted...
 
 Add another sort criterion for the Date field reversed.
 
@@ -65,7 +65,7 @@ Add another sort criterion for the Date field reversed.
     >>> form.getControl('Add criteria').click()
     >>> print browser.contents
     <...
-    ...Added criterion ATSortCriterion for field effective...
+    ...Added criterion FormSortCriterion for field effective...
 
 Change the display layout of the collection to the "Search Form" then
 submit a search criteria to test that the sort links preserve search
@@ -73,7 +73,7 @@ criteria.
 
     >>> foo_topic.setLayout('criteria_form')
     >>> foo_topic.addCriterion(
-    ...     'SearchableText','ATSimpleStringCriterion'
+    ...     'SearchableText','FormSimpleStringCriterion'
     ...     ).setFormFields(['value'])
     >>> browser.getLink('View').click()
     >>> form = browser.getForm(name="formcriteria_search")
@@ -116,7 +116,7 @@ results will be sorted according to the sort criteria.
     LinkNotFoundError
     >>> browser.getLink('Relevance')
     <Link text='Relevance'
-    url='http://nohost/plone/Members/test_user_1_/foo-topic-title/atct_topic_view?form_crit__SearchableText_ATSimpleStringCriterion_value=blah&crit__unsorted_ATSortCriterion:boolean=True&submit=Search'>
+    url='http://nohost/plone/Members/test_user_1_/foo-topic-title/atct_topic_view?crit__unsorted_FormSortCriterion:boolean=True&form_crit__SearchableText_FormSimpleStringCriterion_value=blah&submit=Search'>
 
 The results reflect that the search query is preserved across the new
 sort selection.
@@ -146,7 +146,7 @@ batch.
     >>> browser.open(foo_topic.absolute_url()+'/atct_topic_view')
     >>> browser.getLink('Effective Date')
     <Link text='Effective Date'
-    url='http://nohost/plone/Members/test_user_1_/foo-topic-title/atct_topic_view?test=&crit__effective_ATSortCriterion:boolean=True'>
+    url='http://nohost/plone/Members/test_user_1_/foo-topic-title/atct_topic_view?test=&crit__effective_FormSortCriterion:boolean=True'>
 
 Ensure that the extended sort criteria work inside previously created
 ATTopic instances.
@@ -167,7 +167,7 @@ the catalog brains.
 Sort by creator to that we get at least one group with multiple
 items.
 
-    >>> foo_topic.deleteCriterion('crit__unsorted_ATSortCriterion')
+    >>> foo_topic.deleteCriterion('crit__unsorted_FormSortCriterion')
     >>> foo_topic.setSortCriterion('Creator', False)
 
 Select the layout.

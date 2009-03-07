@@ -2,7 +2,7 @@ from Products.ATContentTypes.criteria import daterange
 
 from collective.formcriteria.criteria import common
 
-class ATDateRangeCriterion(
+class FormDateRangeCriterion(
     common.FormCriterion, daterange.ATDateRangeCriterion):
     __doc__ = daterange.ATDateRangeCriterion.__doc__
 
@@ -27,5 +27,5 @@ class ATDateRangeCriterion(
     def getRawEnd(self, **kw):
         return self.getFormFieldValue('end', raw=True, **kw)
 
-common.replaceCriterionRegistration(
-    daterange.ATDateRangeCriterion, ATDateRangeCriterion)
+common.registerCriterion(
+    FormDateRangeCriterion, orig=daterange.ATDateRangeCriterion)

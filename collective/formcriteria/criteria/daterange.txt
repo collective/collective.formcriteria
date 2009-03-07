@@ -32,14 +32,14 @@ the collection view does not include any such helpers.
 Add a date range criterion for the effective date
 
     >>> foo_topic.addCriterion(
-    ...     'effective', 'ATDateRangeCriterion')
-    <ATDateRangeCriterion at
-    /plone/Members/test_user_1_/foo-topic-title/crit__effective_ATDateRangeCriterion>
+    ...     'effective', 'FormDateRangeCriterion')
+    <FormDateRangeCriterion at
+    /plone/Members/test_user_1_/foo-topic-title/crit__effective_FormDateRangeCriterion>
 
 Designate the criterion's field as a form field.
 
     >>> criterion = foo_topic.getCriterion(
-    ...     'effective_ATDateRangeCriterion')
+    ...     'effective_FormDateRangeCriterion')
     >>> criterion.setFormFields(['start', 'end'])
 
 The values set on the criterion are the default values on the search
@@ -56,48 +56,48 @@ rendered for the index with the default values.
     >>> browser.open(foo_topic.absolute_url())
 
     >>> browser.getControl(
-    ...     name='form_crit__effective_ATDateRangeCriterion'
+    ...     name='form_crit__effective_FormDateRangeCriterion'
     ...     '_start_year').getControl('2009').selected
     True
     >>> browser.getControl(
-    ...     name='form_crit__effective_ATDateRangeCriterion'
+    ...     name='form_crit__effective_FormDateRangeCriterion'
     ...     '_start_month').getControl('January').selected
     True
     >>> browser.getControl(
-    ...     name='form_crit__effective_ATDateRangeCriterion'
+    ...     name='form_crit__effective_FormDateRangeCriterion'
     ...     '_start_day').getControl('12').selected
     True
 
     >>> browser.getControl(
-    ...     name='form_crit__effective_ATDateRangeCriterion'
+    ...     name='form_crit__effective_FormDateRangeCriterion'
     ...     '_end_year').getControl('2009').selected
     True
     >>> browser.getControl(
-    ...     name='form_crit__effective_ATDateRangeCriterion'
+    ...     name='form_crit__effective_FormDateRangeCriterion'
     ...     '_end_month').getControl('January').selected
     True
     >>> browser.getControl(
-    ...     name='form_crit__effective_ATDateRangeCriterion'
+    ...     name='form_crit__effective_FormDateRangeCriterion'
     ...     '_end_day').getControl('14').selected
     True
 
 By default the hour and minute fields are hidden.
 
     >>> browser.getControl(
-    ...     name='form_crit__effective_ATDateRangeCriterion'
+    ...     name='form_crit__effective_FormDateRangeCriterion'
     ...     '_start_hour').type
     'hidden'
     >>> browser.getControl(
-    ...     name='form_crit__effective_ATDateRangeCriterion'
+    ...     name='form_crit__effective_FormDateRangeCriterion'
     ...     '_start_minute').type
     'hidden'
 
     >>> browser.getControl(
-    ...     name='form_crit__effective_ATDateRangeCriterion'
+    ...     name='form_crit__effective_FormDateRangeCriterion'
     ...     '_end_hour').type
     'hidden'
     >>> browser.getControl(
-    ...     name='form_crit__effective_ATDateRangeCriterion'
+    ...     name='form_crit__effective_FormDateRangeCriterion'
     ...     '_end_minute').type
     'hidden'
 
@@ -129,11 +129,11 @@ By default the criterion values determine the search results.
 Change the date range and search
 
     >>> browser.getControl(
-    ...     name='form_crit__effective_ATDateRangeCriterion_'
+    ...     name='form_crit__effective_FormDateRangeCriterion_'
     ...     'start_day').getControl('14').selected = True
 
     >>> browser.getControl(
-    ...     name='form_crit__effective_ATDateRangeCriterion_end_day'
+    ...     name='form_crit__effective_FormDateRangeCriterion_end_day'
     ...     ).getControl('16').selected = True
 
     >>> form = browser.getForm(name="formcriteria_search")

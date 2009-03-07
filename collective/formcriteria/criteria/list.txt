@@ -4,7 +4,7 @@
 List Criteria
 =============
 
-The ATListCriterion is provided for rendering lists on the search
+The FormListCriterion is provided for rendering lists on the search
 form.
 
 We start with a topic.
@@ -21,13 +21,13 @@ Open a browser as an anonymous user.
 Add a list criterion for the subject/keywords.
 
     >>> foo_topic.addCriterion(
-    ...     'Subject', 'ATListCriterion')
-    <ATListCriterion at
-    /plone/Members/test_user_1_/foo-topic-title/crit__Subject_ATListCriterion>
+    ...     'Subject', 'FormListCriterion')
+    <FormListCriterion at
+    /plone/Members/test_user_1_/foo-topic-title/crit__Subject_FormListCriterion>
 
 Designate the criterion's field as a form field.
 
-    >>> crit = foo_topic.getCriterion('Subject_ATListCriterion')
+    >>> crit = foo_topic.getCriterion('Subject_FormListCriterion')
     >>> crit.setFormFields(['value'])
     
 The values set on the criterion are the default values checked on the
@@ -40,9 +40,9 @@ for the field with the default values selected.
 
     >>> browser.open(foo_topic.absolute_url())
     >>> ctrl = browser.getControl(
-    ...     name='form_crit__Subject_ATListCriterion_value:lines')
+    ...     name='form_crit__Subject_FormListCriterion_value:lines')
     >>> ctrl
-    <Control name='form_crit__Subject_ATListCriterion_value:lines'
+    <Control name='form_crit__Subject_FormListCriterion_value:lines'
     type='textarea'>
     >>> ctrl.value
     'bah'
@@ -62,7 +62,7 @@ redundant.
 
     >>> 'Values</label>' in browser.contents
     False
-    >>> ('form_crit__Subject_ATListCriterion_value_help'
+    >>> ('form_crit__Subject_FormListCriterion_value_help'
     ...  in browser.contents)
     False
 
@@ -70,7 +70,7 @@ Change the checked values and search
 
     >>> form = browser.getForm(name="formcriteria_search")
     >>> form.getControl(
-    ...     name='form_crit__Subject_ATListCriterion_value:lines'
+    ...     name='form_crit__Subject_FormListCriterion_value:lines'
     ...     ).value = 'quux'
     >>> form.getControl(name='submit').click()
 

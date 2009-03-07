@@ -4,7 +4,7 @@ from Products.ATContentTypes.criteria import reference
 
 from collective.formcriteria.criteria import common
 
-class ATSelectionCriterion(
+class FormSelectionCriterion(
     common.FormCriterion, selection.ATSelectionCriterion):
     __doc__ = selection.ATSelectionCriterion.__doc__
 
@@ -14,10 +14,10 @@ class ATSelectionCriterion(
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'], schema['operator'])
 
-common.replaceCriterionRegistration(
-    selection.ATSelectionCriterion, ATSelectionCriterion)
+common.registerCriterion(
+    FormSelectionCriterion, orig=selection.ATSelectionCriterion)
 
-class ATPortalTypeCriterion(
+class FormPortalTypeCriterion(
     common.FormCriterion, portaltype.ATPortalTypeCriterion):
     __doc__ = portaltype.ATPortalTypeCriterion.__doc__
 
@@ -28,10 +28,10 @@ class ATPortalTypeCriterion(
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'])
 
-common.replaceCriterionRegistration(
-    portaltype.ATPortalTypeCriterion, ATPortalTypeCriterion)
+common.registerCriterion(
+    FormPortalTypeCriterion, orig=portaltype.ATPortalTypeCriterion)
 
-class ATReferenceCriterion(
+class FormReferenceCriterion(
     common.FormCriterion, reference.ATReferenceCriterion):
     __doc__ = reference.ATReferenceCriterion.__doc__
 
@@ -42,5 +42,5 @@ class ATReferenceCriterion(
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'], schema['operator'])
 
-common.replaceCriterionRegistration(
-    reference.ATReferenceCriterion, ATReferenceCriterion)
+common.registerCriterion(
+    FormReferenceCriterion, orig=reference.ATReferenceCriterion)

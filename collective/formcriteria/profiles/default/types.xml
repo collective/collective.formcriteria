@@ -4,30 +4,30 @@
     name="title">Controls the available content types in your portal</property>
  <object name="Topic"
     meta_type="Factory-based Type Information with dynamic views"/>
- <object name="ATBooleanCriterion"
+ <object name="FormBooleanCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="ATDateCriteria" meta_type="Factory-based Type Information"/>
- <object name="ATDateRangeCriterion"
+ <object name="FormDateCriterion" meta_type="Factory-based Type Information"/>
+ <object name="FormDateRangeCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="ATListCriterion" meta_type="Factory-based Type Information"/>
- <object name="ATPathCriterion" meta_type="Factory-based Type Information"/>
- <object name="ATRelativePathCriterion" meta_type="Factory-based Type Information"/>
- <object name="ATPortalTypeCriterion"
+ <object name="FormListCriterion" meta_type="Factory-based Type Information"/>
+ <object name="FormPathCriterion" meta_type="Factory-based Type Information"/>
+ <object name="FormRelativePathCriterion" meta_type="Factory-based Type Information"/>
+ <object name="FormPortalTypeCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="ATPortalTypeCheckboxCriterion"
+ <object name="FormPortalTypeCheckboxCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="ATReferenceCriterion"
+ <object name="FormReferenceCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="ATReferenceCheckboxCriterion"
+ <object name="FormReferenceCheckboxCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="ATSelectionCriterion"
+ <object name="FormSelectionCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="ATCheckboxCriterion"
+ <object name="FormCheckboxCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="ATSimpleIntCriterion"
+ <object name="FormSimpleIntCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="ATSimpleStringCriterion"
+ <object name="FormSimpleStringCriterion"
     meta_type="Factory-based Type Information"/>
- <object name="ATCommaCriterion"
+ <object name="FormCommaCriterion"
     meta_type="Factory-based Type Information"/>
 </object>
