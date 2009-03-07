@@ -4,6 +4,7 @@ Changelog
 0.9.5 - Unreleased
 ------------------
 
+* Move package to src directory and fix testing buildout
 * Register criteria AT types using the right package name
 * Fix a bug with the JavaScript that narrows the criteria types by
   index/field

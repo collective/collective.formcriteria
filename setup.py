@@ -11,7 +11,7 @@ setup(name='collective.formcriteria',
       "Add forms for user enterable search criteria to collections.",
       long_description='\n'.join(
           open(os.path.join(*path)).read() for path in [
-              ("collective", "formcriteria", "README.txt"),
+              ("src", "collective", "formcriteria", "README.txt"),
               ("docs", "HISTORY.txt"),
               ("docs", "TODO.txt")]),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
@@ -24,7 +24,8 @@ setup(name='collective.formcriteria',
       author_email='me@rpatterson.net',
       url='http://pypi.python.org/pypi/collective.formcriteria',
       license='GPL',
-      packages=find_packages(exclude=['ez_setup']),
+      packages=find_packages('src', exclude=['ez_setup']),
+      package_dir = {'':'src'},
       namespace_packages=['collective'],
       include_package_data=True,
       zip_safe=False,
