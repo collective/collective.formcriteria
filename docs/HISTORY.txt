@@ -4,6 +4,8 @@ Changelog
 0.9.5 - Unreleased
 ------------------
 
+* Fix a bug with the JavaScript that narrows the criteria types by
+  index/field
 * Use separate meta_types instead of overwriting the ATCT meta types,
   may be backwards incompatible for previous installations
 

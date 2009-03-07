@@ -137,6 +137,25 @@ published content.
     ...State...
     ...Select values from list...
 
+Since the test browser doesn't have JavaScript, test the
+discrimination of criteria types by index manually.
+
+    >>> foo_topic.allowedCriteriaForField('review_state')
+    ['FormSelectionCriterion', 'FormCheckboxCriterion',
+    'FormSimpleStringCriterion', 'FormListCriterion',
+    'FormCommaCriterion', 'FormSortCriterion']
+    >>> foo_topic.allowedCriteriaForField(
+    ...     'review_state', display_list=True)
+    <DisplayList
+    [('FormSelectionCriterion', 'Select values from list'),
+     ('FormCheckboxCriterion', 'Check values'),
+     ('FormSimpleStringCriterion', 'Text'),
+     ('FormListCriterion', 'List of values'),
+     ('FormCommaCriterion', 'Enter comma separated values'),
+     ('FormSortCriterion', 'Sort results')] at ...>
+
+Set the query term and save.
+
     >>> form = browser.getForm(action="criterion_edit_form", index=0)
     >>> form.getControl('published').selected = True
     >>> form.getControl('Save').click()

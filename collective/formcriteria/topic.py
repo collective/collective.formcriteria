@@ -72,7 +72,7 @@ class Topic(topic.ATTopic):
         """Add sort fields"""
         try:
             return super(Topic, self).allowedCriteriaForField(
-                field, display_list=False)
+                field, display_list=display_list)
         except AttributeError:
             if (field in self.sort_indices
                 and self.validateAddCriterion(
