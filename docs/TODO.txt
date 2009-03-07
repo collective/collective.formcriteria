@@ -1,17 +1,6 @@
 TODO
 ====
 
-* ArchetypesTool: Trying to register
-  "ATContentTypes.ATSimpleStringCriterion" which has already been
-  registered.  The new type
-  collective.formcriteria.criteria.simplestring.ATSimpleStringCriterion
-  is going to override
-  Products.ATContentTypes.criteria.simplestring.ATSimpleStringCriterion
-
-  Happens on startup for Plone sites that don't have
-  collective.formcriteria installed.  Look into not unregistering the
-  other types.
-
 * Ensure that only formFields are taken from the request
 
 * Form sort criteria

@@ -2,6 +2,7 @@ from zope import interface
 
 from Products.Archetypes import atapi
 from Products.ATContentTypes import criteria
+from Products.ATContentTypes import interfaces as atct_ifaces
 
 from collective.formcriteria import interfaces
 from collective.formcriteria import form
@@ -13,11 +14,32 @@ def makeVocabularyForFields(*fields):
         (field.getName(), field.widget.label)
         for field in fields)
 
-def registerCriterion(class_, orig):
-    return criteria.registerCriterion(
-        class_,
-        criteria._criterionRegistry.indicesByCriterion(
-            orig.meta_type))
+def registerCriterion(criterion, orig):
+    indices = criteria._criterionRegistry.indicesByCriterion(
+        orig.meta_type)
+
+    if isinstance(indices, str):
+        indices = (indices,)
+    indices = tuple(indices)
+
+    if indices == ():
+        indices = criteria.ALL_INDICES
+
+    assert atct_ifaces.IATTopicCriterion.isImplementedByInstancesOf(
+        criterion)
+    atapi.registerType(criterion, 'collective.formcriteria')
+
+    crit_id = criterion.meta_type
+    criteria._criterionRegistry[crit_id] = criterion
+    criteria._criterionRegistry.portaltypes[
+        criterion.portal_type] = criterion
+
+    criteria._criterionRegistry.criterion2index[crit_id] = indices
+    for index in indices:
+        value = criteria._criterionRegistry.index2criterion.get(
+            index, ())
+        criteria._criterionRegistry.index2criterion[
+            index] = value + (crit_id,)
 
 class FormCriterion(object):
     """A criterion that generates a search form field."""

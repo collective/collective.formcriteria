@@ -48,3 +48,11 @@ redundant.
     >>> ('form_crit__getObjPositionInParent_FormSimpleIntCriterion_value_help'
     ...  in browser.contents)
     False
+
+Ensure that the criterion is registered for the right package.
+
+    >>> from Products.Archetypes import ATToolModule
+    >>> ATToolModule.getType(
+    ...     'FormSimpleIntCriterion',
+    ...     'collective.formcriteria')['package']
+    'collective.formcriteria'
