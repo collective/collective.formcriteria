@@ -38,6 +38,13 @@ Also provided is an alternative display layout that uses the folder
 contents table.  This layout is not yet fully functional but provides
 the basis for some very rich site admin functionality.
 
+WARNING: Uninstall
+==================
+
+Uninstalling this product after having added any collections or adding
+criteria to any collections, even ones added before install, is
+untested and may leave your collections broken.
+
 Form Criteria
 =============
 

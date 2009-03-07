@@ -12,8 +12,6 @@ TODO
   collective.formcriteria installed.  Look into not unregistering the
   other types.
 
-* Add warnings about uninstall to docs (davisagli)
-
 * Ensure that only formFields are taken from the request
 
 * Form sort criteria
