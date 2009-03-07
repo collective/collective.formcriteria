@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.9.5 - Unreleased
+0.9.5 - 2009-03-06
 ------------------
 
 * Move package to src directory and fix testing buildout
