@@ -82,3 +82,47 @@ Now the default has been overriden by the submitted query.
     >>> browser.getLink('Baz Event Title')
     <Link text='Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
+
+The operator may also be included on the form.
+
+    >>> crit.setFormFields(['value', 'operator'])
+
+Use the default "or" search, and query on "bah" and "qux"
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> form = browser.getForm(name="formcriteria_search")
+    >>> form.getControl('or').selected
+    True
+    >>> form.getControl(
+    ...     name='form_crit__Subject_FormListCriterion_value:lines'
+    ...     ).value = 'bah\nqux'
+    >>> form.getControl(name='submit').click()
+
+Both objects are returned when since both have "qux".
+
+    >>> browser.getLink('Bar Document Title')
+    <Link text='Bar Document Title'
+    url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
+    >>> browser.getLink('Baz Event Title')
+    <Link text='Baz Event Title'
+    url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
+
+Use the "and" and search operator with the same query.
+
+    >>> form = browser.getForm(name="formcriteria_search")
+    >>> form.getControl('and').selected = True
+    >>> form.getControl(
+    ...     name='form_crit__Subject_FormListCriterion_value:lines'
+    ...     ).value
+    'bah\nqux'
+    >>> form.getControl(name='submit').click()
+
+Now only the object with both "bah" and "qux" is returned.
+
+    >>> browser.getLink('Bar Document Title')
+    <Link text='Bar Document Title'
+    url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
+    >>> browser.getLink('Baz Event Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+

@@ -95,3 +95,6 @@ class FormCriterion(object):
 
     def getRawValue(self, **kw):
         return self.getFormFieldValue('value', raw=True, **kw)
+
+    def getOperator(self, **kw):
+        return self.getFormFieldValue('operator', **kw)
