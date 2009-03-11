@@ -31,12 +31,16 @@
         Sort on:
         <tal:sorts repeat="sort sorts">
           <a tal:condition="not:sort/selected"
-             tal:attributes="href python:'%s?%s' % (url, mq(form, {sort['id']: True}))"
-             tal:content="sort/name">
+             tal:attributes="href python:'%s?%s' % (url, mq(form, {sort['id']: True}));
+                             id string:formcriteria-sort-${sort/id};"
+             tal:content="sort/name"
+             class="formcriteriaSortField">
             Field
           </a>
           <span tal:condition="sort/selected"
-                tal:content="sort/name">
+                tal:attributes="id string:formcriteria-sort-${sort/id};"
+                tal:content="sort/name"
+                class="formcriteriaSortField selected">
             Field
           </span>
         </tal:sorts>

@@ -4,6 +4,7 @@ Changelog
 0.9.6 - Unreleased
 ------------------
 
+* Add ids and CSS classes to the batch_macro sort links (aaronv)
 * Fix a bug with the "operator" field.  Thanks to Mauro!
 
 0.9.5 - 2009-03-06
