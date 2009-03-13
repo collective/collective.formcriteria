@@ -1,6 +1,15 @@
 TODO
 ====
 
+* Add coverage for integer range criteria (SimO)
+
+  "...i.e: I set a range 0:100 and it shows me 5 items. If I put in
+  the portlet a second value of 80, instead of showing me 4 items it
+  shows NO items and worst, even if a re-insert 100 in the second
+  value nothing happens and I have to reload the page to get my
+  items. The weird thing is that if I set 0:80 trough the criteria tab
+  it works fine and it shows me 4 items."
+
 * Ensure that only formFields are taken from the request
 
 * Form sort criteria
