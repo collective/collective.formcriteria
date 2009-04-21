@@ -8,3 +8,6 @@ class IFormCriterion(interface.Interface):
 
 class IFormCriteriaPortlet(interface.Interface):
     """The form criteria search form portlet."""
+
+class IFormCriteriaLayer(interface.Interface):
+    """The form criteria browser layer."""

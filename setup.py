@@ -32,6 +32,7 @@ setup(name='collective.formcriteria',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
+          'plone.browserlayer',
       ],
       tests_require=tests_require,
       extras_require={'tests': tests_require},

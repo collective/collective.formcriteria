@@ -1,9 +1,6 @@
 TODO
 ====
 
-* Register views and viewlets (htmlhead) for specific contexts and
-  layers (optilude)
-
 * Add coverage for making sure that the htmlhead viewlet doesn't
   disable the border (optilude)
 

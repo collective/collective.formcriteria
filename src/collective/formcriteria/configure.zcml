@@ -15,6 +15,7 @@
      />
 
   <browser:viewlet
+     layer=".interfaces.IFormCriteriaLayer"
      name="collective.formcriteria.htmlhead"
      manager="plone.app.layout.viewlets.interfaces.IHtmlHeadLinks"
      class=".form.SearchFormHeadView"
@@ -24,6 +25,7 @@
   
   <browser:page
      for=".interfaces.IFormTopic"
+     layer=".interfaces.IFormCriteriaLayer"
      name="criteria_form"
      class=".form.SearchFormView"
      template="form.pt"
@@ -32,6 +34,7 @@
 
   <browser:menuItem
      for=".interfaces.IFormTopic"
+     layer=".interfaces.IFormCriteriaLayer"
      menu="plone_displayviews"
      title="Search Form"
      action="criteria_form"
@@ -39,6 +42,7 @@
   
   <browser:page
      for=".interfaces.IFormTopic"
+     layer=".interfaces.IFormCriteriaLayer"
      name="formcriteria_macros"
      template="form_macros.pt"
      permission="zope2.View" />
@@ -55,12 +59,14 @@
 
   <browser:page
      for=".interfaces.IFormTopic"
+     layer=".interfaces.IFormCriteriaLayer"
      name="sort_info"
      class=".sort.SortView"
      permission="zope2.View" />
 
   <browser:page
      for=".interfaces.IFormTopic"
+     layer=".interfaces.IFormCriteriaLayer"
      class=".foldercontents.FolderContentsView"
      name="folder_contents_view"
      template="foldercontents.pt"
@@ -68,6 +74,7 @@
 
   <browser:menuItem
      for=".interfaces.IFormTopic"
+     layer=".interfaces.IFormCriteriaLayer"
      menu="plone_displayviews"
      title="Tabular Form"
      action="folder_contents_view"
@@ -75,6 +82,7 @@
 
   <browser:page
      for=".interfaces.IFormTopic"
+     layer=".interfaces.IFormCriteriaLayer"
      class=".grouped.GroupedListingView"
      name="grouped_listing"
      template="grouped.pt"
@@ -82,6 +90,7 @@
 
   <browser:menuItem
      for=".interfaces.IFormTopic"
+     layer=".interfaces.IFormCriteriaLayer"
      menu="plone_displayviews"
      title="Grouped Listing"
      action="grouped_listing"
@@ -89,6 +98,7 @@
 
   <browser:page
      for="*"
+     layer=".interfaces.IFormCriteriaLayer"
      name="comma_widget"
      class=".comma.CommaWidgetView"
      template="comma.pt"

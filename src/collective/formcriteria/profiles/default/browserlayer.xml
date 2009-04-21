@@ -1,0 +1,6 @@
+<layers>
+ <layer
+     name="Form Criteria"
+     interface="collective.formcriteria.interfaces.IFormCriteriaLayer"
+     />
+</layers>
