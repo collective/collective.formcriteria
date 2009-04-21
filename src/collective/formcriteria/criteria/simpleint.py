@@ -12,5 +12,14 @@ class FormSimpleIntCriterion(
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'], schema['value2'], schema['direction'])
 
+    def Value2(self, **kw):
+        return self.getFormFieldValue('value2', **kw)
+
+    def getRawValue2(self, **kw):
+        return self.getFormFieldValue('value2', raw=True, **kw)
+
+    def getDirection(self, **kw):
+        return self.getFormFieldValue('direction', **kw)
+
 common.registerCriterion(
     FormSimpleIntCriterion, orig=simpleint.ATSimpleIntCriterion)

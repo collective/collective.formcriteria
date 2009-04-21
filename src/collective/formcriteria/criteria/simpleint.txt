@@ -56,3 +56,27 @@ Ensure that the criterion is registered for the right package.
     ...     'FormSimpleIntCriterion',
     ...     'collective.formcriteria')['package']
     'collective.formcriteria'
+
+Without any value set, all objects appear.
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> browser.getLink('Bar Document Title')
+    <Link text='Bar Document Title'
+    url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
+    >>> browser.getLink('Baz Event Title')
+    <Link text='Baz Event Title'
+    url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
+
+Submit a search query.
+
+    >>> form = browser.getForm(name="formcriteria_search")
+    >>> form.getControl('Order in folder').value = '0'
+    >>> form.getControl('Second Value').value = '2'
+    >>> form.getControl('Between').selected = True
+    >>> form.getControl(name='submit').click()
+    >>> browser.getLink('Bar Document Title')
+    <Link text='Bar Document Title'
+    url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
+    >>> browser.getLink('Baz Event Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
