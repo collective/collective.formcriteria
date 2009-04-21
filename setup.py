@@ -12,6 +12,7 @@ setup(name='collective.formcriteria',
       long_description='\n'.join(
           open(os.path.join(*path)).read() for path in [
               ("src", "collective", "formcriteria", "README.txt"),
+              ("src", "collective", "formcriteria", "criteria", "sort.txt"),
               ("docs", "HISTORY.txt"),
               ("docs", "TODO.txt")]),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
