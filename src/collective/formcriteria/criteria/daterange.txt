@@ -168,3 +168,25 @@ But the helpers are not included when the portlet is not rendered.
     False
     >>> 'calendar-system.css' in browser.contents
     False
+
+Log in as a user that should see the editable border.
+
+    >>> browser.getLink('Log in').click()
+    >>> browser.getControl('Login Name').value = ptc.default_user
+    >>> browser.getControl(
+    ...     'Password').value = ptc.default_password
+    >>> browser.getControl('Log in').click()
+
+The editable border still appears when the portlet adds the helpers to
+the HTML <head> element.
+
+    >>> browser.open(folder.absolute_url())
+    >>> 'calendar_stripped.js' in browser.contents
+    True
+    >>> 'calendar-en.js' in browser.contents
+    True
+    >>> 'calendar-system.css' in browser.contents
+    True
+    >>> browser.getLink('Edit')
+    <Link text='Edit'
+    url='http://nohost/plone/Members/test_user_1_/edit'>
