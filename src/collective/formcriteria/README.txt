@@ -287,6 +287,24 @@ rendered on the same view.
     ...     '/atct_topic_view')
     True
 
+Values are also ignored if submitted for criteria fields which are not
+listed in "Form Fields".
+
+    >>> crit = foo_topic.getCriterion(
+    ...     'SearchableText_FormSimpleStringCriterion')
+    >>> crit.setFormFields([])
+    >>> anon_browser.open(
+    ...     foo_topic.absolute_url()+'/atct_topic_view'
+    ...     '?form_crit__SearchableText_FormSimpleStringCriterion'
+    ...     '_value=baz')
+    >>> anon_browser.getLink('Bar Document Title')
+    <Link text='Bar Document Title'
+    url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
+    >>> anon_browser.getLink('Baz Event Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+    >>> crit.setFormFields(['value'])
+
 The search form portlet successfully renders when viewed on a context
 other than the portlet.
 

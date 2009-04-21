@@ -4,6 +4,7 @@ Changelog
 0.9.6 - Unreleased
 ------------------
 
+* Ensure that only formFields are taken from the request
 * Fix ignored integer range criteria (reported by SimO)
 * Use a browser layer (suggested by optilude)
 * Add ids and CSS classes to the batch_macro sort links (aaronv)

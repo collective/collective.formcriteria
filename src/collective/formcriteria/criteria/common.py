@@ -64,10 +64,13 @@ class FormCriterion(object):
 
         Fall back to the criterion value.
         """
+        field = self.getField(field_name)
+        if field_name not in self.getFormFields():
+            return field.get(self, **kw)
+
         if REQUEST is None:
             REQUEST = self.REQUEST
 
-        field = self.getField(field_name)
         full_name = self.makeFormKey(self.getId(), field_name)
 
         # Remove the criterion ids from and relevant request keys

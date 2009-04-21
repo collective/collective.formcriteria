@@ -1,8 +1,6 @@
 TODO
 ====
 
-* Ensure that only formFields are taken from the request
-
 * Form sort criteria
 
 * Add single selection (pulldown, radio) criteria (davisagli)
