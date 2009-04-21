@@ -1,11 +1,6 @@
 TODO
 ====
 
-* Add coverage to sort.txt for topics without sort criteria
-
-  Make sure both grouped.pt and batch_macros work when no sort
-  criteria have been added. (optilude)
-
 * Add coverage for integer range criteria (SimO)
 
   "...i.e: I set a range 0:100 and it shows me 5 items. If I put in

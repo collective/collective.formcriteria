@@ -13,6 +13,8 @@ class GroupedListingView(object):
     @property.Lazy
     def groups(self):
         query = self.context.buildQuery()
+        assert 'sort_on' in query, (
+            'The "Grouped Listing" layout requires a sort criterion')
         sort_on = query['sort_on']
         return (
             dict(key=key,

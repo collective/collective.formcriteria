@@ -197,6 +197,24 @@ Now the items are grouped by the sort values.
     ...</dd...
     ...</dl>...
 
+The grouped listing layout requires a sort criterion to render and
+raises an error if one is not present.
+
+    >>> foo_topic.deleteCriterion('crit__Creator_ATSortCriterion')
+    >>> browser.open(foo_topic.absolute_url())
+    Traceback (most recent call last):
+    AssertionError: ...
+
+The batch macros still work for topics that have no sort criteria.
+
+    >>> foo_topic.setLayout('criteria_form')
+    >>> browser.open(foo_topic.absolute_url())
+    >>> form = browser.getForm(name="formcriteria_search")
+    >>> form.getControl('Search Text').value = 'blah'
+    >>> form.getControl(name='submit').click()
+    >>> 'Sort on:' in browser.contents
+    False
+
 Form Sort
 ---------
 
