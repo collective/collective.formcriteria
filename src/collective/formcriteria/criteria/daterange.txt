@@ -158,3 +158,13 @@ search form portlet is rendered outside the context of the collection.
     True
     >>> 'calendar-system.css' in browser.contents
     True
+
+But the helpers are not included when the portlet is not rendered.
+
+    >>> browser.open(portal.absolute_url())
+    >>> 'calendar_stripped.js' in browser.contents
+    False
+    >>> 'calendar-en.js' in browser.contents
+    False
+    >>> 'calendar-system.css' in browser.contents
+    False
