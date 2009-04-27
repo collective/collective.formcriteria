@@ -1,6 +1,10 @@
 TODO
 ====
 
+* Add AJAX search results refresh
+
+* Add criteria ordering support
+
 * Form sort criteria
 
 * Add single selection (pulldown, radio) criteria (davisagli)
