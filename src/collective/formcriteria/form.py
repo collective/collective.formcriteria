@@ -56,6 +56,11 @@ class SearchFormView(object):
 
 class SearchFormHeadView(SearchFormView):
 
+    def render(self):
+        if self.fields():
+            return super(SearchFormHeadView, self).render()
+        return u''
+
     @view.memoize
     def formCriteria(self):
         results = []
@@ -79,6 +84,7 @@ class SearchFormHeadView(SearchFormView):
                         results.append(portlet['renderer'])
         return results
 
+    @view.memoize
     def fields(self):
         results = []
         for criterion in self.criteriaFields():

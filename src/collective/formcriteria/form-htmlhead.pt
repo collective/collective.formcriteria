@@ -1,5 +1,4 @@
-<tal:define define="fields view/fields;"
-            condition="fields">
+<tal:define define="fields view/fields;">
 <metal:block use-macro="here/global_defines/macros/defines" />
 
   <tal:block define="macro context/archetypes_custom_js/macros/javascript_head | nothing"
