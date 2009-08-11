@@ -29,6 +29,7 @@ def test_suite():
         'criteria/relativepath.txt',
         'criteria/simpleint.txt',
         'criteria/sort.txt',
+        'csv/README.txt',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
     criteria_suite.layer = testing.criteria_layer
