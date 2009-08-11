@@ -1,6 +1,5 @@
 .. -*-doctest-*-
 
-==========
 CSV Export
 ==========
 
@@ -15,9 +14,18 @@ as a document action like the print and send-to actions.
 Add some criteria to the collection.
 
     >>> foo_topic = self.folder['foo-topic-title']
+    >>> _ = foo_topic.addCriterion(
+    ...     'path', 'FormRelativePathCriterion')
+    >>> foo_topic.addCriterion(
+    ...     'Type', 'FormSelectionCriterion'
+    ...     ).setValue(['Page', 'Event'])
     >>> foo_topic.addCriterion(
     ...     'SearchableText','FormSimpleStringCriterion'
     ...     ).setFormFields(['value'])
+    >>> _ = foo_topic.addCriterion(
+    ...     'unsorted', 'FormSortCriterion')
+    >>> _ = foo_topic.addCriterion(
+    ...     'effective', 'FormSortCriterion')
 
 Open a browser and log in as a normal user.
 
@@ -35,6 +43,7 @@ Open a browser and log in as a normal user.
 The export link isn't available if the 'Table Columns' field is not
 set.
 
+    >>> foo_topic.update(customViewFields=[])
     >>> browser.open(foo_topic.absolute_url())
     >>> browser.getLink('Export')
     Traceback (most recent call last):
@@ -55,7 +64,15 @@ collection results.
     Status: 200 OK...
     Content-Disposition: attachment...
     Content-Type: text/csv...
+
+Since the testbrowser can't handle file downloads, we'll check the CSV
+output by calling the browser view directly.
+
     >>> print browser.contents
+    Status: 200 OK...
+    Content-Type: text/csv
+    Content-Disposition: attachment;filename=foo-topic-title.csv
+    Title,Description
     Foo Event Title,
     Bar Document Title,blah
     Baz Event Title,blah blah
@@ -71,11 +88,11 @@ and is sorted by relevance.
     >>> browser.getLink('Export').click()
     >>> browser.isHtml
     False
-    >>> print browser.headers
-    Status: 200 OK...
-    Content-Disposition: attachment...
-    Content-Type: text/csv...
     >>> print browser.contents
+    Status: 200 OK...
+    Content-Type: text/csv
+    Content-Disposition: attachment;filename=foo-topic-title.csv
+    Title,Description
     Baz Event Title,blah blah
     Bar Document Title,blah
 
@@ -91,11 +108,11 @@ and query.
     >>> browser.getLink('Export').click()
     >>> browser.isHtml
     False
-    >>> print browser.headers
-    Status: 200 OK...
-    Content-Disposition: attachment...
-    Content-Type: text/csv...
     >>> print browser.contents
+    Status: 200 OK...
+    Content-Type: text/csv
+    Content-Disposition: attachment;filename=foo-topic-title.csv
+    Title,Description
     Bar Document Title,blah
     Baz Event Title,blah blah
 

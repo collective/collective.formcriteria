@@ -1,7 +1,15 @@
 <configure
    xmlns="http://namespaces.zope.org/zope"
    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+   xmlns:monkey="http://namespaces.plone.org/monkey"
    i18n_domain="collective.customer">
+  
+  <monkey:patch
+     class="Testing.ZopeTestCase.zopedoctest.functional.DocResponseWrapper"
+     original="__init__"
+     replacement=".tests.outstream_init"
+     docstringWarning="False"
+     />
   
   <genericsetup:registerProfile
      name="testing"

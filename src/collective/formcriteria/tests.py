@@ -2,6 +2,7 @@ import unittest
 from zope.testing import doctest
 
 from Testing import ZopeTestCase
+from Testing.ZopeTestCase.zopedoctest import functional
 from Products.PloneTestCase import ptc
 
 from collective.formcriteria import testing
@@ -9,6 +10,13 @@ from collective.formcriteria import testing
 optionflags = (doctest.NORMALIZE_WHITESPACE|
                doctest.ELLIPSIS|
                doctest.REPORT_NDIFF)
+
+orig_outstream_init = functional.DocResponseWrapper.__init__
+def outstream_init(self, response, outstream, path, header_output):
+    if not response.body:
+        response.body = outstream.getvalue()
+    orig_outstream_init(self, response, outstream, path,
+                        header_output)
 
 def test_suite():
     suite = ZopeTestCase.FunctionalDocFileSuite(

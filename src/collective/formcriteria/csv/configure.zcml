@@ -5,9 +5,9 @@
 
   <browser:page
      name="export"
-     for="Products.ZCatalog.interfaces.IZCatalog"
+     for="..interfaces.IFormTopic"
      class=".export.ExportView"
-     permission="zope2.ViewManagementScreens"
+     permission="zope2.View"
      />
 
 </configure>

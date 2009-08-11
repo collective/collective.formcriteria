@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0'
+version = '1.0.1'
 
 tests_require = ['collective.testcaselayer']
 
@@ -13,6 +13,7 @@ setup(name='collective.formcriteria',
           open(os.path.join(*path)).read() for path in [
               ("src", "collective", "formcriteria", "README.txt"),
               ("src", "collective", "formcriteria", "criteria", "sort.txt"),
+              ("src", "collective", "formcriteria", "csv", "README.txt"),
               ("docs", "HISTORY.txt"),
               ("docs", "TODO.txt")]),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers

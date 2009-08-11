@@ -104,6 +104,8 @@
      template="comma.pt"
      permission="zope2.View" />
 
+  <include package=".csv" />
+  
   <cmf:registerDirectory name="formcriteria"/>
 
   <genericsetup:registerProfile
