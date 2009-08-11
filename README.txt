@@ -1,1 +1,1 @@
-see collective/formcriteria/README.txt
+see src/collective/formcriteria/README.txt

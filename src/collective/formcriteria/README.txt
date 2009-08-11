@@ -5,13 +5,15 @@ collective.formcriteria
 =======================
 
 This package extends the Products.ATContentTypes.criteria types to
-create a search forms.  Specifically, any criterion fields which are
-selected in each criterion's "Form Fields", then those fields will be
-rendered on the search form.  The values set on the criteria edit form
-become the default values on the search form.  Search terms submitted
-through the search form supplement any criteria not on the search
-form.  IOW, criteria not appearing on the form become the base query
-built into the search form.
+create search forms.  Specifically, any criterion fields which are
+selected in each criterion's "Form Fields" will be rendered on the
+search form.  The values set on the criteria edit form become the
+default values on the search form.  Search terms submitted through the
+search form supplement any criteria not on the search form.  IOW,
+criteria not appearing on the form become the base query built into
+the search form.
+
+.. contents:: Table of Contents
 
 A new "Search Form" display layout is provided that renders the search
 form and the collection body text but no results.  The search form on
@@ -34,9 +36,15 @@ Multiple sort criteria can also be added that will render user
 selectable sort links on the batch macro.  See
 collective/formcriteria/criteria/sort.txt for more details.
 
-Also provided is an alternative display layout that uses the folder
-contents table.  This layout is not yet fully functional but provides
-the basis for some very rich site admin functionality.
+A CSV export action is also provided which provides a link to users
+allowing them to download the collections results, subject to the
+user's query in the CSV format.  This allows collections to be used,
+for example, in conjunction with spreadsheet software for ad-hoc
+reporting or limited export to other systems.
+
+A folder contents table display layout is also included.  This layout
+is not yet fully functional but provides the basis for some very rich
+site admin functionality.
 
 WARNING: Uninstall
 ==================

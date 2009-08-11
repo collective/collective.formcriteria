@@ -1,6 +1,5 @@
 .. -*-doctest-*-
 
-=======
 Sorting
 =======
 
@@ -15,7 +14,7 @@ list of criteria takes effect.
 Form sort criteria are not yet implemented.
 
 Fixed Sort Criteria
-===================
+-------------------
 
 Set the item count to 1 so that batches will only have one item.
 
@@ -160,7 +159,7 @@ ATTopic instances.
     <ATEvent at /plone/Members/test_user_1_/baz-event-title>
 
 Grouped Listing
-===============
+---------------
 
 A variation on the default collection view is provided that lists
 items grouped by the sort used.  This requires that the index used for
