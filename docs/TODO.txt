@@ -1,6 +1,11 @@
 TODO
 ====
 
+* Add support for including the URL in CSV export
+
+  Not sure what the right UI is for this, maybe add a special case
+  into the customViewFields field.
+
 * Add criteria ordering support
 
 * Form Sort Criteria
