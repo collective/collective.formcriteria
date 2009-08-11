@@ -214,37 +214,3 @@ The batch macros still work for topics that have no sort criteria.
     >>> form.getControl(name='submit').click()
     >>> 'Sort on:' in browser.contents
     False
-
-Form Sort
-=========
-
-TODO: Not implemented yet
-
-An widget is avialable for selecting which of the possible
-sort fields should be available for sorting on.  The InAndOutWidget is
-used so that the order can be specified.
-
-    TODO >>> print browser.contents
-    <...
-    <div class="field ArchetypesInAndOutWidget
-    kssattr-atfieldname-sortFields"
-    id="archetypes-fieldname-sortFields">...
-    ...>Relevance</option>...
-    ...>Effective Date</option>...
-
-The InAndOutWidget uses JavaScript so we'll set the field manually for
-testing.
-
-    TODO >>> self.login()
-    TODO >>> foo_topic.setSortFields(['', 'effective', 'Type'])
-
-    TODO >>> form = browser.getForm(name="criteria_select")
-    TODO >>> form.getControl('Sort Order').selected = True
-
-Form sort criteria default to sorting on the "Relevance" field
-corresponds to a sort by weight for searches that include queries
-against indexs that support weighted results.
-
-    TODO >>> form = browser.getForm(action="criterion_edit_form", index=0)
-    TODO >>> form.getControl('Relevance').selected
-    True
