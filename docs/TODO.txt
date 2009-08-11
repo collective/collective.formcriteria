@@ -1,8 +1,6 @@
 TODO
 ====
 
-* Add AJAX search results refresh
-
 * Add criteria ordering support
 
 * Form Sort Criteria
@@ -38,6 +36,8 @@ TODO
       TODO >>> form = browser.getForm(action="criterion_edit_form", index=0)
       TODO >>> form.getControl('Relevance').selected
       True
+
+* Add AJAX search results refresh
 
 * Add single selection (pulldown, radio) criteria (davisagli)
 
