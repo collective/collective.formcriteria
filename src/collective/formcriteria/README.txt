@@ -383,3 +383,37 @@ Make sure none of the collective.formcriteria extensions interfere
 with existing ATTopic instances.
 
     >>> browser.open(portal.events.aggregator.absolute_url())
+
+All criteria can also be created using poral_types.constructContent.
+
+    >>> self.loginAsPortalOwner()
+    >>> foo_topic.deleteCriterion(
+    ...     'crit__SearchableText_FormSimpleStringCriterion')
+    >>> foo_topic.deleteCriterion(
+    ...     'crit__review_state_FormSelectionCriterion')
+    >>> seen = set()
+    >>> topic_indexes = portal.portal_atct.topic_indexes
+    >>> for field, index in topic_indexes.iteritems():
+    ...     for criterion in index.criteria:
+    ...         if criterion in seen or criterion.startswith('AT'):
+    ...             continue
+    ...         portal.portal_types.constructContent(
+    ...             criterion, foo_topic,
+    ...             id='crit__%s_%s' % (field, criterion))
+    ...         seen.add(criterion)
+    'crit__Title_FormSimpleStringCriterion'
+    'crit__effectiveRange_FormDateCriterion'
+    'crit__effectiveRange_FormSortCriterion'
+    'crit__path_FormPathCriterion'
+    'crit__path_FormRelativePathCriterion'
+    'crit__getRawRelatedItems_FormReferenceCriterion'
+    'crit__getRawRelatedItems_FormReferenceCheckboxCriterion'
+    'crit__Type_FormPortalTypeCriterion'
+    'crit__Type_FormPortalTypeCheckboxCriterion'
+    'crit__id_FormListCriterion'
+    'crit__id_FormCommaCriterion'
+    'crit__end_FormDateRangeCriterion'
+    'crit__is_folderish_FormBooleanCriterion'
+    'crit__review_state_FormSelectionCriterion'
+    'crit__review_state_FormCheckboxCriterion'
+    'crit__getObjPositionInParent_FormSimpleIntCriterion'

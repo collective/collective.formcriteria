@@ -30,4 +30,6 @@
     meta_type="Factory-based Type Information"/>
  <object name="FormCommaCriterion"
     meta_type="Factory-based Type Information"/>
+ <object name="FormSortCriterion"
+    meta_type="Factory-based Type Information"/>
 </object>
