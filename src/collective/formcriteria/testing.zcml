@@ -4,6 +4,8 @@
    xmlns:monkey="http://namespaces.plone.org/monkey"
    i18n_domain="collective.customer">
   
+  <include package="collective.monkeypatcher" file="meta.zcml" />
+  
   <monkey:patch
      class="Testing.ZopeTestCase.zopedoctest.functional.DocResponseWrapper"
      original="__init__"

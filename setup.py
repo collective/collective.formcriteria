@@ -3,7 +3,8 @@ import os
 
 version = '1.0.1'
 
-tests_require = ['collective.testcaselayer']
+tests_require = ['collective.testcaselayer',
+                 'collective.monkeypatcher']
 
 setup(name='collective.formcriteria',
       version=version,
