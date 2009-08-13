@@ -13,7 +13,6 @@
      i18n:attributes="description; friendlyName">
    <criteria>FormSelectionCriterion</criteria>
    <criteria>FormCheckboxCriterion</criteria>
-   <criteria>FormCurrentAuthorCriterion</criteria>
    <criteria>FormSimpleStringCriterion</criteria>
    <criteria>FormListCriterion</criteria>
    <criteria>FormCommaCriterion</criteria>
@@ -62,7 +61,6 @@
    <criteria>FormSortCriterion</criteria>
   </index>
   <index name="getEventType" description="" enabled="False" friendlyName="">
-   <criteria>FormCurrentAuthorCriterion</criteria>
    <criteria>FormListCriterion</criteria>
    <criteria>FormCommaCriterion</criteria>
    <criteria>FormReferenceCriterion</criteria>
