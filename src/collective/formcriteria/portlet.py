@@ -29,6 +29,8 @@ class ICriteriaFormPortlet(portlets_ifaces.IPortletDataProvider):
         source=catalog.SearchableTextSourceBinder(
             {'object_provides' : atct_ifaces.IATTopic.__identifier__},
             default_query='path:'))
+    # restrictedTraverse barfs on unicode
+    target_collection._type = str
 
 
 class Assignment(collection.Assignment):
