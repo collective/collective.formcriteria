@@ -51,8 +51,8 @@ By default, the normal folder_contents columns are selected in the
 
 By default, "Title" is selected in the "Table Column Links" field.
 
-    >>> columns = browser.getControl('Table Column Links')
-    >>> columns.value
+    >>> links = browser.getControl('Table Column Links')
+    >>> links.value
     ['Title']
 
 Leave the defaults in place.
@@ -92,9 +92,15 @@ titles are links to the item.
     <ItemControl name='paths:list' type='checkbox'
     optionValue='/plone/Members/test_user_1_/bar-document-title'
     selected=False>
+    >>> browser.getLink('Bar Document Title')
+    <Link text='Bar Document Title'
+    url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
     >>> browser.getControl('Baz Event Title')
     Traceback (most recent call last):
     LookupError: label 'Baz Event Title'
+    >>> browser.getLink('Baz Event Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
 
 Search Form Portlet
 -------------------

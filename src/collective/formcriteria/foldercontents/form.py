@@ -1,5 +1,9 @@
 from plone.app.content.browser import foldercontents
 
+class FolderContentsTable(object):
+    """Use our table template"""                
+
+
 class FolderContentsView(foldercontents.FolderContentsView):
     """List items in a tabular form including object buttons"""
     
