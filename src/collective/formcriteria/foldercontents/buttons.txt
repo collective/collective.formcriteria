@@ -1,0 +1,208 @@
+.. -*-doctest-*-
+
+Folder Contents Buttons
+-----------------------
+
+The folder contents buttons are also usable on collections.
+
+Add a criteria and set the collection layout.
+
+    >>> foo_topic = self.folder['foo-topic-title']
+    >>> path_crit = foo_topic.addCriterion(
+    ...     'path', 'FormRelativePathCriterion')
+    >>> path_crit.setRecurse(True)
+    >>> foo_topic.setLayout('folder_contents_view')
+
+Create a folder and move one item into the folder.
+
+    >>> foo_folder = folder[folder.invokeFactory(
+    ...     type_name='Folder', id='foo-folder-title',
+    ...     title='Foo Folder Title')]
+    >>> foo_folder.manage_pasteObjects(
+    ...     folder.manage_cutObjects(['bar-document-title']))
+    [{'new_id': 'bar-document-title', 'id': 'bar-document-title'}]
+
+Open a browser and log in as a user who can use the folder contents
+buttons on the content listed.
+
+    >>> from Products.Five.testbrowser import Browser
+    >>> from Products.PloneTestCase import ptc
+    >>> browser = Browser()
+    >>> browser.handleErrors = False
+    >>> browser.open(portal.absolute_url())
+    >>> browser.getLink('Log in').click()
+    >>> browser.getControl('Login Name').value = ptc.default_user
+    >>> browser.getControl(
+    ...     'Password').value = ptc.default_password
+    >>> browser.getControl('Log in').click()
+
+Both copies appear in the collection.
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> browser.getControl('Baz Event Title')
+    <ItemControl name='paths:list' type='checkbox'
+    optionValue='/plone/Members/test_user_1_/baz-event-title'
+    selected=False>
+    >>> browser.getControl('Bar Document Title')
+    <ItemControl name='paths:list' type='checkbox'
+    optionValue='/plone/Members/test_user_1_/foo-folder-title/bar-document-title'
+    selected=False>
+
+Select both and click the "Copy" button.
+
+    >>> browser.getControl('Baz Event Title').selected = True
+    >>> browser.getControl('Bar Document Title').selected = True
+    >>> browser.getControl('Copy').click()
+
+The "Paste" button is not available for the collection.
+
+    >>> browser.getControl('Paste')
+    Traceback (most recent call last):
+    LookupError: label 'Paste'
+
+Paste the copied items into the folder.
+
+    >>> browser.open(foo_folder.absolute_url()+'/folder_contents')
+    >>> browser.getControl('Paste').click()
+    >>> print browser.contents
+    <...
+    ...2 item(s) pasted...
+    >>> folder.contentValues()
+    [<Topic at /plone/Members/test_user_1_/foo-topic-title>,
+     <ATEvent at /plone/Members/test_user_1_/foo-event-title>,
+     <ATFolder at /plone/Members/test_user_1_/foo-folder-title>]
+    >>> foo_folder.contentValues()
+    [<ATDocument at
+    /plone/Members/test_user_1_/foo-folder-title/bar-document-title>,
+    <ATDocument at
+    /plone/Members/test_user_1_/foo-folder-title/baz-event-title>,
+    <ATDocument at
+    /plone/Members/test_user_1_/foo-folder-title/copy_of_bar-document-title>]
+
+Use the collection again to select two items, one in each folder and
+click the "Cut" button.
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> browser.getControl(
+    ...     'Baz Event Title', index=0).selected = True
+    >>> browser.getControl(
+    ...     'Bar Document Title', index=0).selected = True
+    >>> browser.getControl('Cut').click()
+
+Paste the cut items into another folder.
+
+    >>> browser.open(folder.absolute_url()+'/folder_contents')
+    >>> browser.getControl('Paste').click()
+    >>> print browser.contents
+    <...
+    ...2 item(s) pasted...
+    >>> folder.contentValues()
+    [<Topic at /plone/Members/test_user_1_/foo-topic-title>,
+     <ATEvent at /plone/Members/test_user_1_/foo-event-title>,
+     <ATFolder at /plone/Members/test_user_1_/foo-folder-title>
+     <ATDocument at /plone/Members/test_user_1_/bar-document-title>,
+     <ATDocument at /plone/Members/test_user_1_/baz-event-title>]
+    >>> foo_folder.contentValues()
+    [<ATDocument at
+    /plone/Members/test_user_1_/foo-folder-title/copy_of_bar-document-title>]
+
+Use the collection again to select two items, one in each folder and
+click the "Rename" button.
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> browser.getControl(
+    ...     'Baz Event Title', index=0).selected = True
+    >>> browser.getControl(
+    ...     'Bar Document Title', index=1).selected = True
+    >>> browser.getControl('Rename').click()
+
+Rename the selected items.
+
+    >>> browser.getControl('New Short Name', index=0).value
+    'baz-event-title'
+    >>> browser.getControl(
+    ...     'New Short Name', index=0).value = 'qux-event-title'
+    >>> browser.getControl('New Title', index=0).value
+    'Baz Event Title'
+    >>> browser.getControl(
+    ...     'New Title', index=0).value = 'Qux Event Title'
+
+    >>> browser.getControl('New Short Name', index=1).value
+    'copy_of_bar-document-title'
+    >>> browser.getControl(
+    ...     'New Short Name', index=1).value = 'qux-document-title'
+    >>> browser.getControl('New Title', index=1).value
+    'Bar Document Title'
+    >>> browser.getControl(
+    ...     'New Title', index=1).value = 'Qux Document Title'
+
+    >>> browser.getControl('Rename All').click()
+    >>> print browser.contents
+    <...
+    ...2 item(s) renamed...
+    >>> folder.contentValues()
+    [<Topic at /plone/Members/test_user_1_/foo-topic-title>,
+     <ATEvent at /plone/Members/test_user_1_/foo-event-title>,
+     <ATFolder at /plone/Members/test_user_1_/foo-folder-title>
+     <ATDocument at /plone/Members/test_user_1_/bar-document-title>,
+     <ATDocument at /plone/Members/test_user_1_/qux-event-title>]
+    >>> foo_folder.contentValues()
+    [<ATDocument at
+    /plone/Members/test_user_1_/foo-folder-title/qux-document-title>]
+    >>> folder['qux-event-title'].Title()
+    'Qux Event Title'
+    >>> folder['qux-document-title'].Title()
+    'Qux Document Title'
+
+Use the collection again to select two items, one in each folder and
+click the "Change State" button.
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> browser.getControl('Qux Event Title').selected = True
+    >>> browser.getControl('Qux Document Title').selected = True
+    >>> browser.getControl('Change State').click()
+
+Change the state of the selected items.
+
+    >>> browser.getControl('Retract').selected = True
+    >>> browser.getControl('Save').click()
+    >>> print browser.contents
+    <...
+    ...2 item(s) transitioned...
+    >>> folder.contentValues()
+    [<Topic at /plone/Members/test_user_1_/foo-topic-title>,
+     <ATEvent at /plone/Members/test_user_1_/foo-event-title>,
+     <ATFolder at /plone/Members/test_user_1_/foo-folder-title>
+     <ATDocument at /plone/Members/test_user_1_/bar-document-title>,
+     <ATDocument at /plone/Members/test_user_1_/qux-event-title>]
+    >>> foo_folder.contentValues()
+    [<ATDocument at
+    /plone/Members/test_user_1_/foo-folder-title/qux-document-title>]
+    >>> portal.portal_workflow.getInfoFor(
+    ...     folder['qux-event-title'], 'review_state')
+    'private'
+    >>> portal.portal_workflow.getInfoFor(
+    ...     folder['foo-folder-title']['qux-document-title'],
+    ...     'review_state')
+    'private'
+
+Use the collection again to select two items, one in each folder and
+click the "Delete" button.
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> browser.getControl('Qux Event Title').selected = True
+    >>> browser.getControl('Qux Document Title').selected = True
+    >>> browser.getControl('Delete').click()
+    >>> print browser.contents
+    <...
+    ...2 item(s) deleted...
+
+The items have been deleted from their respective containers.
+
+    >>> folder.contentValues()
+    [<Topic at /plone/Members/test_user_1_/foo-topic-title>,
+     <ATEvent at /plone/Members/test_user_1_/foo-event-title>,
+     <ATFolder at /plone/Members/test_user_1_/foo-folder-title>
+     <ATDocument at /plone/Members/test_user_1_/bar-document-title>]
+    >>> foo_folder.contentValues()
+    []
