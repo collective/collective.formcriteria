@@ -61,6 +61,9 @@ class Layer(tcl_ptc.BasePTCLayer):
             home['bar-document-title'], 'publish')
         self.portal.portal_workflow.doActionFor(
             home['baz-event-title'], 'publish')
+        home['bar-document-title'].setModificationDate(self.now)
+        home['bar-document-title'].reindexObject(
+            ['modification_date'])
         self.login()
 
 layer = Layer([tcl_ptc.ptc_layer])

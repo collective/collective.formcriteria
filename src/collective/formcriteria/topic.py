@@ -21,6 +21,16 @@ class Topic(topic.ATTopic):
     security = AccessControl.ClassSecurityInfo()
 
     schema = topic.ATTopic.schema.copy() + atapi.Schema((
+        atapi.LinesField(
+            'customViewLinks',
+            default=('Title',),
+            vocabulary='listMetaDataFields',
+            enforceVocabulary=True,
+            write_permission=permission.ChangeTopics,
+            widget=atapi.InAndOutWidget(
+                label=u'Table Column Links',
+                description=
+                u"Select which table columns to link to the item.")),
         atapi.StringField(
             'formLayout',
             default='atct_topic_view',
@@ -31,6 +41,11 @@ class Topic(topic.ATTopic):
                 u'Select the display layout use for results.  '
                 u'Used only with the "Search Form" layout')),
         ))
+    schema['customViewFields'].default = [
+        'Title',
+        'getObjSize',
+        'ModificationDate',
+        'review_state']
 
     sort_indices = {
         'unsorted': topic_tool.TopicIndex(

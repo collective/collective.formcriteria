@@ -3,6 +3,16 @@
 Contents View
 =============
 
+A version of the folder_contents view can be used with collections
+where the columns are those specified in the collection's "Table
+Columns" field.  The buttons at the bottom of the folder contents view
+will then be applied to the selected items.
+
+Any columns that are selected in the collection's "Table
+Columns" field that are also selected in the "Table Column Links"
+field will be rendered as links.  Note that it's possible to select a
+link column that isn't a table column which will have no effect.
+
 Add a simple string criterion for the SearchableText index on the
 criteria tab.  Set a default search term.
 
@@ -26,22 +36,57 @@ for the topic.
     ...     'Password').value = ptc.default_password
     >>> browser.getControl('Log in').click()
 
+Edit the collection to set the "Table Columns" and "Table Column
+Links" fields.
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> browser.getLink('Edit').click()
+
+By default, the normal folder_contents columns are selected in the
+"Table Columns" field.
+
+    >>> columns = browser.getControl('Table Columns')
+    >>> sorted(columns.value)
+    ['ModificationDate', 'Title', 'getObjSize', 'review_state']
+
+By default, "Title" is selected in the "Table Column Links" field.
+
+    >>> columns = browser.getControl('Table Column Links')
+    >>> columns.value
+    ['Title']
+
+Leave the defaults in place.
+
+    >>> browser.getControl('Cancel').click()
+
 Change the topic's display layout and the search form results layout
 to the contents view.
 
-    >>> foo_topic.setFormLayout('folder_contents_view')
-    >>> browser.open(foo_topic.absolute_url())
     >>> browser.getLink('Tabular Form').click()
     >>> print browser.contents
     <...
     ...View changed...
 
-The view renders the contents form.
+The view renders the contents form with the default columns.
 
     >>> browser.getForm(name="folderContentsForm")
     <zope.testbrowser.browser.Form object at ...>
+    >>> print browser.contents
+    <...
+    ...Title...
+    ...Size...
+    ...Modified...
+    ...State...
 
-The topic contents are listed in the contents table form.
+The topic contents are listed in the contents table form and the
+titles are links to the item.
+
+    >>> print browser.contents
+    <...
+    ...Bar Document Title...
+    ...0 kB...
+    ...Jan 15, 2009...
+    ...Published...
 
     >>> browser.getControl('Bar Document Title')
     <ItemControl name='paths:list' type='checkbox'
@@ -74,6 +119,7 @@ Add the portlet.
 
 The search form is also rendered if form criteria are present.
 
+    >>> foo_topic.setFormLayout('folder_contents_view')
     >>> browser.open(foo_topic.absolute_url())
     >>> form = browser.getForm(name="formcriteria_search")
 
