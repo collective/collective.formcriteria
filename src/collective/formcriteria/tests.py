@@ -21,6 +21,7 @@ def outstream_init(self, response, outstream, path, header_output):
 def test_suite():
     suite = ZopeTestCase.FunctionalDocFileSuite(
         'README.txt',
+        'foldercontents/README.txt',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
     suite.layer = testing.layer

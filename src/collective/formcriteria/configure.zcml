@@ -67,22 +67,6 @@
   <browser:page
      for=".interfaces.IFormTopic"
      layer=".interfaces.IFormCriteriaLayer"
-     class=".foldercontents.FolderContentsView"
-     name="folder_contents_view"
-     template="foldercontents.pt"
-     permission="cmf.ListFolderContents" />
-
-  <browser:menuItem
-     for=".interfaces.IFormTopic"
-     layer=".interfaces.IFormCriteriaLayer"
-     menu="plone_displayviews"
-     title="Tabular Form"
-     action="folder_contents_view"
-     description="List items in a tabular form including object buttons" />
-
-  <browser:page
-     for=".interfaces.IFormTopic"
-     layer=".interfaces.IFormCriteriaLayer"
      class=".grouped.GroupedListingView"
      name="grouped_listing"
      template="grouped.pt"
@@ -104,6 +88,7 @@
      template="comma.pt"
      permission="zope2.View" />
 
+  <include package=".foldercontents" />
   <include package=".csv" />
   
   <cmf:registerDirectory name="formcriteria"/>

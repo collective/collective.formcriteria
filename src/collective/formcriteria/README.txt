@@ -333,52 +333,6 @@ instances such as those created by default in a Plone site.
     <...
     ...Criteria for News...
 
-Contents View
-=============
-
-Change the topic's display layout and the search form results layout
-to the contents view.
-
-    >>> foo_topic.setFormLayout('folder_contents_view')
-    >>> browser.open(foo_topic.absolute_url())
-    >>> browser.getLink('Tabular Form').click()
-    >>> print browser.contents
-    <...
-    ...View changed...
-
-The view renders the contents form.
-
-    >>> browser.getForm(name="folderContentsForm")
-    <zope.testbrowser.browser.Form object at ...>
-
-The topic contents are listed in the contents table form.
-
-    >>> browser.getControl('Bar Document Title')
-    <ItemControl name='paths:list' type='checkbox'
-    optionValue='/plone/Members/test_user_1_/bar-document-title'
-    selected=False>
-    >>> browser.getControl('Baz Event Title')
-    Traceback (most recent call last):
-    LookupError: label 'Baz Event Title'
-
-The search form is also rendered if form criteria are present.
-
-    >>> form = browser.getForm(name="formcriteria_search")
-
-The contents view also reflects user submitted criteria.
-
-    >>> form.getControl(
-    ...     name='form_crit__SearchableText_FormSimpleStringCriterion'
-    ...     '_value').value = 'baz'
-    >>> form.getControl(name='submit').click()
-    >>> browser.getControl('Bar Document Title')
-    Traceback (most recent call last):
-    LookupError: label 'Bar Document Title'
-    >>> browser.getControl('Baz Event Title')
-    <ItemControl name='paths:list' type='checkbox'
-    optionValue='/plone/Members/test_user_1_/baz-event-title'
-    selected=False>
-
 Make sure none of the collective.formcriteria extensions interfere
 with existing ATTopic instances.
 
