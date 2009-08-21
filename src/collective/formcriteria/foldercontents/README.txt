@@ -157,29 +157,22 @@ The topic contents are also listed with the specified columns.
 
 The link columns have also been changed.
 
-    >>> browser.getControl('blah')
+    >>> browser.getControl('Bar Document Title')
     <ItemControl name='paths:list' type='checkbox'
     optionValue='/plone/Members/test_user_1_/bar-document-title'
     selected=False>
     >>> browser.getLink('blah')
     <Link text='blah'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
-    >>> browser.getControl('Jan 13, 2009')
-    <ItemControl name='paths:list' type='checkbox'
-    optionValue='/plone/Members/test_user_1_/bar-document-title'
-    selected=False>
     >>> browser.getLink('Jan 13, 2009')
     <Link text='Jan 13, 2009'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
-    >>> browser.getControl('blah blah')
+    >>> browser.getControl('Baz Event Title')
     Traceback (most recent call last):
-    LookupError: label 'blah blah'
+    LookupError: label 'Baz Event Title'
     >>> browser.getLink('blah blah')
     Traceback (most recent call last):
     LinkNotFoundError
-    >>> browser.getControl('Jan 15, 2009')
-    Traceback (most recent call last):
-    LookupError: label 'Jan 15, 2009'
     >>> browser.getLink('Jan 15, 2009')
     Traceback (most recent call last):
     LinkNotFoundError
