@@ -76,6 +76,12 @@ The view renders the contents form with the default columns.
     ...Modified...
     ...State...
 
+The order column is not included since order is determined by the
+collection and is fixed.
+
+    >>> 'Order' in browser.contents
+    False
+
 The topic contents are listed in the contents table form and the
 titles are links to the item.
 
