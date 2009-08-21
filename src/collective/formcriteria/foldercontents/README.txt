@@ -178,6 +178,13 @@ The link columns have also been changed.
     Traceback (most recent call last):
     LinkNotFoundError
 
+TODO
+====
+
+- Ensure that the "Paste" button doesn't render
+- Test coverage and implementation for the "Cut", "Copy", "Delete",
+  and "Change State" buttons
+
 Search Form Portlet
 -------------------
 
