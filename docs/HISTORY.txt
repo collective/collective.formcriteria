@@ -4,6 +4,10 @@ Changelog
 1.0.3 - 2009-08-21
 ------------------
 
+* Use "Table Columns" fields for the folder contents form to control
+  the folder contents columns
+* Use a "Table Column Links" collection filed to specify which folder
+  contents form columns should link to the item [rossp]
 * Fix folder contents form buttons, "Copy", "Cut", "Rename", "Change
   State", and "Delete" now all work for objects listed by the
   collections even if they are in different folders.  [rossp]
