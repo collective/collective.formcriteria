@@ -26,11 +26,14 @@
   </p>
 
   <metal:listing define-macro="folder_listing"
-                 tal:define="nosortclass view/get_nosort_class">
+                 tal:define="nosortclass view/get_nosort_class;
+                             template_id string:folder_contents;
+                             here nocall:context;
+                             batch view/batch;">
     
     <div class="visualClear" id="clear-space-before-navigation"><!-- --></div>
 
-    <div tal:replace="structure view/batching" tal:condition="not:view/show_all"/>
+    <div metal:use-macro="context/batch_macros/macros/navigation" />
     <table class="listing"
            id="listing-table"
            summary="Content listing"
@@ -69,14 +72,15 @@
               id="foldercontents-name-column"
               tal:repeat="column view/columns"
               tal:attributes="id string:foldercontents-${column/id}-column;"
-              >&#160;<tal:label tal:content="column/name"
+              >&#160;<tal:label
+                        tal:content="column/name"
               >Name</tal:label>&#160;</th>
         </tr>
       </thead>
 
       <metal:block tal:condition="view/batch">
         <tbody>
-          <tal:items tal:repeat="item view/batch">
+          <tal:items tal:repeat="item view/items">
             <tr tal:attributes="class item/table_row_class;
                                 id string:folder-contents-item-${item/id};" >
 
@@ -104,31 +108,32 @@
                 </label>
               </td>
               <td tal:repeat="column view/columns">
-                <tal:linked condition="column/link">
-                  <span tal:attributes="class item/type_class">
-                    <img tal:replace="structure item/icon" />
-                    <a href="#" tal:attributes="href  item/view_url;
-                                                title item/url_href_title;
-                                                class item/state_class;">
-                      <strong tal:omit-tag="not: item/is_browser_default"
-                              tal:content="python:item[column['id']]">
-                        value
-                      </strong>
-                    </a>
-                  </span>
+                <tal:define define="value python:getattr(item['obj'], column['id']);">
+                  <tal:linked condition="column/link">
+                    <span tal:attributes="class item/type_class">
+                      <img tal:replace="structure item/icon" />
+                      <a href="#" tal:attributes="href  item/view_url;
+                                                  title item/url_href_title;
+                                                  class item/state_class;">
+                        <strong tal:omit-tag="not: item/is_browser_default"
+                                tal:content="value">
+                          value
+                        </strong>
+                      </a>
+                    </span>
 
-                  <span class="state-expired"
-                        tal:condition="item/is_expired"
-                        i18n:translate="time_expired">expired</span>
-                </tal:linked>
+                    <span class="state-expired"
+                          tal:condition="item/is_expired"
+                          i18n:translate="time_expired">expired</span>
+                  </tal:linked>
 
-                <tal:unlinked define="value python:item[column['id']];"
-                              condition="not:column/link">
-                  <span tal:condition="not: value"> &#160; </span>
-                  <span tal:condition="value"
-                        tal:content="value"
-                        tal:attributes="class item/state_class"> value </span>
-                </tal:unlinked>
+                  <tal:unlinked condition="not:column/link">
+                    <span tal:condition="not: value"> &#160; </span>
+                    <span tal:condition="value"
+                          tal:content="value"
+                          tal:attributes="class item/state_class"> value </span>
+                  </tal:unlinked>
+                </tal:define>
               </td>
             </tr>
           </tal:items>
@@ -151,7 +156,7 @@
         </tfooter>
       </metal:block>
     </table>
-    <div tal:replace="structure view/batching" tal:condition="not:view/show_all"/>
+    <div metal:use-macro="context/batch_macros/macros/navigation" />
     <tal:buttons tal:repeat="button view/buttons">
       <input class="context"
              type="submit"

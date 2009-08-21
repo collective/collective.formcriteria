@@ -73,8 +73,8 @@ The view renders the contents form with the default columns.
     <...
     ...Title...
     ...Size...
-    ...Modified...
-    ...State...
+    ...Modification Date...
+    ...&#160;State&#160;...
 
 The order column is not included since order is determined by the
 collection and is fixed.
@@ -89,8 +89,8 @@ titles are links to the item.
     <...
     ...Bar Document Title...
     ...0 kB...
-    ...Jan 15, 2009...
-    ...Published...
+    ...2009-01-15...
+    ...<span class="state-published">published</span>...
 
     >>> browser.getControl('Bar Document Title')
     <ItemControl name='paths:list' type='checkbox'
@@ -99,12 +99,6 @@ titles are links to the item.
     >>> browser.getLink('Bar Document Title')
     <Link text='Bar Document Title'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
-    >>> browser.getControl('Baz Event Title')
-    Traceback (most recent call last):
-    LookupError: label 'Baz Event Title'
-    >>> browser.getLink('Baz Event Title')
-    Traceback (most recent call last):
-    LinkNotFoundError
 
 Edit the collection and select different "Table Columns" and "Table
 Column Links".  Since the InAndOutWidget uses JavaScript, set the
@@ -133,26 +127,28 @@ The view renders the contents form with the specified columns.
     <zope.testbrowser.browser.Form object at ...>
     >>> print browser.contents
     <...
-    ...Title...
     ...Description...
+    ...Effective Date...
+    ...Title...
     >>> 'Size' in browser.contents
     False
-    >>> 'Modified' in browser.contents
+    >>> 'Modification Date' in browser.contents
     False
-    >>> 'State' in browser.contents
+    >>> '&#160;State&#160;' in browser.contents
     False
 
 The topic contents are also listed with the specified columns.
 
     >>> print browser.contents
     <...
-    ...Bar Document Title...
     ...blah...
+    ...2009-01-13...
+    ...Bar Document Title...
     >>> '0 kB' in browser.contents
     False
-    >>> 'Jan 15, 2009' in browser.contents
+    >>> '2009-01-15' in browser.contents
     False
-    >>> 'Published' in browser.contents
+    >>> '<span class="state-published">published</span>' in browser.contents
     False
 
 The link columns have also been changed.
@@ -164,16 +160,10 @@ The link columns have also been changed.
     >>> browser.getLink('blah')
     <Link text='blah'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
-    >>> browser.getLink('Jan 13, 2009')
-    <Link text='Jan 13, 2009'
+    >>> browser.getLink('2009-01-13')
+    <Link text='2009-01-13 01:00:00'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
-    >>> browser.getControl('Baz Event Title')
-    Traceback (most recent call last):
-    LookupError: label 'Baz Event Title'
-    >>> browser.getLink('blah blah')
-    Traceback (most recent call last):
-    LinkNotFoundError
-    >>> browser.getLink('Jan 15, 2009')
+    >>> browser.getLink('Bar Document Title')
     Traceback (most recent call last):
     LinkNotFoundError
 
