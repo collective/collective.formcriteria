@@ -1,4 +1,7 @@
 <div id="folderlisting-main-table"
+     xmlns:tal="http://xml.zope.org/namespaces/tal"
+     xmlns:metal="http://xml.zope.org/namespaces/metal"
+     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
      i18n:domain="plone">
   <input type="hidden" name="sort_on"
          tal:attributes="value request/sort_on|string:getObjPositionInParent"
@@ -61,23 +64,23 @@
         </tr>
 
         <tr>
-          <th class="nosort">&nbsp;</th>
+          <th class="nosort">&#160;</th>
           <th class="nosort column"
-              id="foldercontents-title-column">&nbsp;<tal:title i18n:translate="listingheader_title"
-              >Title</tal:title>&nbsp;</th>
+              id="foldercontents-title-column">&#160;<tal:title i18n:translate="listingheader_title"
+              >Title</tal:title>&#160;</th>
           <th class="nosort column"
-              id="foldercontents-size-column">&nbsp;<tal:size i18n:translate="listingheader_size"
-              >Size</tal:size>&nbsp;</th>
+              id="foldercontents-size-column">&#160;<tal:size i18n:translate="listingheader_size"
+              >Size</tal:size>&#160;</th>
           <th class="nosort column"
-              id="foldercontents-modified-column">&nbsp;<tal:modified i18n:translate="listingheader_modified"
-              >Modified</tal:modified>&nbsp;</th>
+              id="foldercontents-modified-column">&#160;<tal:modified i18n:translate="listingheader_modified"
+              >Modified</tal:modified>&#160;</th>
           <th class="nosort column"
-              id="foldercontents-status-column">&nbsp;<tal:state i18n:translate="listingheader_status"
-              >State</tal:state>&nbsp;</th>
+              id="foldercontents-status-column">&#160;<tal:state i18n:translate="listingheader_status"
+              >State</tal:state>&#160;</th>
           <th class="nosort column"
               id="foldercontents-order-column"
               tal:condition="view/show_sort_column">
-          &nbsp;<tal:order i18n:translate="listingheader_order">Order</tal:order>&nbsp;</th>
+          &#160;<tal:order i18n:translate="listingheader_order">Order</tal:order>&#160;</th>
         </tr>
       </thead>
 
@@ -127,7 +130,7 @@
               </td>
 
               <td>
-                <span tal:condition="not: item/size"> &nbsp; </span>
+                <span tal:condition="not: item/size"> &#160; </span>
                 <span tal:condition="item/size"
                       tal:content="item/size"
                       tal:attributes="class item/state_class"> size </span>
@@ -141,7 +144,7 @@
                       tal:condition="item/state_title"
                       tal:content="item/state_title"
                       tal:attributes="class item/state_class" />
-                <span tal:condition="not: item/state_title">&nbsp;</span>
+                <span tal:condition="not: item/state_title">&#160;</span>
               </td>
               <td tal:condition="view/show_sort_column" class="draggable">
                 <a href=""
@@ -150,7 +153,7 @@
                    tal:attributes="href string:${view/base_url}/folder_position?position=up&amp;id=${item/quoted_id}">
                   &#9650;
                 </a>
-                &nbsp;
+                &#160;
                 <a href=""
                    title="Move item down"
                    i18n:attributes="title title_move_item_down;"
