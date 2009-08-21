@@ -4,15 +4,8 @@
    xmlns:monkey="http://namespaces.plone.org/monkey"
    i18n_domain="collective.customer">
   
-  <include package="collective.monkeypatcher" file="meta.zcml" />
-  
-  <monkey:patch
-     class="Testing.ZopeTestCase.zopedoctest.functional.DocResponseWrapper"
-     original="__init__"
-     replacement=".tests.outstream_init"
-     docstringWarning="False"
-     />
-  
+  <include package="collective.testcaselayer" />
+
   <genericsetup:registerProfile
      name="testing"
      title="Topic Criteria Test Fixture"
