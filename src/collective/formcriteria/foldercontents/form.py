@@ -148,6 +148,30 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
                 obj=obj,
             ))
         return results
+
+    @property
+    def buttons(self):
+        buttons = []
+        context = Acquisition.aq_inner(self.context)
+        portal_actions = getToolByName(context, 'portal_actions')
+        button_actions = portal_actions.listActionInfos(
+            object=context, categories=('folder_topic_buttons', ))
+
+        # Do not show buttons if there is no data, unless there is data to be
+        # pasted
+        if not len(self.items):
+            if self.context.cb_dataValid():
+                for button in button_actions:
+                    if button['id'] == 'paste':
+                        return [self.setbuttonclass(button)]
+            else:
+                return []
+
+        for button in button_actions:
+            # Make proper classes for our buttons
+            if button['id'] != 'paste' or context.cb_dataValid():
+                buttons.append(self.setbuttonclass(button))
+        return buttons
     
 class FolderContentsView(foldercontents.FolderContentsView):
     """List items in a tabular form including object buttons"""

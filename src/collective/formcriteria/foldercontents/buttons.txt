@@ -11,6 +11,8 @@ Add a criteria and set the collection layout.
     >>> path_crit = foo_topic.addCriterion(
     ...     'path', 'FormRelativePathCriterion')
     >>> path_crit.setRecurse(True)
+    >>> sort_crit = foo_topic.addCriterion(
+    ...     'getPhysicalPath', 'FormSortCriterion')
     >>> foo_topic.setLayout('folder_contents_view')
 
 Create a folder and move one item into the folder.
@@ -66,18 +68,13 @@ Paste the copied items into the folder.
     >>> browser.getControl('Paste').click()
     >>> print browser.contents
     <...
-    ...2 item(s) pasted...
-    >>> folder.contentValues()
-    [<Topic at /plone/Members/test_user_1_/foo-topic-title>,
-     <ATEvent at /plone/Members/test_user_1_/foo-event-title>,
-     <ATFolder at /plone/Members/test_user_1_/foo-folder-title>]
-    >>> foo_folder.contentValues()
-    [<ATDocument at
-    /plone/Members/test_user_1_/foo-folder-title/bar-document-title>,
-    <ATDocument at
-    /plone/Members/test_user_1_/foo-folder-title/baz-event-title>,
-    <ATDocument at
-    /plone/Members/test_user_1_/foo-folder-title/copy_of_bar-document-title>]
+    ...Item(s) pasted...
+    >>> sorted(folder.contentIds())
+    ['baz-event-title', 'foo-event-title', 'foo-folder-title',
+    'foo-topic-title']
+    >>> sorted(foo_folder.contentIds())
+    ['bar-document-title', 'baz-event-title',
+    'copy_of_bar-document-title']
 
 Use the collection again to select two items, one in each folder and
 click the "Cut" button.
@@ -95,16 +92,12 @@ Paste the cut items into another folder.
     >>> browser.getControl('Paste').click()
     >>> print browser.contents
     <...
-    ...2 item(s) pasted...
-    >>> folder.contentValues()
-    [<Topic at /plone/Members/test_user_1_/foo-topic-title>,
-     <ATEvent at /plone/Members/test_user_1_/foo-event-title>,
-     <ATFolder at /plone/Members/test_user_1_/foo-folder-title>
-     <ATDocument at /plone/Members/test_user_1_/bar-document-title>,
-     <ATDocument at /plone/Members/test_user_1_/baz-event-title>]
-    >>> foo_folder.contentValues()
-    [<ATDocument at
-    /plone/Members/test_user_1_/foo-folder-title/copy_of_bar-document-title>]
+    ...Item(s) pasted...
+    >>> sorted(folder.contentIds())
+    ['bar-document-title', 'baz-event-title', 'foo-event-title',
+    'foo-folder-title', 'foo-topic-title']
+    >>> sorted(foo_folder.contentIds())
+    ['baz-event-title', 'copy_of_bar-document-title']
 
 Use the collection again to select two items, one in each folder and
 click the "Rename" button.
@@ -139,19 +132,15 @@ Rename the selected items.
     >>> browser.getControl('Rename All').click()
     >>> print browser.contents
     <...
-    ...2 item(s) renamed...
-    >>> folder.contentValues()
-    [<Topic at /plone/Members/test_user_1_/foo-topic-title>,
-     <ATEvent at /plone/Members/test_user_1_/foo-event-title>,
-     <ATFolder at /plone/Members/test_user_1_/foo-folder-title>
-     <ATDocument at /plone/Members/test_user_1_/bar-document-title>,
-     <ATDocument at /plone/Members/test_user_1_/qux-event-title>]
-    >>> foo_folder.contentValues()
-    [<ATDocument at
-    /plone/Members/test_user_1_/foo-folder-title/qux-document-title>]
+    ...Renamed...
+    >>> sorted(folder.contentIds())
+    ['bar-document-title', 'foo-event-title', 'foo-folder-title',
+    'foo-topic-title', 'qux-event-title']
+    >>> sorted(foo_folder.contentIds())
+    ['baz-event-title', 'qux-document-title']
     >>> folder['qux-event-title'].Title()
     'Qux Event Title'
-    >>> folder['qux-document-title'].Title()
+    >>> folder['foo-folder-title']['qux-document-title'].Title()
     'Qux Document Title'
 
 Use the collection again to select two items, one in each folder and
@@ -168,16 +157,12 @@ Change the state of the selected items.
     >>> browser.getControl('Save').click()
     >>> print browser.contents
     <...
-    ...2 item(s) transitioned...
-    >>> folder.contentValues()
-    [<Topic at /plone/Members/test_user_1_/foo-topic-title>,
-     <ATEvent at /plone/Members/test_user_1_/foo-event-title>,
-     <ATFolder at /plone/Members/test_user_1_/foo-folder-title>
-     <ATDocument at /plone/Members/test_user_1_/bar-document-title>,
-     <ATDocument at /plone/Members/test_user_1_/qux-event-title>]
-    >>> foo_folder.contentValues()
-    [<ATDocument at
-    /plone/Members/test_user_1_/foo-folder-title/qux-document-title>]
+    ...Item state changed...
+    >>> sorted(folder.contentIds())
+    ['bar-document-title', 'foo-event-title', 'foo-folder-title',
+    'foo-topic-title', 'qux-event-title']
+    >>> sorted(foo_folder.contentIds())
+    ['baz-event-title', 'qux-document-title']
     >>> portal.portal_workflow.getInfoFor(
     ...     folder['qux-event-title'], 'review_state')
     'private'
@@ -195,14 +180,12 @@ click the "Delete" button.
     >>> browser.getControl('Delete').click()
     >>> print browser.contents
     <...
-    ...2 item(s) deleted...
+    ...Item(s) deleted...
 
 The items have been deleted from their respective containers.
 
-    >>> folder.contentValues()
-    [<Topic at /plone/Members/test_user_1_/foo-topic-title>,
-     <ATEvent at /plone/Members/test_user_1_/foo-event-title>,
-     <ATFolder at /plone/Members/test_user_1_/foo-folder-title>
-     <ATDocument at /plone/Members/test_user_1_/bar-document-title>]
-    >>> foo_folder.contentValues()
-    []
+    >>> sorted(folder.contentIds())
+    ['bar-document-title', 'foo-event-title', 'foo-folder-title',
+    'foo-topic-title']
+    >>> sorted(foo_folder.contentIds())
+    ['baz-event-title']

@@ -18,4 +18,18 @@
      action="folder_contents_view"
      description="List items in a tabular form including object buttons" />
 
+  <browser:page
+     for="..interfaces.IFormTopic"
+     layer="..interfaces.IFormCriteriaLayer"
+     class=".buttons.TopicCopy"
+     name="topic_copy"
+     permission="zope2.CopyOrMove" />
+
+  <browser:page
+     for="..interfaces.IFormTopic"
+     layer="..interfaces.IFormCriteriaLayer"
+     class=".buttons.TopicCut"
+     name="topic_cut"
+     permission="zope2.CopyOrMove" />
+
 </configure>

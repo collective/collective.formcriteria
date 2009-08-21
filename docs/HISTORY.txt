@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.0.3 - 2009-08-21
+------------------
+
+* Fix folder contents form buttons, "Copy", "Cut", "Rename", "Change
+  State", and "Delete" now all work for objects listed by the
+  collections even if they are in different folders.  [rossp]
+
 1.0.2 - 2009-08-12
 ------------------
 
