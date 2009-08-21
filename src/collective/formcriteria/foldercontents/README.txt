@@ -45,14 +45,12 @@ Links" fields.
 By default, the normal folder_contents columns are selected in the
 "Table Columns" field.
 
-    >>> columns = browser.getControl('Table Columns')
-    >>> sorted(columns.value)
+    >>> sorted(browser.getControl('Table Columns').value)
     ['ModificationDate', 'Title', 'getObjSize', 'review_state']
 
 By default, "Title" is selected in the "Table Column Links" field.
 
-    >>> links = browser.getControl('Table Column Links')
-    >>> links.value
+    >>> browser.getControl('Table Column Links').value
     ['Title']
 
 Leave the defaults in place.
@@ -99,6 +97,84 @@ titles are links to the item.
     Traceback (most recent call last):
     LookupError: label 'Baz Event Title'
     >>> browser.getLink('Baz Event Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+
+Edit the collection and select different "Table Columns" and "Table
+Column Links".  Since the InAndOutWidget uses JavaScript, set the
+value manually and verify on the edit form.
+
+    >>> self.login()
+    >>> foo_topic.update(
+    ...     customViewFields=[
+    ...         'Title', 'Description', 'EffectiveDate'],
+    ...     customViewLinks=['Description', 'EffectiveDate'])
+    >>> self.logout()
+
+    >>> browser.getLink('Edit').click()
+    >>> sorted(browser.getControl('Table Columns').value)
+    ['Description', 'EffectiveDate', 'Title']
+    >>> sorted(browser.getControl('Table Column Links').value)
+    ['Description', 'EffectiveDate']
+    >>> browser.getControl('Save').click()
+    >>> print browser.contents
+    <...
+    ...Changes saved...
+
+The view renders the contents form with the specified columns.
+
+    >>> browser.getForm(name="folderContentsForm")
+    <zope.testbrowser.browser.Form object at ...>
+    >>> print browser.contents
+    <...
+    ...Title...
+    ...Description...
+    >>> 'Size' in browser.contents
+    False
+    >>> 'Modified' in browser.contents
+    False
+    >>> 'State' in browser.contents
+    False
+
+The topic contents are also listed with the specified columns.
+
+    >>> print browser.contents
+    <...
+    ...Bar Document Title...
+    ...blah...
+    >>> '0 kB' in browser.contents
+    False
+    >>> 'Jan 15, 2009' in browser.contents
+    False
+    >>> 'Published' in browser.contents
+    False
+
+The link columns have also been changed.
+
+    >>> browser.getControl('blah')
+    <ItemControl name='paths:list' type='checkbox'
+    optionValue='/plone/Members/test_user_1_/bar-document-title'
+    selected=False>
+    >>> browser.getLink('blah')
+    <Link text='blah'
+    url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
+    >>> browser.getControl('Jan 13, 2009')
+    <ItemControl name='paths:list' type='checkbox'
+    optionValue='/plone/Members/test_user_1_/bar-document-title'
+    selected=False>
+    >>> browser.getLink('Jan 13, 2009')
+    <Link text='Jan 13, 2009'
+    url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
+    >>> browser.getControl('blah blah')
+    Traceback (most recent call last):
+    LookupError: label 'blah blah'
+    >>> browser.getLink('blah blah')
+    Traceback (most recent call last):
+    LinkNotFoundError
+    >>> browser.getControl('Jan 15, 2009')
+    Traceback (most recent call last):
+    LookupError: label 'Jan 15, 2009'
+    >>> browser.getLink('Jan 15, 2009')
     Traceback (most recent call last):
     LinkNotFoundError
 
