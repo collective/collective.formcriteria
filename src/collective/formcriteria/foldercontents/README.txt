@@ -22,7 +22,6 @@ criteria tab.  Set a default search term.
     >>> crit.setValue('bar')
     >>> sort = foo_topic.addCriterion(
     ...     'getPhysicalPath', 'FormSortCriterion')
-    >>> sort = foo_topic.addCriterion('Title', 'FormSortCriterion')
     >>> crit.setFormFields(['value'])
 
 Open a browser and log in as a user who can change the display layout
@@ -67,22 +66,6 @@ to the contents view.
     >>> print browser.contents
     <...
     ...View changed...
-
-The links concerning the folder contents form point back to the
-folder_contents.
-
-    >>> browser.getLink('Actions')
-    <Link text='Actions \xe2\x96\xbc'
-    url='http://nohost/plone/Members/test_user_1_/foo-topic-title/folder_contents'>
-    >>> browser.getLink(url='Title_FormSortCriterion')
-    <Link text='Title'
-    url='http://nohost/plone/Members/test_user_1_/foo-topic-title/folder_contents?test=&crit__Title_FormSortCriterion:boolean=True'>
-
-The select all items functionality doesn't work currently and so is removed.
-
-    >>> browser.getLink('All')
-    Traceback (most recent call last):
-    LinkNotFoundError
 
 The view renders the contents form with the default columns.
 
