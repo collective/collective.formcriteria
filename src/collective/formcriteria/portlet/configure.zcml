@@ -1,7 +1,22 @@
 <configure
    xmlns="http://namespaces.zope.org/zope"
+   xmlns:browser="http://namespaces.zope.org/browser"
    xmlns:plone="http://namespaces.plone.org/plone"
    i18n_domain="collective.formcriteria">
+
+  <browser:resource
+     name="formcriteria-portlet.css"
+     file="formcriteria-portlet.css"
+     />
+
+  <browser:viewlet
+     layer="..interfaces.IFormCriteriaLayer"
+     name="collective.formcriteria.portlet.htmlhead"
+     manager="plone.app.layout.viewlets.interfaces.IHtmlHeadLinks"
+     class="..form.form.SearchFormHeadView"
+     template="htmlhead.pt"
+     permission="zope2.View" 
+     />
 
   <plone:portlet
      name="collective.formcriteria.CriteriaFormPortlet"
