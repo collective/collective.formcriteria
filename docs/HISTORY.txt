@@ -4,6 +4,7 @@ Changelog
 1.0.3 - 2009-08-21
 ------------------
 
+* Tighten up the search form portlet spacing [rossp]
 * Use "Table Columns" fields for the folder contents form to control
   the folder contents columns
 * Use a "Table Column Links" collection filed to specify which folder
