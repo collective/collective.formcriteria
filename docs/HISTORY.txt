@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.3 - 2009-08-21
+1.1.0 - 2009-08-21
 ------------------
 
 * Tighten up the search form portlet spacing [rossp]
