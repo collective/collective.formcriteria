@@ -3,7 +3,7 @@
 Contents View
 =============
 
-A version of the folder_contents view can be used with collections
+A version of the folder_contents can be used with collections
 where the columns are those specified in the collection's "Table
 Columns" field.  The buttons at the bottom of the folder contents view
 will then be applied to the selected items.
@@ -20,6 +20,9 @@ criteria tab.  Set a default search term.
     >>> crit = foo_topic.addCriterion(
     ...     'SearchableText', 'FormSimpleStringCriterion')
     >>> crit.setValue('bar')
+    >>> sort = foo_topic.addCriterion(
+    ...     'getPhysicalPath', 'FormSortCriterion')
+    >>> sort = foo_topic.addCriterion('Title', 'FormSortCriterion')
     >>> crit.setFormFields(['value'])
 
 Open a browser and log in as a user who can change the display layout
@@ -64,6 +67,16 @@ to the contents view.
     >>> print browser.contents
     <...
     ...View changed...
+
+The links concerning the folder contents form point back to the
+folder_contents.
+
+    >>> browser.getLink('Actions')
+    <Link text='Actions \xe2\x96\xbc'
+    url='http://nohost/plone/Members/test_user_1_/foo-topic-title/folder_contents'>
+    >>> browser.getLink(url='Title_FormSortCriterion')
+    <Link text='Title'
+    url='http://nohost/plone/Members/test_user_1_/foo-topic-title/folder_contents?test=&crit__Title_FormSortCriterion:boolean=True'>
 
 The view renders the contents form with the default columns.
 
@@ -190,7 +203,7 @@ Add the portlet.
 
 The search form is also rendered if form criteria are present.
 
-    >>> foo_topic.setFormLayout('folder_contents_view')
+    >>> foo_topic.setFormLayout('folder_contents')
     >>> browser.open(foo_topic.absolute_url())
     >>> form = browser.getForm(name="formcriteria_search")
 

@@ -6,7 +6,7 @@
      for="..interfaces.IFormTopic"
      layer="..interfaces.IFormCriteriaLayer"
      class=".form.FolderContentsView"
-     name="folder_contents_view"
+     name="folder_contents"
      template="template.pt"
      permission="cmf.ListFolderContents" />
 
@@ -15,7 +15,7 @@
      layer="..interfaces.IFormCriteriaLayer"
      menu="plone_displayviews"
      title="Tabular Form"
-     action="folder_contents_view"
+     action="folder_contents"
      description="List items in a tabular form including object buttons" />
 
   <browser:page
