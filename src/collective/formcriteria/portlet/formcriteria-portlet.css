@@ -1,1 +1,4 @@
-.portletCriteriaForm {}
+.portletCriteriaForm .portletItem {
+    padding-top: 0.5em;
+    padding-bottom: 0.01em;
+}
