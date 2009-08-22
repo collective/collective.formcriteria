@@ -175,7 +175,7 @@ Add the portlet.
     >>> from zope import component
     >>> from plone.i18n.normalizer import (
     ...     interfaces as normalizer_ifaces)
-    >>> from collective.formcriteria import portlet
+    >>> from collective.formcriteria.portlet import portlet
     >>> manager = foo_topic.restrictedTraverse(
     ...     '++contextportlets++plone.rightcolumn')
     >>> site_path_len = len(portal.getPhysicalPath())

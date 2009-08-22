@@ -1,0 +1,16 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:plone="http://namespaces.plone.org/plone"
+   i18n_domain="collective.formcriteria">
+
+  <plone:portlet
+     name="collective.formcriteria.CriteriaFormPortlet"
+     interface=".portlet.ICriteriaFormPortlet"
+     assignment=".portlet.Assignment"
+     renderer=".portlet.Renderer"
+     view_permission="zope2.View"
+     edit_permission="cmf.ManagePortal"
+     addview=".portlet.AddForm"
+     editview=".portlet.EditForm" />
+
+</configure>

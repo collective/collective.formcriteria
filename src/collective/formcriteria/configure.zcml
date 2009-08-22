@@ -9,53 +9,8 @@
 
   <include package="plone.app.contentmenu" />
 
-  <browser:resource
-     name="formcriteria.kss"
-     file="formcriteria.kss"
-     />
-
-  <browser:viewlet
-     layer=".interfaces.IFormCriteriaLayer"
-     name="collective.formcriteria.htmlhead"
-     manager="plone.app.layout.viewlets.interfaces.IHtmlHeadLinks"
-     class=".form.SearchFormHeadView"
-     template="form-htmlhead.pt"
-     permission="zope2.View" 
-     />
-  
-  <browser:page
-     for=".interfaces.IFormTopic"
-     layer=".interfaces.IFormCriteriaLayer"
-     name="criteria_form"
-     class=".form.SearchFormView"
-     template="form.pt"
-     permission="zope2.View" 
-     />
-
-  <browser:menuItem
-     for=".interfaces.IFormTopic"
-     layer=".interfaces.IFormCriteriaLayer"
-     menu="plone_displayviews"
-     title="Search Form"
-     action="criteria_form"
-     description="Renders the expanded criteria search form" />
-  
-  <browser:page
-     for=".interfaces.IFormTopic"
-     layer=".interfaces.IFormCriteriaLayer"
-     name="formcriteria_macros"
-     template="form_macros.pt"
-     permission="zope2.View" />
-
-  <plone:portlet
-     name="collective.formcriteria.CriteriaFormPortlet"
-     interface=".portlet.ICriteriaFormPortlet"
-     assignment=".portlet.Assignment"
-     renderer=".portlet.Renderer"
-     view_permission="zope2.View"
-     edit_permission="cmf.ManagePortal"
-     addview=".portlet.AddForm"
-     editview=".portlet.EditForm" />
+  <include package=".form" />
+  <include package=".portlet" />
 
   <browser:page
      for=".interfaces.IFormTopic"
