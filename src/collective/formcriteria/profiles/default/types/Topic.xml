@@ -23,7 +23,7 @@
   <element value="folder_tabular_view"/>
   <element value="atct_album_view"/>
   <element value="atct_topic_view"/>
-  <element value="folder_contents_view"/>
+  <element value="folder_contents"/>
   <element value="criteria_form"/>
   <element value="grouped_listing"/>
  </property>

@@ -190,6 +190,8 @@ present.
     >>> anon_browser.getForm(name="formcriteria_search")
     Traceback (most recent call last):
     LookupError
+    >>> 'formcriteria-portlet.css' in anon_browser.contents
+    False
 
 Add a simple string criterion for the SearchableText index on the
 criteria tab.
@@ -241,6 +243,8 @@ rendered.
 
     >>> anon_browser.open(foo_topic.absolute_url())
     >>> form = anon_browser.getForm(name="formcriteria_search")
+    >>> 'formcriteria-portlet.css' in anon_browser.contents
+    True
     
 Criterion fields that haven't been selected in "Form Fields" don't
 appear on the search form.

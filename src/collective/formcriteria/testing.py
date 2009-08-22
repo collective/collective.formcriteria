@@ -9,7 +9,7 @@ from Products.Five import zcml, fiveconfigure
 from collective.testcaselayer import ptc as tcl_ptc
 
 from collective import formcriteria
-from collective.formcriteria import portlet
+from collective.formcriteria.portlet import portlet
 
 class Layer(tcl_ptc.BasePTCLayer):
     """Install collective.formcriteria"""

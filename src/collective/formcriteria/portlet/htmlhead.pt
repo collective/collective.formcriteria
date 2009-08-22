@@ -1,0 +1,5 @@
+<metal:block use-macro="here/global_defines/macros/defines" />
+<style type="text/css"
+       media="all"
+       tal:content="structure string:<!-- @import url($portal_url/++resource++formcriteria-portlet.css); -->">
+</style>

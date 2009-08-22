@@ -5,7 +5,7 @@ from Products.ATContentTypes import criteria
 from Products.ATContentTypes import interfaces as atct_ifaces
 
 from collective.formcriteria import interfaces
-from collective.formcriteria import form
+from collective.formcriteria.form import form
 
 missing = object()
 

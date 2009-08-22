@@ -13,7 +13,7 @@ Add a criteria and set the collection layout.
     >>> path_crit.setRecurse(True)
     >>> sort_crit = foo_topic.addCriterion(
     ...     'getPhysicalPath', 'FormSortCriterion')
-    >>> foo_topic.setLayout('folder_contents_view')
+    >>> foo_topic.setLayout('folder_contents')
 
 Create a folder and move one item into the folder.
 

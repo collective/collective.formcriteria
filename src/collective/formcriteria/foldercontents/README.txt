@@ -3,7 +3,7 @@
 Contents View
 =============
 
-A version of the folder_contents view can be used with collections
+A version of the folder_contents can be used with collections
 where the columns are those specified in the collection's "Table
 Columns" field.  The buttons at the bottom of the folder contents view
 will then be applied to the selected items.
@@ -20,6 +20,8 @@ criteria tab.  Set a default search term.
     >>> crit = foo_topic.addCriterion(
     ...     'SearchableText', 'FormSimpleStringCriterion')
     >>> crit.setValue('bar')
+    >>> sort = foo_topic.addCriterion(
+    ...     'getPhysicalPath', 'FormSortCriterion')
     >>> crit.setFormFields(['value'])
 
 Open a browser and log in as a user who can change the display layout
@@ -175,7 +177,7 @@ Add the portlet.
     >>> from zope import component
     >>> from plone.i18n.normalizer import (
     ...     interfaces as normalizer_ifaces)
-    >>> from collective.formcriteria import portlet
+    >>> from collective.formcriteria.portlet import portlet
     >>> manager = foo_topic.restrictedTraverse(
     ...     '++contextportlets++plone.rightcolumn')
     >>> site_path_len = len(portal.getPhysicalPath())
@@ -190,7 +192,7 @@ Add the portlet.
 
 The search form is also rendered if form criteria are present.
 
-    >>> foo_topic.setFormLayout('folder_contents_view')
+    >>> foo_topic.setFormLayout('folder_contents')
     >>> browser.open(foo_topic.absolute_url())
     >>> form = browser.getForm(name="formcriteria_search")
 
