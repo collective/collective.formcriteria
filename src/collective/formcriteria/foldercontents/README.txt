@@ -78,6 +78,12 @@ folder_contents.
     <Link text='Title'
     url='http://nohost/plone/Members/test_user_1_/foo-topic-title/folder_contents?test=&crit__Title_FormSortCriterion:boolean=True'>
 
+The select all items functionality doesn't work currently and so is removed.
+
+    >>> browser.getLink('All')
+    Traceback (most recent call last):
+    LinkNotFoundError
+
 The view renders the contents form with the default columns.
 
     >>> browser.getForm(name="folderContentsForm")
