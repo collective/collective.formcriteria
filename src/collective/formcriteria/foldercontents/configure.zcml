@@ -17,6 +17,13 @@
      title="Tabular Form"
      action="folder_contents"
      description="List items in a tabular form including object buttons" />
+    
+  <browser:page
+     for="..interfaces.IFormTopic"
+     class=".form.FolderContentsKSSView"
+     attribute="update_table"
+     name="foldercontents_update_table"
+     permission="cmf.ListFolderContents" />
 
   <browser:page
      for="..interfaces.IFormTopic"
