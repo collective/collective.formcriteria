@@ -3,21 +3,7 @@
      xmlns:metal="http://xml.zope.org/namespaces/metal"
      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
      i18n:domain="plone">
-  <input type="hidden" name="sort_on"
-         tal:attributes="value request/sort_on|string:getObjPositionInParent"
-         />
-  <input type="hidden" name="pagenumber" tal:attributes="value view/batch/pagenumber"/>
-  <input type="hidden" name="show_all" tal:attributes="value view/show_all"/>
-  <input type="hidden" name="orig_template" tal:attributes="value view/viewname"/>
-  <tal:block condition="view/selectall">
-    <input type="hidden" name="paths:list"
-           tal:repeat="item view/batch/items_not_on_page"
-           tal:attributes="value item/path"/>
-  </tal:block>
 
-  <!-- <div metal:use-macro="context/document_actions/macros/document_actions">
-       Document actions (print, sendto etc)
-       </div> -->
   <p class="discreet"
      tal:condition="not: view/batch"
      i18n:translate="description_no_visible_items_add_paste">
