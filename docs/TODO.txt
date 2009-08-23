@@ -43,8 +43,6 @@ TODO
 
 * Add single selection (pulldown, radio) criteria (davisagli)
 
-* Fix folder_contents view to support deleting, etc.
-
 * Use subcollections to support AdvancedQuery operations
 
   Collections will act as grouping/parenthesis *and* operators.  IOW,
