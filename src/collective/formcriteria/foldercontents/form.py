@@ -9,6 +9,7 @@ from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
 
 from Products.CMFPlone.utils import safe_unicode
+from Products.CMFPlone import PloneBatch  
 from plone.memoize import instance
 
 from plone.app.content.browser import tableview
@@ -44,8 +45,7 @@ class Table(tableview.Table):
     @property
     def items_on_page(self):
         if self.islastpage:
-            # XXX should this be self.batch.sequence_length
-            remainder = self.batch.length % self.batch.size
+            remainder = self.batch.sequence_length % self.batch.size
             if remainder == 0:
                 return self.batch.size
             else:
@@ -68,6 +68,10 @@ class Table(tableview.Table):
                 self.selectall = True
         return property(
             tableview.Table._get_select_currentbatch, set)
+
+    @property
+    def within_batch_size(self):
+        return self.batch.sequence_length < self.pagesize
 
 class FolderContentsTable(foldercontents.FolderContentsTable):
     """Use a table template which obeys the columns fields"""                
@@ -101,6 +105,12 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
     def batch(self):
         """Let the collection batch the results"""
         context = aq_inner(self.context)
+        if self.request.get('show_all', '').lower() == 'true':
+            results = context.queryCatalog(
+                self.contentFilter, batch=False)
+            return PloneBatch.Batch(
+                results, len(results),
+                int(self.request.get('b_start', 0)), orphan=0)
         return context.queryCatalog(self.contentFilter, batch=True)
 
     @property
