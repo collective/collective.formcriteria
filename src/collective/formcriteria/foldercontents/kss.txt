@@ -1,0 +1,93 @@
+.. -*-doctest-*-
+
+KSS Folder Contents
+===================
+
+The folder contents view uses KSS/AJAX to select all items and to sort
+on the columns.
+
+Add a simple string criterion for the SearchableText index on the
+criteria tab.  Set a default search term.
+
+    >>> foo_topic = self.folder['foo-topic-title']
+    >>> crit = foo_topic.addCriterion(
+    ...     'SearchableText', 'FormSimpleStringCriterion')
+    >>> crit.setValue('bar')
+    >>> sort = foo_topic.addCriterion(
+    ...     'getPhysicalPath', 'FormSortCriterion')
+    >>> crit.setFormFields(['value'])
+
+Change the columns and link columns.
+
+    >>> foo_topic.update(
+    ...     customViewFields=[
+    ...         'Title', 'Description', 'EffectiveDate'],
+    ...     customViewLinks=['Description', 'EffectiveDate'])
+
+Open a browser and log in as a user who can view the topic.
+
+    >>> from Products.Five.testbrowser import Browser
+    >>> from Products.PloneTestCase import ptc
+    >>> browser = Browser()
+    >>> browser.handleErrors = False
+    >>> browser.open(portal.absolute_url())
+    >>> browser.getLink('Log in').click()
+    >>> browser.getControl('Login Name').value = ptc.default_user
+    >>> browser.getControl(
+    ...     'Password').value = ptc.default_password
+    >>> browser.getControl('Log in').click()
+
+Use the browser to load the XML KSS uses to update the table.
+
+    >>> browser.open(
+    ...     foo_topic.absolute_url()+'/foldercontents_update_table')
+
+The XML reflects the customized columns
+
+    >>> print browser.contents
+    <...
+    ...Title...
+    ...Description...
+    ...Effective Date...
+    <input type="checkbox" class="noborder" name="paths:list"
+    id="cb_bar-document-title"
+    value="/plone/Members/test_user_1_/bar-document-title" alt="Select
+    Bar Document Title" title="Select Bar Document Title" />
+    ...Bar Document Title...
+    ...blah...
+    ...2009-01-13...
+
+    >>> 'Size' in browser.contents
+    False
+    >>> 'Modification Date' in browser.contents
+    False
+    >>> '&#160;State&#160;' in browser.contents
+    False
+
+    >>> '0 kB' in browser.contents
+    False
+    >>> '2009-01-15' in browser.contents
+    False
+    >>> '<span class="state-published">published</span>' in browser.contents
+    False
+
+If the "Select: All" link is clicked, the screen is selected.
+
+    >>> browser.open(
+    ...     foo_topic.absolute_url()+'/foldercontents_update_table?'
+    ...     'show_all=False&pagenumber=1&'
+    ...     'sort_on=getObjPositionInParent&select=screen')
+
+    >>> print browser.contents
+    <...
+    ...Title...
+    ...Description...
+    ...Effective Date...
+    <input type="checkbox" class="noborder" name="paths:list"
+    id="cb_bar-document-title"
+    value="/plone/Members/test_user_1_/bar-document-title"
+    alt="Select Bar Document Title" checked="checked"
+    title="Select Bar Document Title" />
+    ...Bar Document Title...
+    ...blah...
+    ...2009-01-13...

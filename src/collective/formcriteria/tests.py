@@ -15,6 +15,7 @@ def test_suite():
         'README.txt',
         'foldercontents/README.txt',
         'foldercontents/buttons.txt',
+        'foldercontents/kss.txt',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
     suite.layer = testing.layer
