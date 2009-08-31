@@ -22,14 +22,14 @@ class Table(tableview.Table):
     def __init__(self, context, request, base_url, view_url, items,
                  batch, columns, show_sort_column=False, buttons=[],
                  pagesize=20):
+        self._batch = batch
         super(Table, self).__init__(
             request=request, base_url=base_url, view_url=view_url,
             items=items, show_sort_column=show_sort_column,
-            buttons=buttons, pagesize=pagesize)
+            buttons=buttons, pagesize=batch.size)
         map(self.set_checked, items)
         self.context = context
         self.columns = columns
-        self._batch = batch
 
     @property
     @instance.memoize
@@ -44,19 +44,30 @@ class Table(tableview.Table):
     @property
     def items_on_page(self):
         if self.islastpage:
+            # XXX should this be self.batch.sequence_length
             remainder = self.batch.length % self.batch.size
             if remainder == 0:
                 return self.batch.size
             else:
                 return remainder
         else:
-            return self.batch.pagesize
+            return self.batch.size
 
     @property
     def items_not_on_page(self):
         items_on_page = list(self.items)
         return [item for item in self.items if item not in
                 items_on_page]
+
+    @apply
+    def selectcurrentbatch():
+        def set(self, value):
+            self._selectcurrentbatch = value
+            if self._selectcurrentbatch and self.show_all or (
+                self.batch.sequence_length <= self.pagesize):
+                self.selectall = True
+        return property(
+            tableview.Table._get_select_currentbatch, set)
 
 class FolderContentsTable(foldercontents.FolderContentsTable):
     """Use a table template which obeys the columns fields"""                
