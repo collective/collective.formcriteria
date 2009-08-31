@@ -14,15 +14,16 @@ field will be rendered as links.  Note that it's possible to select a
 link column that isn't a table column which will have no effect.
 
 Add a simple string criterion for the SearchableText index on the
-criteria tab.  Set a default search term.
+criteria tab.  Set a default search term.  Add a sort criteria for
+consistent ordering.
 
     >>> foo_topic = self.folder['foo-topic-title']
     >>> crit = foo_topic.addCriterion(
     ...     'SearchableText', 'FormSimpleStringCriterion')
     >>> crit.setValue('bar')
+    >>> crit.setFormFields(['value'])
     >>> sort = foo_topic.addCriterion(
     ...     'getPhysicalPath', 'FormSortCriterion')
-    >>> crit.setFormFields(['value'])
 
 Open a browser and log in as a user who can change the display layout
 for the topic.
