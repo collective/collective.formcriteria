@@ -4,7 +4,6 @@ from zope.component import getMultiAdapter
 from zope.app import pagetemplate
 from zope.i18n import translate
 
-from Acquisition import aq_base
 from Acquisition import aq_inner
 
 from Products.CMFCore.utils import getToolByName
@@ -23,11 +22,11 @@ class Table(tableview.Table):
     def __init__(self, context, request, base_url, view_url, items,
                  batch, columns, show_sort_column=False, buttons=[],
                  pagesize=20):
-        map(self.set_checked, items)
         super(Table, self).__init__(
             request=request, base_url=base_url, view_url=view_url,
             items=items, show_sort_column=show_sort_column,
             buttons=buttons, pagesize=pagesize)
+        map(self.set_checked, items)
         self.context = context
         self.columns = columns
         self._batch = batch
