@@ -14,15 +14,16 @@ field will be rendered as links.  Note that it's possible to select a
 link column that isn't a table column which will have no effect.
 
 Add a simple string criterion for the SearchableText index on the
-criteria tab.  Set a default search term.
+criteria tab.  Set a default search term.  Add a sort criteria for
+consistent ordering.
 
     >>> foo_topic = self.folder['foo-topic-title']
     >>> crit = foo_topic.addCriterion(
     ...     'SearchableText', 'FormSimpleStringCriterion')
     >>> crit.setValue('bar')
+    >>> crit.setFormFields(['value'])
     >>> sort = foo_topic.addCriterion(
     ...     'getPhysicalPath', 'FormSortCriterion')
-    >>> crit.setFormFields(['value'])
 
 Open a browser and log in as a user who can change the display layout
 for the topic.
@@ -168,6 +169,30 @@ The link columns have also been changed.
     >>> browser.getLink('Bar Document Title')
     Traceback (most recent call last):
     LinkNotFoundError
+
+The item selection header row reflects the new number of columns.
+
+    >>> print browser.contents
+    <...
+    ...<thead>...
+    ...<th colspan="4"...
+    ...</thead>...
+
+The KSS update table view also reflects the selected columns.
+
+    >>> browser.open(
+    ...     foo_topic.absolute_url()+'/foldercontents_update_table')
+    >>> print browser.contents
+    <...
+    ...Description...
+    ...Effective Date...
+    ...Title...
+    >>> 'Size' in browser.contents
+    False
+    >>> 'Modification Date' in browser.contents
+    False
+    >>> '&#160;State&#160;' in browser.contents
+    False
 
 Search Form Portlet
 -------------------

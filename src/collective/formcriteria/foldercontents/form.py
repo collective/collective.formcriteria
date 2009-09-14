@@ -4,11 +4,12 @@ from zope.component import getMultiAdapter
 from zope.app import pagetemplate
 from zope.i18n import translate
 
-import Acquisition
+from Acquisition import aq_inner
 
 from Products.CMFCore.utils import getToolByName
 
 from Products.CMFPlone.utils import safe_unicode
+from Products.CMFPlone import PloneBatch  
 from plone.memoize import instance
 
 from plone.app.content.browser import tableview
@@ -22,20 +23,55 @@ class Table(tableview.Table):
     def __init__(self, context, request, base_url, view_url, items,
                  batch, columns, show_sort_column=False, buttons=[],
                  pagesize=20):
-        map(self.set_checked, items)
+        self._batch = batch
         super(Table, self).__init__(
             request=request, base_url=base_url, view_url=view_url,
             items=items, show_sort_column=show_sort_column,
-            buttons=buttons, pagesize=pagesize)
+            buttons=buttons, pagesize=batch.size)
+        map(self.set_checked, items)
         self.context = context
         self.columns = columns
-        self._batch = batch
 
     @property
     @instance.memoize
     def batch(self):
         """Use the collection batch"""
         return self._batch
+
+    @property
+    def islastpage(self):
+        return self.batch.numpages == self.batch.pagenumber
+
+    @property
+    def items_on_page(self):
+        if self.islastpage:
+            remainder = self.batch.sequence_length % self.batch.size
+            if remainder == 0:
+                return self.batch.size
+            else:
+                return remainder
+        else:
+            return self.batch.size
+
+    @property
+    def items_not_on_page(self):
+        items_on_page = list(self.items)
+        return [item for item in self.items if item not in
+                items_on_page]
+
+    @apply
+    def selectcurrentbatch():
+        def set(self, value):
+            self._selectcurrentbatch = value
+            if self._selectcurrentbatch and self.show_all or (
+                self.batch.sequence_length <= self.pagesize):
+                self.selectall = True
+        return property(
+            tableview.Table._get_select_currentbatch, set)
+
+    @property
+    def within_batch_size(self):
+        return self.batch.sequence_length < self.pagesize
 
 class FolderContentsTable(foldercontents.FolderContentsTable):
     """Use a table template which obeys the columns fields"""                
@@ -47,8 +83,8 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
         """Use a table template which obeys the columns fields"""
         self.context = context
         self.request = request
-        self.contentFilter = contentFilter
-
+        self.contentFilter = request
+        
         column_vocab = context.Vocabulary('customViewFields')[0]
         link_columns = context.getField(
             'customViewLinks').getAccessor(context)()
@@ -68,14 +104,20 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
     @instance.memoize
     def batch(self):
         """Let the collection batch the results"""
-        context = Acquisition.aq_inner(self.context)
+        context = aq_inner(self.context)
+        if self.request.get('show_all', '').lower() == 'true':
+            results = context.queryCatalog(
+                self.contentFilter, batch=False)
+            return PloneBatch.Batch(
+                results, len(results),
+                int(self.request.get('b_start', 0)), orphan=0)
         return context.queryCatalog(self.contentFilter, batch=True)
 
     @property
     @instance.memoize
     def items(self):
         """Use the item brains"""
-        context = Acquisition.aq_inner(self.context)
+        context = aq_inner(self.context)
         plone_utils = getToolByName(context, 'plone_utils')
         plone_view = getMultiAdapter((context, self.request), name=u'plone')
         portal_workflow = getToolByName(context, 'portal_workflow')
@@ -152,7 +194,7 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
     @property
     def buttons(self):
         buttons = []
-        context = Acquisition.aq_inner(self.context)
+        context = aq_inner(self.context)
         portal_actions = getToolByName(context, 'portal_actions')
         button_actions = portal_actions.listActionInfos(
             object=context, categories=('folder_topic_buttons', ))
@@ -178,6 +220,8 @@ class FolderContentsView(foldercontents.FolderContentsView):
     
     def contents_table(self):
         """Use the request as the contentFilter"""
-        table = FolderContentsTable(
-            self.context, self.request, contentFilter=self.request)
+        table = FolderContentsTable(self.context, self.request)
         return table.render()
+
+class FolderContentsKSSView(foldercontents.FolderContentsKSSView):
+    table = FolderContentsTable
