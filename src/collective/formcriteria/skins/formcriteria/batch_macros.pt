@@ -7,7 +7,9 @@
 
     <!-- Navigation -->
     <div class="listingBar"
-         metal:define-macro="navigation"
+         metal:define-macro="navigation">
+      <metal:inner
+         define-macro="navigationInner"
          tal:define="request request|here/request|container/request|nothing;
                      batch batch|nothing;
                      template_id template_id|template/getId;
@@ -151,6 +153,7 @@
            tal:content="batch/numpages">3457</a>
       </span>
 
+      </metal:inner>
     </div>
 
   </body>
