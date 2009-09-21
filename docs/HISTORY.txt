@@ -4,7 +4,10 @@ Changelog
 1.1.2 - Unreleased
 ------------------
 
-* Fix <tfoot> usage
+* Fix <tfoot> usage [rossp]
+
+* Integrate sort criteria with folder contents view columns for KSS
+  sorting [rossp]
 
 1.1.1 - 2009-08-31
 ------------------
