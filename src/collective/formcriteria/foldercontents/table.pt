@@ -29,8 +29,9 @@
                              batch view/batch;
                              sort_info context/@@sort_info/getSortInfo|nothing;
                              form sort_info/form|nothing;
-                             sorts sort_info/sorts|nothing;">
-    
+                             sorts sort_info/sorts|nothing;
+                             colspan python:len(view.columns)+1;">
+
     <div class="visualClear" id="clear-space-before-navigation"><!-- --></div>
 
     <table class="listing"
@@ -40,15 +41,18 @@
            tal:condition="view/items">
       <thead>
         <tr tal:condition="python: batch.next or  batch.previous or sorts">
-          <th colspan="0" class="nosort">
+          <th colspan="6" class="nosort"
+              tal:attributes="colspan colspan;">
             <div metal:use-macro="context/batch_macros/macros/navigation" />
           </th>
         </tr>
         <tr tal:condition="not:view/selectcurrentbatch">
-          <th colspan="0" class="nosort"><span i18n:translate="label_select" tal:omit-tag="">Select:</span> <a i18n:translate="label_all" tal:attributes="href view/selectscreen_url" id="foldercontents-selectall" class="update-selection">All</a></th>
+          <th colspan="6" class="nosort"
+              tal:attributes="colspan colspan;"><span i18n:translate="label_select" tal:omit-tag="">Select:</span> <a i18n:translate="label_all" tal:attributes="href view/selectscreen_url" id="foldercontents-selectall" class="update-selection">All</a></th>
         </tr>
         <tr tal:condition="view/show_select_all_items">
-          <th colspan="0" class="nosort">
+          <th colspan="6" class="nosort"
+              tal:attributes="colspan colspan;">
             <span tal:omit-tag="" i18n:translate="tableheading_all_items_selected">
             All <tal:block replace="view/items_on_page" i18n:name="count"/> items on this
             page are selected. 
@@ -60,7 +64,8 @@
           </th>
         </tr>
         <tr tal:condition="view/selectall">
-          <th colspan="0" class="nosort">
+          <th colspan="6" class="nosort"
+              tal:attributes="colspan colspan;">
             <span tal:omit-tag="" i18n:translate="tableheading_all_items_selected">
             All <tal:block replace="view/batch/sequence_length" i18n:name="count"/> items in this collection
             are selected. 
@@ -83,21 +88,24 @@
       </thead>
       <tfoot tal:condition="not:view/within_batch_size">
         <tr tal:condition="not:view/show_all">
-          <th colspan="0" class="nosort">
+          <th colspan="6" class="nosort"
+              tal:attributes="colspan colspan;">
             <a tal:attributes="href view/show_all_url"
                i18n:translate="label_show_all"
                id="foldercontents-show-all" class="update-selection">Show all items</a>
           </th>
         </tr>
         <tr tal:condition="view/show_all">
-          <th colspan="0" class="nosort">
+          <th colspan="6" class="nosort"
+              tal:attributes="colspan colspan;">
             <a tal:attributes="href view/view_url"
                i18n:translate="label_show_batched"
                id="foldercontents-show-batched" class="update-selection">Show batched</a>
           </th>
         </tr>
         <tr tal:condition="python: batch.next or  batch.previous or sorts">
-          <th colspan="0" class="nosort">
+          <th colspan="6" class="nosort"
+              tal:attributes="colspan colspan;">
             <div metal:use-macro="context/batch_macros/macros/navigation" />
           </th>
         </tr>
