@@ -76,7 +76,7 @@
 
         <tr>
           <th class="nosort">&#160;</th>
-          <th class="nosort column"
+          <th class="nosort sortColumn"
               id="foldercontents-name-column"
               tal:repeat="column view/columns"
               tal:attributes="id string:foldercontents-${column/id}-column;"

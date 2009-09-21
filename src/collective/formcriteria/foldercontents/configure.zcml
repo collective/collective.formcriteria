@@ -2,6 +2,11 @@
    xmlns="http://namespaces.zope.org/zope"
    xmlns:browser="http://namespaces.zope.org/browser">
 
+  <browser:resource
+     name="formcriteria-provider.js"
+     file="provider.js"
+     />
+
   <browser:page
      for="..interfaces.IFormTopic"
      layer="..interfaces.IFormCriteriaLayer"

@@ -9,3 +9,11 @@ form[id=formcriteria_search] select.blurrable:blur {
 form[id=formcriteria_search] textarea.blurrable:blur {
     action-cancel: kssValidateField;
 }
+
+#listing-table .sortColumn:click {
+    action-server: update_table url(kssAttr("serveraction", true));
+    evt-click-preventdefault: True;
+    update_table-pagenumber: currentFormVar('pagenumber');
+    update_table-show_all: currentFormVar('show_all');
+    update_table-sort_on: folderContentsColumnOrCurrentFormVar('sort_on');
+}
