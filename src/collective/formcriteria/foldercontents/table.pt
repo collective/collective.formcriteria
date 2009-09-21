@@ -26,7 +26,10 @@
                  tal:define="nosortclass view/get_nosort_class;
                              template_id string:folder_contents;
                              here nocall:context;
-                             batch view/batch;">
+                             batch view/batch;
+                             sort_info context/@@sort_info/getSortInfo|nothing;
+                             form sort_info/form|nothing;
+                             sorts sort_info/sorts|nothing;">
     
     <div class="visualClear" id="clear-space-before-navigation"><!-- --></div>
 
