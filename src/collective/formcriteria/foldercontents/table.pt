@@ -8,7 +8,6 @@
          />
   <input type="hidden" name="pagenumber" tal:attributes="value view/batch/pagenumber"/>
   <input type="hidden" name="show_all" tal:attributes="value view/show_all"/>
-  <input type="hidden" name="orig_template" tal:attributes="value view/viewname"/>
   <tal:block condition="view/selectall">
     <input type="hidden" name="paths:list"
            tal:repeat="item view/items_not_on_page"
