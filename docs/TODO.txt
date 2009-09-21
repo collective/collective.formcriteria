@@ -1,6 +1,9 @@
 TODO
 ====
 
+* Make the '<input type="hidden" name="sort_on"...' use the default
+  sort criteria if present
+
 * Add a sort icon to sortable folder_contents columns
 
 * Establish some sort of correlation between indexes and metadata
