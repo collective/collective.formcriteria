@@ -88,7 +88,7 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
         sort_info = context.restrictedTraverse(
             '@@sort_info').getSortInfo()
         sort_on = contentFilter.get('sort_on')
-        if sort_on in self.sorts:
+        if sort_on in sort_info['sorts']:
             sort = self.sorts[sort_on]
             request[sort['id']] = True
         
