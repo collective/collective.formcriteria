@@ -111,7 +111,7 @@
         </tr>
       </tfoot>
 
-      <tbody tal:condition="view/batch">>
+      <tbody tal:condition="view/batch">
         <tal:items tal:repeat="item view/items">
           <tr tal:attributes="class item/table_row_class;
                               id string:folder-contents-item-${item/id};" >
