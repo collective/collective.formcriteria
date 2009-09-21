@@ -6,22 +6,26 @@ class SortView(object):
     def getSortInfo(self):
         form = self.request.form.copy()
         selected = None
-        sorts = []
+        ids = []
+        sorts = {}
         criteria = self.context.listSortCriteria()
         for crit in criteria:
+            field = crit.Field()
             sort = dict(
                 id=crit.getId(),
-                name=self.context.getFriendlyName(crit.Field()),
+                name=self.context.getFriendlyName(field),
                 selected=False)
             if sort['id'] in self.request:
                 form.pop(sort['id'])
                 selected = sort
                 sort['selected'] = True
-            sorts.append(sort)
+            sorts[field] = sort
+            ids.append(field)
         # If no sort is selected, use the first as the default
         if sorts and selected is None:
-            selected = sorts[0]
+            selected = sorts[ids[0]]
             form.pop(selected['id'], None)
-            sorts[0]['selected'] = True
+            selected['selected'] = True
 
-        return dict(form=form, sorts=sorts, selected=selected)
+        return dict(form=form, sorts=sorts, selected=selected,
+                    ids=ids)

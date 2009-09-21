@@ -18,12 +18,13 @@
                      currentpage batch/pagenumber;
                      sort_info context/@@sort_info/getSortInfo|nothing;
                      form sort_info/form|nothing;
+                     ids ids|sort_info/ids|nothing;
                      sorts sort_info/sorts|nothing;"
-         tal:condition="python: batch.next or  batch.previous or sorts">
+         tal:condition="python: batch.next or  batch.previous or ids">
 
-        <span tal:condition="sorts">
+        <span tal:condition="ids">
           Sort on:
-          <tal:sorts repeat="sort sorts">
+          <tal:sorts repeat="sort python:[sorts[field] for field in ids]">
             <a tal:condition="not:sort/selected"
                tal:attributes="href python:'%s?%s' % (url, mq(form, {sort['id']: True}));
                                id string:formcriteria-sort-${sort/id};"

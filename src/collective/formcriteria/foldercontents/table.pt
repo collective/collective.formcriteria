@@ -26,10 +26,10 @@
                              template_id string:folder_contents;
                              here nocall:context;
                              batch view/batch;
+                             colspan python:len(view.columns)+1;
                              sort_info context/@@sort_info/getSortInfo|nothing;
-                             form sort_info/form|nothing;
                              sorts sort_info/sorts|nothing;
-                             colspan python:len(view.columns)+1;">
+                             ids python:[id_ for id_ in sort_info['ids'] if id_ not in context.getCustomViewFields()];">
 
     <div class="visualClear" id="clear-space-before-navigation"><!-- --></div>
 
@@ -39,7 +39,7 @@
            i18n:attributes="summary summary_content_listing;"
            tal:condition="view/items">
       <thead>
-        <tr tal:condition="python: batch.next or  batch.previous or sorts">
+        <tr tal:condition="python: batch.next or  batch.previous or ids">
           <th colspan="6" class="nosort"
               tal:attributes="colspan colspan;">
             <div metal:use-macro="context/batch_macros/macros/navigationInner" />
@@ -79,7 +79,8 @@
           <th class="nosort sortColumn"
               id="foldercontents-name-column"
               tal:repeat="column view/columns"
-              tal:attributes="id string:foldercontents-${column/id}-column;"
+              tal:attributes="id string:foldercontents-${column/id}-column;
+                              class column/class_;"
               >&#160;<tal:label
                         tal:content="column/name"
               >Name</tal:label>&#160;</th>
@@ -102,7 +103,7 @@
                id="foldercontents-show-batched" class="update-selection">Show batched</a>
           </th>
         </tr>
-        <tr tal:condition="python: batch.next or  batch.previous or sorts">
+        <tr tal:condition="python: batch.next or  batch.previous or ids">
           <th colspan="6" class="nosort"
               tal:attributes="colspan colspan;">
             <div metal:use-macro="context/batch_macros/macros/navigationInner" />

@@ -84,13 +84,23 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
         self.context = context
         self.request = request
         self.contentFilter = request
+
+        sort_info = context.restrictedTraverse(
+            '@@sort_info').getSortInfo()
+        sort_on = contentFilter.get('sort_on')
+        if sort_on in self.sorts:
+            sort = self.sorts[sort_on]
+            request[sort['id']] = True
         
         column_vocab = context.Vocabulary('customViewFields')[0]
         link_columns = context.getField(
             'customViewLinks').getAccessor(context)()
         columns = [
             dict(id=column, name=column_vocab.getValue(column),
-                 link=(column in link_columns))
+                 link=(column in link_columns),
+                 class_=('nosort %s' % (
+                     column in sort_info['sorts']
+                     and 'sortColumn' or 'noSortColumn')))
             for column in context.getCustomViewFields()]
 
         url = context.absolute_url()
