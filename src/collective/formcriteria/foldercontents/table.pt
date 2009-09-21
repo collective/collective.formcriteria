@@ -30,7 +30,6 @@
     
     <div class="visualClear" id="clear-space-before-navigation"><!-- --></div>
 
-    <div metal:use-macro="context/batch_macros/macros/navigation" />
     <table class="listing"
            id="listing-table"
            summary="Content listing"
@@ -38,6 +37,12 @@
            tal:define="colspan python:len(view.columns)+1;"
            tal:condition="view/items">
       <thead>
+        <tr tal:condition="python: batch.next or  batch.previous or sorts">
+          <th colspan="6" class="nosort"
+              tal:attributes="colspan colspan;">
+            <div metal:use-macro="context/batch_macros/macros/navigation" />
+          </th>
+        </tr>
         <tr tal:condition="not:view/selectcurrentbatch">
           <th colspan="6" class="nosort"
               tal:attributes="colspan colspan;"><span i18n:translate="label_select" tal:omit-tag="">Select:</span> <a i18n:translate="label_all" tal:attributes="href view/selectscreen_url" id="foldercontents-selectall" class="update-selection">All</a></th>
@@ -93,6 +98,12 @@
             <a tal:attributes="href view/view_url"
                i18n:translate="label_show_batched"
                id="foldercontents-show-batched" class="update-selection">Show batched</a>
+          </th>
+        </tr>
+        <tr tal:condition="python: batch.next or  batch.previous or sorts">
+          <th colspan="6" class="nosort"
+              tal:attributes="colspan colspan;">
+            <div metal:use-macro="context/batch_macros/macros/navigation" />
           </th>
         </tr>
       </tfoot>
@@ -157,7 +168,6 @@
         </tal:items>
       </tbody>
     </table>
-    <div metal:use-macro="context/batch_macros/macros/navigation" />
     <tal:buttons tal:repeat="button view/buttons">
       <input class="context"
              type="submit"
