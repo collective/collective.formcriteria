@@ -4,6 +4,9 @@ Changelog
 2.0 - Unreleased
 ----------------
 
+* Fix '<input type="hidden" name="sort_on"...', now uses the default
+  sort criteria if present
+
 * Use individual persistent objects to represent table columns such as
   with the fodler_contents view.  UI for editing the folder_contents
   column objects has yet to be implemented.

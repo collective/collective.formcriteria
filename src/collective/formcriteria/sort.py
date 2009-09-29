@@ -13,6 +13,7 @@ class SortView(object):
             field = crit.Field()
             sort = dict(
                 id=crit.getId(),
+                field=field,
                 name=self.context.getFriendlyName(field),
                 selected=False)
             if sort['id'] in self.request:

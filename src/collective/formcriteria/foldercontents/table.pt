@@ -2,11 +2,12 @@
      xmlns:tal="http://xml.zope.org/namespaces/tal"
      xmlns:metal="http://xml.zope.org/namespaces/metal"
      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+     tal:define="sort_info context/@@sort_info/getSortInfo|nothing;"
      i18n:domain="plone">
   <tal:globals define="global plone_view context/@@plone;
                        foo plone_view/globalize" />
   <input type="hidden" name="sort_on"
-         tal:attributes="value request/sort_on|string:getObjPositionInParent"
+         tal:attributes="value request/sort_on|sort_info/selected/field|string:getObjPositionInParent"
          />
   <input type="hidden" name="pagenumber" tal:attributes="value view/batch/pagenumber"/>
   <input type="hidden" name="show_all" tal:attributes="value view/show_all"/>
@@ -29,7 +30,6 @@
                              here nocall:context;
                              batch view/batch;
                              colspan python:len(view.columns);
-                             sort_info context/@@sort_info/getSortInfo|nothing;
                              ids sort_info/ids|nothing;
                              form nocall:context/@@criteria_form;
                              portal context/portal_url/getPortalObject;

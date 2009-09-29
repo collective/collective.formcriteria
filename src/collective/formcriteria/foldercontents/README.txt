@@ -83,6 +83,11 @@ titles are links to the item.
     <Link text='Bar Document Title'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
 
+The first sort criterion is the default sort.
+
+    >>> browser.getControl(name="sort_on").value
+    'sortable_title'
+
 Select different collection columns and which columns link to the
 result item.
 

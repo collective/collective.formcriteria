@@ -10,9 +10,6 @@ TODO
 * Add coverage for folder contents buttons when using KSS select all
   from all screens.  It didn't work for one deployment.
 
-* Make the '<input type="hidden" name="sort_on"...' use the default
-  sort criteria if present
-
 * Add a sort icon to sortable folder_contents columns
 
 * Add support for including the URL in CSV export
