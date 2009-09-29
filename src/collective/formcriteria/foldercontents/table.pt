@@ -28,7 +28,10 @@
                              batch view/batch;
                              colspan python:len(view.columns);
                              sort_info context/@@sort_info/getSortInfo|nothing;
-                             ids sort_info/ids|nothing;">
+                             ids sort_info/ids|nothing;
+                             form nocall:context/@@criteria_form;
+                             portal context/portal_url/getPortalObject;
+                             errors options/state/getErrors|python:{}; ">
 
     <div class="visualClear" id="clear-space-before-navigation"><!-- --></div>
 
@@ -106,9 +109,43 @@
                                   >total</tal:label></th>
           </tal:column>
         </tr>
+        <tr tal:condition="view/filters"
+            metal:define-macro="filters">
+          <tal:column repeat="column view/columns">
+            <tal:define define="criterion column/filter_;
+                                fields criterion/fields|python:();">
+              <th class="nosort"
+                  tal:condition="python:column['id']=='getPath'">
+                &#160;
+                <input class="context"
+                       type="submit"
+                       name="filter"
+                       value="Filter"
+                       i18n:attributes="value label_search;" />
+                <tal:fields repeat="field fields">
+                  <metal:label use-macro="form/macros/field" />
+                </tal:fields>
+                &#160;
+              </th>
+              <th class="nosort columnFilter"
+                  id="foldercontents-name-filter"
+                  tal:condition="python:column['id']!='getPath'"
+                  tal:attributes="class python:'nosort'+(fields and '' or ' columnFilter');
+                                  id python:fields and 'foldercontents-'+column['id']+'-filter' or None;"
+                  >
+                &#160;
+                <tal:fields repeat="field fields">
+                  <metal:label use-macro="form/macros/field" />
+                  &#160;
+                </tal:fields>
+              </th>
+            </tal:define>
+          </tal:column>
+        </tr>
       </thead>
 
       <tfoot tal:condition="not:view/within_batch_size">
+        <metal:filters use-macro="template/macros/filters" />
         <metal:sums use-macro="template/macros/sums" />
         <tr tal:condition="not:view/show_all">
           <th colspan="6" class="nosort"

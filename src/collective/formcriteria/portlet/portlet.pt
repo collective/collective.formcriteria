@@ -19,7 +19,7 @@
         <span class="portletTopRight"></span>
       </dt>
 
-      <tal:criteria tal:repeat="criterion form/criteriaFields">
+      <tal:criteria tal:repeat="criterion python:form.criteriaFields()[0]">
         <dt class="portletItem">
           <metal:label use-macro="macros/label" />
         </dt>

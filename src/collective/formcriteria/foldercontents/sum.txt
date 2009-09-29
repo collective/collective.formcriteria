@@ -20,10 +20,11 @@ Set the batch size to force batching.
 Remove the sort criteria.
 
     >>> columns = foo_topic.columns
-    >>> columns['Title-column'].update(sort='')
-    >>> columns['get_size-column'].update(sort='')
-    >>> columns['ModificationDate-column'].update(sort='')
-    >>> columns['review_state-column'].update(sort='')
+    >>> columns['getPath-column'].update(filter='')
+    >>> columns['Title-column'].update(sort='', filter='')
+    >>> columns['get_size-column'].update(sort='', filter='')
+    >>> columns['ModificationDate-column'].update(sort='', filter='')
+    >>> columns['review_state-column'].update(sort='', filter='')
     >>> foo_topic.manage_delObjects(
     ...     ['crit__sortable_title_FormSortCriterion',
     ...      'crit__get_size_FormSortCriterion',

@@ -46,7 +46,7 @@ class Renderer(collection.Renderer):
     @property.Lazy
     def available(self):
         return (self.__parent__.__name__ != 'criteria_form'
-                and self.form.formCriteria())
+                and self.form.criteriaFields()[0])
 
     @property.Lazy
     def form(self):

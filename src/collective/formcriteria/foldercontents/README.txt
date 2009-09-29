@@ -100,8 +100,11 @@ result item.
     ...     link=True)]
     >>> foo_topic.manage_delObjects(
     ...     ['crit__get_size_FormSortCriterion',
+    ...      'crit__get_size_FormSimpleIntCriterion',
     ...      'crit__modified_FormSortCriterion',
-    ...      'crit__review_state_FormSortCriterion'])
+    ...      'crit__modified_FormDateCriterion',
+    ...      'crit__review_state_FormSortCriterion',
+    ...      'crit__review_state_FormSelectionCriterion'])
     >>> self.logout()
 
 The view renders the contents form with the specified columns.
@@ -175,8 +178,12 @@ The KSS update table view also reflects the selected columns.
     >>> '&#160;State&#160;' in browser.contents
     False
 
-Search Form Portlet
--------------------
+Query Criteria
+--------------
+
+If the query criteria have been assigned to a specific column, the
+will be rendered in the filter table header row.  Otherwise they will
+be rendered in the search form as usual.
 
 Add the portlet.
 
@@ -198,18 +205,40 @@ Add the portlet.
     >>> manager[name] = assignment
     >>> self.logout()
 
-The search form is also rendered if form criteria are present.
+If query criteria are configured for the table columns, a filter table
+head row will be rendered as a search form.
 
     >>> foo_topic.setFormLayout('folder_contents')
     >>> browser.open(foo_topic.absolute_url())
-    >>> form = browser.getForm(name="formcriteria_search")
+    >>> contents_form = browser.getForm(name="folderContentsForm")
+    >>> contents_form.getControl(
+    ...     name='form_crit__SearchableText_FormSimpleStringCriterion'
+    ...     '_value')
+    <Control
+    name='form_crit__SearchableText_FormSimpleStringCriterion_value'
+    type='text'>
+    >>> contents_form.getControl(
+    ...     name='form_crit__Title_FormSimpleStringCriterion_value')
+    <Control
+    name='form_crit__Title_FormSimpleStringCriterion_value'
+    type='text'>
+    >>> contents_form.getControl('Filter')
+    <SubmitControl name='filter' type='submit'>
 
-The contents view also reflects user submitted criteria.
+Since all query criteria are used in the table columns, no portlet
+search form is rendered.
 
-    >>> form.getControl(
+    >>> browser.getForm(name="formcriteria_search")
+    Traceback (most recent call last):
+    LookupError
+
+The contents view reflects user criteria submitted through the
+contents form.
+
+    >>> contents_form.getControl(
     ...     name='form_crit__SearchableText_FormSimpleStringCriterion'
     ...     '_value').value = 'baz'
-    >>> form.getControl(name='submit').click()
+    >>> contents_form.getControl(name='filter').click()
     >>> browser.getControl('Bar Document Title')
     Traceback (most recent call last):
     LookupError: label 'Bar Document Title'
@@ -217,3 +246,51 @@ The contents view also reflects user submitted criteria.
     <ItemControl name='paths:list' type='checkbox'
     optionValue='/plone/Members/test_user_1_/baz-event-title'
     selected=False>
+
+The search form is rendered if query criteria are present which are
+not assigned to a column.
+
+    >>> self.loginAsPortalOwner()
+    >>> columns['getPath-column'].update(filter='')
+    >>> self.logout()
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> portlet_form = browser.getForm(name="formcriteria_search")
+
+The contents view also reflects user criteria submitted through the
+portlet form.
+
+    >>> portlet_form.getControl(
+    ...     name='form_crit__SearchableText_FormSimpleStringCriterion'
+    ...     '_value').value = 'baz'
+    >>> portlet_form.getControl(name='submit').click()
+    >>> browser.getControl('Bar Document Title')
+    Traceback (most recent call last):
+    LookupError: label 'Bar Document Title'
+    >>> browser.getControl('Baz Event Title')
+    <ItemControl name='paths:list' type='checkbox'
+    optionValue='/plone/Members/test_user_1_/baz-event-title'
+    selected=False>
+
+If no query criteria are configured, the filter table head row will
+not be rendered.
+
+    >>> self.loginAsPortalOwner()
+    >>> columns['Title-column'].update(filter='')
+    >>> self.logout()
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> print browser.contents
+    <...
+          <thead...
+            <tr>
+              <th class="nosort">&#160;</th>
+              <th class="nosort sortColumn"
+                  id="foldercontents-sortable_title-column">&#160;Title&#160;</th>
+              <th class="nosort noSortColumn"
+                  id="foldercontents-Description-column">&#160;Description&#160;</th>
+              <th class="nosort noSortColumn"
+                  id="foldercontents-EffectiveDate-column">&#160;Effective Date&#160;</th>
+            </tr>
+          </thead...
+          <tbody...

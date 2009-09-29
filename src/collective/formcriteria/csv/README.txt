@@ -19,6 +19,7 @@ Change the columns and link columns.
     >>> columns.manage_delObjects(
     ...     ['ModificationDate-column', 'get_size-column',
     ...      'review_state-column'])
+    >>> columns['getPath-column'].update(filter='')
     >>> columns['Title-column'].update(link=False, sort='')
     >>> desc_column = columns[columns.invokeFactory(
     ...     type_name='TopicColumn', id='Description-column',

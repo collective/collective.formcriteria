@@ -24,8 +24,15 @@ class SearchFormView(object):
     @view.memoize
     def criteriaFields(self):
         results = []
+
+        # Assemble colun information
+        columns = getattr(self.context, 'columns', [])
+        if columns:
+            columns = columns.contentValues()
+        columns = dict((column.getFilter(), None) for column in columns
+                       if column.getFilter())
+        
         for criterion in self.formCriteria():
-            crit_id = criterion.getId()
             field = criterion.Field()
             index = self.context.portal_atct.getIndex(field)
 
@@ -36,6 +43,7 @@ class SearchFormView(object):
                 new_field.write_permission = field.read_permission
                 fields.append(new_field)
 
+            crit_id = criterion.getId()
             result = {
                 'id': crit_id,
                 'field': field,
@@ -45,8 +53,11 @@ class SearchFormView(object):
                 'widget': criterion.widget,
                 }
 
-            results.append(result)
-        return results
+            if crit_id in columns:
+                columns[crit_id] = result
+            else:
+                results.append(result)
+        return results, columns
 
     makeFormKey = makeFormKey
 
@@ -87,6 +98,6 @@ class SearchFormHeadView(SearchFormView):
     @view.memoize
     def fields(self):
         results = []
-        for criterion in self.criteriaFields():
+        for criterion in self.criteriaFields()[0]:
             results.extend(criterion['fields'])
         return results

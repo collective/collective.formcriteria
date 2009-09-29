@@ -12,6 +12,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
 from Products.CMFPlone import PloneBatch  
 from plone.memoize import instance
+from plone.memoize import view
 
 from plone.app.content.browser import tableview
 from plone.app.content.browser import foldercontents
@@ -23,7 +24,7 @@ class Table(tableview.Table):
 
     def __init__(self, context, request, base_url, view_url, items,
                  batch, columns, show_sort_column=False, buttons=[],
-                 pagesize=20, sums={}):
+                 pagesize=20, sums={}, filters=[]):
         self._batch = batch
         super(Table, self).__init__(
             request=request, base_url=base_url, view_url=view_url,
@@ -33,6 +34,7 @@ class Table(tableview.Table):
         self.context = context
         self.columns = columns
         self.sums = sums
+        self.filters = filters
 
     @property
     @instance.memoize
@@ -98,25 +100,38 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
             sort = self.sorts[sort_on]
             request[sort['id']] = True
 
+        criteriaFields = context.restrictedTraverse(
+            '@@criteria_form').criteriaFields()[1]
+
         # Assemble colun information
         column_objs = getattr(self.context, 'columns', [])
         if column_objs:
             column_objs = column_objs.contentValues()
         columns = []
+        filters = []
         for column in column_objs:
             field = column.Field()
             class_ = 'nosort sortColumn'
+
             sort = column.getSort()
             if sort:
                 # Remove column sorts from the batch_macro sorts
                 sort = context[sort].Field()
+                # TODO This banks on memoize, baaad!
                 sort_info['ids'].remove(sort)
             else:
                 sort = field
                 class_ = 'nosort noSortColumn'
+                
+            filter_ = column.getFilter()
+            if filter_ in criteriaFields:
+                filters.append(filter_)
+                filter_ = criteriaFields[filter_]
+
             columns.append(dict(
                 id=field,
                 sort=sort,
+                filter_=filter_,
                 name=column.Title(),
                 link=column.getLink(),
                 class_=class_))
@@ -126,7 +141,8 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
         self.table = Table(
             context, request, url, view_url, self.items, self.batch,
             columns, show_sort_column=self.show_sort_column,
-            buttons=self.buttons, sums=self.sums)
+            buttons=self.buttons, sums=self.sums,
+            filters=filters)
 
     @property
     @instance.memoize
@@ -265,7 +281,7 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
     
 class FolderContentsView(foldercontents.FolderContentsView):
     """List items in a tabular form including object buttons"""
-    
+
     def contents_table(self):
         """Use the request as the contentFilter"""
         table = FolderContentsTable(self.context, self.request)
