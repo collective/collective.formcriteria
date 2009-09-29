@@ -5,16 +5,6 @@ Folder Contents Buttons
 
 The folder contents buttons are also usable on collections.
 
-Add a criteria and set the collection layout.
-
-    >>> foo_topic = self.folder['foo-topic-title']
-    >>> path_crit = foo_topic.addCriterion(
-    ...     'path', 'FormRelativePathCriterion')
-    >>> path_crit.setRecurse(True)
-    >>> sort_crit = foo_topic.addCriterion(
-    ...     'getPhysicalPath', 'FormSortCriterion')
-    >>> foo_topic.setLayout('folder_contents')
-
 Create a folder and move one item into the folder.
 
     >>> foo_folder = folder[folder.invokeFactory(
@@ -40,6 +30,7 @@ buttons on the content listed.
 
 Both copies appear in the collection.
 
+    >>> foo_topic = self.folder['foo-topic-title']
     >>> browser.open(foo_topic.absolute_url())
     >>> browser.getControl('Baz Event Title')
     <ItemControl name='paths:list' type='checkbox'

@@ -14,8 +14,6 @@ def test_suite():
     suite = ZopeTestCase.FunctionalDocFileSuite(
         'README.txt',
         'foldercontents/README.txt',
-        'foldercontents/buttons.txt',
-        'foldercontents/kss.txt',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
     suite.layer = testing.layer
@@ -37,7 +35,14 @@ def test_suite():
         test_class=ptc.FunctionalTestCase)
     criteria_suite.layer = testing.criteria_layer
 
-    return unittest.TestSuite([suite, criteria_suite])
+    contents_suite = ZopeTestCase.FunctionalDocFileSuite(
+        'foldercontents/buttons.txt',
+        'foldercontents/kss.txt',
+        optionflags=optionflags,
+        test_class=ptc.FunctionalTestCase)
+    contents_suite.layer = testing.contents_layer
+
+    return unittest.TestSuite([suite, criteria_suite, contents_suite])
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')

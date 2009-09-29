@@ -6,19 +6,9 @@ KSS Folder Contents
 The folder contents view uses KSS/AJAX to select all items and to sort
 on the columns.
 
-Add a path criterion to force results to be included.
-
-    >>> foo_topic = self.folder['foo-topic-title']
-    >>> crit = foo_topic.addCriterion(
-    ...     'path', 'FormRelativePathCriterion')
-
-Add a sort criteria for consistent ordering.
-
-    >>> sort = foo_topic.addCriterion(
-    ...     'getPhysicalPath', 'FormSortCriterion')
-
 Set the batch size to force batching.
 
+    >>> foo_topic = self.folder['foo-topic-title']
     >>> foo_topic.update(itemCount=2)
 
 Change the columns and link columns.

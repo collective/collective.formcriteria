@@ -82,3 +82,17 @@ class CriteriaLayer(tcl_ptc.BasePTCLayer):
         manager['foo-search-form-portlet'] = assignment
 
 criteria_layer = CriteriaLayer([layer])
+
+class ContentsLayer(tcl_ptc.BasePTCLayer):
+    """Used for testing folder contents"""
+
+    def afterSetUp(self):
+        foo_topic = self.folder['foo-topic-title']
+        path_crit = foo_topic.addCriterion(
+            'path', 'FormRelativePathCriterion')
+        path_crit.setRecurse(True)
+        sort_crit = foo_topic.addCriterion(
+            'getPhysicalPath', 'FormSortCriterion')
+        foo_topic.setLayout('folder_contents')
+
+contents_layer = ContentsLayer([layer])
