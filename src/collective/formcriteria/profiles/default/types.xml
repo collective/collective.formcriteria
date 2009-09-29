@@ -4,6 +4,10 @@
     name="title">Controls the available content types in your portal</property>
  <object name="Topic"
     meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="TopicColumns"
+    meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="TopicColumn"
+    meta_type="Factory-based Type Information with dynamic views"/>
  <object name="FormBooleanCriterion"
     meta_type="Factory-based Type Information"/>
  <object name="FormDateCriterion" meta_type="Factory-based Type Information"/>

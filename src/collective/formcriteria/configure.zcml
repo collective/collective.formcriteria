@@ -43,6 +43,7 @@
      template="comma.pt"
      permission="zope2.View" />
 
+  <include package=".columns" />
   <include package=".foldercontents" />
   <include package=".csv" />
   
@@ -52,6 +53,13 @@
      name="default"
      title="Form Criteria"
      description="Add forms for user enterable search criteria to collections/topic/smart folders."
+     provides="Products.GenericSetup.interfaces.EXTENSION"
+     />
+
+  <genericsetup:registerProfile
+     name="columns"
+     title="Setup collective.formcriteria Columns"
+     description="Install a template collection with query criteria,x sort criteria and columns for reproducing the folder_contents table in a collection."
      provides="Products.GenericSetup.interfaces.EXTENSION"
      />
   

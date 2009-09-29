@@ -43,7 +43,14 @@ def test_suite():
         test_class=ptc.FunctionalTestCase)
     contents_suite.layer = testing.contents_layer
 
-    return unittest.TestSuite([suite, criteria_suite, contents_suite])
+    columns_suite = ZopeTestCase.FunctionalDocFileSuite(
+        'columns/README.txt',
+        optionflags=optionflags,
+        test_class=ptc.FunctionalTestCase)
+    columns_suite.layer = testing.columns_layer
+
+    return unittest.TestSuite(
+        [suite, criteria_suite, contents_suite, columns_suite])
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')

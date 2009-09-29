@@ -20,42 +20,8 @@ class Topic(topic.ATTopic):
 
     security = AccessControl.ClassSecurityInfo()
 
-    schema = topic.ATTopic.schema.copy() + atapi.Schema((
-        atapi.LinesField(
-            'customViewLinks',
-            default=('Title',),
-            vocabulary='listMetaDataFields',
-            enforceVocabulary=True,
-            write_permission=permission.ChangeTopics,
-            widget=atapi.InAndOutWidget(
-                label=u'Table Column Links',
-                description=
-                u"Select which table columns to link to the item.")),
-        atapi.LinesField(
-            'customViewSums',
-            default=('get_size',),
-            vocabulary='listMetaDataFields',
-            enforceVocabulary=True,
-            write_permission=permission.ChangeTopics,
-            widget=atapi.InAndOutWidget(
-                label=u'Table Column Sums',
-                description=u"Select which table columns to include "
-                "totals for.")),
-        atapi.StringField(
-            'formLayout',
-            default='atct_topic_view',
-            vocabulary='getPossibleFormLayouts',
-            widget=atapi.SelectionWidget(
-                label=u'Form Results Layout',
-                description=
-                u'Select the display layout use for results.  '
-                u'Used only with the "Search Form" layout')),
-        ))
-    schema['customViewFields'].default = [
-        'Title',
-        'get_size',
-        'ModificationDate',
-        'review_state']
+    schema = topic.ATTopic.schema.copy()
+    del schema['customViewFields']
 
     sort_indices = {
         'unsorted': topic_tool.TopicIndex(
@@ -124,11 +90,30 @@ class Topic(topic.ATTopic):
             (key, value.friendlyName, value.description)
             for key, value in self.sort_indices.items()]
 
+    def listQueryCriteria(self):
+        """Return a list of our query criteria objects.
+        """
+        return [val for val in self.listCriteria() if not
+                atct_ifaces.IATTopicSortCriterion.isImplementedBy(
+                    val)]
+
+    def listQueryCriteriaVocab(self):
+        """Return a list of fields for which this topic has query
+        criteria."""
+        return [(crit.Field(), crit) for crit in
+                self.listQueryCriteria()]
+
     def listSortCriteria(self):
         """Return a list of our sort criteria objects.
         """
         return [val for val in self.listCriteria() if
                 atct_ifaces.IATTopicSortCriterion.isImplementedBy(val)]
+
+    def listSortCriteriaVocab(self):
+        """Return a list of fields for which this topic has sort
+        criteria."""
+        return [(crit.Field(), crit) for crit in
+                self.listSortCriteria()]
 
     def getFriendlyName(self, index):
         """Get the friendly name for an index from the tool"""

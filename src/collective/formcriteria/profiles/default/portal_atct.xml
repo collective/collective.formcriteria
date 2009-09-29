@@ -87,6 +87,13 @@
    <criteria>FormSimpleIntCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
   </index>
+  <index name="get_size"
+     description="The size of an item" enabled="False"
+     friendlyName="Size"
+     i18n:attributes="description; friendlyName">
+   <criteria>FormSimpleIntCriterion</criteria>
+   <criteria>FormSortCriterion</criteria>
+  </index>
   <index name="getRawRelatedItems"
      description="Find items related to the selected items" enabled="True"
      friendlyName="Related To"

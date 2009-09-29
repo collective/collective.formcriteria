@@ -52,8 +52,11 @@ class ExportView(object):
 
     @view.memoize
     def getCustomViewFields(self):
-        return self.context.getField(
-            'customViewFields').getAccessor(self.context)()
+        columns = getattr(self.context, 'columns', None)
+        if columns is not None:
+            return [column.Field() for column in
+                    columns.contentValues()]
+        return []
             
     def getCSVQuery(self):
         info = self.context.restrictedTraverse(

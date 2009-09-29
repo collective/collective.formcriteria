@@ -96,3 +96,15 @@ class ContentsLayer(tcl_ptc.BasePTCLayer):
         foo_topic.setLayout('folder_contents')
 
 contents_layer = ContentsLayer([layer])
+
+class ColumnsLayer(tcl_ptc.BasePTCLayer):
+    """Used for testing folder_contents columns"""
+
+    def afterSetUp(self):
+        self.addProfile('collective.formcriteria:columns')
+        self.loginAsPortalOwner()
+        self.folder.manage_pasteObjects(
+            self.portal.templates.manage_copyObjects(['Topic']))
+        self.logout()
+        
+columns_layer = ColumnsLayer([layer])

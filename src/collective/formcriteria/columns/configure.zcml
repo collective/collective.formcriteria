@@ -1,0 +1,15 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+   i18n_domain="collective.formcriteria">
+
+  <genericsetup:importStep
+      name="formcriteria_columns"
+      title="Setup collective.formcriteria Columns"
+      description="Install a template collection with query criteria, sort criteria and columns for reproducing the folder_contents table in a collection."
+      handler="collective.formcriteria.columns.setuphandlers.setupColumnTemplate"
+      >
+    <genericsetup:depends name="content" />
+  </genericsetup:importStep>
+
+</configure>

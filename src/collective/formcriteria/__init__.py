@@ -13,6 +13,9 @@ def initialize(context):
     from collective.formcriteria import topic
     topic # import to register
 
+    from collective.formcriteria.columns import content
+    content # import to register
+
     listOfTypes = atapi.listTypes('collective.formcriteria')
 
     content_types, constructors, ftis = atapi.process_types(
