@@ -1,6 +1,12 @@
 TODO
 ====
 
+* Tabs for folder_contents based multiple object edit form for topic
+  containers such as topic columns.
+
+* Separate query and sort criteria out into topic containers and use
+  folder_contents based multi-edit form
+
 * Add coverage for folder contents buttons when using KSS select all
   from all screens.  It didn't work for one deployment.
 
@@ -8,9 +14,6 @@ TODO
   sort criteria if present
 
 * Add a sort icon to sortable folder_contents columns
-
-* Establish some sort of correlation between indexes and metadata
-  columns for the column sorting stuff.
 
 * Add support for including the URL in CSV export
 
