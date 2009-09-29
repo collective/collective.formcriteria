@@ -1,3 +1,4 @@
+import os
 import urllib
 
 from zope.component import getMultiAdapter
@@ -17,10 +18,15 @@ from plone.memoize import view
 from plone.app.content.browser import tableview
 from plone.app.content.browser import foldercontents
 
+class ViewPageTemplateFile(pagetemplate.ViewPageTemplateFile):
+
+    def getId(self):
+        return os.path.basename(self.filename)
+
 class Table(tableview.Table):
     """Use a table template which obeys the columns fields"""                
 
-    render = pagetemplate.ViewPageTemplateFile("table.pt")
+    render = ViewPageTemplateFile("table.pt")
 
     def __init__(self, context, request, base_url, view_url, items,
                  batch, columns, show_sort_column=False, buttons=[],

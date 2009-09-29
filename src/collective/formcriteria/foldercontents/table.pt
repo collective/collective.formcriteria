@@ -3,6 +3,8 @@
      xmlns:metal="http://xml.zope.org/namespaces/metal"
      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
      i18n:domain="plone">
+  <tal:globals define="global plone_view context/@@plone;
+                       foo plone_view/globalize" />
   <input type="hidden" name="sort_on"
          tal:attributes="value request/sort_on|string:getObjPositionInParent"
          />
