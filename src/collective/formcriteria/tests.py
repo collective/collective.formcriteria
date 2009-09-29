@@ -38,6 +38,7 @@ def test_suite():
     contents_suite = ZopeTestCase.FunctionalDocFileSuite(
         'foldercontents/buttons.txt',
         'foldercontents/kss.txt',
+        'foldercontents/sum.txt',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
     contents_suite.layer = testing.contents_layer
