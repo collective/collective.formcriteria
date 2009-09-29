@@ -3,8 +3,6 @@ import mimetypes
 
 import ZTUtils
 
-from plone.memoize import view
-
 class ExportView(object):
     """Download collection query results in different formats"""
 
@@ -38,25 +36,22 @@ class ExportView(object):
         (default='csv.fmtparam-') will be converted into kwargs to the
         underlying csv.writer instantiation.
         """
-        keys = self.getCustomViewFields()
-        vocab = self.context.getField('customViewFields').Vocabulary(
-            self.context)
+        columns = self.context.columns.contentValues()
 
         csvwriter = csv.writer(self.request.response,
                                **self._get_fmtparam())
         csvwriter.writerow(
-                tuple(vocab.getValue(key) for key in keys))
+                tuple(column.Title() for column in columns))
         for brain in brains:
-            csvwriter.writerow(
-                tuple(brain[key] for key in keys))
-
-    @view.memoize
-    def getCustomViewFields(self):
-        columns = getattr(self.context, 'columns', None)
-        if columns is not None:
-            return [column.Field() for column in
-                    columns.contentValues()]
-        return []
+            row = []
+            for column in columns:
+                field = column.Field()
+                if field == 'getPath':
+                    value = brain.getURL()
+                else:
+                    value = brain[field]
+                row.append(value)
+            csvwriter.writerow(row)
             
     def getCSVQuery(self):
         info = self.context.restrictedTraverse(

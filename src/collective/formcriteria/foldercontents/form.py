@@ -89,21 +89,37 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
 
         sort_info = context.restrictedTraverse(
             '@@sort_info').getSortInfo()
+
+        # If a sort has been selected by the user, make sure it will
+        # be picked up by the topic.  This is done by adding it to the
+        # request.
         sort_on = contentFilter.get('sort_on')
         if sort_on in sort_info['sorts']:
             sort = self.sorts[sort_on]
             request[sort['id']] = True
-        
-        column_vocab = context.Vocabulary('customViewFields')[0]
-        link_columns = context.getField(
-            'customViewLinks').getAccessor(context)()
-        columns = [
-            dict(id=column, name=column_vocab.getValue(column),
-                 link=(column in link_columns),
-                 class_=('nosort %s' % (
-                     column in sort_info['sorts']
-                     and 'sortColumn' or 'noSortColumn')))
-            for column in context.getCustomViewFields()]
+
+        # Assemble colun information
+        column_objs = getattr(self.context, 'columns', [])
+        if column_objs:
+            column_objs = column_objs.contentValues()
+        columns = []
+        for column in column_objs:
+            field = column.Field()
+            class_ = 'nosort sortColumn'
+            sort = column.getSort()
+            if sort:
+                # Remove column sorts from the batch_macro sorts
+                sort = context[sort].Field()
+                sort_info['ids'].remove(sort)
+            else:
+                sort = field
+                class_ = 'nosort noSortColumn'
+            columns.append(dict(
+                id=field,
+                sort=sort,
+                name=column.Title(),
+                link=column.getLink(),
+                class_=class_))
 
         url = context.absolute_url()
         view_url = url + '/@@folder_contents'
@@ -129,6 +145,8 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
     @instance.memoize
     def items(self):
         """Use the item brains"""
+        # Mostly copied from plone.app.content.browser.foldercontents,
+        # modified to use catalog brains
         context = aq_inner(self.context)
         plone_utils = getToolByName(context, 'plone_utils')
         plone_view = getMultiAdapter((context, self.request), name=u'plone')
@@ -140,9 +158,14 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
         use_view_action = site_properties.getProperty('typesUseViewActionInListings', ())
         browser_default = context.browserDefault()
 
+        sum_columns = getattr(self.context, 'columns', [])
+        if sum_columns:
+            sum_columns = [
+                column.Field() for column in
+                sum_columns.contentValues() if column.getSum()]
+
         results = []
         sums = {}
-        sum_columns = context.getCustomViewSums()
         for i, obj in enumerate(self.batch):
             if (i + 1) % 2 == 0:
                 table_row_class = "draggable even"

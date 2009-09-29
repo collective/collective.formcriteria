@@ -13,10 +13,24 @@ Set the batch size to force batching.
 
 Change the columns and link columns.
 
-    >>> foo_topic.update(
-    ...     customViewFields=[
-    ...         'Title', 'Description', 'EffectiveDate'],
-    ...     customViewLinks=['Description', 'EffectiveDate'])
+    >>> self.loginAsPortalOwner()
+    >>> columns = foo_topic.columns
+    >>> columns.manage_delObjects(
+    ...     ['ModificationDate-column', 'get_size-column',
+    ...      'review_state-column'])
+    >>> columns['Title-column'].update(link=False, sort='')
+    >>> desc_column = columns[columns.invokeFactory(
+    ...     type_name='TopicColumn', id='Description-column',
+    ...     link=True)]
+    >>> effective_column = columns[columns.invokeFactory(
+    ...     type_name='TopicColumn', id='EffectiveDate-column',
+    ...     link=True)]
+    >>> foo_topic.manage_delObjects(
+    ...     ['crit__sortable_title_FormSortCriterion',
+    ...      'crit__get_size_FormSortCriterion',
+    ...      'crit__modified_FormSortCriterion',
+    ...      'crit__review_state_FormSortCriterion'])
+    >>> self.logout()
 
 Open a browser and log in as a user who can view the topic.
 

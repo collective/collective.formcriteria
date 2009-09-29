@@ -20,7 +20,17 @@ class Topic(topic.ATTopic):
 
     security = AccessControl.ClassSecurityInfo()
 
-    schema = topic.ATTopic.schema.copy()
+    schema = topic.ATTopic.schema.copy() + atapi.Schema((
+        atapi.StringField(
+            'formLayout',
+            default='atct_topic_view',
+            vocabulary='getPossibleFormLayouts',
+            widget=atapi.SelectionWidget(
+                label=u'Form Results Layout',
+                description=
+                u'Select the display layout use for results.  '
+                u'Used only with the "Search Form" layout')),
+        ))
     del schema['customViewFields']
 
     sort_indices = {
@@ -130,5 +140,12 @@ class Topic(topic.ATTopic):
         crit = super(Topic, self).addCriterion(field, criterion_type)
         crit.initializeArchetype()
         return crit
+
+    def getCustomViewFields(self):
+        columns = getattr(self.context, 'columns', [])
+        if columns:
+            return [
+                column.Field() for column in columns.contentValues()]
+        return columns
     
 atapi.registerType(Topic, 'collective.formcriteria')

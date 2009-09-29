@@ -2,7 +2,6 @@ import DateTime
 from Products.CMFPlone import utils as plone_utils
 
 from Testing import ZopeTestCase
-from Products.PloneTestCase import ptc
 
 from Products.Five import zcml, fiveconfigure
 
@@ -24,26 +23,31 @@ class Layer(tcl_ptc.BasePTCLayer):
         self.addProfile('collective.formcriteria:default')
         self.addProfile('collective.formcriteria:testing')
 
+        self.loginAsPortalOwner()
+        self.portal.portal_workflow.doActionFor(
+            self.folder, 'publish')
         self.login()
-        home = self.portal.portal_membership.getHomeFolder(
-            ptc.default_user)
-        plone_utils._createObjectByType(
-            container=home, type_name='Topic',
-            id='foo-topic-title', title='Foo Topic Title')
 
+layer = Layer([tcl_ptc.ptc_layer])
+
+class ContentLayer(tcl_ptc.BasePTCLayer):
+    """Add some content"""
+    def afterSetUp(self):
         self.now = DateTime.DateTime('Jan 15, 2009')
         tomorrow = DateTime.DateTime()+1
-        home.invokeFactory(
+
+        self.login()
+        self.folder.invokeFactory(
             type_name='Event', effectiveDate=self.now-3,
             startDate=tomorrow, endDate=tomorrow,
             id='foo-event-title', title='Foo Event Title',
             creators='foo_creator_id', text='foo'*2000)
-        home.invokeFactory(
+        self.folder.invokeFactory(
             type_name='Document', effectiveDate=self.now-2,
             id='bar-document-title', title='Bar Document Title',
             description='blah', subject=['bah', 'qux'],
             creators='foo_creator_id', text='bar'*1000)
-        home.invokeFactory(
+        self.folder.invokeFactory(
             type_name='Event', effectiveDate=self.now,
             id='baz-event-title', title='Baz Event Title',
             startDate=tomorrow, endDate=tomorrow,
@@ -54,19 +58,30 @@ class Layer(tcl_ptc.BasePTCLayer):
             creators='bar_creator_id')
 
         self.loginAsPortalOwner()
-        self.portal.portal_workflow.doActionFor(home, 'publish')
         self.portal.portal_workflow.doActionFor(
-            home['foo-topic-title'], 'publish')
+            self.folder['bar-document-title'], 'publish')
         self.portal.portal_workflow.doActionFor(
-            home['bar-document-title'], 'publish')
-        self.portal.portal_workflow.doActionFor(
-            home['baz-event-title'], 'publish')
-        home['bar-document-title'].setModificationDate(self.now)
-        home['bar-document-title'].reindexObject(
+            self.folder['baz-event-title'], 'publish')
+        self.folder['bar-document-title'].setModificationDate(
+            self.now)
+        self.folder['bar-document-title'].reindexObject(
             ['modification_date'])
         self.login()
 
-layer = Layer([tcl_ptc.ptc_layer])
+content_layer = ContentLayer([layer])
+
+class TopicLayer(tcl_ptc.BasePTCLayer):
+    """Add a simple topic"""
+
+    def afterSetUp(self):
+        self.loginAsPortalOwner()
+        foo_topic = self.folder[self.folder.invokeFactory(
+            type_name='Topic', id='foo-topic-title',
+            title='Foo Topic Title')]
+        self.portal.portal_workflow.doActionFor(foo_topic, 'publish')
+        self.login()
+
+topic_layer = TopicLayer([content_layer])
 
 class CriteriaLayer(tcl_ptc.BasePTCLayer):
     """Used for testing form criteria"""
@@ -81,7 +96,22 @@ class CriteriaLayer(tcl_ptc.BasePTCLayer):
                 topic.getPhysicalPath()[site_path_len:]))
         manager['foo-search-form-portlet'] = assignment
 
-criteria_layer = CriteriaLayer([layer])
+criteria_layer = CriteriaLayer([topic_layer])
+
+class ColumnsLayer(tcl_ptc.BasePTCLayer):
+    """Used for testing folder_contents columns"""
+
+    def afterSetUp(self):
+        self.addProfile('collective.formcriteria:columns')
+        self.loginAsPortalOwner()
+        self.folder.manage_pasteObjects(
+            self.portal.templates.manage_copyObjects(['Topic']))
+        self.folder.manage_renameObject('Topic', 'foo-topic-title')
+        foo_topic = self.folder['foo-topic-title']
+        foo_topic.update(title='Foo Topic Title')
+        self.logout()
+        
+columns_layer = ColumnsLayer([content_layer])
 
 class ContentsLayer(tcl_ptc.BasePTCLayer):
     """Used for testing folder contents"""
@@ -95,16 +125,4 @@ class ContentsLayer(tcl_ptc.BasePTCLayer):
             'getPhysicalPath', 'FormSortCriterion')
         foo_topic.setLayout('folder_contents')
 
-contents_layer = ContentsLayer([layer])
-
-class ColumnsLayer(tcl_ptc.BasePTCLayer):
-    """Used for testing folder_contents columns"""
-
-    def afterSetUp(self):
-        self.addProfile('collective.formcriteria:columns')
-        self.loginAsPortalOwner()
-        self.folder.manage_pasteObjects(
-            self.portal.templates.manage_copyObjects(['Topic']))
-        self.logout()
-        
-columns_layer = ColumnsLayer([layer])
+contents_layer = ContentsLayer([columns_layer])

@@ -45,7 +45,7 @@ The values set on the criterion are the default values on the search
 form.
 
     >>> from collective.formcriteria import testing
-    >>> now = testing.layer.now
+    >>> now = testing.content_layer.now
     >>> criterion.setStart(now-3)
     >>> criterion.setEnd(now-1)
 

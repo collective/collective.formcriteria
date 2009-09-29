@@ -13,10 +13,9 @@ optionflags = (doctest.NORMALIZE_WHITESPACE|
 def test_suite():
     suite = ZopeTestCase.FunctionalDocFileSuite(
         'README.txt',
-        'foldercontents/README.txt',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
-    suite.layer = testing.layer
+    suite.layer = testing.topic_layer
 
     criteria_suite = ZopeTestCase.FunctionalDocFileSuite(
         'criteria/list.txt',
@@ -30,10 +29,17 @@ def test_suite():
         'criteria/relativepath.txt',
         'criteria/simpleint.txt',
         'criteria/sort.txt',
-        'csv/README.txt',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
     criteria_suite.layer = testing.criteria_layer
+
+    columns_suite = ZopeTestCase.FunctionalDocFileSuite(
+        'columns/README.txt',
+        'foldercontents/README.txt',
+        'csv/README.txt',
+        optionflags=optionflags,
+        test_class=ptc.FunctionalTestCase)
+    columns_suite.layer = testing.columns_layer
 
     contents_suite = ZopeTestCase.FunctionalDocFileSuite(
         'foldercontents/buttons.txt',
@@ -43,14 +49,8 @@ def test_suite():
         test_class=ptc.FunctionalTestCase)
     contents_suite.layer = testing.contents_layer
 
-    columns_suite = ZopeTestCase.FunctionalDocFileSuite(
-        'columns/README.txt',
-        optionflags=optionflags,
-        test_class=ptc.FunctionalTestCase)
-    columns_suite.layer = testing.columns_layer
-
     return unittest.TestSuite(
-        [suite, criteria_suite, contents_suite, columns_suite])
+        [suite, criteria_suite, columns_suite, contents_suite])
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')

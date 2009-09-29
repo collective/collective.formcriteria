@@ -17,10 +17,10 @@ When a topic is created using the template included in the
 'profile-collective.formcriteria:columns', it has a columns
 container.
 
-    >>> foo_topic = self.folder['Topic']
+    >>> foo_topic = self.folder['foo-topic-title']
     >>> foo_topic.columns
     <TopicColumns at
-    /plone/Members/test_user_1_/Topic/columns>
+    /plone/Members/test_user_1_/foo-topic-title/columns>
 
 The columns container starts with column objects representing the
 default folder contents table columns.  Note that a colun object is
@@ -30,15 +30,15 @@ the selected items.
     >>> import pprint
     >>> foo_topic.columns.contentValues()
     [<TopicColumn at
-      /plone/Members/test_user_1_/Topic/columns/getPath-column>,
+      /plone/Members/test_user_1_/foo-topic-title/columns/getPath-column>,
      <TopicColumn at
-      /plone/Members/test_user_1_/Topic/columns/Title-column>,
+      /plone/Members/test_user_1_/foo-topic-title/columns/Title-column>,
      <TopicColumn at
-      /plone/Members/test_user_1_/Topic/columns/get_size-column>,
+      /plone/Members/test_user_1_/foo-topic-title/columns/get_size-column>,
      <TopicColumn at
-      /plone/Members/test_user_1_/Topic/columns/ModificationDate-column>,
+      /plone/Members/test_user_1_/foo-topic-title/columns/ModificationDate-column>,
      <TopicColumn at
-      /plone/Members/test_user_1_/Topic/columns/review_state-column>]
+      /plone/Members/test_user_1_/foo-topic-title/columns/review_state-column>]
 
     >>> from collective.formcriteria.columns import content
     >>> for column in foo_topic.columns.contentValues():
@@ -47,27 +47,32 @@ the selected items.
     ...         for field in content.column_schema.fields()])
     [('id', 'getPath-column'),
      ('link', False),
+     ('sum', False),
      ('expression', ''),
      ('sort', ''),
      ('filter', 'crit__SearchableText_FormSimpleStringCriterion')]
     [('id', 'Title-column'),
      ('link', True),
+     ('sum', False),
      ('expression', ''),
      ('sort', 'crit__sortable_title_FormSortCriterion'),
      ('filter', 'crit__Title_FormSimpleStringCriterion')]
     [('id', 'get_size-column'),
      ('link', False),
+     ('sum', False),
      ('expression',
       "python:modules['collective.formcriteria.columns.utils'].format_number(value)"),
      ('sort', 'crit__get_size_FormSortCriterion'),
      ('filter', 'crit__get_size_FormSimpleIntCriterion')]
     [('id', 'ModificationDate-column'),
      ('link', False),
+     ('sum', False),
      ('expression', ''),
      ('sort', 'crit__modified_FormSortCriterion'),
      ('filter', 'crit__modified_FormDateCriterion')]
     [('id', 'review_state-column'),
      ('link', False),
+     ('sum', False),
      ('expression',
       'python:portal_workflow.getTitleForStateOnType(value, item.Type)'),
      ('sort', 'crit__review_state_FormSortCriterion'),

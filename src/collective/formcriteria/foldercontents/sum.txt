@@ -13,10 +13,25 @@ user to select only columns that can be summed.
 Set the batch size to force batching.
 
     >>> foo_topic = self.folder['foo-topic-title']
-    >>> foo_topic.update(itemCount=2, customViewSums=[])
 
-Open a browser and log in as a user who can make changes to the
-topic.
+    >>> self.loginAsPortalOwner()
+    >>> foo_topic.update(itemCount=2)
+
+Remove the sort criteria.
+
+    >>> columns = foo_topic.columns
+    >>> columns['Title-column'].update(sort='')
+    >>> columns['get_size-column'].update(sort='')
+    >>> columns['ModificationDate-column'].update(sort='')
+    >>> columns['review_state-column'].update(sort='')
+    >>> foo_topic.manage_delObjects(
+    ...     ['crit__sortable_title_FormSortCriterion',
+    ...      'crit__get_size_FormSortCriterion',
+    ...      'crit__modified_FormSortCriterion',
+    ...      'crit__review_state_FormSortCriterion'])
+    >>> self.logout()
+
+Open a browser and log in.
 
     >>> from Products.Five.testbrowser import Browser
     >>> from Products.PloneTestCase import ptc
@@ -29,8 +44,8 @@ topic.
     ...     'Password').value = ptc.default_password
     >>> browser.getControl('Log in').click()
 
-Before setting any sum columns, no total rows are included in either
-the table head or foot.
+If no column is set to calculate sums, no total rows are included in
+either the table head or foot.
 
     >>> browser.open(foo_topic.absolute_url())
     >>> print browser.contents
@@ -49,26 +64,21 @@ the table head or foot.
             </tr>
           </thead...
           <tfoot>
-              <tr>
+            <tr>
               <th colspan="5" class="nosort">
                 <a id="foldercontents-show-all"...
           </tfoot...
 
-Select the size column as a sum column.  Since the InAndOutWidget uses
-JavaScript, set the value manually and verify on the edit form.
+Select the size column as a sum column.
 
-    >>> self.login()
-    >>> foo_topic.update(customViewSums=['get_size'])
+    >>> self.loginAsPortalOwner()
+    >>> foo_topic.columns['get_size-column'].update(sum=True)
     >>> self.logout()
-
-    >>> browser.getLink('Edit').click()
-    >>> browser.getControl('Table Column Sums').value
-    ['get_size']
-    >>> browser.getControl('Cancel').click()
 
 A total sum is now included for the size column in the table head and
 foot.
 
+    >>> browser.open(foo_topic.absolute_url())
     >>> print browser.contents
     <...
           <thead...

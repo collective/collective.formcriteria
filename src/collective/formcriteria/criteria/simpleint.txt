@@ -70,7 +70,7 @@ Submit a search query.
 
     >>> form = browser.getForm(name="formcriteria_search")
     >>> form.getControl('Order in folder').value = '0'
-    >>> form.getControl('Second Value').value = '2'
+    >>> form.getControl('Second Value').value = '1'
     >>> form.getControl('Between').selected = True
     >>> form.getControl(name='submit').click()
     >>> browser.getLink('Bar Document Title')

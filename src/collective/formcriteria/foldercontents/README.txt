@@ -18,8 +18,8 @@ criteria tab.  Set a default search term.  Add a sort criteria for
 consistent ordering.
 
     >>> foo_topic = self.folder['foo-topic-title']
-    >>> crit = foo_topic.addCriterion(
-    ...     'SearchableText', 'FormSimpleStringCriterion')
+    >>> crit = foo_topic.getCriterion(
+    ...     'SearchableText_FormSimpleStringCriterion')
     >>> crit.setValue('bar')
     >>> crit.setFormFields(['value'])
     >>> sort = foo_topic.addCriterion(
@@ -39,30 +39,10 @@ for the topic.
     ...     'Password').value = ptc.default_password
     >>> browser.getControl('Log in').click()
 
-Edit the collection to set the "Table Columns" and "Table Column
-Links" fields.
-
-    >>> browser.open(foo_topic.absolute_url())
-    >>> browser.getLink('Edit').click()
-
-By default, the normal folder_contents columns are selected in the
-"Table Columns" field.
-
-    >>> sorted(browser.getControl('Table Columns').value)
-    ['ModificationDate', 'Title', 'get_size', 'review_state']
-
-By default, "Title" is selected in the "Table Column Links" field.
-
-    >>> browser.getControl('Table Column Links').value
-    ['Title']
-
-Leave the defaults in place.
-
-    >>> browser.getControl('Cancel').click()
-
 Change the topic's display layout and the search form results layout
 to the contents view.
 
+    >>> browser.open(foo_topic.absolute_url())
     >>> browser.getLink('Tabular Form').click()
     >>> print browser.contents
     <...
@@ -103,29 +83,30 @@ titles are links to the item.
     <Link text='Bar Document Title'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
 
-Edit the collection and select different "Table Columns" and "Table
-Column Links".  Since the InAndOutWidget uses JavaScript, set the
-value manually and verify on the edit form.
+Select different collection columns and which columns link to the
+result item.
 
-    >>> self.login()
-    >>> foo_topic.update(
-    ...     customViewFields=[
-    ...         'Title', 'Description', 'EffectiveDate'],
-    ...     customViewLinks=['Description', 'EffectiveDate'])
+    >>> self.loginAsPortalOwner()
+    >>> columns = foo_topic.columns
+    >>> columns.manage_delObjects(
+    ...     ['ModificationDate-column', 'get_size-column',
+    ...      'review_state-column'])
+    >>> columns['Title-column'].update(link=False)
+    >>> desc_column = columns[columns.invokeFactory(
+    ...     type_name='TopicColumn', id='Description-column',
+    ...     link=True)]
+    >>> effective_column = columns[columns.invokeFactory(
+    ...     type_name='TopicColumn', id='EffectiveDate-column',
+    ...     link=True)]
+    >>> foo_topic.manage_delObjects(
+    ...     ['crit__get_size_FormSortCriterion',
+    ...      'crit__modified_FormSortCriterion',
+    ...      'crit__review_state_FormSortCriterion'])
     >>> self.logout()
-
-    >>> browser.getLink('Edit').click()
-    >>> sorted(browser.getControl('Table Columns').value)
-    ['Description', 'EffectiveDate', 'Title']
-    >>> sorted(browser.getControl('Table Column Links').value)
-    ['Description', 'EffectiveDate']
-    >>> browser.getControl('Save').click()
-    >>> print browser.contents
-    <...
-    ...Changes saved...
 
 The view renders the contents form with the specified columns.
 
+    >>> browser.open(foo_topic.absolute_url())
     >>> browser.getForm(name="folderContentsForm")
     <zope.testbrowser.browser.Form object at ...>
     >>> print browser.contents
@@ -144,9 +125,9 @@ The topic contents are also listed with the specified columns.
 
     >>> print browser.contents
     <...
+    ...Bar Document Title...
     ...blah...
     ...2009-01-13...
-    ...Bar Document Title...
     >>> '0 kB' in browser.contents
     False
     >>> '2009-01-15' in browser.contents
@@ -203,6 +184,7 @@ Add the portlet.
     >>> from plone.i18n.normalizer import (
     ...     interfaces as normalizer_ifaces)
     >>> from collective.formcriteria.portlet import portlet
+    >>> self.login()
     >>> manager = foo_topic.restrictedTraverse(
     ...     '++contextportlets++plone.rightcolumn')
     >>> site_path_len = len(portal.getPhysicalPath())
@@ -214,6 +196,7 @@ Add the portlet.
     ...     normalizer_ifaces.IIDNormalizer).normalize(
     ...         assignment.title)
     >>> manager[name] = assignment
+    >>> self.logout()
 
 The search form is also rendered if form criteria are present.
 

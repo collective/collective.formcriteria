@@ -5,14 +5,32 @@ Folder Contents Buttons
 
 The folder contents buttons are also usable on collections.
 
+Remove the sort criteria.
+
+    >>> self.loginAsPortalOwner()
+    >>> foo_topic = self.folder['foo-topic-title']
+    >>> columns = foo_topic.columns
+    >>> columns['Title-column'].update(sort='')
+    >>> columns['get_size-column'].update(sort='')
+    >>> columns['ModificationDate-column'].update(sort='')
+    >>> columns['review_state-column'].update(sort='')
+    >>> foo_topic.manage_delObjects(
+    ...     ['crit__sortable_title_FormSortCriterion',
+    ...      'crit__get_size_FormSortCriterion',
+    ...      'crit__modified_FormSortCriterion',
+    ...      'crit__review_state_FormSortCriterion'])
+    >>> self.logout()
+
 Create a folder and move one item into the folder.
 
+    >>> self.login()
     >>> foo_folder = folder[folder.invokeFactory(
     ...     type_name='Folder', id='foo-folder-title',
     ...     title='Foo Folder Title')]
     >>> foo_folder.manage_pasteObjects(
     ...     folder.manage_cutObjects(['bar-document-title']))
     [{'new_id': 'bar-document-title', 'id': 'bar-document-title'}]
+    >>> self.logout()
 
 Open a browser and log in as a user who can use the folder contents
 buttons on the content listed.

@@ -22,7 +22,7 @@ column_schema = atapi.Schema((
         'id',
         required=1,
         write_permission=permission.ChangeTopics,
-        vocabulary='listMetaDataFields',
+        vocabulary='listMetaDataVocab',
         enforceVocabulary=True,
         widget=atapi.SelectionWidget(
             label=u'Field',
@@ -36,6 +36,13 @@ column_schema = atapi.Schema((
             label=u'Link to the Item?',
             description=u'Should the cells for this column '
             'render a content type icon and a link to the item?')),
+    atapi.BooleanField(
+        'sum',
+        write_permission=permission.ChangeTopics,
+        widget=atapi.BooleanWidget(
+            label=u'Sum Total?',
+            description=u'Should the cells for this column be added '
+            'together to calculate a total for the column?')),
     atapi.StringField(
         'expression',
         write_permission=permission.ChangeTopics,
@@ -86,12 +93,13 @@ class TopicColumn(contained.NonRefCatalogMixin,
         return self.getId()[:-7]
 
     def Title(self):
-        return self.Vocabulary('id').getValue(self.getId())
+        return self.Vocabulary('id')[0].getValue(self.getId())
 
     def listMetaDataVocab(self):
         """Append '-column' suffix to avoid id clashes"""
         return atapi.DisplayList(
             (key+'-column', value) for key, value in
-            aq_parent(aq_parent(self)).listMetaDataFields().items())
+            aq_parent(aq_parent(self)).listMetaDataFields().items()+(
+                ('getPath', 'URL'),))
 
 atapi.registerType(TopicColumn, 'collective.formcriteria')

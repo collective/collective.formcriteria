@@ -372,6 +372,6 @@ All criteria can also be created using poral_types.constructContent.
     'crit__id_FormCommaCriterion'
     'crit__end_FormDateRangeCriterion'
     'crit__is_folderish_FormBooleanCriterion'
+    'crit__get_size_FormSimpleIntCriterion'
     'crit__review_state_FormSelectionCriterion'
     'crit__review_state_FormCheckboxCriterion'
-    'crit__getObjPositionInParent_FormSimpleIntCriterion'
