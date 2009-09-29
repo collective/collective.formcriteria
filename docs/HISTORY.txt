@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.1.2 - Unreleased
-------------------
+2.0 - Unreleased
+----------------
 
 * Fix <tfoot> usage [rossp]
 
