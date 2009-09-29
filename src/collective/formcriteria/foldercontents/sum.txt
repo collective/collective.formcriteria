@@ -13,7 +13,7 @@ user to select only columns that can be summed.
 Set the batch size to force batching.
 
     >>> foo_topic = self.folder['foo-topic-title']
-    >>> foo_topic.update(itemCount=2)
+    >>> foo_topic.update(itemCount=2, customViewSums=[])
 
 Open a browser and log in as a user who can make changes to the
 topic.
@@ -41,7 +41,7 @@ the table head or foot.
               <th class="nosort noSortColumn"
                   id="foldercontents-Title-column">&#160;Title&#160;</th>
               <th class="nosort noSortColumn"
-                  id="foldercontents-getObjSize-column">&#160;Size&#160;</th>
+                  id="foldercontents-get_size-column">&#160;Size&#160;</th>
               <th class="nosort noSortColumn"
                   id="foldercontents-ModificationDate-column">&#160;Modification Date&#160;</th>
               <th class="nosort noSortColumn"
@@ -58,12 +58,12 @@ Select the size column as a sum column.  Since the InAndOutWidget uses
 JavaScript, set the value manually and verify on the edit form.
 
     >>> self.login()
-    >>> foo_topic.update(customViewSums=['getObjSize'])
+    >>> foo_topic.update(customViewSums=['get_size'])
     >>> self.logout()
 
     >>> browser.getLink('Edit').click()
     >>> browser.getControl('Table Column Sums').value
-    ['getObjSize']
+    ['get_size']
     >>> browser.getControl('Cancel').click()
 
 A total sum is now included for the size column in the table head and
@@ -77,24 +77,26 @@ foot.
               <th class="nosort noSortColumn"
                   id="foldercontents-Title-column">&#160;Title&#160;</th>
               <th class="nosort noSortColumn"
-                  id="foldercontents-getObjSize-column">&#160;Size&#160;</th>
+                  id="foldercontents-get_size-column">&#160;Size&#160;</th>
               <th class="nosort noSortColumn"
                   id="foldercontents-ModificationDate-column">&#160;Modification Date&#160;</th>
               <th class="nosort noSortColumn"
                   id="foldercontents-review_state-column">&#160;State&#160;</th>
             </tr>
             <tr>
-              <th class="nosort">&nbsp;Total&nbsp;</th>
-              <th class="nosort columnSum">&nbsp;</th>
-              <th class="nosort columnSum" id="foldercontents-size-sum">&nbsp;XXX&nbsp;</th>
-              <th class="nosort columnSum">&nbsp;</th>
-              <th class="nosort columnSum">&nbsp;</th>
+                <th class="nosort">&#160;Total&#160;</th>
+                <th class="nosort columnSum">&#160;</th>
+                <th class="nosort columnSum"
+                    id="foldercontents-get_size-sum">&#160;3000&#160;</th>
+                <th class="nosort columnSum">&#160;</th>
+                <th class="nosort columnSum">&#160;</th>
             </tr>...
-          <tfoot...
+          <tfoot>
             <tr>
-              <th class="nosort">&nbsp;Total&nbsp;</th>
-              <th class="nosort columnSum">&nbsp;</th>
-              <th class="nosort columnSum" id="foldercontents-size-sum">&nbsp;XXX&nbsp;</th>
-              <th class="nosort columnSum">&nbsp;</th>
-              <th class="nosort columnSum">&nbsp;</th>
+                <th class="nosort">&#160;Total&#160;</th>
+                <th class="nosort columnSum">&#160;</th>
+                <th class="nosort columnSum"
+                    id="foldercontents-get_size-sum">&#160;3000&#160;</th>
+                <th class="nosort columnSum">&#160;</th>
+                <th class="nosort columnSum">&#160;</th>
             </tr>...

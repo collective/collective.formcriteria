@@ -31,6 +31,16 @@ class Topic(topic.ATTopic):
                 label=u'Table Column Links',
                 description=
                 u"Select which table columns to link to the item.")),
+        atapi.LinesField(
+            'customViewSums',
+            default=('get_size',),
+            vocabulary='listMetaDataFields',
+            enforceVocabulary=True,
+            write_permission=permission.ChangeTopics,
+            widget=atapi.InAndOutWidget(
+                label=u'Table Column Sums',
+                description=u"Select which table columns to include "
+                "totals for.")),
         atapi.StringField(
             'formLayout',
             default='atct_topic_view',
@@ -43,7 +53,7 @@ class Topic(topic.ATTopic):
         ))
     schema['customViewFields'].default = [
         'Title',
-        'getObjSize',
+        'get_size',
         'ModificationDate',
         'review_state']
 

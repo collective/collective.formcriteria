@@ -188,4 +188,10 @@
    <criteria>FormSortCriterion</criteria>
   </index>
  </topic_indexes>
+ <topic_metadata i18n:domain="plone">
+  <metadata name="get_size" description="The size of an item" enabled="True"
+     friendlyName="Size" i18n:attributes="description; friendlyName" />
+  <metadata name="getObjSize" description="The size of an item" enabled="False"
+     friendlyName="Size" i18n:attributes="description; friendlyName" />
+ </topic_metadata>
 </atcttool>

@@ -38,6 +38,7 @@
            summary="Content listing"
            i18n:attributes="summary summary_content_listing;"
            tal:condition="view/items">
+
       <thead>
         <tr tal:condition="python: batch.next or  batch.previous or ids">
           <th colspan="6" class="nosort"
@@ -85,8 +86,35 @@
                         tal:content="column/name"
               >Name</tal:label>&#160;</th>
         </tr>
+        <tr tal:condition="view/sums">
+          <th class="nosort">&#160;Total&#160;</th>
+          <tal:column repeat="column view/columns">
+            <th class="nosort columnSum"
+                id="foldercontents-name-sum"
+                tal:define="has_sum python:column['id'] in view.sums;"
+                tal:attributes="class python:'nosort'+(has_sum and '' or ' columnSum');
+                                id python:has_sum and 'foldercontents-'+column['id']+'-sum' or None;"
+                >&#160;<tal:label tal:condition="has_sum"
+                                  tal:content="structure python:'%s&#160;' % view.sums[column['id']]"
+                                  >total</tal:label></th>
+          </tal:column>
+        </tr>
       </thead>
+
       <tfoot tal:condition="not:view/within_batch_size">
+        <tr tal:condition="view/sums">
+          <th class="nosort">&#160;Total&#160;</th>
+          <tal:column repeat="column view/columns">
+            <th class="nosort columnSum"
+                id="foldercontents-name-sum"
+                tal:define="has_sum python:column['id'] in view.sums;"
+                tal:attributes="class python:'nosort'+(has_sum and '' or ' columnSum');
+                                id python:has_sum and 'foldercontents-'+column['id']+'-sum' or None;"
+                >&#160;<tal:label tal:condition="has_sum"
+                                  tal:content="structure python:'%s&#160;' % view.sums[column['id']]"
+                                  >total</tal:label></th>
+          </tal:column>
+        </tr>
         <tr tal:condition="not:view/show_all">
           <th colspan="6" class="nosort"
               tal:attributes="colspan colspan;">

@@ -5,6 +5,7 @@ from zope.app import pagetemplate
 from zope.i18n import translate
 
 from Acquisition import aq_inner
+from Missing import MV
 
 from Products.CMFCore.utils import getToolByName
 
@@ -22,7 +23,7 @@ class Table(tableview.Table):
 
     def __init__(self, context, request, base_url, view_url, items,
                  batch, columns, show_sort_column=False, buttons=[],
-                 pagesize=20):
+                 pagesize=20, sums={}):
         self._batch = batch
         super(Table, self).__init__(
             request=request, base_url=base_url, view_url=view_url,
@@ -31,6 +32,7 @@ class Table(tableview.Table):
         map(self.set_checked, items)
         self.context = context
         self.columns = columns
+        self.sums = sums
 
     @property
     @instance.memoize
@@ -108,7 +110,7 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
         self.table = Table(
             context, request, url, view_url, self.items, self.batch,
             columns, show_sort_column=self.show_sort_column,
-            buttons=self.buttons)
+            buttons=self.buttons, sums=self.sums)
 
     @property
     @instance.memoize
@@ -139,6 +141,8 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
         browser_default = context.browserDefault()
 
         results = []
+        sums = {}
+        sum_columns = context.getCustomViewSums()
         for i, obj in enumerate(self.batch):
             if (i + 1) % 2 == 0:
                 table_row_class = "draggable even"
@@ -199,6 +203,17 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
                 is_expired = context.isExpired(obj),
                 obj=obj,
             ))
+
+            for column in sum_columns:
+                value = getattr(obj, column, MV)
+                if value is MV:
+                    continue
+                if column in sums:
+                    sums[column] += value
+                else:
+                    sums[column] = value
+
+        self.sums = sums
         return results
 
     @property
