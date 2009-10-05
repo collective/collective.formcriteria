@@ -5,9 +5,12 @@
 .columnFilter .field {
     margin: 0em;
 }
-table.listing th.sortColumn {
-    padding-left: 8px;
-    background-image: url(arrowUpAlternative.gif);
+table th.sortColumn {
+    padding-left: 1em;
+    background-image: url(arrowUp.gif);
     background-position: 2px 50%;
     background-repeat: no-repeat;
+}
+table th.sortColumn.selected {
+    background-image: url(arrowTop.gif);
 }

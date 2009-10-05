@@ -104,8 +104,8 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
         # request.
         sort_on = contentFilter.get('sort_on')
         if sort_on in sort_info['sorts']:
-            sort = self.sorts[sort_on]
-            request[sort['id']] = True
+            sort = self.columns.sorts[sort_on]
+            request[sort] = True
 
         url = context.absolute_url()
         view_url = url + '/@@folder_contents'

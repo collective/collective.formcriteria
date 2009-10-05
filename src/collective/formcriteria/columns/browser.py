@@ -11,7 +11,8 @@ class ColumnsView(object):
 
     def __init__(self, *args, **kw):
         super(ColumnsView, self).__init__(*args, **kw)
-        self.ordered, self.has_filters, self.has_sums = self.update()
+        (self.ordered, self.sorts, self.has_filters, self.has_sums
+         ) = self.update()
 
     @view.memoize
     def update(self):
@@ -25,6 +26,7 @@ class ColumnsView(object):
 
         columns = getattr(context, 'columns', ())
         ordered = []
+        sorts = {}
         has_filters = False
         has_sums = False
         for column_obj in columns and columns.contentValues():
@@ -33,12 +35,15 @@ class ColumnsView(object):
                 field=field,
                 name=column_obj.Title(),
                 link=column_obj.getLink(),
+                id_=column_obj.getId(),
                 )
 
             sort = column_obj.getSort()
             if sort:
-                sort_field = context[sort].Field()
+                sort_crit = context[sort]
+                sort_field = sort_crit.Field()
                 column['sort'] = sort_field
+                sorts[sort_field] = sort_crit.getId()
                 # Remove column sorts from the batch_macro sorts.
                 # Only want to do this for views that use columns so
                 # we modify the values from the sort_info view.
@@ -65,6 +70,6 @@ class ColumnsView(object):
             column['has_sum'] = has_sum = column_obj.getSum()
             if has_sum:
                 has_sums = True
-            
+
             ordered.append(column)
-        return ordered, has_filters, has_sums
+        return ordered, sorts, has_filters, has_sums

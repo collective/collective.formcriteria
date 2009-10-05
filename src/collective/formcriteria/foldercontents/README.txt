@@ -57,7 +57,7 @@ The view renders the contents form with the default columns.
     ...Title...
     ...Size...
     ...Modification Date...
-    ...&#160;State&#160;...
+    ...State...
 
 The order column is not included since order is determined by the
 collection and is fixed.
@@ -291,11 +291,23 @@ not be rendered.
             <tr>
               <th class="nosort">&#160;</th>
               <th class="nosort sortColumn"
-                  id="foldercontents-sortable_title-column">&#160;Title&#160;</th>
+                  id="foldercontents-sortable_title-column">
+                    &#160;
+                    Title
+                    &#160;
+                  </th>
               <th class="nosort noSortColumn"
-                  id="foldercontents-Description-column">&#160;Description&#160;</th>
+                  id="foldercontents-Description-column">
+                    &#160;
+                    Description
+                    &#160;
+                  </th>
               <th class="nosort noSortColumn"
-                  id="foldercontents-EffectiveDate-column">&#160;Effective Date&#160;</th>
+                  id="foldercontents-EffectiveDate-column">
+                    &#160;
+                    Effective Date
+                    &#160;
+                  </th>
             </tr>
           </thead...
           <tbody...

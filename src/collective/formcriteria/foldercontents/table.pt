@@ -84,14 +84,26 @@
             <th class="nosort"
                 tal:condition="python:column['field']=='getPath'"
                 >&#160;</th>
-            <th class="nosort sortColumn"
-                id="foldercontents-name-column"
-                tal:condition="python:column['field']!='getPath'"
-                tal:attributes="id string:foldercontents-${column/sort|column/field}-column;
-                                class python:'nosort '+('sort' in column and 'sortColumn' or 'noSortColumn');"
-                >&#160;<tal:label
-                          tal:content="column/name"
-                          >Name</tal:label>&#160;</th>
+            <tal:sort tal:define="sort column/sort|nothing;"
+                      tal:condition="python:column['field']!='getPath'">
+              <th class="nosort sortColumn"
+                  id="foldercontents-name-column"
+                  tal:condition="sort"
+                  tal:attributes="id string:foldercontents-$sort-column;
+                                  class python:'nosort sortColumn'+(view.columns.sorts[sort] in request and ' selected' or '');">
+                &#160;
+                <tal:label tal:content="column/name">Name</tal:label>
+                &#160;
+              </th>
+              <th class="nosort noSortColumn"
+                  id="foldercontents-name-column"
+                  tal:condition="not:sort"
+                  tal:attributes="id string:foldercontents-${column/field}-column;">
+                &#160;
+                <tal:label tal:content="column/name">Name</tal:label>
+                &#160;
+              </th>
+            </tal:sort>
           </tal:column>
         </tr>
         <tr tal:condition="view/columns/has_sums"

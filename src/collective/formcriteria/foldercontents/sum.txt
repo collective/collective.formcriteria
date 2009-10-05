@@ -55,13 +55,29 @@ either the table head or foot.
             <tr>
               <th class="nosort">&#160;</th>
               <th class="nosort noSortColumn"
-                  id="foldercontents-Title-column">&#160;Title&#160;</th>
+                  id="foldercontents-Title-column">
+                    &#160;
+                    Title
+                    &#160;
+                  </th>
               <th class="nosort noSortColumn"
-                  id="foldercontents-get_size-column">&#160;Size&#160;</th>
+                  id="foldercontents-get_size-column">
+                    &#160;
+                    Size
+                    &#160;
+                  </th>
               <th class="nosort noSortColumn"
-                  id="foldercontents-ModificationDate-column">&#160;Modification Date&#160;</th>
+                  id="foldercontents-ModificationDate-column">
+                    &#160;
+                    Modification Date
+                    &#160;
+                  </th>
               <th class="nosort noSortColumn"
-                  id="foldercontents-review_state-column">&#160;State&#160;</th>
+                  id="foldercontents-review_state-column">
+                    &#160;
+                    State
+                    &#160;
+                  </th>
             </tr>
           </thead...
           <tfoot>
@@ -86,13 +102,29 @@ foot.
             <tr>
               <th class="nosort">&#160;</th>
               <th class="nosort noSortColumn"
-                  id="foldercontents-Title-column">&#160;Title&#160;</th>
+                  id="foldercontents-Title-column">
+                    &#160;
+                    Title
+                    &#160;
+                  </th>
               <th class="nosort noSortColumn"
-                  id="foldercontents-get_size-column">&#160;Size&#160;</th>
+                  id="foldercontents-get_size-column">
+                    &#160;
+                    Size
+                    &#160;
+                  </th>
               <th class="nosort noSortColumn"
-                  id="foldercontents-ModificationDate-column">&#160;Modification Date&#160;</th>
+                  id="foldercontents-ModificationDate-column">
+                    &#160;
+                    Modification Date
+                    &#160;
+                  </th>
               <th class="nosort noSortColumn"
-                  id="foldercontents-review_state-column">&#160;State&#160;</th>
+                  id="foldercontents-review_state-column">
+                    &#160;
+                    State
+                    &#160;
+                  </th>
             </tr>
             <tr>
                 <th class="nosort">&#160;Total&#160;</th>
