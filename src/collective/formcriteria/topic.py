@@ -142,7 +142,7 @@ class Topic(topic.ATTopic):
         return crit
 
     def getCustomViewFields(self):
-        columns = getattr(self.context, 'columns', [])
+        columns = getattr(self, 'columns', [])
         if columns:
             return [
                 column.Field() for column in columns.contentValues()]
