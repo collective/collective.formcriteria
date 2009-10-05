@@ -74,7 +74,7 @@ The XML reflects the customized columns
 
     >>> '0 kB' in browser.contents
     False
-    >>> '<span class="state-published">published</span>' in browser.contents
+    >>> '<span class="state-published">Published</span>' in browser.contents
     False
 
 If the "Select: All" link is clicked, the screen is selected.
@@ -145,3 +145,7 @@ bottom of the table.
     ...blah...
     ...2009-01-13...
     ...Foo Topic Title...
+
+KSS sorting
+
+    >>> TODO

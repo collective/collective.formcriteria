@@ -29,7 +29,7 @@
                              template_id string:folder_contents;
                              here nocall:context;
                              batch view/batch;
-                             colspan python:len(view.columns);
+                             colspan python:len(view.columns.ordered);
                              ids sort_info/ids|nothing;
                              form nocall:context/@@criteria_form;
                              portal context/portal_url/getPortalObject;
@@ -80,44 +80,51 @@
         </tr>
 
         <tr>
-          <tal:column repeat="column view/columns">
+          <tal:column repeat="column view/columns/ordered">
             <th class="nosort"
-                tal:condition="python:column['id']=='getPath'"
+                tal:condition="python:column['field']=='getPath'"
                 >&#160;</th>
             <th class="nosort sortColumn"
                 id="foldercontents-name-column"
-                tal:condition="python:column['id']!='getPath'"
-                tal:attributes="id string:foldercontents-${column/sort}-column;
-                                class column/class_;"
+                tal:condition="python:column['field']!='getPath'"
+                tal:attributes="id string:foldercontents-${column/sort|column/field}-column;
+                                class python:'nosort '+('sort' in column and 'sortColumn' or 'noSortColumn');"
                 >&#160;<tal:label
                           tal:content="column/name"
                           >Name</tal:label>&#160;</th>
           </tal:column>
         </tr>
-        <tr tal:condition="view/sums"
+        <tr tal:condition="view/columns/has_sums"
             metal:define-macro="sums">
-          <tal:column repeat="column view/columns">
+          <tal:column repeat="column view/columns/ordered">
             <th class="nosort"
-                tal:condition="python:column['id']=='getPath'"
+                tal:condition="python:column['field']=='getPath'"
                 >&#160;Total&#160;</th>
             <th class="nosort columnSum"
                 id="foldercontents-name-sum"
-                tal:define="has_sum python:column['id'] in view.sums;"
-                tal:condition="python:column['id']!='getPath'"
-                tal:attributes="class python:'nosort'+(has_sum and '' or ' columnSum');
-                                id python:has_sum and 'foldercontents-'+column['id']+'-sum' or None;"
-                >&#160;<tal:label tal:condition="has_sum"
-                                  tal:content="structure python:'%s&#160;' % view.sums[column['id']]"
-                                  >total</tal:label></th>
+                tal:condition="python:column['field']!='getPath'"
+                tal:attributes="class python:'nosort'+(column['has_sum'] and '' or ' columnSum');
+                                id python:column['has_sum'] and
+                                'foldercontents-'+column['field']+'-sum'
+                                or None;">
+              &#160;
+              <tal:has_sum tal:condition="column/has_sum">
+                <tal:structure condition="column/structure"
+                               content="structure column/sum" />
+                <tal:text condition="not:column/structure"
+                          content="structure column/sum" />
+                &#160;
+              </tal:has_sum>
+            </th>
           </tal:column>
         </tr>
-        <tr tal:condition="view/filters"
+        <tr tal:condition="view/columns/has_filters"
             metal:define-macro="filters">
-          <tal:column repeat="column view/columns">
-            <tal:define define="criterion column/filter_;
+          <tal:column repeat="column view/columns/ordered">
+            <tal:define define="criterion column/filter_|nothing;
                                 fields criterion/fields|python:();">
               <th class="nosort"
-                  tal:condition="python:column['id']=='getPath'">
+                  tal:condition="python:column['field']=='getPath'">
                 &#160;
                 <input class="context"
                        type="submit"
@@ -131,9 +138,9 @@
               </th>
               <th class="nosort columnFilter"
                   id="foldercontents-name-filter"
-                  tal:condition="python:column['id']!='getPath'"
+                  tal:condition="python:column['field']!='getPath'"
                   tal:attributes="class python:'nosort'+(fields and '' or ' columnFilter');
-                                  id python:fields and 'foldercontents-'+column['id']+'-filter' or None;"
+                                  id python:fields and 'foldercontents-'+column['field']+'-filter' or None;"
                   >
                 &#160;
                 <tal:fields repeat="field fields">
@@ -183,9 +190,9 @@
               * Create title_or_id metadata in the catalog (why not just use item.Title or item.getId? (alecm))
             </tal:comment>
 
-            <tal:column repeat="column view/columns">
+            <tal:column repeat="column view/columns/ordered">
               <td class="notDraggable"
-                  tal:condition="python:column['id']=='getPath'">
+                  tal:condition="python:column['field']=='getPath'">
                 <input type="checkbox"
                        class="noborder"
                        name="paths:list" id="#"
@@ -203,15 +210,21 @@
                   Item Title
                 </label>
               </td>
-              <td tal:condition="python:column['id']!='getPath'">
-                <tal:define define="value python:getattr(item['obj'], column['id']);">
+              <td tal:condition="python:column['field']!='getPath'">
+                <tal:value define="value python:item['columns'][column['field']];">
                   <tal:linked condition="column/link">
                     <span tal:attributes="class item/type_class">
                       <img tal:replace="structure item/icon" />
                       <a href="#" tal:attributes="href  item/view_url;
                                                   title item/url_href_title;
                                                   class item/state_class;">
-                        <strong tal:omit-tag="not: item/is_browser_default"
+                        <strong tal:condition="column/structure|nothing"
+                                tal:omit-tag="not: item/is_browser_default"
+                                tal:content="structure value">
+                          value
+                        </strong>
+                        <strong tal:condition="not:column/structure|nothing"
+                                tal:omit-tag="not: item/is_browser_default"
                                 tal:content="value">
                           value
                         </strong>
@@ -225,11 +238,20 @@
 
                   <tal:unlinked condition="not:column/link">
                     <span tal:condition="not: value"> &#160; </span>
-                    <span tal:condition="value"
-                          tal:content="value"
-                          tal:attributes="class item/state_class"> value </span>
+                    <tal:value condition="value">
+                      <span tal:condition="column/structure|nothing"
+                            tal:content="structure value"
+                            tal:attributes="class item/state_class">
+                            value
+                      </span>
+                      <span tal:condition="not:column/structure|nothing"
+                            tal:content="value"
+                            tal:attributes="class item/state_class">
+                            value
+                      </span>
+                    </tal:value>
                   </tal:unlinked>
-                </tal:define>
+                </tal:value>
               </td>
             </tal:column>
           </tr>

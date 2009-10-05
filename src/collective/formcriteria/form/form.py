@@ -23,41 +23,32 @@ class SearchFormView(object):
 
     @view.memoize
     def criteriaFields(self):
-        results = []
-
-        # Assemble colun information
-        columns = getattr(self.context, 'columns', [])
-        if columns:
-            columns = columns.contentValues()
-        columns = dict((column.getFilter(), None) for column in columns
-                       if column.getFilter())
+        criteria = {}
+        fields = []
         
         for criterion in self.formCriteria():
             field = criterion.Field()
             index = self.context.portal_atct.getIndex(field)
 
-            fields = []
+            crit_fields = []
             for field_name in criterion.getFormFields():
-                field = criterion.getField(field_name)
-                new_field = field.copy()
-                new_field.write_permission = field.read_permission
-                fields.append(new_field)
+                crit_field = criterion.getField(field_name)
+                new_field = crit_field.copy()
+                new_field.write_permission = crit_field.read_permission
+                crit_fields.append(new_field)
 
             crit_id = criterion.getId()
-            result = {
+            fields.append(field)
+            criteria[field] = {
                 'id': crit_id,
                 'field': field,
                 'friendlyName': index.friendlyName or index.index,
                 'description': index.description,
-                'fields': fields,
+                'fields': crit_fields,
                 'widget': criterion.widget,
                 }
 
-            if crit_id in columns:
-                columns[crit_id] = result
-            else:
-                results.append(result)
-        return results, columns
+        return fields, criteria
 
     makeFormKey = makeFormKey
 
@@ -98,6 +89,6 @@ class SearchFormHeadView(SearchFormView):
     @view.memoize
     def fields(self):
         results = []
-        for criterion in self.criteriaFields()[0]:
+        for criterion in self.criteriaFields()[1].values():
             results.extend(criterion['fields'])
         return results

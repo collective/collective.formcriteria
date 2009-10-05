@@ -24,34 +24,37 @@
           <legend i18n:translate="legend_search_terms">Search Terms</legend>
 
           <dl>
-            <tal:criteria tal:repeat="criterion python:form.criteriaFields()[0]">
-              <dt>
-                <div class="field"
-                     metal:define-macro="label">
-                  <label
-                     tal:content="criterion/friendlyName"
-                     tal:attributes="for python:form.makeFormKey(criterion['id'], criterion['fields'][0].getName());"
-                     i18n:translate="">
-                    Label
-                  </label>
-                  <div class="formHelp" tal:content="criterion/description"
+            <tal:criteria tal:define="criteriaFields python:form.criteriaFields();"
+                          tal:repeat="crit_field python:criteriaFields[0]">
+              <tal:criterion tal:define="criterion python:criteriaFields[1][crit_field];">
+                <dt>
+                  <div class="field"
+                       metal:define-macro="label">
+                    <label
+                       tal:content="criterion/friendlyName"
+                       tal:attributes="for python:form.makeFormKey(criterion['id'], criterion['fields'][0].getName());"
                        i18n:translate="">
-                    Help
+                      Label
+                    </label>
+                    <div class="formHelp" tal:content="criterion/description"
+                         i18n:translate="">
+                      Help
+                    </div>
                   </div>
-                </div>
-              </dt>
+                </dt>
 
-              <tal:fields repeat="field criterion/fields">
-                <dd>
-                 <metal:field
-                    define-macro="field"
-                    tal:define="fieldName python:form.makeFormKey(criterion['id'], field.getName());"
-                    tal:condition="python:field.mode != 'r'">
-                   <metal:widget 
-                      use-macro="python:criterion['widget'](fieldName, field=field, mode='edit')" />
-                 </metal:field>
-                </dd>
-              </tal:fields>
+                <tal:fields repeat="field criterion/fields">
+                  <dd>
+                    <metal:field
+                       define-macro="field"
+                       tal:define="fieldName python:form.makeFormKey(criterion['id'], field.getName());"
+                       tal:condition="python:field.mode != 'r'">
+                      <metal:widget 
+                         use-macro="python:criterion['widget'](fieldName, field=field, mode='edit')" />
+                    </metal:field>
+                  </dd>
+                </tal:fields>
+              </tal:criterion>
             </tal:criteria>
           </dl>
 

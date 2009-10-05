@@ -96,18 +96,38 @@ foot.
             </tr>
             <tr>
                 <th class="nosort">&#160;Total&#160;</th>
-                <th class="nosort columnSum">&#160;</th>
+                <th class="nosort columnSum">
+                  &#160;
+                </th>
                 <th class="nosort columnSum"
-                    id="foldercontents-get_size-sum">&#160;3000&#160;</th>
-                <th class="nosort columnSum">&#160;</th>
-                <th class="nosort columnSum">&#160;</th>
+                    id="foldercontents-get_size-sum">
+                  &#160;
+                    2.9 kB
+                    &#160;
+                </th>
+                <th class="nosort columnSum">
+                  &#160;
+                </th>
+                <th class="nosort columnSum">
+                  &#160;
+                </th>
             </tr>...
           <tfoot>
             <tr>
                 <th class="nosort">&#160;Total&#160;</th>
-                <th class="nosort columnSum">&#160;</th>
+                <th class="nosort columnSum">
+                  &#160;
+                </th>
                 <th class="nosort columnSum"
-                    id="foldercontents-get_size-sum">&#160;3000&#160;</th>
-                <th class="nosort columnSum">&#160;</th>
-                <th class="nosort columnSum">&#160;</th>
+                    id="foldercontents-get_size-sum">
+                  &#160;
+                    2.9 kB
+                    &#160;
+                </th>
+                <th class="nosort columnSum">
+                  &#160;
+                </th>
+                <th class="nosort columnSum">
+                  &#160;
+                </th>
             </tr>...

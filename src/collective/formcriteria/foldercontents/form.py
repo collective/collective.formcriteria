@@ -12,7 +12,6 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.CMFPlone.utils import safe_unicode
 from Products.CMFPlone import PloneBatch  
-from plone.memoize import instance
 from plone.memoize import view
 
 from plone.app.content.browser import tableview
@@ -30,7 +29,7 @@ class Table(tableview.Table):
 
     def __init__(self, context, request, base_url, view_url, items,
                  batch, columns, show_sort_column=False, buttons=[],
-                 pagesize=20, sums={}, filters=[]):
+                 pagesize=20):
         self._batch = batch
         super(Table, self).__init__(
             request=request, base_url=base_url, view_url=view_url,
@@ -39,11 +38,9 @@ class Table(tableview.Table):
         map(self.set_checked, items)
         self.context = context
         self.columns = columns
-        self.sums = sums
-        self.filters = filters
 
     @property
-    @instance.memoize
+    @view.memoize
     def batch(self):
         """Use the collection batch"""
         return self._batch
@@ -86,6 +83,9 @@ class Table(tableview.Table):
 class FolderContentsTable(foldercontents.FolderContentsTable):
     """Use a table template which obeys the columns fields"""                
 
+    # Used for evaluating TALES
+    index = ViewPageTemplateFile('empty.pt')
+
     # Copied from
     # plone.app.content.browser.foldercontents.FolderContentsTable
     # v1.2.5
@@ -97,6 +97,7 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
 
         sort_info = context.restrictedTraverse(
             '@@sort_info').getSortInfo()
+        self.columns = context.restrictedTraverse('columns_view')
 
         # If a sort has been selected by the user, make sure it will
         # be picked up by the topic.  This is done by adding it to the
@@ -106,52 +107,15 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
             sort = self.sorts[sort_on]
             request[sort['id']] = True
 
-        criteriaFields = context.restrictedTraverse(
-            '@@criteria_form').criteriaFields()[1]
-
-        # Assemble colun information
-        column_objs = getattr(self.context, 'columns', [])
-        if column_objs:
-            column_objs = column_objs.contentValues()
-        columns = []
-        filters = []
-        for column in column_objs:
-            field = column.Field()
-            class_ = 'nosort sortColumn'
-
-            sort = column.getSort()
-            if sort:
-                # Remove column sorts from the batch_macro sorts
-                sort = context[sort].Field()
-                # TODO This banks on memoize, baaad!
-                sort_info['ids'].remove(sort)
-            else:
-                sort = field
-                class_ = 'nosort noSortColumn'
-                
-            filter_ = column.getFilter()
-            if filter_ in criteriaFields:
-                filters.append(filter_)
-                filter_ = criteriaFields[filter_]
-
-            columns.append(dict(
-                id=field,
-                sort=sort,
-                filter_=filter_,
-                name=column.Title(),
-                link=column.getLink(),
-                class_=class_))
-
         url = context.absolute_url()
         view_url = url + '/@@folder_contents'
         self.table = Table(
             context, request, url, view_url, self.items, self.batch,
-            columns, show_sort_column=self.show_sort_column,
-            buttons=self.buttons, sums=self.sums,
-            filters=filters)
+            self.columns, show_sort_column=self.show_sort_column,
+            buttons=self.buttons)
 
     @property
-    @instance.memoize
+    @view.memoize
     def batch(self):
         """Let the collection batch the results"""
         context = aq_inner(self.context)
@@ -164,7 +128,7 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
         return context.queryCatalog(self.contentFilter, batch=True)
 
     @property
-    @instance.memoize
+    @view.memoize
     def items(self):
         """Use the item brains"""
         # Mostly copied from plone.app.content.browser.foldercontents,
@@ -176,18 +140,16 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
         portal_properties = getToolByName(context, 'portal_properties')
         portal_types = getToolByName(context, 'portal_types')
         site_properties = portal_properties.site_properties
+        portal = getToolByName(context, 'portal_url').getPortalObject()
         
         use_view_action = site_properties.getProperty('typesUseViewActionInListings', ())
         browser_default = context.browserDefault()
 
-        sum_columns = getattr(self.context, 'columns', [])
-        if sum_columns:
-            sum_columns = [
-                column.Field() for column in
-                sum_columns.contentValues() if column.getSum()]
-
+        expr_context = self.index.im_func.pt_getContext(
+            self, self.request)
+        expr_context.update(portal=portal)
+        
         results = []
-        sums = {}
         for i, obj in enumerate(self.batch):
             if (i + 1) % 2 == 0:
                 table_row_class = "draggable even"
@@ -223,6 +185,29 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
 
             is_browser_default = len(browser_default[1]) == 1 and (
                 obj.id == browser_default[1][0])
+
+            econtext = self.index.im_func.pt_getEngineContext(
+                expr_context)
+            columns = {}
+            for column in self.columns.ordered:
+                value = getattr(obj, column['field'], MV)
+
+                # Calculate the sums before using any expression
+                if value is not MV:
+                    if column['has_sum']:
+                        if 'sum' in column:
+                            column['sum'] += value
+                        else:
+                            column['sum'] = value
+
+                expr = column.get('expr')
+                if expr:
+                    econtext.vars.update(item=obj, value=value)
+                    value = econtext.evaluate(expr)
+                    del econtext.vars['value']
+                    del econtext.vars['item']
+
+                columns[column['field']] = value
                                  
             results.append(dict(
                 url = url,
@@ -247,18 +232,19 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
                 table_row_class = table_row_class,
                 is_expired = context.isExpired(obj),
                 obj=obj,
-            ))
+                columns=columns,
+                ))
 
-            for column in sum_columns:
-                value = getattr(obj, column, MV)
-                if value is MV:
-                    continue
-                if column in sums:
-                    sums[column] += value
-                else:
-                    sums[column] = value
+        for column in self.columns.ordered:
+            if not column['has_sum']:
+                continue
+            expr = column.get('expr')
+            if expr:
+                econtext.vars.update(item=obj, value=column['sum'])
+                column['sum'] = econtext.evaluate(expr)
+                del econtext.vars['value']
+                del econtext.vars['item']
 
-        self.sums = sums
         return results
 
     @property
@@ -284,8 +270,16 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
             if button['id'] != 'paste' or context.cb_dataValid():
                 buttons.append(self.setbuttonclass(button))
         return buttons
-    
-class FolderContentsView(foldercontents.FolderContentsView):
+
+class FolderContentsMixin(object):
+
+    def __call__(self, *args, **kw):
+        context = aq_inner(self.context)
+        self.columns = context.restrictedTraverse('columns_view')
+        return super(FolderContentsMixin, self).__call__(*args, **kw)
+
+class FolderContentsView(FolderContentsMixin,
+                         foldercontents.FolderContentsView):
     """List items in a tabular form including object buttons"""
 
     def contents_table(self):
@@ -293,5 +287,6 @@ class FolderContentsView(foldercontents.FolderContentsView):
         table = FolderContentsTable(self.context, self.request)
         return table.render()
 
-class FolderContentsKSSView(foldercontents.FolderContentsKSSView):
+class FolderContentsKSSView(FolderContentsMixin,
+                            foldercontents.FolderContentsKSSView):
     table = FolderContentsTable

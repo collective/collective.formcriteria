@@ -1,5 +1,5 @@
 
-SIZE_SUFFIXES = [('kB', 1024), ('MB', 1024*1024), ('GB', 1024*1024*1024)]
+SIZE_SUFFIXES = [('GB', 1024*1024*1024), ('MB', 1024*1024), ('kB', 1024)]
 
 def format_number(number, format='%.1f %s', suffixes=SIZE_SUFFIXES):
     """Format a number acording to suffixes defaulting to byte sizes"""

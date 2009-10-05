@@ -58,4 +58,4 @@ def setupColumnTemplate(context):
         type_name='TopicColumn', id='review_state-column', link=False,
         sort=state_sort.getId(), filter=state_query.getId(),
         expression="python:"
-        "portal_workflow.getTitleForStateOnType(value, item.Type)")
+        "portal.portal_workflow.getTitleForStateOnType(value, item.Type)")

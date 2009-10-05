@@ -74,7 +74,7 @@ the selected items.
      ('link', False),
      ('sum', False),
      ('expression',
-      'python:portal_workflow.getTitleForStateOnType(value, item.Type)'),
+      'python:portal.portal_workflow.getTitleForStateOnType(value, item.Type)'),
      ('sort', 'crit__review_state_FormSortCriterion'),
      ('filter', 'crit__review_state_FormSelectionCriterion')]
 

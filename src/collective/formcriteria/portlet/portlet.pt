@@ -1,10 +1,11 @@
-<metal:block use-macro="here/global_defines/macros/defines" />
-<tal:define define="form nocall:view/form;
+<tal:define xmlns:tal="http://xml.zope.org/namespaces/tal"
+            xmlns:metal="http://xml.zope.org/namespaces/metal"
+            define="form nocall:view/form;
                     macros nocall:form/macros;">
+  <metal:block use-macro="here/global_defines/macros/defines" />
   <metal:form use-macro="macros/form">
 
     <dl class="portlet portletCriteriaForm"
-        i18n:domain="plone"
         metal:fill-slot="fieldset"
         tal:define="collection_url view/collection_url;
                     plone_view context/@@plone;
@@ -19,16 +20,19 @@
         <span class="portletTopRight"></span>
       </dt>
 
-      <tal:criteria tal:repeat="criterion python:form.criteriaFields()[0]">
-        <dt class="portletItem">
-          <metal:label use-macro="macros/label" />
-        </dt>
+      <tal:criteria tal:define="criteriaFields python:form.criteriaFields();"
+                    tal:repeat="crit_field python:criteriaFields[0]">
+        <tal:criterion tal:define="criterion python:criteriaFields[1][crit_field];">
+          <dt class="portletItem">
+            <metal:label use-macro="macros/label" />
+          </dt>
 
-        <tal:fields repeat="field criterion/fields">
-          <dd class="portletItem">
-            <metal:label use-macro="macros/field" />
-          </dd>
-        </tal:fields>
+          <tal:fields repeat="field criterion/fields">
+            <dd class="portletItem">
+              <metal:label use-macro="macros/field" />
+            </dd>
+          </tal:fields>
+        </tal:criterion>
       </tal:criteria>
 
       <dd class="portletFooter" tal:condition="view/data/show_more">
