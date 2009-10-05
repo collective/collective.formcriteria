@@ -17,3 +17,8 @@ form[id=formcriteria_search] textarea.blurrable:blur {
     update_table-show_all: currentFormVar('show_all');
     update_table-sort_on: folderContentsColumnOrCurrentFormVar('sort_on');
 }
+
+#listing-table:load {
+    evt-load-initial: false;
+    action-client: initializeCollapsible;
+}
