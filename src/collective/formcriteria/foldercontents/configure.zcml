@@ -7,6 +7,11 @@
      file="provider.js"
      />
 
+  <browser:resource
+     name="formcriteria-foldercontents.css"
+     file="foldercontents.css"
+     />
+
   <browser:page
      for="..interfaces.IFormTopic"
      layer="..interfaces.IFormCriteriaLayer"

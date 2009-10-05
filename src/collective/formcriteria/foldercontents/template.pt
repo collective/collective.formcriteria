@@ -11,6 +11,15 @@
         <tal:insert tal:replace="nothing"
               tal:define="dummy python:request.set('enable_border', 1)" />
       </metal:block>
+
+      <style type="text/css"
+             media="all"
+             metal:fill-slot="css_slot"
+             tal:content="structure string:<!-- @import
+             url($portal_url/++resource++formcriteria-foldercontents.css);
+             -->">
+        <!-- @import url(++resource++formcriteria-foldercontents.css); -->
+      </style>
   </head>
 
   <body>

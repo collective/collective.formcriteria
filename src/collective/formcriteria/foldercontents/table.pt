@@ -109,21 +109,23 @@
                                 or None;">
               &#160;
               <tal:has_sum tal:condition="column/has_sum">
-                <tal:structure condition="column/structure"
+                <tal:structure condition="column/structure|nothing"
                                content="structure column/sum" />
-                <tal:text condition="not:column/structure"
+                <tal:text condition="not:column/structure|nothing"
                           content="structure column/sum" />
                 &#160;
               </tal:has_sum>
             </th>
           </tal:column>
         </tr>
-        <tr tal:condition="view/columns/has_filters"
+        <tr class="collapsible collapsedOnLoad"
+            tal:define="field_macro nocall:context/@@formcriteria_macros/macros/field_macro;"
+            tal:condition="view/columns/has_filters"
             metal:define-macro="filters">
           <tal:column repeat="column view/columns/ordered">
             <tal:define define="criterion column/filter_|nothing;
                                 fields criterion/fields|python:();">
-              <th class="nosort"
+              <th class="nosort columnFilter collapsibleHeader"
                   tal:condition="python:column['field']=='getPath'">
                 &#160;
                 <input class="context"
@@ -131,22 +133,28 @@
                        name="filter"
                        value="Filter"
                        i18n:attributes="value label_search;" />
-                <tal:fields repeat="field fields">
-                  <metal:label use-macro="form/macros/field" />
-                </tal:fields>
-                &#160;
+                <div class="collapsibleContent"
+                     tal:condition="fields">
+                  <tal:fields repeat="field fields">
+                    <metal:label use-macro="form/macros/field" />
+                  </tal:fields>
+                  &#160;
+                </div>
               </th>
-              <th class="nosort columnFilter"
+              <th class="nosort columnFilter collapsibleHeader"
                   id="foldercontents-name-filter"
                   tal:condition="python:column['field']!='getPath'"
                   tal:attributes="class python:'nosort'+(fields and '' or ' columnFilter');
                                   id python:fields and 'foldercontents-'+column['field']+'-filter' or None;"
                   >
                 &#160;
-                <tal:fields repeat="field fields">
-                  <metal:label use-macro="form/macros/field" />
-                  &#160;
-                </tal:fields>
+                <div class="collapsibleContent"
+                     tal:condition="fields">
+                  <tal:fields repeat="field fields">
+                    <metal:label use-macro="form/macros/field" />
+                    &#160;
+                  </tal:fields>
+                </div>
               </th>
             </tal:define>
           </tal:column>
