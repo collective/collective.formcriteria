@@ -1,5 +1,4 @@
 import DateTime
-from Products.CMFPlone import utils as plone_utils
 
 from Testing import ZopeTestCase
 
