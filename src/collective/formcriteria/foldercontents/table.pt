@@ -173,8 +173,9 @@
         </tr>
       </thead>
 
-      <tfoot tal:condition="not:view/within_batch_size">
-        <metal:filters use-macro="template/macros/filters" />
+      <tfoot tal:define="has_batch not:view/within_batch_size;
+                         has_sums view/columns/has_sums;"
+             tal:condition="python:has_batch or has_sums">
         <metal:sums use-macro="template/macros/sums" />
         <tr tal:condition="not:view/show_all">
           <th colspan="6" class="nosort"

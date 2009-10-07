@@ -218,16 +218,17 @@ head row will be rendered as a search form.
     >>> contents_form = browser.getForm(name="folderContentsForm")
     >>> contents_form.getControl(
     ...     name='form_crit__SearchableText_FormSimpleStringCriterion'
-    ...     '_value')
+    ...     '_value', index=0)
     <Control
     name='form_crit__SearchableText_FormSimpleStringCriterion_value'
     type='text'>
     >>> contents_form.getControl(
-    ...     name='form_crit__Title_FormSimpleStringCriterion_value')
+    ...     name='form_crit__Title_FormSimpleStringCriterion_value',
+    ...     index=0)
     <Control
     name='form_crit__Title_FormSimpleStringCriterion_value'
     type='text'>
-    >>> contents_form.getControl('Filter')
+    >>> contents_form.getControl('Filter', index=0)
     <SubmitControl name='filter' type='submit'>
 
 Since all query criteria are used in the table columns, no portlet
@@ -242,8 +243,8 @@ contents form.
 
     >>> contents_form.getControl(
     ...     name='form_crit__SearchableText_FormSimpleStringCriterion'
-    ...     '_value').value = 'baz'
-    >>> contents_form.getControl(name='filter').click()
+    ...     '_value', index=0).value = 'baz'
+    >>> contents_form.getControl('Filter', index=0).click()
     >>> browser.getControl('Bar Document Title')
     Traceback (most recent call last):
     LookupError: label 'Bar Document Title'
@@ -289,25 +290,25 @@ not be rendered.
     <...
           <thead...
             <tr>
-              <th class="nosort">&#160;</th>
-              <th class="nosort sortColumn"
-                  id="foldercontents-sortable_title-column">
-                    &#160;
-                    Title
-                    &#160;
-                  </th>
-              <th class="nosort noSortColumn"
-                  id="foldercontents-Description-column">
-                    &#160;
-                    Description
-                    &#160;
-                  </th>
-              <th class="nosort noSortColumn"
-                  id="foldercontents-EffectiveDate-column">
-                    &#160;
-                    Effective Date
-                    &#160;
-                  </th>
+                <th class="nosort">&#160;</th>
+                <th class="nosort sortColumn"
+                    id="foldercontents-sortable_title-column">
+                      &#160;
+                      Title
+                      &#160;
+                    </th>
+                <th class="nosort noSortColumn"
+                    id="foldercontents-Description-column">
+                      &#160;
+                      Description
+                      &#160;
+                    </th>
+                <th class="nosort noSortColumn"
+                    id="foldercontents-EffectiveDate-column">
+                      &#160;
+                      Effective Date
+                      &#160;
+                    </th>
             </tr>
           </thead...
           <tbody...
