@@ -36,16 +36,17 @@ class ExportView(object):
         (default='csv.fmtparam-') will be converted into kwargs to the
         underlying csv.writer instantiation.
         """
-        columns = self.context.columns.contentValues()
-
+        columns = self.context.restrictedTraverse(
+            'columns_view').ordered
+        
         csvwriter = csv.writer(self.request.response,
                                **self._get_fmtparam())
         csvwriter.writerow(
-                tuple(column.Title() for column in columns))
+                tuple(column['name'] for column in columns))
         for brain in brains:
             row = []
             for column in columns:
-                field = column.Field()
+                field = column['field']
                 if field == 'getPath':
                     value = brain.getURL()
                 else:

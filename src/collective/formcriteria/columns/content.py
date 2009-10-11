@@ -1,3 +1,4 @@
+
 from Acquisition import aq_parent
 from AccessControl import ClassSecurityInfo
 
@@ -92,7 +93,10 @@ class TopicColumn(contained.NonRefCatalogMixin,
         """Return the field name without the '-column' suffix"""
         return self.getId()[:-7]
 
-    def Title(self):
+    def Title(self, **kw):
+        title = self.Schema()['title'].get(self, **kw)
+        if title:
+            return title
         return self.Vocabulary('id')[0].getValue(self.getId())
 
     def listMetaDataVocab(self):
