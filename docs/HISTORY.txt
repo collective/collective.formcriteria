@@ -4,6 +4,11 @@ Changelog
 2.0 - Unreleased
 ----------------
 
+* fix issue producing 
+  AttributeError: 'NoneType' object has no attribute 'title_or_id'
+  when adding path criterions.
+  [hplocher]
+
 * Fix '<input type="hidden" name="sort_on"...', now uses the default
   sort criteria if present
 
