@@ -18,6 +18,11 @@
      permission="zope2.View" 
      />
 
+  <browser:resource
+     name="formcriteria-listing-portlet.css"
+     file="listing.css"
+     />
+
   <plone:portlet
      name="collective.formcriteria.CriteriaFormPortlet"
      interface=".portlet.ICriteriaFormPortlet"

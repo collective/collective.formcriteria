@@ -1,0 +1,27 @@
+.portletCollection dl {
+    margin: 0;
+}
+.portletCollection dt a {
+    border-bottom: none;
+}
+
+.portletCollection dt a:visited,
+.portletFooter a:visited {
+    color: #436976;
+}
+.portletCollection dt,
+.portletCollection dd {
+    margin: 0;
+    padding: 0.5em 1em;
+    border-left: 1px solid #8cacbb;
+    border-right: 1px solid #8cacbb;
+}
+.portletCollection dt ol {
+    margin: 0 0 0 1em;
+}
+.portletCollection dd,
+.portletCollection .documentByLine {
+    text-align: right;
+    display: block;
+    color: Black;
+}

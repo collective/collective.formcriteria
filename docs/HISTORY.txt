@@ -4,6 +4,9 @@ Changelog
 2.0 - Unreleased
 ----------------
 
+* Add a collection listing portlet that makes use of the
+  folder_listing macros for a richer portlet. [rossp]
+
 * fix issue producing 
   AttributeError: 'NoneType' object has no attribute 'title_or_id'
   when adding path criterions.

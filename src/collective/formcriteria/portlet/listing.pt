@@ -1,0 +1,33 @@
+<dl class="portlet portletCollection"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="plone"
+    tal:define="collection_url view/collection_url;
+                plone_view context/@@plone;
+                toLocalizedTime nocall:plone_view/toLocalizedTime;
+                getIcon nocall:plone_view/getIcon;">
+  <metal:block use-macro="here/global_defines/macros/defines" />
+
+  <dt class="portletHeader">
+    <span class="portletTopLeft"></span>
+    <a tal:attributes="href collection_url" tal:omit-tag="not:view/data/show_more">
+      <span tal:content="view/data/header" />
+    </a>
+    <span class="portletTopRight"></span>
+  </dt>
+  
+  <metal:listing use-macro="context/folder_listing/macros/listing"
+                 tal:define="folderContents view/results;" />
+  
+  <dd class="portletFooter" tal:condition="view/data/show_more">
+    <span class="portletBottomLeft"></span>
+    <span>
+      <a tal:attributes="href collection_url" i18n:translate="more_url">
+        More&hellip;
+      </a>
+    </span>
+    <span class="portletBottomRight"></span>
+  </dd>
+
+</dl>
