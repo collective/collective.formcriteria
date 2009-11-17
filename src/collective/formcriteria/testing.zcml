@@ -4,7 +4,7 @@
    xmlns:monkey="http://namespaces.plone.org/monkey"
    i18n_domain="collective.customer">
   
-  <include package="collective.testcaselayer" />
+  <include package="collective.testcaselayer" file="testing.zcml" />
 
   <genericsetup:registerProfile
      name="testing"
