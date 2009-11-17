@@ -68,14 +68,11 @@ Start with a collection and some content for search results.
     >>> self.folder['baz-event-title']
     <ATEvent at /plone/Members/test_user_1_/baz-event-title>
 
-Create the browser object we'll be using.
+Open a browser and log in as a normal user.
 
     >>> from Products.Five.testbrowser import Browser
     >>> browser = Browser()
     >>> browser.handleErrors = False
-
-Log in as a normal user.
-
     >>> browser.open(portal.absolute_url())
     >>> browser.getLink('Log in').click()
     >>> browser.getControl('Login Name').value = ptc.default_user
