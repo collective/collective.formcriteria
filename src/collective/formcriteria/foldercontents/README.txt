@@ -153,7 +153,7 @@ The link columns have also been changed.
     <Link text='blah'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
     >>> browser.getLink('2009-01-13')
-    <Link text='2009-01-13 01:00:00'
+    <Link text='2009-01-13 00:00:00'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
     >>> browser.getLink('Bar Document Title')
     Traceback (most recent call last):
