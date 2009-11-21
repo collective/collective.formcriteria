@@ -46,15 +46,16 @@ class ContentLayer(tcl_ptc.BasePTCLayer):
             id='bar-document-title', title='Bar Document Title',
             description='blah', subject=['bah', 'qux'],
             creators='foo_creator_id', text='bar'*1000)
-        self.folder.invokeFactory(
+        baz_event = self.folder[self.folder.invokeFactory(
             type_name='Event', effectiveDate=self.now,
             id='baz-event-title', title='Baz Event Title',
             startDate=tomorrow, endDate=tomorrow,
             # More relevant for a "blah" search
             description='blah blah',
-            # For Events eventType == subject
+            subject=['qux', 'quux'],
+            # BBB Plone 3, For Events eventType == subject
             eventType=['qux', 'quux'],
-            creators='bar_creator_id')
+            creators='bar_creator_id')]
 
         self.loginAsPortalOwner()
         self.portal.portal_workflow.doActionFor(
