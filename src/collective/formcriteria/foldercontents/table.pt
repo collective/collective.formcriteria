@@ -4,8 +4,7 @@
      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
      tal:define="sort_info context/@@sort_info/getSortInfo|nothing;"
      i18n:domain="plone">
-  <tal:globals define="global plone_view context/@@plone;
-                       foo plone_view/globalize" />
+  <metal:block use-macro="context/global_defines/macros/defines" />
   <input type="hidden" name="sort_on"
          tal:attributes="value request/sort_on|sort_info/selected/field|string:getObjPositionInParent"
          />
@@ -131,7 +130,7 @@
           </tal:column>
         </tr>
         <tr class="collapsible collapsedOnLoad"
-            tal:define="field_macro nocall:context/@@formcriteria_macros/macros/field_macro;"
+            tal:define="field_macro nocall:context/@@formcriteria_macros/field_macro;"
             tal:condition="view/columns/has_filters"
             metal:define-macro="filters">
           <tal:column repeat="column view/columns/ordered">
@@ -148,7 +147,7 @@
                 <div class="collapsibleContent"
                      tal:condition="fields">
                   <tal:fields repeat="field fields">
-                    <metal:label use-macro="form/macros/field" />
+                    <metal:label use-macro="form/field" />
                   </tal:fields>
                   &#160;
                 </div>
@@ -163,7 +162,7 @@
                 <div class="collapsibleContent"
                      tal:condition="fields">
                   <tal:fields repeat="field fields">
-                    <metal:label use-macro="form/macros/field" />
+                    <metal:label use-macro="form/field" />
                     &#160;
                   </tal:fields>
                 </div>

@@ -1,9 +1,8 @@
 <tal:define xmlns:tal="http://xml.zope.org/namespaces/tal"
             xmlns:metal="http://xml.zope.org/namespaces/metal"
-            define="form nocall:view/form;
-                    macros nocall:form/macros;">
+            define="form nocall:view/form;">
   <metal:block use-macro="here/global_defines/macros/defines" />
-  <metal:form use-macro="macros/form">
+  <metal:form use-macro="form/form">
 
     <dl class="portlet portletCriteriaForm"
         metal:fill-slot="fieldset"
@@ -24,12 +23,12 @@
                     tal:repeat="crit_field python:criteriaFields[0]">
         <tal:criterion tal:define="criterion python:criteriaFields[1][crit_field];">
           <dt class="portletItem">
-            <metal:label use-macro="macros/label" />
+            <metal:label use-macro="form/label" />
           </dt>
 
           <tal:fields repeat="field criterion/fields">
             <dd class="portletItem">
-              <metal:label use-macro="macros/field" />
+              <metal:label use-macro="form/field" />
             </dd>
           </tal:fields>
         </tal:criterion>
@@ -37,7 +36,7 @@
 
       <dd class="portletFooter" tal:condition="view/data/show_more">
         <span class="portletBottomLeft"></span>
-        <span metal:use-macro="macros/formControls">
+        <span metal:use-macro="form/formControls">
           Search
         </span>
         <span class="portletBottomRight"></span>

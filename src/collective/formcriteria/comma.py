@@ -4,4 +4,4 @@ class CommaWidgetView(object):
 
     @property.Lazy
     def macros(self):
-        return self['macros']
+        return self.index.macros
