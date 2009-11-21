@@ -4,6 +4,13 @@ def setupColumnTemplate(context):
         return
 
     site = context.getSite()
+
+    if 'templates' in site.contentIds():
+        return
+    topic = site[site.invokeFactory(
+        type_name='Folder', id='templates',
+        title='Content Templates')]
+
     if 'Topic' in site.templates.contentIds():
         return
     topic = site.templates[site.templates.invokeFactory(
