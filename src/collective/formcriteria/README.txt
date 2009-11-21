@@ -372,3 +372,11 @@ All criteria can also be created using poral_types.constructContent.
     'crit__get_size_FormSimpleIntCriterion'
     'crit__review_state_FormSelectionCriterion'
     'crit__review_state_FormCheckboxCriterion'
+
+Installing
+==========
+
+The 'default' profile is used when installing collective.formcriteria
+through the Plone Add-ons control panel
+
+    >>> TODO
