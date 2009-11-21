@@ -147,8 +147,7 @@ batch.
     >>> foo_topic.setItemCount(0)
     >>> browser.open(foo_topic.absolute_url()+'/atct_topic_view')
     >>> browser.getLink('Effective Date')
-    <Link text='Effective Date'
-    url='http://nohost/plone/Members/test_user_1_/foo-topic-title/atct_topic_view?test=&crit__effective_FormSortCriterion:boolean=True'>
+    <Link text='Effective Date' url='http://nohost/plone/Members/test_user_1_/foo-topic-title/atct_topic_view?...crit__effective_FormSortCriterion:boolean=True...
 
 Ensure that the extended sort criteria work inside previously created
 ATTopic instances.

@@ -66,13 +66,10 @@ with the folder_listing template.
     >>> print owner_browser.contents
     <...
             <span>Foo Collcetion Listing Portlet Title</span>...
-                    <dt class="vevent">
-                            <span
-        class="contenttype-event summary">
-                                <img width="16" height="16" src="http://nohost/plone/event_icon.gif" alt="Event" />
-                                <a
-        href="http://nohost/plone/Members/test_user_1_/baz-event-title"
-        class="state-published url">Baz Event Title</a>
+                <dt class="vevent">
+                            <span class="contenttype-event summary">
+                                <img width="16" height="16" src="http://nohost/plone/event_icon..." alt="Event" />
+                                <a href="http://nohost/plone/Members/test_user_1_/baz-event-title" class="state-published url">Baz Event Title</a>
                             </span>
                             <span class="documentByLine">
                                 <span>
@@ -83,7 +80,7 @@ with the folder_listing template.
                                     &mdash;
                                       <span>
                                         by
-                                      bar_creator_id
+                                      ...bar_creator_id...
                                       </span>
                             </span>
                         </dt>

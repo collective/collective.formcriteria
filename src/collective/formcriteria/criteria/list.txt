@@ -110,10 +110,11 @@ Use the "and" and search operator with the same query.
 
     >>> form = browser.getForm(name="formcriteria_search")
     >>> form.getControl('and').selected = True
-    >>> form.getControl(
+    >>> print form.getControl(
     ...     name='form_crit__Subject_FormListCriterion_value:lines'
     ...     ).value
-    'bah\nqux'
+    bah
+    qux
     >>> form.getControl(name='submit').click()
 
 Now only the object with both "bah" and "qux" is returned.
