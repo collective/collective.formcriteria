@@ -5,7 +5,6 @@ import AccessControl
 from Products.Archetypes import atapi
 from Products.ATContentTypes import interfaces as atct_ifaces
 from Products.ATContentTypes import permission
-from Products.ATContentTypes import config 
 from Products.ATContentTypes.content import topic
 from Products.ATContentTypes.tool import topic as topic_tool
 from Products.ATContentTypes import criteria
@@ -132,7 +131,7 @@ class Topic(topic.ATTopic):
 
     def getFriendlyName(self, index):
         """Get the friendly name for an index from the tool"""
-        tool = getattr(self, config.TOOLNAME)
+        tool = getattr(self, 'portal_atct')
         try:
             tool.getIndex(index)
         except AttributeError:
