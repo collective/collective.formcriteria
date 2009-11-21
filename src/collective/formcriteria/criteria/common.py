@@ -25,8 +25,13 @@ def registerCriterion(criterion, orig):
     if indices == ():
         indices = criteria.ALL_INDICES
 
-    assert atct_ifaces.IATTopicCriterion.isImplementedByInstancesOf(
-        criterion)
+    implementedBy = getattr(
+        atct_ifaces.IATTopicCriterion, 'implementedBy', None)
+    if implementedBy is None:
+        # BBB Plone 3
+        implementedBy = (
+            atct_ifaces.IATTopicCriterion.isImplementedByInstancesOf)
+    assert implementedBy(criterion)
     atapi.registerType(criterion, 'collective.formcriteria')
 
     crit_id = criterion.meta_type
