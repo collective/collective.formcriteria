@@ -13,6 +13,7 @@
      i18n:attributes="description; friendlyName">
    <criteria>FormSelectionCriterion</criteria>
    <criteria>FormCheckboxCriterion</criteria>
+   <criteria>FormPulldownCriterion</criteria>
    <criteria>FormSimpleStringCriterion</criteria>
    <criteria>FormListCriterion</criteria>
    <criteria>FormCommaCriterion</criteria>
@@ -65,8 +66,10 @@
    <criteria>FormCommaCriterion</criteria>
    <criteria>FormReferenceCriterion</criteria>
    <criteria>FormReferenceCheckboxCriterion</criteria>
+   <criteria>FormReferencePulldownCriterion</criteria>
    <criteria>FormSelectionCriterion</criteria>
    <criteria>FormCheckboxCriterion</criteria>
+   <criteria>FormPulldownCriterion</criteria>
    <criteria>FormSimpleIntCriterion</criteria>
    <criteria>FormSimpleStringCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
@@ -100,6 +103,7 @@
      i18n:attributes="description; friendlyName">
    <criteria>FormReferenceCriterion</criteria>
    <criteria>FormReferenceCheckboxCriterion</criteria>
+   <criteria>FormReferencePulldownCriterion</criteria>
   </index>
   <index name="id" description="The short name of an item (used in the url)"
      enabled="False" friendlyName="Short Name"
@@ -142,6 +146,7 @@
      i18n:attributes="description; friendlyName">
    <criteria>FormPortalTypeCriterion</criteria>
    <criteria>FormPortalTypeCheckboxCriterion</criteria>
+   <criteria>FormPortalTypePulldownCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
   </index>
   <index name="review_state"
@@ -150,6 +155,7 @@
      i18n:attributes="description; friendlyName">
    <criteria>FormSelectionCriterion</criteria>
    <criteria>FormCheckboxCriterion</criteria>
+   <criteria>FormPulldownCriterion</criteria>
    <criteria>FormSimpleStringCriterion</criteria>
    <criteria>FormListCriterion</criteria>
    <criteria>FormCommaCriterion</criteria>
@@ -177,6 +183,7 @@
      i18n:attributes="description; friendlyName">
    <criteria>FormSelectionCriterion</criteria>
    <criteria>FormCheckboxCriterion</criteria>
+   <criteria>FormPulldownCriterion</criteria>
    <criteria>FormSimpleStringCriterion</criteria>
    <criteria>FormListCriterion</criteria>
    <criteria>FormCommaCriterion</criteria>
@@ -192,6 +199,7 @@
      i18n:attributes="description; friendlyName">
    <criteria>FormPortalTypeCriterion</criteria>
    <criteria>FormPortalTypeCheckboxCriterion</criteria>
+   <criteria>FormPortalTypePulldownCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
   </index>
  </topic_indexes>

@@ -22,6 +22,7 @@ def test_suite():
         'criteria/list.txt',
         'criteria/selection.txt',
         'criteria/checkbox.txt',
+        'criteria/pulldown.txt',
         'criteria/daterange.txt',
         'criteria/comma.txt',
         'criteria/boolean.txt',

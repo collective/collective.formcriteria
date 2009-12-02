@@ -154,13 +154,14 @@ discrimination of criteria types by index manually.
 
     >>> foo_topic.allowedCriteriaForField('review_state')
     ['FormSelectionCriterion', 'FormCheckboxCriterion',
-    'FormSimpleStringCriterion', 'FormListCriterion',
-    'FormCommaCriterion', 'FormSortCriterion']
+    'FormPulldownCriterion', 'FormSimpleStringCriterion',
+    'FormListCriterion', 'FormCommaCriterion', 'FormSortCriterion']
     >>> foo_topic.allowedCriteriaForField(
     ...     'review_state', display_list=True)
     <DisplayList
     [('FormSelectionCriterion', 'Select values from list'),
      ('FormCheckboxCriterion', 'Check values'),
+     ('FormPulldownCriterion', 'Select one value'),
      ('FormSimpleStringCriterion', 'Text'),
      ('FormListCriterion', 'List of values'),
      ('FormCommaCriterion', 'Enter comma separated values'),
@@ -363,8 +364,10 @@ All criteria can also be created using poral_types.constructContent.
     'crit__path_FormRelativePathCriterion'
     'crit__getRawRelatedItems_FormReferenceCriterion'
     'crit__getRawRelatedItems_FormReferenceCheckboxCriterion'
+    'crit__getRawRelatedItems_FormReferencePulldownCriterion'
     'crit__Type_FormPortalTypeCriterion'
     'crit__Type_FormPortalTypeCheckboxCriterion'
+    'crit__Type_FormPortalTypePulldownCriterion'
     'crit__id_FormListCriterion'
     'crit__id_FormCommaCriterion'
     'crit__end_FormDateRangeCriterion'
@@ -372,6 +375,7 @@ All criteria can also be created using poral_types.constructContent.
     'crit__get_size_FormSimpleIntCriterion'
     'crit__review_state_FormSelectionCriterion'
     'crit__review_state_FormCheckboxCriterion'
+    'crit__review_state_FormPulldownCriterion'
 
 Installing
 ==========

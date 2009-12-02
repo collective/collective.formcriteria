@@ -24,6 +24,10 @@ Changelog
 * Integrate sort criteria with folder contents view columns for KSS
   sorting [rossp]
 
+* Add pulldown/select, single-value criterion based on
+  FormSelectionCriterion, FormPortalTypeCriterion, and
+  FormReferenceCriterion [rossp]
+
 1.1.1 - 2009-08-31
 ------------------
 

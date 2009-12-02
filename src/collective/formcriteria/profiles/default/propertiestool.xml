@@ -8,10 +8,13 @@
    <element value="FormListCriterion"/>
    <element value="FormPortalTypeCriterion"/>
    <element value="FormPortalTypeCheckboxCriterion"/>
+   <element value="FormPortalTypePulldownCriterion"/>
    <element value="FormReferenceCriterion"/>
    <element value="FormReferenceCheckboxCriterion"/>
+   <element value="FormReferencePulldownCriterion"/>
    <element value="FormSelectionCriterion"/>
    <element value="FormCheckboxCriterion"/>
+   <element value="FormPulldownCriterion"/>
    <element value="FormSimpleIntCriterion"/>
    <element value="FormSimpleStringCriterion"/>
    <element value="FormSortCriterion"/>
@@ -29,10 +32,13 @@
    <element value="FormListCriterion"/>
    <element value="FormPortalTypeCriterion"/>
    <element value="FormPortalTypeCheckboxCriterion"/>
+   <element value="FormPortalTypePulldownCriterion"/>
    <element value="FormReferenceCriterion"/>
    <element value="FormReferenceCheckboxCriterion"/>
+   <element value="FormReferencePulldownCriterion"/>
    <element value="FormSelectionCriterion"/>
    <element value="FormCheckboxCriterion"/>
+   <element value="FormPulldownCriterion"/>
    <element value="FormSimpleIntCriterion"/>
    <element value="FormSimpleStringCriterion"/>
    <element value="FormSortCriterion"/>

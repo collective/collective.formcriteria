@@ -9,10 +9,13 @@
   <type type_id="FormRelativePathCriterion"/>
   <type type_id="FormPortalTypeCriterion"/>
   <type type_id="FormPortalTypeCheckboxCriterion"/>
+  <type type_id="FormPortalTypePulldownCriterion"/>
   <type type_id="FormReferenceCriterion"/>
   <type type_id="FormReferenceCheckboxCriterion"/>
+  <type type_id="FormReferencePulldownCriterion"/>
   <type type_id="FormSelectionCriterion"/>
   <type type_id="FormCheckboxCriterion"/>
+  <type type_id="FormPulldownCriterion"/>
   <type type_id="FormSimpleIntCriterion"/>
   <type type_id="FormSimpleStringCriterion"/>
   <type type_id="FormCommaCriterion"/>
