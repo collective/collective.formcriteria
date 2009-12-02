@@ -10,7 +10,7 @@
          />
   <input type="hidden" name="pagenumber" tal:attributes="value view/batch/pagenumber"/>
   <input type="hidden" name="show_all" tal:attributes="value view/show_all"/>
-  <tal:block condition="view/selectall">
+  <tal:block condition="python:view.buttons and view.selectall">
     <input type="hidden" name="paths:list"
            tal:repeat="item view/items_not_on_page"
            tal:attributes="value item/path"/>
@@ -49,7 +49,7 @@
             <div metal:use-macro="context/batch_macros/macros/navigationInner" />
           </th>
         </tr>
-        <tr tal:condition="not:view/selectcurrentbatch">
+        <tr tal:condition="python:view.buttons and not view.selectcurrentbatch">
           <th colspan="6" class="nosort"
               tal:attributes="colspan colspan;"><span i18n:translate="label_select" tal:omit-tag="">Select:</span> <a i18n:translate="label_all" tal:attributes="href view/selectscreen_url" id="foldercontents-selectall" class="update-selection">All</a></th>
         </tr>
@@ -213,22 +213,24 @@
             <tal:column repeat="column view/columns/ordered">
               <td class="notDraggable"
                   tal:condition="python:column['field']=='getPath'">
-                <input type="checkbox"
-                       class="noborder"
-                       name="paths:list" id="#"
-                       value="#"
-                       tal:attributes="value   item/path;
-                                       id      string:cb_${item/id};
-                                       checked item/checked;
-                                       alt     string:Select ${item/title_or_id};
-                                       title   string:Select ${item/title_or_id}" />
-                <input type="hidden" name="selected_obj_paths:list" value="#"
-                       tal:attributes="value item/relative_url" />
-                <label tal:content="item/title_or_id"
-                       tal:attributes="for string:cb_${item/id}" 
-                       class="hiddenStructure">
-                  Item Title
-                </label>
+                <tal:has_buttons condition="view/buttons">
+                  <input type="checkbox"
+                         class="noborder"
+                         name="paths:list" id="#"
+                         value="#"
+                         tal:attributes="value   item/path;
+                                         id      string:cb_${item/id};
+                                         checked item/checked;
+                                         alt     string:Select ${item/title_or_id};
+                                         title   string:Select ${item/title_or_id}" />
+                  <input type="hidden" name="selected_obj_paths:list" value="#"
+                         tal:attributes="value item/relative_url" />
+                  <label tal:content="item/title_or_id"
+                         tal:attributes="for string:cb_${item/id}" 
+                         class="hiddenStructure">
+                    Item Title
+                  </label>
+                </tal:has_buttons>
               </td>
               <td tal:condition="python:column['field']!='getPath'">
                 <tal:value define="value python:item['columns'][column['field']];">

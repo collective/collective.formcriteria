@@ -19,6 +19,7 @@ Remove the sort criteria.
     ...      'crit__get_size_FormSortCriterion',
     ...      'crit__modified_FormSortCriterion',
     ...      'crit__review_state_FormSortCriterion'])
+    >>> portal.portal_workflow.doActionFor(foo_topic, 'publish')
     >>> self.logout()
 
 Create a folder and move one item into the folder.
@@ -198,3 +199,27 @@ The items have been deleted from their respective containers.
     'foo-topic-title']
     >>> sorted(foo_folder.contentIds())
     ['baz-event-title']
+
+If no buttons are available, then the checkboxes are not rendered.
+
+Remove the copy permission for anonymous users to that the copy and
+rename buttons aren't available.
+
+    >>> portal.manage_permission(
+    ...     'Copy or Move', roles=['Authenticated', 'Manager'],
+    ...     acquire=0)
+
+Open a browser and visit the topic anonymously.
+
+    >>> anon_browser = Browser()
+    >>> anon_browser.handleErrors = False
+    >>> anon_browser.open(foo_topic.absolute_url())
+
+The checkboxes are no longer available.
+
+    >>> anon_browser.getControl('Bar Document Title')
+    Traceback (most recent call last):
+    LookupError: label 'Bar Document Title'
+    >>> anon_browser.getLink('All')
+    Traceback (most recent call last):
+    LinkNotFoundError
