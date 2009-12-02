@@ -45,7 +45,7 @@ class SearchFormView(object):
                 'friendlyName': index.friendlyName or index.index,
                 'description': index.description,
                 'fields': crit_fields,
-                'widget': criterion.widget,
+                'criterion': criterion,
                 }
 
         return fields, criteria

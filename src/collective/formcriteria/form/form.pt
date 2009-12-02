@@ -47,10 +47,11 @@
                   <dd>
                     <metal:field
                        define-macro="field"
-                       tal:define="fieldName python:form.makeFormKey(criterion['id'], field.getName());"
+                       tal:define="fieldName python:form.makeFormKey(criterion['id'], field.getName());
+                                   context nocall:criterion/criterion;"
                        tal:condition="python:field.mode != 'r'">
                       <metal:widget 
-                         use-macro="python:criterion['widget'](fieldName, field=field, mode='edit')" />
+                         use-macro="python:context.widget(fieldName, field=field, mode='edit')" />
                     </metal:field>
                   </dd>
                 </tal:fields>
