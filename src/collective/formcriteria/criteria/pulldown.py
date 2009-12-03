@@ -23,6 +23,14 @@ field = atapi.StringField(
 
 class PulldownMixin(object):
 
+    def getCriteriaItems(self):
+        result = []
+
+        if self.Value() is not '':
+            result.append((self.Field(), self.Value()))
+
+        return tuple( result )
+
     def getCurrentValues(self):
         """Insert an empty entry at the beginning since this is a
         single select field"""
@@ -43,8 +51,10 @@ class FormPulldownCriterion(
     schema = selection.ATSelectionCriterion.schema.copy(
         ) + common.FormCriterion.schema.copy()
     schema.addField(field)
+    del schema['operator']
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
-        schema['value'], schema['operator'])
+        schema['value'])
+    
 
 common.registerCriterion(FormPulldownCriterion,
                          orig=form_selection.FormSelectionCriterion)
@@ -60,7 +70,7 @@ class FormPortalTypePulldownCriterion(
     schema = portaltype.ATPortalTypeCriterion.schema.copy(
         ) + common.FormCriterion.schema.copy()
     schema.addField(field)
-    schema['operator'].mode = 'r'
+    del schema['operator']
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'])
 
@@ -78,8 +88,9 @@ class FormReferencePulldownCriterion(
     schema = portaltype.ATPortalTypeCriterion.schema.copy(
         ) + common.FormCriterion.schema.copy()
     schema.addField(field)
+    del schema['operator']
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
-        schema['value'], schema['operator'])
+        schema['value'])
 
 common.registerCriterion(FormReferencePulldownCriterion,
                          orig=form_selection.FormReferenceCriterion)

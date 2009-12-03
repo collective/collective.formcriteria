@@ -41,7 +41,7 @@ Designate the criterion's field as a form field.
 The values set on the criterion are the default values checked on the
 search form.
 
-    >>> crit.setValue(['Page'])
+    >>> crit.setValue('Page')
 
 When viewing the collection in a browser pulldown menus will be
 rendered for the field with the default values selected.
@@ -56,17 +56,6 @@ rendered for the field with the default values selected.
     name='form_crit__Type_FormPortalTypePulldownCriterion_value'
     type='select' optionValue='Event' selected=False>
 
-The portal type pulldown form criterion doesn't allow using "and" as a
-query operator since it wouldn't make any sense.  As such the operator
-field isn't rendered on the search form.
-
-    >>> browser.getControl(
-    ...     name='form_crit__Type_FormPortalTypePulldownCriterion'
-    ...     '_operator')
-    Traceback (most recent call last):
-    LookupError: name
-    'form_crit__Type_FormPortalTypePulldownCriterion_operator'
-
 By default the criterion values determine the search results.
 
     >>> browser.getLink('Bar Document Title')
@@ -78,9 +67,8 @@ By default the criterion values determine the search results.
 
 Change the checked values and search
 
-    >>> browser.getControl('Page').selected = False
-    >>> browser.getControl('Event').selected = True
     >>> form = browser.getForm(name="formcriteria_search")
+    >>> form.getControl('Event').selected = True
     >>> form.getControl(name='submit').click()
 
 Now the default has been overriden by the submitted query.
