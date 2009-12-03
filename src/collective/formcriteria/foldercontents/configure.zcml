@@ -20,6 +20,13 @@
      template="template.pt"
      permission="cmf.ListFolderContents" />
 
+  <browser:page
+     for="..interfaces.IFormTopic"
+     layer="..interfaces.IFormCriteriaLayer"
+     class=".form.Table"
+     name="folder_contents_table"
+     permission="cmf.ListFolderContents" />
+
   <browser:menuItem
      for="..interfaces.IFormTopic"
      layer="..interfaces.IFormCriteriaLayer"

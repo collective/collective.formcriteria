@@ -8,6 +8,8 @@ from zope.i18n import translate
 from Acquisition import aq_inner
 from Missing import MV
 
+from Products.Five.browser import metaconfigure
+
 from Products.CMFCore.utils import getToolByName
 
 from Products.CMFPlone.utils import safe_unicode
@@ -22,21 +24,26 @@ class ViewPageTemplateFile(pagetemplate.ViewPageTemplateFile):
     def getId(self):
         return os.path.basename(self.filename)
 
-class Table(tableview.Table):
+class Table(metaconfigure.ViewMixinForTemplates, tableview.Table):
     """Use a table template which obeys the columns fields"""                
 
-    render = ViewPageTemplateFile("table.pt")
+    index = ViewPageTemplateFile("table.pt")
 
-    def __init__(self, context, request, base_url, view_url, items,
-                 batch, columns, show_sort_column=False, buttons=[],
-                 pagesize=20):
+    def render(self, *args, **kw):
+        """Delegate to the registered template""" 
+        return self.index(*args, **kw)
+
+    def update(self, base_url, view_url, items, batch, columns,
+               show_sort_column=False, buttons=[], pagesize=20):
         self._batch = batch
-        super(Table, self).__init__(
-            request=request, base_url=base_url, view_url=view_url,
-            items=items, show_sort_column=show_sort_column,
-            buttons=buttons, pagesize=batch.size)
+        context = aq_inner(self.context)
+        tableview.Table.__init__(
+            self, request=self.request, base_url=base_url,
+            view_url=view_url, items=items,
+            show_sort_column=show_sort_column, buttons=buttons,
+            pagesize=batch.size)
         map(self.set_checked, items)
-        self.context = context
+        self.__dict__['context'] = context
         self.columns = columns
 
     @property
@@ -109,8 +116,9 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
 
         url = context.absolute_url()
         view_url = url + '/@@folder_contents'
-        self.table = Table(
-            context, request, url, view_url, self.items, self.batch,
+        self.table = context.restrictedTraverse(
+            '@@folder_contents_table')
+        self.table.update(url, view_url, self.items, self.batch,
             self.columns, show_sort_column=self.show_sort_column,
             buttons=self.buttons)
 
