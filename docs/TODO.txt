@@ -1,6 +1,8 @@
 TODO
 ====
 
+* Replace KSS with jQuery for the AJAX folder contents stuff
+
 * Tabs for folder_contents based multiple object edit form for topic
   containers such as topic columns.
 
