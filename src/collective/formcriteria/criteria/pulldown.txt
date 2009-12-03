@@ -12,6 +12,12 @@ We start with a topic.
 
     >>> foo_topic = self.folder['foo-topic-title']
 
+Add a criterion to the topic.
+
+    >>> path_crit = foo_topic.addCriterion(
+    ...     'path', 'FormRelativePathCriterion')
+    >>> path_crit.setRecurse(True)
+
 Open a browser as an anonymous user.
 
     >>> from Products.Five.testbrowser import Browser
@@ -82,6 +88,19 @@ Now the default has been overriden by the submitted query.
     >>> browser.getLink('Bar Document Title')
     Traceback (most recent call last):
     LinkNotFoundError
+    >>> browser.getLink('Baz Event Title')
+    <Link text='Baz Event Title'
+    url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
+
+If no value is set, all results should be returned.
+
+    >>> crit.setValue('')
+    >>> browser.open(foo_topic.absolute_url())
+    >>> form = browser.getForm(name="formcriteria_search")
+    >>> form.getControl(name='submit').click()
+    >>> browser.getLink('Bar Document Title')
+    <Link text='Bar Document Title'
+    url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
     >>> browser.getLink('Baz Event Title')
     <Link text='Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>

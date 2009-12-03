@@ -21,8 +21,20 @@ field = atapi.StringField(
         format='select',
         hide_form_label=True))
 
+class PulldownMixin(object):
+
+    def getCurrentValues(self):
+        """Insert an empty entry at the beginning since this is a
+        single select field"""
+        result = super(PulldownMixin, self).getCurrentValues()
+        if isinstance(result, atapi.DisplayList):
+            return atapi.DisplayList([('','')])+result
+        else:
+            return ['']+result
+
 class FormPulldownCriterion(
-    common.FormCriterion, selection.ATSelectionCriterion):
+    PulldownMixin, common.FormCriterion,
+    selection.ATSelectionCriterion):
     """A pulldown criterion"""
 
     archetype_name = 'Pulldown Criterion'
@@ -38,7 +50,8 @@ common.registerCriterion(FormPulldownCriterion,
                          orig=form_selection.FormSelectionCriterion)
 
 class FormPortalTypePulldownCriterion(
-    common.FormCriterion, portaltype.ATPortalTypeCriterion):
+    PulldownMixin, common.FormCriterion,
+    portaltype.ATPortalTypeCriterion):
     """A portal_types pulldown criterion"""
 
     archetype_name = 'Portal Types Pulldown Criterion'
@@ -55,7 +68,8 @@ common.registerCriterion(FormPortalTypePulldownCriterion,
                          orig=form_selection.FormPortalTypeCriterion)
 
 class FormReferencePulldownCriterion(
-    common.FormCriterion, reference.ATReferenceCriterion):
+    PulldownMixin, common.FormCriterion,
+    reference.ATReferenceCriterion):
     """A reference pulldown criterion"""
 
     archetype_name = 'Portal Types Pulldown Criterion'
