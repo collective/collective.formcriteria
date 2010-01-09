@@ -101,9 +101,9 @@ class TopicColumn(contained.NonRefCatalogMixin,
 
     def listMetaDataVocab(self):
         """Append '-column' suffix to avoid id clashes"""
+        fields = aq_parent(aq_parent(self)).listMetaDataFields()
+        fields.add('getPath', 'URL')
         return atapi.DisplayList(
-            (key+'-column', value) for key, value in
-            aq_parent(aq_parent(self)).listMetaDataFields().items()+(
-                ('getPath', 'URL'),))
+            (key+'-column', fields.getValue(key)) for key in fields)
 
 atapi.registerType(TopicColumn, 'collective.formcriteria')
