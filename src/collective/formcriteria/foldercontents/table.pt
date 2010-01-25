@@ -40,7 +40,7 @@
            id="listing-table"
            summary="Content listing"
            i18n:attributes="summary summary_content_listing;"
-           tal:condition="view/items">
+           tal:condition="python:view.items or view.columns.has_filters">
 
       <thead>
         <tr tal:condition="python: batch.next or  batch.previous or ids">
