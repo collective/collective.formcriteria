@@ -6,7 +6,8 @@
     tal:define="collection_url view/collection_url;
                 plone_view context/@@plone;
                 toLocalizedTime nocall:plone_view/toLocalizedTime;
-                getIcon nocall:plone_view/getIcon;">
+                getIcon nocall:plone_view/getIcon;
+                folderContents view/results;">
   <metal:block use-macro="here/global_defines/macros/defines" />
 
   <dt class="portletHeader">
@@ -17,8 +18,7 @@
     <span class="portletTopRight"></span>
   </dt>
   
-  <metal:listing use-macro="context/folder_listing/macros/listing"
-                 tal:define="folderContents view/results;" />
+  <metal:listing use-macro="context/folder_listing/macros/listing" />
   
   <dd class="portletFooter" tal:condition="view/data/show_more">
     <span class="portletBottomLeft"></span>
