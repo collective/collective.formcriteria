@@ -1,5 +1,5 @@
 import unittest
-from zope.testing import doctest
+import doctest
 
 from Testing import ZopeTestCase
 from Products.PloneTestCase import ptc
