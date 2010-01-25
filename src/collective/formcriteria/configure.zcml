@@ -9,6 +9,8 @@
 
   <include package="plone.app.contentmenu" />
 
+  <include file="deprecated.zcml" />
+
   <include package=".form" />
   <include package=".portlet" />
 
