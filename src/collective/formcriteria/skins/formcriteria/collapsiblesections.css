@@ -83,4 +83,12 @@ tr.collapsible .collapsibleContent {
     display: inline;
 }
 
+#foldercontents-getPath-filter .collapsibleHeader {
+    display: inline-block;
+    padding: 0;
+    height: 9px;
+    width: 9px;
+    background-position: 0;
+}
+
 /* </dtml-with> */

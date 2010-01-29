@@ -136,8 +136,12 @@
           <tal:column repeat="column view/columns/ordered">
             <tal:define define="criterion column/filter_|nothing;
                                 fields criterion/fields|python:();">
-              <th class="nosort columnFilter collapsibleHeader"
-                  tal:condition="python:column['field']=='getPath'">
+              <th class="nosort columnFilter"
+                  tal:condition="python:column['field']=='getPath'"
+                  tal:attributes="id python:fields and 'foldercontents-'+column['field']+'-filter' or None;">
+                <span class="collapsibleHeader">
+                  <!-- collapse/expand toggle -->
+                </span>
                 &#160;
                 <input class="context"
                        type="submit"
@@ -230,13 +234,17 @@
                          class="hiddenStructure">
                     Item Title
                   </label>
+                  <a href="#" tal:attributes="href  item/view_url;
+                                              title item/url_href_title;
+                                              class item/state_class;">
+                    <img tal:replace="structure item/icon" />
+                  </a>
                 </tal:has_buttons>
               </td>
               <td tal:condition="python:column['field']!='getPath'">
                 <tal:value define="value python:item['columns'][column['field']];">
                   <tal:linked condition="column/link">
                     <span tal:attributes="class item/type_class">
-                      <img tal:replace="structure item/icon" />
                       <a href="#" tal:attributes="href  item/view_url;
                                                   title item/url_href_title;
                                                   class item/state_class;">

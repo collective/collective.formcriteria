@@ -253,6 +253,17 @@ contents form.
     optionValue='/plone/Members/test_user_1_/baz-event-title'
     selected=False>
 
+The filter collapsible doesn't collapse when clicking on the search
+text box.
+
+    >>> import re
+    >>> regexp = re.compile('http://.*?collapsiblesections.css')
+    >>> browser.open(regexp.search(browser.contents).group())
+    >>> print browser.contents
+    /*...
+    #foldercontents-getPath-filter .collapsibleHeader {
+    ...
+
 The search form is rendered if query criteria are present which are
 not assigned to a column.
 
@@ -316,9 +327,32 @@ not be rendered.
 Cells that link to the item have just a link and no icon.  If the
 special "Path" column is include, it will display an icon.
 
-    >>> TODO
-
-The filter collapsible doesn't collapse when clicking on the search
-text box.
-
-    >>> TODO
+    >>> print browser.contents
+    <...
+                  <td class="notDraggable">
+                      <input type="checkbox" class="noborder"
+                             name="paths:list"
+                             id="cb_bar-document-title"
+                             value="/plone/Members/test_user_1_/bar-document-title"
+                             alt="Select Bar Document Title"
+                             title="Select Bar Document Title" />
+                      <input type="hidden"
+                             name="selected_obj_paths:list"
+                             value="/plone/Members/test_user_1_/bar-document-title" />
+                      <label class="hiddenStructure"
+                             for="cb_bar-document-title">Bar Document Title</label>
+                          <a href="http://nohost/plone/Members/test_user_1_/bar-document-title"
+                             class="state-published"
+                             title="Page: blah">
+                          <img width="16" height="16" src="http://nohost/plone/document_icon.gif" alt="Page" />
+                          </a>
+                  </td>
+    ...
+                        <span class="contenttype-document">
+                          <a href="http://nohost/plone/Members/test_user_1_/bar-document-title"
+                             class="state-published"
+                             title="Page: blah">
+                            blah
+                          </a>
+                        </span>
+    ...
