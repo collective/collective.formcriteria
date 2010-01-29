@@ -121,9 +121,9 @@
               &#160;
               <tal:has_sum tal:condition="column/has_sum">
                 <tal:structure condition="column/structure|nothing"
-                               content="structure column/sum" />
+                               content="structure column/sum|nothing" />
                 <tal:text condition="not:column/structure|nothing"
-                          content="structure column/sum" />
+                          content="structure column/sum|nothing" />
                 &#160;
               </tal:has_sum>
             </th>

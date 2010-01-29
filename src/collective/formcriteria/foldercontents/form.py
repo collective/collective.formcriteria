@@ -244,7 +244,7 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
                 ))
 
         for column in self.columns.ordered:
-            if not column['has_sum']:
+            if not column['has_sum'] or 'sum' not in column:
                 continue
             expr = column.get('expr')
             if expr:
