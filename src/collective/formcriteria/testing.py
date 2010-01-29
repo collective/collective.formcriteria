@@ -5,6 +5,7 @@ from Testing import ZopeTestCase
 from Products.Five import zcml, fiveconfigure
 
 from collective.testcaselayer import ptc as tcl_ptc
+from collective.testcaselayer import common
 
 from collective import formcriteria
 from collective.formcriteria.portlet import portlet
@@ -27,7 +28,7 @@ class Layer(tcl_ptc.BasePTCLayer):
             self.folder, 'publish')
         self.login()
 
-layer = Layer([tcl_ptc.ptc_layer])
+layer = Layer([common.common_layer])
 
 class ContentLayer(tcl_ptc.BasePTCLayer):
     """Add some content"""
