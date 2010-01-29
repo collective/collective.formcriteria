@@ -312,3 +312,13 @@ not be rendered.
             </tr>
           </thead...
           <tbody...
+
+Cells that link to the item have just a link and no icon.  If the
+special "Path" column is include, it will display an icon.
+
+    >>> TODO
+
+The filter collapsible doesn't collapse when clicking on the search
+text box.
+
+    >>> TODO
