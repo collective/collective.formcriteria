@@ -2,8 +2,6 @@ import DateTime
 
 from Testing import ZopeTestCase
 
-from Products.Five import zcml, fiveconfigure
-
 from collective.testcaselayer import ptc as tcl_ptc
 from collective.testcaselayer import common
 
@@ -14,9 +12,7 @@ class Layer(tcl_ptc.BasePTCLayer):
     """Install collective.formcriteria"""
 
     def afterSetUp(self):
-        fiveconfigure.debug_mode = True
-        zcml.load_config('testing.zcml', package=formcriteria)
-        fiveconfigure.debug_mode = False
+        self.loadZCML('testing.zcml', package=formcriteria)
 
         ZopeTestCase.installPackage('collective.formcriteria')
 
