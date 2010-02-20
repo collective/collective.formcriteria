@@ -349,7 +349,7 @@ All criteria can also be created using poral_types.constructContent.
     ...     'crit__review_state_FormSelectionCriterion')
     >>> seen = set()
     >>> topic_indexes = portal.portal_atct.topic_indexes
-    >>> for field, index in topic_indexes.iteritems():
+    >>> for field, index in sorted(topic_indexes.iteritems()):
     ...     for criterion in index.criteria:
     ...         if criterion in seen or criterion.startswith('AT'):
     ...             continue
@@ -357,25 +357,25 @@ All criteria can also be created using poral_types.constructContent.
     ...             criterion, foo_topic,
     ...             id='crit__%s_%s' % (field, criterion))
     ...         seen.add(criterion)
-    'crit__Title_FormSimpleStringCriterion'
-    'crit__effectiveRange_FormDateCriterion'
-    'crit__effectiveRange_FormSortCriterion'
-    'crit__path_FormPathCriterion'
-    'crit__path_FormRelativePathCriterion'
-    'crit__getRawRelatedItems_FormReferenceCriterion'
-    'crit__getRawRelatedItems_FormReferenceCheckboxCriterion'
-    'crit__getRawRelatedItems_FormReferencePulldownCriterion'
+    'crit__Creator_FormSelectionCriterion'
+    'crit__Creator_FormCheckboxCriterion'
+    'crit__Creator_FormPulldownCriterion'
+    'crit__Creator_FormSimpleStringCriterion'
+    'crit__Creator_FormListCriterion'
+    'crit__Creator_FormCommaCriterion'
+    'crit__Creator_FormSortCriterion'
+    'crit__Date_FormDateCriterion'
+    'crit__Date_FormDateRangeCriterion'
     'crit__Type_FormPortalTypeCriterion'
     'crit__Type_FormPortalTypeCheckboxCriterion'
     'crit__Type_FormPortalTypePulldownCriterion'
-    'crit__id_FormListCriterion'
-    'crit__id_FormCommaCriterion'
-    'crit__end_FormDateRangeCriterion'
-    'crit__is_folderish_FormBooleanCriterion'
-    'crit__get_size_FormSimpleIntCriterion'
-    'crit__review_state_FormSelectionCriterion'
-    'crit__review_state_FormCheckboxCriterion'
-    'crit__review_state_FormPulldownCriterion'
+    'crit__foo_int_FormSimpleIntCriterion'
+    'crit__getEventType_FormReferenceCriterion'
+    'crit__getEventType_FormReferenceCheckboxCriterion'
+    'crit__getEventType_FormReferencePulldownCriterion'
+    'crit__is_default_page_FormBooleanCriterion'
+    'crit__path_FormPathCriterion'
+    'crit__path_FormRelativePathCriterion'
 
 Installing
 ==========
