@@ -17,9 +17,11 @@
     </a>
     <span class="portletTopRight"></span>
   </dt>
-  
-  <metal:listing use-macro="context/folder_listing/macros/listing" />
-  
+
+  <dd>
+    <metal:listing use-macro="context/folder_listing/macros/listing" />
+  </dd>
+
   <dd class="portletFooter" tal:condition="view/data/show_more">
     <span class="portletBottomLeft"></span>
     <span>
