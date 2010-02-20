@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<atcttool
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <topic_indexes i18n:domain="plone">
+  <index name="foo_int"
+     description="Test integer index" enabled="False"
+     friendlyName="Foo Integer"
+     i18n:attributes="description; friendlyName">
+   <criteria>FormSimpleIntCriterion</criteria>
+   <criteria>FormSortCriterion</criteria>
+  </index>
+ </topic_indexes>
+</atcttool>

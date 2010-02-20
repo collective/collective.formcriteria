@@ -3,5 +3,8 @@
  <index name="getPhysicalPath" meta_type="FieldIndex">
   <indexed_attr value="getPhysicalPath"/>
  </index>
+ <index name="foo_int" meta_type="FieldIndex">
+  <indexed_attr value="foo_int"/>
+ </index>
  <column value="get_size"/>
 </object>

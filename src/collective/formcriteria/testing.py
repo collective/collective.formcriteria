@@ -38,11 +38,12 @@ class ContentLayer(tcl_ptc.BasePTCLayer):
             startDate=tomorrow, endDate=tomorrow,
             id='foo-event-title', title='Foo Event Title',
             creators='foo_creator_id', text='foo'*2000)
-        self.folder.invokeFactory(
+        bar_document = self.folder[self.folder.invokeFactory(
             type_name='Document', effectiveDate=self.now-2,
             id='bar-document-title', title='Bar Document Title',
             description='blah', subject=['bah', 'qux'],
-            creators='foo_creator_id', text='bar'*1000)
+            creators='foo_creator_id', text='bar'*1000)]
+        bar_document.foo_int = 0
         baz_event = self.folder[self.folder.invokeFactory(
             type_name='Event', effectiveDate=self.now,
             id='baz-event-title', title='Baz Event Title',
@@ -53,16 +54,14 @@ class ContentLayer(tcl_ptc.BasePTCLayer):
             # BBB Plone 3, For Events eventType == subject
             eventType=['qux', 'quux'],
             creators='bar_creator_id')]
+        baz_event.foo_int = 1
 
         self.loginAsPortalOwner()
         self.portal.portal_workflow.doActionFor(
-            self.folder['bar-document-title'], 'publish')
-        self.portal.portal_workflow.doActionFor(
-            self.folder['baz-event-title'], 'publish')
-        self.folder['bar-document-title'].setModificationDate(
-            self.now)
-        self.folder['bar-document-title'].reindexObject(
-            ['modification_date'])
+            bar_document, 'publish')
+        self.portal.portal_workflow.doActionFor(baz_event, 'publish')
+        bar_document.setModificationDate(self.now)
+        bar_document.reindexObject(['modification_date'])
         self.login()
 
 content_layer = ContentLayer([layer])
