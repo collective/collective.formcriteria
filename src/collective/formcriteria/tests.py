@@ -7,8 +7,7 @@ from Products.PloneTestCase import ptc
 from collective.formcriteria import testing
 
 optionflags = (doctest.NORMALIZE_WHITESPACE|
-               doctest.ELLIPSIS|
-               doctest.REPORT_NDIFF)
+               doctest.ELLIPSIS)
 
 def test_suite():
     suite = ZopeTestCase.FunctionalDocFileSuite(
