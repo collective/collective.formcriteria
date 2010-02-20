@@ -38,6 +38,7 @@ setup(name='collective.formcriteria',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
+          'Plone',
           'plone.browserlayer',
       ],
       tests_require=tests_require,
