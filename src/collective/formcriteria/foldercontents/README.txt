@@ -344,7 +344,7 @@ special "Path" column is include, it will display an icon.
                           <a href="http://nohost/plone/Members/test_user_1_/bar-document-title"
                              class="state-published"
                              title="Page: blah">
-                          <img width="16" height="16" src="http://nohost/plone/document_icon.gif" alt="Page" />
+                          <img width="16" height="16" src="http://nohost/plone/document_icon..." alt="Page" />
                           </a>
                   </td>
     ...
