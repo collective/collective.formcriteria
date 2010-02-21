@@ -26,8 +26,7 @@
           Sort on:
           <tal:sorts repeat="sort python:[sorts[field] for field in ids]">
             <a tal:condition="not:sort/selected"
-               tal:attributes="href python:'%s?%s' % (url, mq(form, {sort['id']: True}));
-                               id string:formcriteria-sort-${sort/id};"
+               tal:attributes="href python:'%s?%s' % (url, mq(form, {sort['id']: True}));"
                tal:content="sort/name"
                class="formcriteriaSortField">
               Field
