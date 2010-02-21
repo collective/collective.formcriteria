@@ -28,7 +28,7 @@
             <tal:criteria tal:repeat="crit_field python:criteriaFields[0]">
               <tal:criterion tal:define="criterion python:criteriaFields[1][crit_field];">
                 <dt>
-                  <div class="field"
+                  <span class="field"
                        metal:define-macro="label">
                     <label
                        tal:content="criterion/friendlyName"
@@ -36,11 +36,11 @@
                        i18n:translate="">
                       Label
                     </label>
-                    <div class="formHelp" tal:content="criterion/description"
+                    <span class="formHelp" tal:content="criterion/description"
                          i18n:translate="">
                       Help
-                    </div>
-                  </div>
+                    </span>
+                  </span>
                 </dt>
 
                 <tal:fields repeat="field criterion/fields">
