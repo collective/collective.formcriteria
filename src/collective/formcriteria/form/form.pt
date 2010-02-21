@@ -23,9 +23,9 @@
         <fieldset metal:define-slot="fieldset">
           <legend i18n:translate="legend_search_terms">Search Terms</legend>
 
-          <dl>
-            <tal:criteria tal:define="criteriaFields python:form.criteriaFields();"
-                          tal:repeat="crit_field python:criteriaFields[0]">
+          <dl tal:define="criteriaFields python:form.criteriaFields();"
+              tal:condition="python:criteriaFields[0]">
+            <tal:criteria tal:repeat="crit_field python:criteriaFields[0]">
               <tal:criterion tal:define="criterion python:criteriaFields[1][crit_field];">
                 <dt>
                   <div class="field"
