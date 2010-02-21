@@ -332,7 +332,7 @@ special "Path" column is include, it will display an icon.
                   <td class="notDraggable">
                       <input type="checkbox" class="noborder"
                              name="paths:list"
-                             id="cb_bar-document-title"
+                             id="cb_-plone-Members-test_user_1_-bar-document-title"
                              value="/plone/Members/test_user_1_/bar-document-title"
                              alt="Select Bar Document Title"
                              title="Select Bar Document Title" />
@@ -340,7 +340,7 @@ special "Path" column is include, it will display an icon.
                              name="selected_obj_paths:list"
                              value="/plone/Members/test_user_1_/bar-document-title" />
                       <label class="hiddenStructure"
-                             for="cb_bar-document-title">Bar Document Title</label>
+                             for="cb_-plone-Members-test_user_1_-bar-document-title">Bar Document Title</label>
                           <a href="http://nohost/plone/Members/test_user_1_/bar-document-title"
                              class="state-published"
                              title="Page: blah">

@@ -112,12 +112,8 @@
                 tal:condition="python:column['field']=='getPath'"
                 >&#160;Total&#160;</th>
             <th class="nosort columnSum"
-                id="foldercontents-name-sum"
                 tal:condition="python:column['field']!='getPath'"
-                tal:attributes="class python:'nosort'+(column['has_sum'] and '' or ' columnSum');
-                                id python:column['has_sum'] and
-                                'foldercontents-'+column['field']+'-sum'
-                                or None;">
+                tal:attributes="class python:'nosort'+(column['has_sum'] and '' or ' columnSum');">
               &#160;
               <tal:has_sum tal:condition="column/has_sum">
                 <tal:structure condition="column/structure|nothing"

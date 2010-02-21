@@ -131,8 +131,7 @@ foot.
                 <th class="nosort columnSum">
                   &#160;
                 </th>
-                <th class="nosort columnSum"
-                    id="foldercontents-get_size-sum">
+                <th class="nosort columnSum">
                   &#160;
                     2.9 kB
                     &#160;
@@ -150,8 +149,7 @@ foot.
                 <th class="nosort columnSum">
                   &#160;
                 </th>
-                <th class="nosort columnSum"
-                    id="foldercontents-get_size-sum">
+                <th class="nosort columnSum">
                   &#160;
                     2.9 kB
                     &#160;

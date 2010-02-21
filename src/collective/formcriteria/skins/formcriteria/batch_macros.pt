@@ -33,7 +33,6 @@
               Field
             </a>
             <span tal:condition="sort/selected"
-                  tal:attributes="id string:formcriteria-sort-${sort/id};"
                   tal:content="sort/name"
                   class="formcriteriaSortField selected">
               Field
