@@ -59,13 +59,34 @@ Add the collection listing portlet to the folder.
     <...
     ...Foo Collcetion Listing Portlet Title...
 
+Add a link to test rendering to the target remoteUrl.
+
+    >>> qux_link = self.folder[self.folder.invokeFactory(
+    ...     type_name='Link', id='qux-link-title',
+    ...     title='Qux Link Title', remoteUrl='http://foo.com')]
+    >>> self.loginAsPortalOwner()
+    >>> self.portal.portal_workflow.doActionFor(
+    ...     qux_link, 'publish')
+    >>> self.logout()
+
+Allow anonymous users to view the by-line.
+
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> getToolByName(portal, 'portal_properties'
+    ...               ).site_properties.manage_changeProperties(
+    ...                   allowAnonymousViewAbout=True)
+
 The author by-lines, descriptions, and event details are included as
 with the folder_listing template.
 
+    >>> owner_browser.getLink('Log out').click()
     >>> owner_browser.open(folder.absolute_url())
     >>> print owner_browser.contents
     <...
-            <span>Foo Collcetion Listing Portlet Title</span>...
+          <span>Foo Collcetion Listing Portlet Title</span>
+    ...
+        href="http://foo.com"
+    ...
                 <dt class="vevent">
                             <span class="contenttype-event summary">
                                 <img width="16" height="16" src="http://nohost/plone/event_icon..." alt="Event" />
@@ -86,4 +107,10 @@ with the folder_listing template.
                         </dt>
                         <dd>
                             <span class="description">blah blah</span> 
-                        </dd>...
+                        </dd>
+    ...
+
+Link items render links to the remoteUrl.
+
+    >>> owner_browser.getLink('Qux Link Title', index=1)
+    <Link text='Qux Link Title' url='http://foo.com'>

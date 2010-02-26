@@ -4,7 +4,8 @@ import os
 version = '2.0dev'
 
 tests_require = ['collective.testcaselayer>=1.3',
-                 'collective.monkeypatcher']
+                 'collective.monkeypatcher',
+                 'zope.testbrowser>3.3']
 
 setup(name='collective.formcriteria',
       version=version,
