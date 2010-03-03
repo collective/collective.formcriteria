@@ -1,5 +1,7 @@
 import Acquisition
 
+from Products.Archetypes import atapi
+from Products.ATContentTypes.content import schemata
 from Products.ATContentTypes.criteria import sort
 
 from collective.formcriteria import interfaces
@@ -9,7 +11,10 @@ class FormSortCriterion(
     common.FormCriterion, sort.ATSortCriterion):
     __doc__ = sort.ATSortCriterion.__doc__
 
-    schema = sort.ATSortCriterion.schema.copy()
+    schema = atapi.Schema((
+        schemata.ATContentTypeSchema['title'],
+        schemata.ATContentTypeSchema['description'],
+        )) + sort.ATSortCriterion.schema.copy()
     shortDesc      = 'Sort results'
 
     def getCriteriaItems(self):

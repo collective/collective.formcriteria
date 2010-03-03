@@ -1,6 +1,7 @@
 from zope import interface
 
 from Products.Archetypes import atapi
+from Products.ATContentTypes.content import schemata
 from Products.ATContentTypes import criteria
 from Products.ATContentTypes import interfaces as atct_ifaces
 
@@ -51,6 +52,8 @@ class FormCriterion(object):
     interface.implements(interfaces.IFormCriterion)
 
     schema = atapi.Schema((
+        schemata.ATContentTypeSchema['title'],
+        schemata.ATContentTypeSchema['description'],
         atapi.LinesField(
             'formFields',
             widget=atapi.MultiSelectionWidget(
