@@ -33,4 +33,22 @@
      addview=".portlet.AddForm"
      editview=".portlet.EditForm" />
 
+  <plone:portletRenderer
+     portlet=".portlet.ICriteriaFormPortlet"
+     layer="..interfaces.IFormCriteriaLayer"
+     class=".portlet.Renderer"
+     />
+
+  <plone:portletRenderer
+     portlet="plone.portlet.collection.collection.ICollectionPortlet"
+     layer="..interfaces.IFormCriteriaLayer"
+     template="listing.pt"
+     />
+
+  <plone:portletRenderer
+     portlet="plone.app.portlets.portlets.navigation.INavigationPortlet"
+     layer="..interfaces.IFormCriteriaLayer"
+     class=".navigation.Renderer"
+     />
+
 </configure>

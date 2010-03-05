@@ -1,7 +1,0 @@
-<configure
-   xmlns="http://namespaces.zope.org/zope"
-   i18n_domain="collective.formcriteria">
-
-  <include package=".portlet" file="overrides.zcml" />
-
-</configure>
