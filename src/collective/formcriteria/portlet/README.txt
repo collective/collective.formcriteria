@@ -118,3 +118,18 @@ Link items render links to the remoteUrl.
 
     >>> owner_browser.getLink('Qux Link Title', index=1)
     <Link text='Qux Link Title' url='http://foo.com'>
+
+The navigation portlet has also been overridden with one which supports
+linking directly to the remoteUrl.
+
+    >>> self.login()
+    >>> manager = self.folder.restrictedTraverse(
+    ...     '++contextportlets++plone.leftcolumn')
+    >>> from plone.app.portlets.portlets import navigation
+    >>> assignment = navigation.Assignment()
+    >>> manager['navigation'] = assignment
+    >>> self.logout()
+
+    >>> owner_browser.open(folder.absolute_url())
+    >>> owner_browser.getLink('Qux Link Title', index=0)
+    <Link text='Link[IMG] Qux Link Title' url='http://foo.com'>

@@ -13,5 +13,14 @@
      addview="plone.portlet.collection.collection.AddForm"
      editview="plone.portlet.collection.collection.EditForm"
      />
+        
+    <plone:portlet
+        name="portlets.Navigation"
+        interface="plone.app.portlets.portlets.navigation.INavigationPortlet"
+        assignment="plone.app.portlets.portlets.navigation.Assignment"
+        renderer=".navigation.Renderer"
+        addview="plone.app.portlets.portlets.navigation.AddForm"
+        editview="plone.app.portlets.portlets.navigation.EditForm"
+        />
 
 </configure>

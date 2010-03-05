@@ -7,7 +7,11 @@
 <tal:navitem repeat="node children">
 <li tal:define="show_children   node/show_children;
                 children        node/children;
+                use_remote_url view/typesUseRemoteUrlInListings;
+                remote_url node/getRemoteUrl|nothing;
                 item_url        node/getURL;
+                item_type node/portal_type;
+                item_url        python:item_type in use_remote_url and remote_url or item_url;
                 item_icon       node/item_icon;
                 is_current      node/currentItem;
                 is_in_path      node/currentParent;
