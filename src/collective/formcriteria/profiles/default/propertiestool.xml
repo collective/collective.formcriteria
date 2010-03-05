@@ -50,4 +50,9 @@
    <element value="FormRelativePathCriterion"/>
   </property>
  </object>
+ <object name="site_properties" meta_type="Plone Property Sheet">
+  <property name="typesUseRemoteUrlInListings" type="lines">
+   <element value="Link"/>
+  </property>
+ </object>
 </object>
