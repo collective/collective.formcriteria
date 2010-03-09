@@ -4,6 +4,8 @@
    xmlns:plone="http://namespaces.plone.org/plone"
    i18n_domain="collective.formcriteria">
 
+  <include package="plone.portlet.collection" />
+
   <browser:resource
      name="formcriteria-portlet.css"
      file="formcriteria-portlet.css"
