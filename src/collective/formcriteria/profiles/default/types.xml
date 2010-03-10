@@ -30,6 +30,8 @@
     meta_type="Factory-based Type Information"/>
  <object name="FormSelectionCriterion"
     meta_type="Factory-based Type Information"/>
+ <object name="FormContextCriterion"
+    meta_type="Factory-based Type Information"/>
  <object name="FormCheckboxCriterion"
     meta_type="Factory-based Type Information"/>
  <object name="FormPulldownCriterion"

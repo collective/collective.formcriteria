@@ -38,3 +38,6 @@ relativepath # import to register
 
 from collective.formcriteria.criteria import sort
 sort # import to register
+
+from collective.formcriteria.criteria import context
+context # import to register

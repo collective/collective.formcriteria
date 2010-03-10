@@ -33,11 +33,11 @@ class ContentLayer(tcl_ptc.BasePTCLayer):
         tomorrow = DateTime.DateTime()+1
 
         self.login()
-        self.folder.invokeFactory(
+        foo_event = self.folder[self.folder.invokeFactory(
             type_name='Event', effectiveDate=self.now-3,
             startDate=tomorrow, endDate=tomorrow,
             id='foo-event-title', title='Foo Event Title',
-            creators='foo_creator_id', text='foo'*2000)
+            creators='foo_creator_id', text='foo'*2000)]
         bar_document = self.folder[self.folder.invokeFactory(
             type_name='Document', effectiveDate=self.now-2,
             id='bar-document-title', title='Bar Document Title',
@@ -57,6 +57,7 @@ class ContentLayer(tcl_ptc.BasePTCLayer):
         baz_event.foo_int = 1
 
         self.loginAsPortalOwner()
+        self.portal.portal_workflow.doActionFor(foo_event, 'publish')
         self.portal.portal_workflow.doActionFor(
             bar_document, 'publish')
         self.portal.portal_workflow.doActionFor(baz_event, 'publish')

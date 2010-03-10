@@ -13,6 +13,7 @@
    <element value="FormReferenceCheckboxCriterion"/>
    <element value="FormReferencePulldownCriterion"/>
    <element value="FormSelectionCriterion"/>
+   <element value="FormContextCriterion"/>
    <element value="FormCheckboxCriterion"/>
    <element value="FormPulldownCriterion"/>
    <element value="FormSimpleIntCriterion"/>
@@ -37,6 +38,7 @@
    <element value="FormReferenceCheckboxCriterion"/>
    <element value="FormReferencePulldownCriterion"/>
    <element value="FormSelectionCriterion"/>
+   <element value="FormContextCriterion"/>
    <element value="FormCheckboxCriterion"/>
    <element value="FormPulldownCriterion"/>
    <element value="FormSimpleIntCriterion"/>

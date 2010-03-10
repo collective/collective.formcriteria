@@ -14,6 +14,7 @@
   <type type_id="FormReferenceCheckboxCriterion"/>
   <type type_id="FormReferencePulldownCriterion"/>
   <type type_id="FormSelectionCriterion"/>
+  <type type_id="FormContextCriterion"/>
   <type type_id="FormCheckboxCriterion"/>
   <type type_id="FormPulldownCriterion"/>
   <type type_id="FormSimpleIntCriterion"/>

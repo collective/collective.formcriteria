@@ -155,7 +155,8 @@ discrimination of criteria types by index manually.
     >>> foo_topic.allowedCriteriaForField('review_state')
     ['FormSelectionCriterion', 'FormCheckboxCriterion',
     'FormPulldownCriterion', 'FormSimpleStringCriterion',
-    'FormListCriterion', 'FormCommaCriterion', 'FormSortCriterion']
+    'FormListCriterion', 'FormCommaCriterion', 'FormSortCriterion',
+    'FormContextCriterion']
     >>> foo_topic.allowedCriteriaForField(
     ...     'review_state', display_list=True)
     <DisplayList
@@ -165,7 +166,9 @@ discrimination of criteria types by index manually.
      ('FormSimpleStringCriterion', 'Text'),
      ('FormListCriterion', 'List of values'),
      ('FormCommaCriterion', 'Enter comma separated values'),
-     ('FormSortCriterion', 'Sort results')] at ...>
+     ('FormSortCriterion', 'Sort results'),
+     ('FormContextCriterion',
+      'Values will be taken from the context')] at ...>
 
 Set the query term and save.
 
@@ -364,16 +367,17 @@ All criteria can also be created using poral_types.constructContent.
     'crit__Creator_FormListCriterion'
     'crit__Creator_FormCommaCriterion'
     'crit__Creator_FormSortCriterion'
+    'crit__Creator_FormContextCriterion'
     'crit__Date_FormDateCriterion'
     'crit__Date_FormDateRangeCriterion'
     'crit__Type_FormPortalTypeCriterion'
     'crit__Type_FormPortalTypeCheckboxCriterion'
     'crit__Type_FormPortalTypePulldownCriterion'
-    'crit__foo_int_FormSimpleIntCriterion'
-    'crit__getEventType_FormReferenceCriterion'
-    'crit__getEventType_FormReferenceCheckboxCriterion'
-    'crit__getEventType_FormReferencePulldownCriterion'
-    'crit__is_default_page_FormBooleanCriterion'
+    'crit__UID_FormBooleanCriterion'
+    'crit__UID_FormReferenceCheckboxCriterion'
+    'crit__UID_FormReferenceCriterion'
+    'crit__UID_FormReferencePulldownCriterion'
+    'crit__UID_FormSimpleIntCriterion'
     'crit__path_FormPathCriterion'
     'crit__path_FormRelativePathCriterion'
 

@@ -8,6 +8,7 @@
    <criteria>FormDateCriterion</criteria>
    <criteria>FormDateRangeCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="Creator" description="" enabled="True" friendlyName="Creator"
      i18n:attributes="description; friendlyName">
@@ -18,6 +19,7 @@
    <criteria>FormListCriterion</criteria>
    <criteria>FormCommaCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="Date"
      description="The time and date an item was last modified"
@@ -26,10 +28,12 @@
    <criteria>FormDateCriterion</criteria>
    <criteria>FormDateRangeCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="Description" description="" enabled="True" friendlyName="Description"
      i18n:attributes="description; friendlyName">
    <criteria>FormSimpleStringCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="effective"
      description="The time and date an item becomes publicly available"
@@ -38,6 +42,7 @@
    <criteria>FormDateCriterion</criteria>
    <criteria>FormDateRangeCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="effectiveRange"
      description="All items publicly available on a certain date"
@@ -45,6 +50,7 @@
      i18n:attributes="description; friendlyName">
    <criteria>FormDateCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="end" description="The end date and time of an event"
      enabled="True" friendlyName="End Date"
@@ -52,6 +58,7 @@
    <criteria>FormDateCriterion</criteria>
    <criteria>FormDateRangeCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="expires"
      description="The time and date an item is no longer publicly available"
@@ -60,6 +67,7 @@
    <criteria>FormDateCriterion</criteria>
    <criteria>FormDateRangeCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="getEventType" description="" enabled="False" friendlyName="">
    <criteria>FormListCriterion</criteria>
@@ -73,6 +81,7 @@
    <criteria>FormSimpleIntCriterion</criteria>
    <criteria>FormSimpleStringCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="getId"
      description="The short name of an item (used in the url)" enabled="True"
@@ -82,6 +91,7 @@
    <criteria>FormListCriterion</criteria>
    <criteria>FormCommaCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="getObjPositionInParent"
      description="The order of an item in its parent folder" enabled="False"
@@ -89,6 +99,7 @@
      i18n:attributes="description; friendlyName">
    <criteria>FormSimpleIntCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="get_size"
      description="The size of an item" enabled="False"
@@ -96,6 +107,7 @@
      i18n:attributes="description; friendlyName">
    <criteria>FormSimpleIntCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="getRawRelatedItems"
      description="Find items related to the selected items" enabled="True"
@@ -104,6 +116,7 @@
    <criteria>FormReferenceCriterion</criteria>
    <criteria>FormReferenceCheckboxCriterion</criteria>
    <criteria>FormReferencePulldownCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="id" description="The short name of an item (used in the url)"
      enabled="False" friendlyName="Short Name"
@@ -112,6 +125,7 @@
    <criteria>FormListCriterion</criteria>
    <criteria>FormCommaCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="is_default_page"
      description="Find items that are the default view for their containing folder."
@@ -119,6 +133,7 @@
      i18n:attributes="description; friendlyName">
    <criteria>FormBooleanCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="is_folderish"
      description="Find items that can contain other objects" enabled="False"
@@ -126,6 +141,7 @@
      i18n:attributes="description; friendlyName">
    <criteria>FormBooleanCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="modified"
      description="The time and date an item was last modified" enabled="True"
@@ -134,12 +150,14 @@
    <criteria>FormDateCriterion</criteria>
    <criteria>FormDateRangeCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="path" description="The location of an item in the site (path)"
      enabled="True" friendlyName="Location"
      i18n:attributes="description; friendlyName">
    <criteria>FormPathCriterion</criteria>
    <criteria>FormRelativePathCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="portal_type" description="" enabled="False"
      friendlyName="Item Type (internal)"
@@ -148,6 +166,7 @@
    <criteria>FormPortalTypeCheckboxCriterion</criteria>
    <criteria>FormPortalTypePulldownCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="review_state"
      description="An item's workflow state (e.g.published)" enabled="True"
@@ -160,16 +179,19 @@
    <criteria>FormListCriterion</criteria>
    <criteria>FormCommaCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="SearchableText" description="Text search of an item's contents"
      enabled="True" friendlyName="Search Text"
      i18n:attributes="description; friendlyName">
    <criteria>FormSimpleStringCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="sortable_title"
      description="An item's title transformed for sorting" enabled="True"
      friendlyName="Title" i18n:attributes="description; friendlyName">
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="start" description="The start date and time of an event"
      enabled="True" friendlyName="Start Date"
@@ -177,6 +199,7 @@
    <criteria>FormDateCriterion</criteria>
    <criteria>FormDateRangeCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="Subject" description="The keywords used to describe an item"
      enabled="True" friendlyName="Categories"
@@ -188,11 +211,13 @@
    <criteria>FormListCriterion</criteria>
    <criteria>FormCommaCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="Title" description="Text search of an item's title"
      enabled="True" friendlyName="Title"
      i18n:attributes="description; friendlyName">
    <criteria>FormSimpleStringCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
   <index name="Type" description="An item's type (e.g. Event)" enabled="True"
      friendlyName="Item Type"
@@ -201,6 +226,7 @@
    <criteria>FormPortalTypeCheckboxCriterion</criteria>
    <criteria>FormPortalTypePulldownCriterion</criteria>
    <criteria>FormSortCriterion</criteria>
+   <criteria>FormContextCriterion</criteria>
   </index>
  </topic_indexes>
  <topic_metadata i18n:domain="plone">

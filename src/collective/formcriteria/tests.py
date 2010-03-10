@@ -30,6 +30,7 @@ def test_suite():
         'criteria/relativepath.txt',
         'criteria/simpleint.txt',
         'criteria/sort.txt',
+        'criteria/context.txt',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
     criteria_suite.layer = testing.criteria_layer
