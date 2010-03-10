@@ -15,9 +15,10 @@ def makeVocabularyForFields(*fields):
         (field.getName(), field.widget.label)
         for field in fields)
 
-def registerCriterion(criterion, orig):
-    indices = criteria._criterionRegistry.indicesByCriterion(
-        orig.meta_type)
+def registerCriterion(criterion, orig=None, indices=()):
+    if orig is not None:
+        indices = criteria._criterionRegistry.indicesByCriterion(
+            orig.meta_type)
 
     if isinstance(indices, str):
         indices = (indices,)

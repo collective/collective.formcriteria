@@ -1,6 +1,6 @@
 from Products.Archetypes import atapi
-from Products.ATContentTypes import criteria
 
+from collective.formcriteria.criteria import common
 from collective.formcriteria.criteria import list as list_
 
 class CommaWidget(atapi.LinesWidget):
@@ -35,7 +35,5 @@ class FormCommaCriterion(list_.FormListCriterion):
         description=u'Values, separated by commas.',
         hide_form_label=True)
 
-criteria.registerCriterion(
-    FormCommaCriterion,
-    criteria._criterionRegistry.indicesByCriterion(
-        list_.FormListCriterion.meta_type))
+common.registerCriterion(
+    FormCommaCriterion, list_.FormListCriterion)
