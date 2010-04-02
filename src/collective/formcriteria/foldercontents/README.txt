@@ -339,13 +339,10 @@ special "Path" column is include, it will display an icon.
                       <input type="hidden"
                              name="selected_obj_paths:list"
                              value="/plone/Members/test_user_1_/bar-document-title" />
-                      <label class="hiddenStructure"
-                             for="cb_-plone-Members-test_user_1_-bar-document-title">Bar Document Title</label>
-                          <a href="http://nohost/plone/Members/test_user_1_/bar-document-title"
-                             class="state-published"
-                             title="Page: blah">
-                          <img width="16" height="16" src="http://nohost/plone/document_icon..." alt="Page" />
-                          </a>
+                      <label for="cb_-plone-Members-test_user_1_-bar-document-title">
+                        <img width="16" height="16" src="http://nohost/plone/document_icon..." alt="Page" />
+                        <span class="hiddenStructure">Bar Document Title</span>
+                      </label>
                   </td>
     ...
                         <span class="contenttype-document">
