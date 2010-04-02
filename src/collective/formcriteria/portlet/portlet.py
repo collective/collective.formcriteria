@@ -13,6 +13,7 @@ from Products.ATContentTypes import interface as atct_ifaces
 
 from collective.formcriteria import interfaces
 
+
 class ICriteriaFormPortlet(portlets_ifaces.IPortletDataProvider):
     """A search form based on the criteria in a collection."""
 
@@ -27,7 +28,7 @@ class ICriteriaFormPortlet(portlets_ifaces.IPortletDataProvider):
             u"Find the collection which provides the items to list"),
         required=True,
         source=catalog.SearchableTextSourceBinder(
-            {'object_provides' : atct_ifaces.IATTopic.__identifier__},
+            {'object_provides': atct_ifaces.IATTopic.__identifier__},
             default_query='path:'))
     # restrictedTraverse barfs on unicode
     target_collection._type = str
@@ -61,12 +62,13 @@ form_fields[
 description = (
     u'A search form based on the criteria in a collection')
 
+
 class AddForm(collection.AddForm):
     form_fields = form_fields
 
     label = u'Add Search Form Portlet'
     description = description
-   
+
     def create(self, data):
         return Assignment(**data)
 
