@@ -4,6 +4,13 @@ Changelog
 2.0 - Unreleased
 ----------------
 
+* Added defines for Plone4 complatibility in folder_listing
+  skin template.
+  [seletz]
+
+* Fix navigation_recurse template to match current Plone 4 version.
+  [seletz] [ramonski]
+
 * Add a collection listing portlet that makes use of the
   folder_listing macros for a richer portlet. [rossp]
 
