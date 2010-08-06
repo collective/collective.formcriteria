@@ -209,7 +209,13 @@ rename buttons aren't available.
     ...     'Copy or Move', roles=['Authenticated', 'Manager'],
     ...     acquire=0)
 
-Open a browser and visit the topic anonymously.
+Open a browser and visit the topic anonymously.  If anonymous has the
+"List folder contents" permission, the folder_contents table is
+viewable.
+
+    >>> foo_topic.manage_permission(
+    ...     'List folder contents', roles=['Anonymous', 'Manager'],
+    ...     acquire=1)
 
     >>> anon_browser = Browser()
     >>> anon_browser.handleErrors = False

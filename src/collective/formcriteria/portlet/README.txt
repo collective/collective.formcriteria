@@ -47,7 +47,7 @@ Add the collection listing portlet to the folder.
     ...Add Collection Portlet...
 
     >>> header = owner_browser.getControl('Portlet header')
-    >>> header.value = 'Foo Collcetion Listing Portlet Title'
+    >>> header.value = 'Foo Collection Listing Portlet Title'
     >>> foo_topic_path = '/'.join(
     ...     ('',)+ foo_topic.getPhysicalPath()[
     ...         len(portal.getPhysicalPath()):])
@@ -57,7 +57,7 @@ Add the collection listing portlet to the folder.
     >>> owner_browser.getControl('Save').click()
     >>> print owner_browser.contents
     <...
-    ...Foo Collcetion Listing Portlet Title...
+    ...Foo Collection Listing Portlet Title...
 
 Add a link to test rendering to the target remoteUrl.
 
@@ -83,17 +83,17 @@ with the folder_listing template.
     >>> owner_browser.open(folder.absolute_url())
     >>> print owner_browser.contents
     <...
-          <span>Foo Collcetion Listing Portlet Title</span>
+          <span>Foo Collection Listing Portlet Title</span>
     ...
         href="http://foo.com"
     ...
     >>> print owner_browser.contents
     <...
-          <span>Foo Collcetion Listing Portlet Title</span>
+          <span>Foo Collection Listing Portlet Title</span>
     ...
                 <dt class="vevent">
                             <span class="contenttype-event summary">
-                                <img width="16" height="16" src="http://nohost/plone/event_icon..." alt="Event" />
+    ...
                                 <a href="http://nohost/plone/Members/test_user_1_/baz-event-title" class="state-published url">Baz Event Title</a>
                             </span>
                             <span class="documentByLine">
@@ -132,4 +132,4 @@ linking directly to the remoteUrl.
 
     >>> owner_browser.open(folder.absolute_url())
     >>> owner_browser.getLink('Qux Link Title', index=0)
-    <Link text='Link[IMG] Qux Link Title' url='http://foo.com'>
+    <Link text='...Qux Link Title' url='http://foo.com'>

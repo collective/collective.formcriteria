@@ -153,7 +153,7 @@ The link columns have also been changed.
     <Link text='blah'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
     >>> browser.getLink('2009-01-13')
-    <Link text='2009-01-13 ...'
+    <Link text='2009-01-13...'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
     >>> browser.getLink('Bar Document Title')
     Traceback (most recent call last):
@@ -330,25 +330,18 @@ special "Path" column is include, it will display an icon.
     >>> print browser.contents
     <...
                   <td class="notDraggable">
-                      <input type="checkbox" class="noborder"
-                             name="paths:list"
-                             id="cb_-plone-Members-test_user_1_-bar-document-title"
-                             value="/plone/Members/test_user_1_/bar-document-title"
-                             alt="Select Bar Document Title"
-                             title="Select Bar Document Title" />
-                      <input type="hidden"
-                             name="selected_obj_paths:list"
-                             value="/plone/Members/test_user_1_/bar-document-title" />
+                      <input type="checkbox" class="noborder" name="paths:list" id="cb_-plone-Members-test_user_1_-bar-document-title" value="/plone/Members/test_user_1_/bar-document-title" alt="Select Bar Document Title" title="Select Bar Document Title" />
+                      <input type="hidden" name="selected_obj_paths:list" value="/plone/Members/test_user_1_/bar-document-title" />
                       <label for="cb_-plone-Members-test_user_1_-bar-document-title">
-                        <img width="16" height="16" src="http://nohost/plone/document_icon..." alt="Page" />
+                        <span class="contenttype-document">
+    ...
+                        </span>
                         <span class="hiddenStructure">Bar Document Title</span>
                       </label>
                   </td>
     ...
                         <span class="contenttype-document">
-                          <a href="http://nohost/plone/Members/test_user_1_/bar-document-title"
-                             class="state-published"
-                             title="Page: blah">
+                          <a href="http://nohost/plone/Members/test_user_1_/bar-document-title" class="state-published" title="Page: blah">
                             blah
                           </a>
                         </span>

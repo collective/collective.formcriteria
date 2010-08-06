@@ -226,8 +226,11 @@
                                          title   string:Select ${item/title_or_id}" />
                   <input type="hidden" name="selected_obj_paths:list" value="#"
                          tal:attributes="value item/relative_url" />
-                  <label tal:attributes="for string:cb_${path_id}">
-                    <img tal:replace="structure item/icon" />
+                  <label tal:attributes="for string:cb_${path_id};">
+                    <span tal:attributes="class item/type_class;">
+                      &nbsp;
+                      <img tal:replace="structure item/icon" />
+                    </span>
                     <span class="hiddenStructure"
                           tal:content="item/title_or_id">
                       Item Title

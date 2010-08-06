@@ -28,7 +28,7 @@
         <a tal:attributes="href python:item_url;
                            title node/Description;
                            class string:$item_class${li_class}${li_extr_class}${li_folder_class}">
-            <img tal:replace="structure item_icon" />
+            <img tal:replace="structure item_icon/html_tag|nothing" />
             <span tal:content="node/Title">Selected Item Title</span>
         </a>
         
