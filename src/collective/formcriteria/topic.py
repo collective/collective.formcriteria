@@ -13,6 +13,7 @@ from Products.CMFPlone import CatalogTool
 from collective.formcriteria import interfaces
 from collective.formcriteria.criteria import sort
 
+
 class Topic(topic.ATTopic):
     """A collection supporting form criteria"""
     interface.implements(interfaces.IFormTopic)
@@ -26,9 +27,9 @@ class Topic(topic.ATTopic):
             vocabulary='getPossibleFormLayouts',
             widget=atapi.SelectionWidget(
                 label=u'Form Results Layout',
-                description=
-                u'Select the display layout use for results.  '
-                u'Used only with the "Search Form" layout')),
+                description=(
+                    u'Select the display layout use for results.  '
+                    u'Used only with the "Search Form" layout'))),
         ))
     del schema['customViewFields']
 
@@ -48,7 +49,7 @@ class Topic(topic.ATTopic):
 
     sort_vocab = atapi.DisplayList([(sort.FormSortCriterion.meta_type,
                                      sort.FormSortCriterion.shortDesc)])
-    
+
     def getPossibleFormLayouts(self):
         """Return all valid form results display laouts"""
         return atapi.DisplayList(
@@ -81,7 +82,6 @@ class Topic(topic.ATTopic):
                     return self.sort_vocab
                 return [sort.FormSortCriterion.meta_type]
 
-    security.declareProtected(permission.ChangeTopics, 'getIndex')
     def getIndex(self, name):
         """Get index data including sort indices"""
         tool = self.portal_atct
@@ -91,6 +91,7 @@ class Topic(topic.ATTopic):
             if name in self.sort_indices:
                 return self.sort_indices[name]
             raise
+    security.declareProtected(permission.ChangeTopics, 'getIndex')
 
     def listFields(self):
         """Add sort fields"""
@@ -137,7 +138,7 @@ class Topic(topic.ATTopic):
         except AttributeError:
             if index in self.sort_indices:
                 return self.sort_indices[index].friendlyName
-        return tool.getFriendlyName(index)        
+        return tool.getFriendlyName(index)
 
     def addCriterion(self, field, criterion_type):
         """Make sure that criteria are properly initialized."""
@@ -151,5 +152,5 @@ class Topic(topic.ATTopic):
             return [
                 column.Field() for column in columns.contentValues()]
         return columns
-    
+
 atapi.registerType(Topic, 'collective.formcriteria')

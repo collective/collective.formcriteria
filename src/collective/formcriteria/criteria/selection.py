@@ -4,6 +4,7 @@ from Products.ATContentTypes.criteria import reference
 
 from collective.formcriteria.criteria import common
 
+
 class FormSelectionCriterion(
     common.FormCriterion, selection.ATSelectionCriterion):
     __doc__ = selection.ATSelectionCriterion.__doc__
@@ -16,6 +17,7 @@ class FormSelectionCriterion(
 
 common.registerCriterion(
     FormSelectionCriterion, orig=selection.ATSelectionCriterion)
+
 
 class FormPortalTypeCriterion(
     common.FormCriterion, portaltype.ATPortalTypeCriterion):
@@ -30,6 +32,7 @@ class FormPortalTypeCriterion(
 
 common.registerCriterion(
     FormPortalTypeCriterion, orig=portaltype.ATPortalTypeCriterion)
+
 
 class FormReferenceCriterion(
     common.FormCriterion, reference.ATReferenceCriterion):

@@ -2,6 +2,7 @@ from Products.ATContentTypes.criteria import date
 
 from collective.formcriteria.criteria import common
 
+
 class FormDateCriterion(
     common.FormCriterion, date.ATDateCriteria):
     __doc__ = date.ATDateCriteria.__doc__

@@ -1,5 +1,6 @@
 from zope.cachedescriptors import property
 
+
 class CommaWidgetView(object):
 
     @property.Lazy

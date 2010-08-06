@@ -6,6 +6,7 @@ from Products.Five.browser import pagetemplatefile
 
 from plone.memoize import view
 
+
 class ColumnsView(object):
     """Prepare and aggregate columns for use in browsr views"""
 
@@ -47,7 +48,7 @@ class ColumnsView(object):
                 # Remove column sorts from the batch_macro sorts.
                 # Only want to do this for views that use columns so
                 # we modify the values from the sort_info view.
-                # TODO This depends on memoize, maybe inappropriate                
+                # TODO This depends on memoize, maybe inappropriate
                 sort_info['ids'].remove(sort_field)
 
             filter_ = column_obj.getFilter()
@@ -65,7 +66,7 @@ class ColumnsView(object):
             if expr:
                 key, expr = taldefs.parseSubstitution(expr)
                 column['expr'] = engine.compile(expr)
-                column['structure'] = key=='structure'
+                column['structure'] = (key == 'structure')
 
             column['has_sum'] = has_sum = column_obj.getSum()
             if has_sum:

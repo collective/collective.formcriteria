@@ -3,6 +3,7 @@ import mimetypes
 
 import ZTUtils
 
+
 class ExportView(object):
     """Download collection query results in different formats"""
 
@@ -38,7 +39,7 @@ class ExportView(object):
         """
         columns = self.context.restrictedTraverse(
             'columns_view').ordered
-        
+
         csvwriter = csv.writer(self.request.response,
                                **self._get_fmtparam())
         csvwriter.writerow(
@@ -53,11 +54,11 @@ class ExportView(object):
                     value = brain[field]
                 row.append(value)
             csvwriter.writerow(row)
-            
+
     def getCSVQuery(self):
         info = self.context.restrictedTraverse(
             '@@sort_info').getSortInfo()
         kw = {'Content-Type': 'text/csv'}
         if info['selected']:
-            kw[info['selected']['id']] = True                           
+            kw[info['selected']['id']] = True
         return ZTUtils.make_query(info['form'], kw)

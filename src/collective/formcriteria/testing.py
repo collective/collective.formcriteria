@@ -8,6 +8,7 @@ from collective.testcaselayer import common
 from collective import formcriteria
 from collective.formcriteria.portlet import portlet
 
+
 class Layer(tcl_ptc.BasePTCLayer):
     """Install collective.formcriteria"""
 
@@ -26,23 +27,24 @@ class Layer(tcl_ptc.BasePTCLayer):
 
 layer = Layer([common.common_layer])
 
+
 class ContentLayer(tcl_ptc.BasePTCLayer):
     """Add some content"""
     def afterSetUp(self):
         self.now = DateTime.DateTime('Jan 15, 2009')
-        tomorrow = DateTime.DateTime()+1
+        tomorrow = DateTime.DateTime() + 1
 
         self.login()
         foo_event = self.folder[self.folder.invokeFactory(
-            type_name='Event', effectiveDate=self.now-3,
+            type_name='Event', effectiveDate=self.now - 3,
             startDate=tomorrow, endDate=tomorrow,
             id='foo-event-title', title='Foo Event Title',
-            creators='foo_creator_id', text='foo'*2000)]
+            creators='foo_creator_id', text='foo' * 2000)]
         bar_document = self.folder[self.folder.invokeFactory(
-            type_name='Document', effectiveDate=self.now-2,
+            type_name='Document', effectiveDate=self.now - 2,
             id='bar-document-title', title='Bar Document Title',
             description='blah', subject=['bah', 'qux'],
-            creators='foo_creator_id', text='bar'*1000)]
+            creators='foo_creator_id', text='bar' * 1000)]
         bar_document.foo_int = 0
         baz_event = self.folder[self.folder.invokeFactory(
             type_name='Event', effectiveDate=self.now,
@@ -67,6 +69,7 @@ class ContentLayer(tcl_ptc.BasePTCLayer):
 
 content_layer = ContentLayer([layer])
 
+
 class TopicLayer(tcl_ptc.BasePTCLayer):
     """Add a simple topic"""
 
@@ -79,6 +82,7 @@ class TopicLayer(tcl_ptc.BasePTCLayer):
         self.login()
 
 topic_layer = TopicLayer([content_layer])
+
 
 class CriteriaLayer(tcl_ptc.BasePTCLayer):
     """Used for testing form criteria"""
@@ -95,6 +99,7 @@ class CriteriaLayer(tcl_ptc.BasePTCLayer):
 
 criteria_layer = CriteriaLayer([topic_layer])
 
+
 class ColumnsLayer(tcl_ptc.BasePTCLayer):
     """Used for testing folder_contents columns"""
 
@@ -107,8 +112,9 @@ class ColumnsLayer(tcl_ptc.BasePTCLayer):
         foo_topic = self.folder['foo-topic-title']
         foo_topic.update(title='Foo Topic Title')
         self.logout()
-        
+
 columns_layer = ColumnsLayer([content_layer])
+
 
 class ContentsLayer(tcl_ptc.BasePTCLayer):
     """Used for testing folder contents"""

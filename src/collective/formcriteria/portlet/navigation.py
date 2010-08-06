@@ -8,6 +8,7 @@ from Products.CMFCore.utils import getToolByName
 
 from plone.app.portlets.portlets import navigation
 
+
 class Renderer(navigation.Renderer):
     """Use Link remoteUrl if configured"""
 

@@ -10,10 +10,12 @@ from collective.formcriteria.form import form
 
 missing = object()
 
+
 def makeVocabularyForFields(*fields):
     return atapi.DisplayList(
         (field.getName(), field.widget.label)
         for field in fields)
+
 
 def registerCriterion(criterion, orig=None, indices=()):
     if orig is not None:
@@ -48,6 +50,7 @@ def registerCriterion(criterion, orig=None, indices=()):
         criteria._criterionRegistry.index2criterion[
             index] = value + (crit_id,)
 
+
 class FormCriterion(object):
     """A criterion that generates a search form field."""
     interface.implements(interfaces.IFormCriterion)
@@ -59,9 +62,9 @@ class FormCriterion(object):
             'formFields',
             widget=atapi.MultiSelectionWidget(
                 label=u'Form Fields',
-                description=
-                u'Select any fields for this criterion that should'
-                u'appear on a search form',
+                description=(
+                    u'Select any fields for this criterion that should'
+                    u'appear on a search form'),
                 format='checkbox')),))
 
     makeFormKey = form.makeFormKey

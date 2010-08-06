@@ -7,15 +7,17 @@ from plone.portlets import interfaces as portelts_ifaces
 
 from collective.formcriteria import interfaces
 
+
 def makeFormKey(self, crit_id, field_name):
     return 'form_%s_%s' % (crit_id, field_name)
+
 
 class SearchFormView(object):
 
     def getFormCriteria(self, collection):
         return (
             criterion for criterion in collection.listCriteria()
-            if getattr(criterion, 'getFormFields', lambda : False)())
+            if getattr(criterion, 'getFormFields', lambda: False)())
 
     @view.memoize
     def formCriteria(self):
@@ -25,7 +27,7 @@ class SearchFormView(object):
     def criteriaFields(self):
         criteria = {}
         fields = []
-        
+
         for criterion in self.formCriteria():
             field = criterion.Field()
             index = self.context.portal_atct.getIndex(field)
@@ -55,6 +57,7 @@ class SearchFormView(object):
     def action(self):
         return '%s/%s' % (self.context.absolute_url(),
                           self.context.getFormLayout())
+
 
 class SearchFormHeadView(SearchFormView):
 

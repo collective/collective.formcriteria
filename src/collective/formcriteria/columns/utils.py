@@ -1,5 +1,5 @@
+SIZE_SUFFIXES = [('GB', 1024 * 1024 * 1024), ('MB', 1024 * 1024), ('kB', 1024)]
 
-SIZE_SUFFIXES = [('GB', 1024*1024*1024), ('MB', 1024*1024), ('kB', 1024)]
 
 def format_number(number, format='%.1f %s', suffixes=SIZE_SUFFIXES):
     """Format a number acording to suffixes defaulting to byte sizes"""
@@ -19,7 +19,7 @@ def format_number(number, format='%.1f %s', suffixes=SIZE_SUFFIXES):
         if number < min_:
             return '1 %s' % smaller
         for c, factor in suffixes:
-            if number/factor > 0:
+            if number / factor > 0:
                 break
-        return format % (float(number/float(factor)), c)
+        return format % (float(number / float(factor)), c)
     return number

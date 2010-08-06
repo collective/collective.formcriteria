@@ -9,8 +9,8 @@ tests_require = ['collective.testcaselayer>=1.3',
 
 setup(name='collective.formcriteria',
       version=version,
-      description=
-      "Add forms for user enterable search criteria to collections.",
+      description=(
+          "Add forms for user enterable search criteria to collections."),
       long_description='\n'.join(
           open(os.path.join(*path)).read() for path in [
               ("src", "collective", "formcriteria", "README.txt"),
@@ -21,7 +21,8 @@ setup(name='collective.formcriteria',
               ("src", "collective", "formcriteria", "foldercontents",
                "README.txt"),
               ("docs", "HISTORY.txt"), ("docs", "TODO.txt")]),
-      # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
+      # Get more strings from
+      # http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
@@ -32,7 +33,7 @@ setup(name='collective.formcriteria',
       url='http://pypi.python.org/pypi/collective.formcriteria',
       license='GPL',
       packages=find_packages('src', exclude=['ez_setup']),
-      package_dir = {'':'src'},
+      package_dir={'': 'src'},
       namespace_packages=['collective'],
       include_package_data=True,
       zip_safe=False,

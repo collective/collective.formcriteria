@@ -2,6 +2,7 @@ from Products.ATContentTypes.criteria import list as list_
 
 from collective.formcriteria.criteria import common
 
+
 class FormListCriterion(
     common.FormCriterion, list_.ATListCriterion):
     __doc__ = list_.ATListCriterion.__doc__

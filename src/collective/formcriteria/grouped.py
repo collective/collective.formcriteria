@@ -3,6 +3,7 @@ import operator
 
 from zope.cachedescriptors import property
 
+
 class GroupedListingView(object):
     """Lists items grouped by the sort used"""
 

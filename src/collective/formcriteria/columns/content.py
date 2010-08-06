@@ -7,6 +7,7 @@ from Products.ATContentTypes import permission
 
 from collective.formcriteria import contained
 
+
 class TopicColumns(contained.NonRefCatalogMixin,
                   atapi.BaseFolderMixin):
     """Contains folder_contents table columns"""
@@ -27,9 +28,8 @@ column_schema = atapi.Schema((
         enforceVocabulary=True,
         widget=atapi.SelectionWidget(
             label=u'Field',
-            description=
-            u"Select the catalog/brains metadata for the column",
-            visible={'view' : 'invisible'})),
+            description=u"Select the catalog/brains metadata for the column",
+            visible={'view': 'invisible'})),
     atapi.BooleanField(
         'link',
         write_permission=permission.ChangeTopics,
@@ -76,6 +76,7 @@ required index is not in the list, add a query criterion for the index
 first.""")),
     ))
 
+
 class TopicColumn(contained.NonRefCatalogMixin,
                   atapi.BaseContentMixin):
     """A folder_contents table column"""
@@ -104,6 +105,6 @@ class TopicColumn(contained.NonRefCatalogMixin,
         fields = aq_parent(aq_parent(self)).listMetaDataFields()
         fields.add('getPath', 'URL')
         return atapi.DisplayList(
-            (key+'-column', fields.getValue(key)) for key in fields)
+            (key + '-column', fields.getValue(key)) for key in fields)
 
 atapi.registerType(TopicColumn, 'collective.formcriteria')

@@ -2,6 +2,7 @@ from Products.ATContentTypes.criteria import daterange
 
 from collective.formcriteria.criteria import common
 
+
 class FormDateRangeCriterion(
     common.FormCriterion, daterange.ATDateRangeCriterion):
     __doc__ = daterange.ATDateRangeCriterion.__doc__

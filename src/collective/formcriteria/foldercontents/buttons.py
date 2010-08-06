@@ -4,6 +4,7 @@ from OFS import CopySupport
 from Products.CMFPlone.utils import transaction_note
 from Products.CMFPlone import PloneMessageFactory as _
 
+
 class TopicPathsButton(object):
 
     method = None
@@ -29,17 +30,19 @@ class TopicPathsButton(object):
         self.request['__cp'] = cp
 
         transaction_note(self.transaction_note % paths)
-        message = _(self.message, mapping={u'count' : len(paths)})
+        message = _(self.message, mapping={u'count': len(paths)})
         context.plone_utils.addPortalMessage(message)
 
         resp.redirect(context.absolute_url())
         return ''
+
 
 class TopicCopy(TopicPathsButton):
 
     method = 'manage_copyObjects'
     transaction_note = 'Copied %r'
     message = u'${count} item(s) copied.'
+
 
 class TopicCut(TopicPathsButton):
 

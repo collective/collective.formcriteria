@@ -13,11 +13,14 @@ from plone.indexer.interfaces import IIndexableObject
 from collective.formcriteria.criteria import common
 from collective.formcriteria.criteria import selection
 
+
 class IContextCriterion(interface.Interface):
     """A criterion which pulls query terms from the context."""
 
+
 class ICriteriaContext(interface.Interface):
     """Provide the current query criteria context."""
+
 
 @interface.implementer(ICriteriaContext)
 @component.adapter(IContextCriterion)
@@ -26,6 +29,7 @@ def getPublishedContext(context):
     for parent in parents:
         if cmf_ifaces.IContentish.providedBy(parent):
             return parent
+
 
 class FormContextCriterion(selection.FormSelectionCriterion):
     __doc__ = IContextCriterion.__doc__
@@ -45,7 +49,7 @@ class FormContextCriterion(selection.FormSelectionCriterion):
             (context, catalog), IIndexableObject)
         if wrapper is None:
             wrapper = context
-        
+
         value = getattr(wrapper, self.Field())
         if safe_callable(value):
             value = value()

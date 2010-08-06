@@ -2,6 +2,7 @@ from Products.ATContentTypes.criteria import path
 
 from collective.formcriteria.criteria import common
 
+
 class FormPathCriterion(
     common.FormCriterion, path.ATPathCriterion):
     __doc__ = path.ATPathCriterion.__doc__

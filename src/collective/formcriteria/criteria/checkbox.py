@@ -6,6 +6,7 @@ from collective.formcriteria.criteria import common
 from collective.formcriteria.criteria import (
     selection as form_selection)
 
+
 class FormCheckboxCriterion(
     common.FormCriterion, selection.ATSelectionCriterion):
     """A checkbox criterion"""
@@ -22,6 +23,7 @@ class FormCheckboxCriterion(
 
 common.registerCriterion(FormCheckboxCriterion,
                          orig=form_selection.FormSelectionCriterion)
+
 
 class FormPortalTypeCheckboxCriterion(
     common.FormCriterion, portaltype.ATPortalTypeCriterion):
@@ -40,6 +42,7 @@ class FormPortalTypeCheckboxCriterion(
 
 common.registerCriterion(FormPortalTypeCheckboxCriterion,
                          orig=form_selection.FormPortalTypeCriterion)
+
 
 class FormReferenceCheckboxCriterion(
     common.FormCriterion, reference.ATReferenceCriterion):

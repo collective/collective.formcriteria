@@ -2,6 +2,7 @@ from Products.ATContentTypes.criteria import simpleint
 
 from collective.formcriteria.criteria import common
 
+
 class FormSimpleIntCriterion(
     common.FormCriterion, simpleint.ATSimpleIntCriterion):
     __doc__ = simpleint.ATSimpleIntCriterion.__doc__

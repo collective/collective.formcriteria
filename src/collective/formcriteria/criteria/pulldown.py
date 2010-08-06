@@ -21,6 +21,7 @@ field = atapi.StringField(
         format='select',
         hide_form_label=True))
 
+
 class PulldownMixin(object):
 
     def getCriteriaItems(self):
@@ -29,16 +30,17 @@ class PulldownMixin(object):
         if self.Value() is not '':
             result.append((self.Field(), self.Value()))
 
-        return tuple( result )
+        return tuple(result)
 
     def getCurrentValues(self):
         """Insert an empty entry at the beginning since this is a
         single select field"""
         result = super(PulldownMixin, self).getCurrentValues()
         if isinstance(result, atapi.DisplayList):
-            return atapi.DisplayList([('','')])+result
+            return atapi.DisplayList([('', '')]) + result
         else:
-            return ['']+result
+            return [''] + result
+
 
 class FormPulldownCriterion(
     PulldownMixin, common.FormCriterion,
@@ -54,10 +56,11 @@ class FormPulldownCriterion(
     del schema['operator']
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'])
-    
+
 
 common.registerCriterion(FormPulldownCriterion,
                          orig=form_selection.FormSelectionCriterion)
+
 
 class FormPortalTypePulldownCriterion(
     PulldownMixin, common.FormCriterion,
@@ -76,6 +79,7 @@ class FormPortalTypePulldownCriterion(
 
 common.registerCriterion(FormPortalTypePulldownCriterion,
                          orig=form_selection.FormPortalTypeCriterion)
+
 
 class FormReferencePulldownCriterion(
     PulldownMixin, common.FormCriterion,

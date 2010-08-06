@@ -3,13 +3,14 @@ from Products.Archetypes import atapi
 from collective.formcriteria.criteria import common
 from collective.formcriteria.criteria import list as list_
 
+
 class CommaWidget(atapi.LinesWidget):
     _properties = atapi.LinesWidget._properties.copy()
     _properties.update({
-        'macro' : "comma_widget",
-        'size' : '30',
-        'maxlength' : '255',
-        'blurrable' : True,
+        'macro': "comma_widget",
+        'size': '30',
+        'maxlength': '255',
+        'blurrable': True,
         'show_form_help': True,
         })
 
@@ -22,6 +23,7 @@ class CommaWidget(atapi.LinesWidget):
         value, mutator_kw = result
         value = [item.strip() for item in value.split(',')]
         return value, mutator_kw
+
 
 class FormCommaCriterion(list_.FormListCriterion):
     """A comma separated criterion"""

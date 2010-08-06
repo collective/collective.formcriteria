@@ -1,20 +1,21 @@
 """Add a form for user enterable search criteria to
 collections/topic/smart folders."""
 
-from Products.CMFCore import utils 
+from Products.CMFCore import utils
 
 from Products.Archetypes import atapi
 from Products.ATContentTypes import permission
 
+
 def initialize(context):
     from collective.formcriteria import criteria
-    criteria # import to register
+    criteria  # import to register
 
     from collective.formcriteria import topic
-    topic # import to register
+    topic  # import to register
 
     from collective.formcriteria.columns import content
-    content # import to register
+    content  # import to register
 
     listOfTypes = atapi.listTypes('collective.formcriteria')
 

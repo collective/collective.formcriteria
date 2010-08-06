@@ -7,6 +7,7 @@ from Products.ATContentTypes.criteria import sort
 from collective.formcriteria import interfaces
 from collective.formcriteria.criteria import common
 
+
 class FormSortCriterion(
     common.FormCriterion, sort.ATSortCriterion):
     __doc__ = sort.ATSortCriterion.__doc__

@@ -2,6 +2,7 @@ from Products.ATContentTypes.criteria import boolean
 
 from collective.formcriteria.criteria import common
 
+
 class FormBooleanCriterion(
     common.FormCriterion, boolean.ATBooleanCriterion):
     __doc__ = boolean.ATBooleanCriterion.__doc__

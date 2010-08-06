@@ -13,24 +13,26 @@ from Products.Five.browser import metaconfigure
 from Products.CMFCore.utils import getToolByName
 
 from Products.CMFPlone.utils import safe_unicode
-from Products.CMFPlone import PloneBatch  
+from Products.CMFPlone import PloneBatch
 from plone.memoize import view
 
 from plone.app.content.browser import tableview
 from plone.app.content.browser import foldercontents
+
 
 class ViewPageTemplateFile(pagetemplate.ViewPageTemplateFile):
 
     def getId(self):
         return os.path.basename(self.filename)
 
+
 class Table(metaconfigure.ViewMixinForTemplates, tableview.Table):
-    """Use a table template which obeys the columns fields"""                
+    """Use a table template which obeys the columns fields"""
 
     index = ViewPageTemplateFile("table.pt")
 
     def render(self, *args, **kw):
-        """Delegate to the registered template""" 
+        """Delegate to the registered template"""
         return self.index(*args, **kw)
 
     def update(self, base_url, view_url, items, batch, columns,
@@ -87,8 +89,9 @@ class Table(metaconfigure.ViewMixinForTemplates, tableview.Table):
     def within_batch_size(self):
         return self.batch.sequence_length < self.pagesize
 
+
 class FolderContentsTable(foldercontents.FolderContentsTable):
-    """Use a table template which obeys the columns fields"""                
+    """Use a table template which obeys the columns fields"""
 
     # Used for evaluating TALES
     index = ViewPageTemplateFile('empty.pt')
@@ -149,14 +152,15 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
         portal_types = getToolByName(context, 'portal_types')
         site_properties = portal_properties.site_properties
         portal = getToolByName(context, 'portal_url').getPortalObject()
-        
-        use_view_action = site_properties.getProperty('typesUseViewActionInListings', ())
+
+        use_view_action = site_properties.getProperty(
+            'typesUseViewActionInListings', ())
         browser_default = context.browserDefault()
 
         expr_context = self.index.im_func.pt_getContext(
             self, self.request)
         expr_context.update(portal=portal)
-        
+
         results = []
         for i, obj in enumerate(self.batch):
             if (i + 1) % 2 == 0:
@@ -166,8 +170,8 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
 
             url = obj.getURL()
             path = obj.getPath or "/".join(obj.getPhysicalPath())
-            icon = plone_view.getIcon(obj);
-            
+            icon = plone_view.getIcon(obj)
+
             type_class = 'contenttype-' + plone_utils.normalizeString(
                 obj.portal_type)
 
@@ -187,7 +191,7 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
             if obj_type in use_view_action:
                 view_url = url + '/view'
             elif obj.is_folderish:
-                view_url = url + "/folder_contents"              
+                view_url = url + "/folder_contents"
             else:
                 view_url = url
 
@@ -216,29 +220,29 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
                     del econtext.vars['item']
 
                 columns[column['field']] = value
-                                 
+
             results.append(dict(
-                url = url,
-                url_href_title = url_href_title,
-                id  = obj.getId,
-                quoted_id = urllib.quote_plus(obj.getId),
-                path = path,
-                title_or_id = obj.pretty_title_or_id(),
-                obj_type = obj_type,
-                size = obj.getObjSize,
-                modified = modified,
-                icon = icon.html_tag(),
-                type_class = type_class,
-                wf_state = review_state,
-                state_title = portal_workflow.getTitleForStateOnType(review_state,
-                                                           obj_type),
-                state_class = state_class,
-                is_browser_default = is_browser_default,
-                folderish = obj.is_folderish,
-                relative_url = relative_url,
-                view_url = view_url,
-                table_row_class = table_row_class,
-                is_expired = context.isExpired(obj),
+                url=url,
+                url_href_title=url_href_title,
+                id=obj.getId,
+                quoted_id=urllib.quote_plus(obj.getId),
+                path=path,
+                title_or_id=obj.pretty_title_or_id(),
+                obj_type=obj_type,
+                size=obj.getObjSize,
+                modified=modified,
+                icon=icon.html_tag(),
+                type_class=type_class,
+                wf_state=review_state,
+                state_title=portal_workflow.getTitleForStateOnType(
+                    review_state, obj_type),
+                state_class=state_class,
+                is_browser_default=is_browser_default,
+                folderish=obj.is_folderish,
+                relative_url=relative_url,
+                view_url=view_url,
+                table_row_class=table_row_class,
+                is_expired=context.isExpired(obj),
                 obj=obj,
                 columns=columns,
                 ))
@@ -279,12 +283,14 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
                 buttons.append(self.setbuttonclass(button))
         return buttons
 
+
 class FolderContentsMixin(object):
 
     def __call__(self, *args, **kw):
         context = aq_inner(self.context)
         self.columns = context.restrictedTraverse('columns_view')
         return super(FolderContentsMixin, self).__call__(*args, **kw)
+
 
 class FolderContentsView(FolderContentsMixin,
                          foldercontents.FolderContentsView):
@@ -294,6 +300,7 @@ class FolderContentsView(FolderContentsMixin,
         """Use the request as the contentFilter"""
         table = FolderContentsTable(self.context, self.request)
         return table.render()
+
 
 class FolderContentsKSSView(FolderContentsMixin,
                             foldercontents.FolderContentsKSSView):

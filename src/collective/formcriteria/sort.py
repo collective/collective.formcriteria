@@ -1,5 +1,6 @@
 from plone.memoize import view
 
+
 class SortView(object):
 
     @view.memoize

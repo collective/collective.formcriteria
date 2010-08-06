@@ -19,7 +19,7 @@ def setupColumnTemplate(context):
     searchable_query = topic.addCriterion(
         'SearchableText', 'FormSimpleStringCriterion')
     searchable_query.update(formFields=['value'])
-    
+
     title_query = topic.addCriterion(
         'Title', 'FormSimpleStringCriterion')
     title_query.update(formFields=['value'])
@@ -31,7 +31,7 @@ def setupColumnTemplate(context):
     size_query.update(formFields=['value', 'value2', 'direction'])
     size_sort = topic.addCriterion(
         'get_size', 'FormSortCriterion')
-    
+
     modified_query = topic.addCriterion(
         'modified', 'FormDateCriterion')
     modified_query.update(
@@ -56,7 +56,9 @@ def setupColumnTemplate(context):
     columns.invokeFactory(
         type_name='TopicColumn', id='get_size-column', link=False,
         sort=size_sort.getId(), filter=size_query.getId(),
-        expression="python:modules['collective.formcriteria.columns.utils'].format_number(value)")
+        expression=(
+            "python:modules['collective.formcriteria.columns.utils']"
+            ".format_number(value)"))
     columns.invokeFactory(
         type_name='TopicColumn', id='ModificationDate-column',
         link=False,
