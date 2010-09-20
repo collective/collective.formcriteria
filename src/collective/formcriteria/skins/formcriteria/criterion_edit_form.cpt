@@ -29,6 +29,7 @@
     </script>
 
     <script type="text/javascript">
+    	<!--
         registerDynamicSelect('criteria_select','field','criterion_type', 'vocabulary','allowedCriteriaForField','field');
         function showHelp(selectedItem, helpElementId){
              helpElement = document.getElementById(helpElementId);
@@ -41,6 +42,7 @@
                 }
              if (helpElement) {helpElement.innerHTML = helpText;}
             }
+		-->
     </script>
 </tal:defines>
 </metal:head>

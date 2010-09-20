@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.1.0-RT-BRANCH
+---------------
+
+* re-fix issue closed at revision 101749 - [keul]
+* changed form method from GET to POST [keul]
+
 1.1.0 - 2009-08-21
 ------------------
 

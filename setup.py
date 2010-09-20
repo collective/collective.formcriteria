@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.1.0'
+version = '1.1.0-RT-BRANCH'
 
 tests_require = ['collective.testcaselayer',
                  'collective.monkeypatcher']

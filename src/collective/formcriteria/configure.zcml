@@ -54,7 +54,7 @@
      description="Add forms for user enterable search criteria to collections/topic/smart folders."
      provides="Products.GenericSetup.interfaces.EXTENSION"
      />
-  
+
   <five:registerPackage package="." initialize=".initialize" />
 
 </configure>

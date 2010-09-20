@@ -66,6 +66,8 @@ class FormCriterion(object):
         """
         field = self.getField(field_name)
         if field_name not in self.getFormFields():
+            if raw:
+                return field.getRaw(self, **kw)
             return field.get(self, **kw)
 
         if REQUEST is None:
@@ -88,6 +90,8 @@ class FormCriterion(object):
             empty_marker=missing, emptyReturnsMarker=True)
 
         if result is missing:
+            if raw:
+                return field.getRaw(self, **kw)
             return field.get(self, **kw)
 
         value, mutator_kw = result
