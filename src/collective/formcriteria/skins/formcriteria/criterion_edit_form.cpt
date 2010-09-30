@@ -203,6 +203,83 @@
 
     </form>
 
+    <form action=""
+          method="post"
+          i18n:domain="atcontenttypes"
+          tal:attributes="action template/getId"
+          tal:define="errors options/state/getErrors|nothing">
+
+        <fieldset>
+
+            <legend i18n:translate="legend_set_sort_order">Set Sort Order</legend>
+
+            <div class="field" style="float:left">
+
+                <label for="field" i18n:translate="label_criteria_field_name">Field name</label>
+
+                <div class="formHelp"
+                     id="fieldHelpSort"
+                     i18n:translate="help_criteria_field_name">
+                    List Available Fields
+                </div>
+
+                <select name="field"
+                        id="sortfield"
+                        tal:define="fields here/listSortFields">
+
+                     <option value="no_sort"
+                             tal:attributes="selected python:not here.hasSortCriterion();"
+                             i18n:translate="no_sort_order">No sort order</option>
+
+                     <tal:block tal:repeat="field fields"
+                                i18n:domain="plone">
+                         <option value=""
+                                 tal:define="explanation python:field[2]"
+                                 tal:attributes="value python:field[0];
+                                                 selected python:here.hasSortCriterion() and here.getSortCriterion().field==field[0];
+                                                 title explanation"
+                                 tal:content="python:field[1]"
+                                 i18n:attributes="title"
+                                 i18n:translate="">Field</option>
+                     </tal:block>
+                </select>
+
+            </div>
+
+
+            <div class="field">
+                <label for="reversed" i18n:translate="label_sort_reverse">Reverse</label>
+                <div class="formHelp"
+                     i18n:translate="help_sort_reverse">Reverse display order</div>
+
+                <input class="noborder"
+                       type="checkbox"
+                       value="on"
+                       name="reversed"
+                       id="reversed"
+                       tal:attributes="checked python:here.hasSortCriterion() and here.getSortCriterion().getReversed()"
+                       />
+            </div>
+
+
+            <input type="hidden" name="form.submitted" value="1" />
+            <input type="hidden" name="criterion_type" value="ATSortCriterion" />
+
+            <div class="formControls" style="clear:both">
+                <input class="context"
+                       type="submit"
+                       value="Save"
+                       name="form.button.SetSortCriterion"
+                       i18n:attributes="value label_save;"
+                       i18n:domain="plone"
+                       />
+            </div>
+
+        </fieldset>
+
+    </form>
+
+
 </div>
 </body>
 </html>

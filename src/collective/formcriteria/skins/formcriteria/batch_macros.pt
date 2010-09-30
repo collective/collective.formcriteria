@@ -27,7 +27,7 @@
            </metal:rellinks>
            -->
 
-      <span tal:condition="sorts">
+      <!--span tal:condition="sorts">
         Sort on:
         <tal:sorts repeat="sort sorts">
           <a tal:condition="not:sort/selected"
@@ -44,7 +44,7 @@
             Field
           </span>
         </tal:sorts>
-      </span>
+      </span-->
 
       <span class="previous"
             tal:define="p batch/previous | nothing"
