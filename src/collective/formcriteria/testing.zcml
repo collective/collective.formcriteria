@@ -1,10 +1,12 @@
 <configure
    xmlns="http://namespaces.zope.org/zope"
+   xmlns:zcml="http://namespaces.zope.org/zcml"
    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
    xmlns:monkey="http://namespaces.plone.org/monkey"
    i18n_domain="collective.customer">
   
   <include package="collective.testcaselayer" file="testing.zcml" />
+  <include zcml:condition="installed cmf.pt" package="cmf.pt" />
 
   <genericsetup:registerProfile
      name="testing"
