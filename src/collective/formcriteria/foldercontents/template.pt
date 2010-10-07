@@ -15,7 +15,7 @@
       <style type="text/css"
              media="all"
              metal:fill-slot="css_slot"
-             tal:content="structure string:<!-- @import
+             tal:content="structure string:&lt;!-- @import
              url($portal_url/++resource++formcriteria-foldercontents.css);
              -->">
         <!-- @import url(++resource++formcriteria-foldercontents.css); -->
