@@ -341,7 +341,7 @@ special "Path" column is include, it will display an icon.
                   </td>
     ...
                         <span class="contenttype-document">
-                          <a href="http://nohost/plone/Members/test_user_1_/bar-document-title" class="state-published" title="Page: blah">
+                          <a href="http://nohost/plone/Members/test_user_1_/bar-document-title"...
                             blah
                           </a>
                         </span>
