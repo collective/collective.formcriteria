@@ -11,6 +11,7 @@ from Missing import MV
 from Products.Five.browser import metaconfigure
 
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore import Expression
 
 from Products.CMFPlone.utils import safe_unicode
 from Products.CMFPlone import PloneBatch
@@ -157,9 +158,7 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
             'typesUseViewActionInListings', ())
         browser_default = context.browserDefault()
 
-        expr_context = self.index.im_func.pt_getContext(
-            self, self.request)
-        expr_context.update(portal=portal)
+        econtext = Expression.getExprContext(context)
 
         results = []
         for i, obj in enumerate(self.batch):
@@ -198,8 +197,6 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
             is_browser_default = len(browser_default[1]) == 1 and (
                 obj.id == browser_default[1][0])
 
-            econtext = self.index.im_func.pt_getEngineContext(
-                expr_context)
             columns = {}
             for column in self.columns.ordered:
                 value = getattr(obj, column['field'], MV)

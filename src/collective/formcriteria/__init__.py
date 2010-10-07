@@ -1,10 +1,14 @@
 """Add a form for user enterable search criteria to
 collections/topic/smart folders."""
 
+from AccessControl import allow_module
+
 from Products.CMFCore import utils
 
 from Products.Archetypes import atapi
 from Products.ATContentTypes import permission
+
+allow_module('collective.formcriteria.columns.utils')
 
 
 def initialize(context):
