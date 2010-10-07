@@ -92,15 +92,13 @@ with the folder_listing template.
           <span>Foo Collection Listing Portlet Title</span>
     ...
                 <dt class="vevent">
-                            <span class="contenttype-event summary">
+                            <span class="summary">
     ...
-                                <a href="http://nohost/plone/Members/test_user_1_/baz-event-title" class="state-published url">Baz Event Title</a>
+                                <a href="http://nohost/plone/Members/test_user_1_/baz-event-title" class="contenttype-event state-published url">Baz Event Title</a>
                             </span>
                             <span class="documentByLine">
                                 <span>
-                                    (from
-                                     <abbr class="dtstart" title="...">...</abbr> to
-                                     <abbr class="dtend" title="...">...</abbr>)
+                                     <abbr class="dtstart" title="...">...</abbr>
                                 </span>
                                     &mdash;
                                       <span>
