@@ -129,5 +129,7 @@ linking directly to the remoteUrl.
     >>> self.logout()
 
     >>> owner_browser.open(folder.absolute_url())
-    >>> owner_browser.getLink('Qux Link Title', index=0)
+    >>> owner_browser.getLink('Qux Link Title', index=1)
+    <Link text='...Qux Link Title' url='http://foo.com'>
+    >>> owner_browser.getLink('Qux Link Title', index=2)
     <Link text='...Qux Link Title' url='http://foo.com'>
