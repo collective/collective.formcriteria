@@ -212,6 +212,7 @@
             </tal:comment>
 
             <tal:column repeat="column view/columns/ordered">
+              <tal:value define="value python:item['columns'][column['field']];">
               <td class="notDraggable"
                   tal:condition="python:column['field']=='getPath'">
                 <tal:has_buttons condition="view/buttons">
@@ -239,7 +240,6 @@
                 </tal:has_buttons>
               </td>
               <td tal:condition="python:column['field']!='getPath'">
-                <tal:value define="value python:item['columns'][column['field']];">
                   <tal:linked condition="column/link">
                     <span tal:attributes="class item/type_class">
                       <a href="#" tal:attributes="href  item/view_url;
@@ -278,8 +278,8 @@
                       </span>
                     </tal:value>
                   </tal:unlinked>
-                </tal:value>
               </td>
+              </tal:value>
             </tal:column>
           </tr>
         </tal:items>
