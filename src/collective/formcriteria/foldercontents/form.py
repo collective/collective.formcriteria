@@ -2,13 +2,13 @@ import os
 import urllib
 
 from zope.component import getMultiAdapter
-from zope.app import pagetemplate
 from zope.i18n import translate
 
 from Acquisition import aq_inner
 from Missing import MV
 
 from Products.Five.browser import metaconfigure
+from Products.Five.browser import pagetemplatefile
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore import Expression
@@ -21,16 +21,10 @@ from plone.app.content.browser import tableview
 from plone.app.content.browser import foldercontents
 
 
-class ViewPageTemplateFile(pagetemplate.ViewPageTemplateFile):
-
-    def getId(self):
-        return os.path.basename(self.filename)
-
-
 class Table(metaconfigure.ViewMixinForTemplates, tableview.Table):
     """Use a table template which obeys the columns fields"""
 
-    index = ViewPageTemplateFile("table.pt")
+    index = pagetemplatefile.ViewPageTemplateFile("table.pt")
 
     def render(self, *args, **kw):
         """Delegate to the registered template"""
@@ -95,7 +89,7 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
     """Use a table template which obeys the columns fields"""
 
     # Used for evaluating TALES
-    index = ViewPageTemplateFile('empty.pt')
+    index = pagetemplatefile.ViewPageTemplateFile('empty.pt')
 
     # Copied from
     # plone.app.content.browser.foldercontents.FolderContentsTable
