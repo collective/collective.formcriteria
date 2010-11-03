@@ -32,8 +32,7 @@
                              ids sort_info/ids|nothing;
                              form nocall:context/@@criteria_form;
                              portal context/portal_url/getPortalObject;
-                             errors options/state/getErrors|python:{};
-                             MV python:modules['Missing'].MV;">
+                             errors options/state/getErrors|python:{}; ">
 
     <div class="visualClear" id="clear-space-before-navigation"><!-- --></div>
 
@@ -241,7 +240,6 @@
                 </tal:has_buttons>
               </td>
               <td tal:condition="python:column['field']!='getPath'">
-                <tal:missing condition="python:value is not MV">
                   <tal:linked condition="column/link">
                     <span tal:attributes="class item/type_class">
                       <a href="#" tal:attributes="href  item/view_url;
@@ -280,7 +278,6 @@
                       </span>
                     </tal:value>
                   </tal:unlinked>
-                </tal:missing>
               </td>
               </tal:value>
             </tal:column>
