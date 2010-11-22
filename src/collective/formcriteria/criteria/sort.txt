@@ -88,11 +88,14 @@ links also have id's and CSS classes for styling support.
     <...
               Sort on:
                 <span class="formcriteriaSortField selected">Relevance</span>
-                <a class="formcriteriaSortField" href="...">Effective Date</a>
+                <button...>Effective Date</button>
     ...
-    >>> browser.getLink('Relevance')
+    >>> form = browser.getForm(name="navigation_batches")
+    >>> form.getControl(
+    ...     name="crit__unsorted_FormSortCriterion:boolean")
     Traceback (most recent call last):
-    LinkNotFoundError
+    LookupError: name
+    'crit__unsorted_FormSortCriterion:boolean'
 
 The results are listed in order of weight.
 
@@ -106,18 +109,23 @@ The results are listed in order of weight.
 When a sort link is clicked, that sort will show as selected and
 results will be sorted according to the sort criteria.
 
-    >>> browser.getLink('Effective Date').click()
+    >>> form = browser.getForm(name="navigation_batches")
+    >>> form.getControl(
+    ...     name="crit__effective_FormSortCriterion:boolean").click()
     >>> print browser.contents
     <...
     ...Sort on:...
     ...Relevance...
     ...Effective Date</span>...
-    >>> browser.getLink('Effective Date')
-    Traceback (most recent call last):
-    LinkNotFoundError
-    >>> browser.getLink('Relevance')
-    <Link text='Relevance'
-    url='http://nohost/plone/Members/test_user_1_/foo-topic-title/atct_topic_view?crit__unsorted_FormSortCriterion:boolean=True&form_crit__SearchableText_FormSimpleStringCriterion_value=blah&submit=Search'>
+    >>> form = browser.getForm(name="navigation_batches")
+    >>> form.getControl(
+    ...     name="crit__effective_FormSortCriterion:boolean")
+    <Control name='crit__effective_FormSortCriterion:boolean' type='hidden'>
+    >>> form = browser.getForm(name="navigation_batches")
+    >>> form.getControl(
+    ...     name="crit__unsorted_FormSortCriterion:boolean")
+    <SubmitControl name='crit__unsorted_FormSortCriterion:boolean'
+    type='submitbutton'>
 
 The results reflect that the search query is preserved across the new
 sort selection.
@@ -132,7 +140,8 @@ sort selection.
 If the next batch is selected the sort and search query are
 preserved.
 
-    >>> browser.getLink('Next 1 items').click()
+    >>> form = browser.getForm(name="navigation_batches")
+    >>> form.getControl(name="b_start", index=0).click()
     >>> browser.getLink('Bar Document Title')
     Traceback (most recent call last):
     LinkNotFoundError
@@ -145,8 +154,11 @@ batch.
 
     >>> foo_topic.setItemCount(0)
     >>> browser.open(foo_topic.absolute_url()+'/atct_topic_view')
-    >>> browser.getLink('Effective Date')
-    <Link text='Effective Date' url='http://nohost/plone/Members/test_user_1_/foo-topic-title/atct_topic_view?...crit__effective_FormSortCriterion:boolean=True...
+    >>> form = browser.getForm(name="navigation_batches")
+    >>> form.getControl(
+    ...     name="crit__effective_FormSortCriterion:boolean")
+    <SubmitControl name='crit__effective_FormSortCriterion:boolean'
+    type='submitbutton'>
 
 Ensure that the extended sort criteria work inside previously created
 ATTopic instances.

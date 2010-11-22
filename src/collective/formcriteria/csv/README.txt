@@ -129,7 +129,8 @@ and query.
     >>> form = browser.getForm(name="formcriteria_search")
     >>> form.getControl('Search Text').value = 'blah'
     >>> form.getControl(name='submit').click()
-    >>> browser.getLink('Effective Date').click()
+    >>> browser.getControl(
+    ...     name="crit__effective_FormSortCriterion:boolean").click()
 
     >>> browser.getLink('Export').click()
     >>> browser.isHtml

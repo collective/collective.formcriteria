@@ -31,8 +31,8 @@ layer = Layer([common.common_layer])
 class ContentLayer(tcl_ptc.BasePTCLayer):
     """Add some content"""
     def afterSetUp(self):
-        self.now = DateTime.DateTime()
-        tomorrow = DateTime.DateTime() + 1
+        self.now = DateTime.DateTime(str(DateTime.DateTime())[:10])
+        tomorrow = self.now + 1
 
         self.login()
         foo_event = self.folder[self.folder.invokeFactory(

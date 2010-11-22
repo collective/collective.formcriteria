@@ -84,7 +84,8 @@ Now the default has been overriden by the submitted query.
 
 The form reflects the submitted value.
 
-    >>> browser.getControl(
+    >>> form = browser.getForm(name="formcriteria_search")
+    >>> form.getControl(
     ...     name='form_crit__Subject_FormCommaCriterion_value'
     ...     ).value
     'bah, quux'

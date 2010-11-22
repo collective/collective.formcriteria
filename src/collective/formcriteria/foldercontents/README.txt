@@ -72,8 +72,11 @@ titles are links to the item.
     <...
     ...Bar Document Title...
     ...2.9 kB...
-    ...2009-01-15...
     ...<span class="state-published">Published</span>...
+    >>> from collective.formcriteria import testing
+    >>> now = testing.content_layer.now
+    >>> now.ISO() in browser.contents
+    True
 
     >>> browser.getControl('Bar Document Title')
     <ItemControl name='paths:list' type='checkbox'
@@ -135,10 +138,9 @@ The topic contents are also listed with the specified columns.
     <...
     ...Bar Document Title...
     ...blah...
-    ...2009-01-13...
     >>> '2.9 kB' in browser.contents
     False
-    >>> '2009-01-15' in browser.contents
+    >>> now.ISO() in browser.contents
     False
     >>> '<span class="state-published">Published</span>' in browser.contents
     False
@@ -152,8 +154,8 @@ The link columns have also been changed.
     >>> browser.getLink('blah')
     <Link text='blah'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
-    >>> browser.getLink('2009-01-13')
-    <Link text='2009-01-13...'
+    >>> browser.getLink((now-2).ISO())
+    <Link text='...'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
     >>> browser.getLink('Bar Document Title')
     Traceback (most recent call last):
