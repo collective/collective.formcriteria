@@ -8,16 +8,26 @@
     <!-- Navigation -->
     <div class="listingBar"
          metal:define-macro="navigation">
+      <form action="."
+            class="enableAutoFocus"
+            method="post"
+            name="navigation_batches"
+            metal:define-macro="form"
+            tal:define="template_id template_id|template/getId;"
+            tal:attributes="action batch_base_url|string:${here/absolute_url}/${template_id};">
+        <input type="hidden"
+               tal:define="ZTUtils python:modules['ZTUtils'];
+                           hidden_sort_info context/@@sort_info/getSortInfo|nothing;
+                           form hidden_sort_info/form|nothing;"
+               tal:condition="nocall:form"
+               tal:replace="structure python:ZTUtils.make_hidden_input(**form)"
+               />
       <metal:inner
          define-macro="navigationInner"
          tal:define="request request|here/request|container/request|nothing;
                      batch batch|nothing;
-                     template_id template_id|template/getId;
-                     mq python:modules['ZTUtils'].make_query;
-                     url batch_base_url | string:${here/absolute_url}/${template_id};
                      currentpage batch/pagenumber;
-                     sort_info context/@@sort_info/getSortInfo|nothing;
-                     form sort_info/form|nothing;
+                     sort_info hidden_sort_info|context/@@sort_info/getSortInfo|nothing;
                      ids ids|sort_info/ids|nothing;
                      sorts sort_info/sorts|nothing;"
          tal:condition="python: batch.next or  batch.previous or ids">
@@ -25,12 +35,14 @@
         <span tal:condition="ids">
           Sort on:
           <tal:sorts repeat="sort python:[sorts[field] for field in ids]">
-            <a tal:condition="not:sort/selected"
-               tal:attributes="href python:'%s?%s' % (url, mq(form, {sort['id']: True}));"
+            <button type="submit" name="sort_id" value="True"
+               tal:condition="not:sort/selected"
+               tal:attributes="name string:${sort/id}:boolean;
+                               value True;"
                tal:content="sort/name"
                class="formcriteriaSortField">
               Field
-            </a>
+            </button>
             <span tal:condition="sort/selected"
                   tal:content="sort/name"
                   class="formcriteriaSortField selected">
@@ -42,35 +54,40 @@
         <span class="previous"
               tal:define="p batch/previous | nothing"
               tal:condition="p">
-          <a href=""
-             tal:attributes="href python: '%s?%s' % (url , mq( request.form, {batch.b_start_str:p.first} ))">
+          <button type="submit" name="b_start" value="10"
+                  tal:attributes="name batch/b_start_str;
+                                  value p/first;">
             &laquo;
             <span i18n:translate="batch_previous_x_items" tal:omit-tag="">
               Previous
               <span i18n:name="number" tal:omit-tag="" tal:content="p/length">n</span>
               items
             </span>
-          </a>
+          </button>
         </span> 
 
         <span class="next"
               tal:define="n batch/next | nothing"
               tal:condition="n">
-          <a href=""
-             tal:attributes="href python: '%s?%s' % (url , mq( request.form, {batch.b_start_str:n.first} ))">
+          <button type="submit" name="b_start" value="20"
+                  tal:attributes="name batch/b_start_str;
+                                  value n/first;">
             <span i18n:translate="batch_next_x_items" tal:omit-tag="">
               Next
               <span i18n:name="number" tal:omit-tag="" tal:content="n/length">n</span>
               items
             </span>
             &raquo;
-          </a>
+          </button>
         </span>
 
         <!-- Link to first -->
         <span tal:condition="python: 1 not in batch.navlist">
-          <a href=""
-             tal:attributes="href python: '%s?%s' % (url, batch.pageurl(request.form,1));">1</a>
+          <button type="submit" name="b_start" value="0"
+                  tal:define="pagenumber python:1;"
+                  tal:attributes="name batch/b_start_str;
+                                  value python:pagenumber * (batch.size - batch.overlap) - batch.size;"
+                  tal:content="pagenumber">1</button>
           <span tal:condition="python: 2 not in (batch.prevlist or batch.leapback)"
                 tal:omit-tag="">
             ...
@@ -78,28 +95,24 @@
         </span>
 
         <!-- Pagelist with quantum leap links to previous pages for quick navigation -->
-        <span tal:repeat="linklist python:batch.navurls(request.form, batch.leapback)"
+        <span tal:repeat="pagenumber batch/leapback"
               tal:condition="batch/leapback"
               tal:omit-tag="" >
-          <a href=""
-             tal:define="page python:linklist[0];
-                         query python:linklist[1];"
-             tal:content="page"
-             tal:attributes="href python: '%s?%s' % (url,query)" >
-          </a>
+          <button type="submit" name="b_start" value="0"
+                  tal:attributes="name batch/b_start_str;
+                                  value python:pagenumber * (batch.size - batch.overlap) - batch.size;"
+                  tal:content="pagenumber">1</button>
           ...
         </span>
 
         <!-- Pagelist with links to previous pages for quick navigation -->
-        <span tal:repeat="linklist python:batch.prevurls(request.form)"
+        <span tal:repeat="pagenumber batch/prevlist"
               tal:condition="batch/prevlist"
               tal:omit-tag="" >
-          <a href=""
-             tal:define="page python:linklist[0];
-                         query python:linklist[1];"
-             tal:content="page"
-             tal:attributes="href python: '%s?%s' % (url,query)" >
-          </a>
+          <button type="submit" name="b_start" value="0"
+                  tal:attributes="name batch/b_start_str;
+                                  value python:pagenumber * (batch.size - batch.overlap) - batch.size;"
+                  tal:content="pagenumber">1</button>
         </span>
 
         <!-- Current page -->
@@ -109,28 +122,24 @@
         </span>
 
         <!-- Pagelist with links to next pages for quick navigation -->
-        <span tal:repeat="linklist python:batch.nexturls(request.form)"
+        <span tal:repeat="pagenumber batch/nextlist"
               tal:condition="batch/nextlist"
               tal:omit-tag="" >
-          <a href=""
-             tal:define="page python:linklist[0];
-                         query python:linklist[1];"
-             tal:content="page"
-             tal:attributes="href python: '%s?%s' % (url,query)" >
-          </a>
+          <button type="submit" name="b_start" value="0"
+                  tal:attributes="name batch/b_start_str;
+                                  value python:pagenumber * (batch.size - batch.overlap) - batch.size;"
+                  tal:content="pagenumber">1</button>
         </span>
 
         <!-- Pagelist with quantum leap links to next pages for quick navigation -->
-        <span tal:repeat="linklist python:batch.navurls(request.form, batch.leapforward)"
+        <span tal:repeat="pagenumber batch/leapforward"
               tal:condition="batch/leapforward"
               tal:omit-tag="" >
           ...
-          <a href=""
-             tal:define="page python:linklist[0];
-                         query python:linklist[1];"
-             tal:content="page"
-             tal:attributes="href python: '%s?%s' % (url,query)" >
-          </a>
+          <button type="submit" name="b_start" value="0"
+                  tal:attributes="name batch/b_start_str;
+                                  value python:pagenumber * (batch.size - batch.overlap) - batch.size;"
+                  tal:content="pagenumber">1</button>
         </span>
 
         <!-- Link to last -->
@@ -139,12 +148,15 @@
                 tal:omit-tag="">
             ...
           </span>
-          <a href=""
-             tal:attributes="href python: '%s?%s' % (url,batch.pageurl(request.form,batch.numpages));"
-             tal:content="batch/numpages">3457</a>
+          <button type="submit" name="b_start" value="0"
+                  tal:define="pagenumber batch/numpages;"
+                  tal:attributes="name batch/b_start_str;
+                                  value python:pagenumber * (batch.size - batch.overlap) - batch.size;"
+                  tal:content="pagenumber">3457</button>
         </span>
 
       </metal:inner>
+      </form>
     </div>
 
   </body>

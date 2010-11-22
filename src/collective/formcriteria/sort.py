@@ -6,6 +6,7 @@ class SortView(object):
     @view.memoize
     def getSortInfo(self):
         form = self.request.form.copy()
+        form.pop('b_start', None)
         selected = None
         ids = []
         sorts = {}

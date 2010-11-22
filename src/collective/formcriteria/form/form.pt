@@ -12,7 +12,7 @@
 
       <form action="."
             class="enableAutoFocus"
-            method="get"
+            method="post"
             name="formcriteria_search"
             id="formcriteria_search"
             metal:define-macro="form"

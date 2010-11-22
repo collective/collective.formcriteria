@@ -31,7 +31,7 @@ layer = Layer([common.common_layer])
 class ContentLayer(tcl_ptc.BasePTCLayer):
     """Add some content"""
     def afterSetUp(self):
-        self.now = DateTime.DateTime('Jan 15, 2009')
+        self.now = DateTime.DateTime()
         tomorrow = DateTime.DateTime() + 1
 
         self.login()
