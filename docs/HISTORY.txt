@@ -9,6 +9,11 @@ Changelog
   doesn't actually used a DateTimeField.
   [rossp]
 
+* Refactor the <form> and <button> based batch_macros so as to not
+  conflict with other uses of the full "navigation" macro within an
+  existing form resulting in nested <form>s.
+  [rossp]
+
 2.0a1 - 2010-11-21
 ------------------
 

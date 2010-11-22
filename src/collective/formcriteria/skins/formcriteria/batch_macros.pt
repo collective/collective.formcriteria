@@ -6,21 +6,21 @@
   <body>
 
     <!-- Navigation -->
+    <form action="."
+          method="post"
+          metal:define-macro="navigation_form"
+          name="navigation_form"
+          tal:define="template_id template_id|template/getId;"
+          tal:attributes="action batch_base_url|string:${here/absolute_url}/${template_id};">
+      <input type="hidden"
+             tal:define="ZTUtils python:modules['ZTUtils'];
+                         hidden_sort_info context/@@sort_info/getSortInfo|nothing;
+                         form hidden_sort_info/form|nothing;"
+             tal:condition="nocall:form"
+             tal:replace="structure python:ZTUtils.make_hidden_input(**form)"
+             />
     <div class="listingBar"
          metal:define-macro="navigation">
-      <form action="."
-            method="post"
-            name="navigation_batches"
-            metal:define-macro="form"
-            tal:define="template_id template_id|template/getId;"
-            tal:attributes="action batch_base_url|string:${here/absolute_url}/${template_id};">
-        <input type="hidden"
-               tal:define="ZTUtils python:modules['ZTUtils'];
-                           hidden_sort_info context/@@sort_info/getSortInfo|nothing;
-                           form hidden_sort_info/form|nothing;"
-               tal:condition="nocall:form"
-               tal:replace="structure python:ZTUtils.make_hidden_input(**form)"
-               />
       <div class="listingBarInner"
            metal:define-macro="navigationInner"
          tal:define="request request|here/request|container/request|nothing;
@@ -155,8 +155,8 @@
         </span>
 
       </div>
-      </form>
     </div>
+    </form>
 
   </body>
 </html>

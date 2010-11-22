@@ -75,7 +75,7 @@
             </p>
 
             <!-- Navigation -->
-            <div metal:use-macro="here/batch_macros/macros/navigation" />
+            <div metal:use-macro="here/batch_macros/macros/navigation_form" />
 
         </tal:topiccontents>
         </metal:listingmacro>
