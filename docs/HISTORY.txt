@@ -4,6 +4,10 @@ Changelog
 2.0 - Unreleased
 ----------------
 
+* Ensure that the "default" profile is used by portal_quickinstaller
+  by... well, default.  :-)
+  [rossp]
+
 * Use a <form> and <button> elements in the navigation/paging
   batch_macros to prevent "uri too long" errors when using paging with
   many form criteria.

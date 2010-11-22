@@ -104,7 +104,7 @@ class ColumnsLayer(tcl_ptc.BasePTCLayer):
     """Used for testing folder_contents columns"""
 
     def afterSetUp(self):
-        self.addProfile('collective.formcriteria:columns')
+        self.addProfile('collective.formcriteria:formcriteria-columns')
         self.loginAsPortalOwner()
         self.folder.manage_pasteObjects(
             self.portal.templates.manage_copyObjects(['Topic']))

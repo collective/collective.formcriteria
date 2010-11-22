@@ -14,8 +14,8 @@ rich, spreadsheet like, functionality.  Each column objects controls:
   - an optional query criterion for column filtering
 
 When a topic is created using the template included in the
-'profile-collective.formcriteria:columns', it has a columns
-container.
+'profile-collective.formcriteria:formcriteria-columns', it has a
+columns container.
 
     >>> foo_topic = self.folder['foo-topic-title']
     >>> foo_topic.columns

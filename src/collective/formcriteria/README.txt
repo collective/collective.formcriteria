@@ -388,5 +388,10 @@ The 'default' profile is used when installing collective.formcriteria
 through the Plone Add-ons control panel
 
     >>> portal.portal_quickinstaller.uninstallProducts(['collective.formcriteria'])
-    >>> portal.portal_quickinstaller.installProducts(['collective.formcriteria'])
-    >>> TODO
+    >>> print portal.portal_quickinstaller.installProducts(['collective.formcriteria'])
+        Installed Products
+        ====================
+        collective.formcriteria:ok:
+    >>> portal.portal_quickinstaller.getInstallProfiles(
+    ...     'collective.formcriteria')[0]
+    u'collective.formcriteria:default'

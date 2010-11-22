@@ -66,7 +66,8 @@
      />
 
   <genericsetup:registerProfile
-     name="columns"
+     name="formcriteria-columns"
+     directory="profiles/columns"
      title="Setup collective.formcriteria Columns"
      description="Install a template collection with query criteria,x sort criteria and columns for reproducing the folder_contents table in a collection."
      provides="Products.GenericSetup.interfaces.EXTENSION"
