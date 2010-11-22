@@ -4,6 +4,16 @@ Changelog
 2.0 - Unreleased
 ----------------
 
+* Use a <form> and <button> elements in the navigation/paging
+  batch_macros to prevent "uri too long" errors when using paging with
+  many form criteria.
+  [rossp]
+
+* Use method="post" for the criteria form to address "uri too long"
+  when lots of form criteria are used.  Reported by mauro and
+  confirmed to happen with just two date fields.
+  [rossp]
+
 * Added defines for Plone4 complatibility in folder_listing
   skin template.
   [seletz]
