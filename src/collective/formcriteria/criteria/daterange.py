@@ -1,10 +1,11 @@
 from Products.ATContentTypes.criteria import daterange
 
 from collective.formcriteria.criteria import common
+from collective.formcriteria.criteria import date
 
 
 class FormDateRangeCriterion(
-    common.FormCriterion, daterange.ATDateRangeCriterion):
+    date.DateCriterion, daterange.ATDateRangeCriterion):
     __doc__ = daterange.ATDateRangeCriterion.__doc__
 
     schema = daterange.ATDateRangeCriterion.schema.copy(
