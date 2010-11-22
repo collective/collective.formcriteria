@@ -6,4 +6,7 @@
  <stylesheet title="" cacheable="True" compression="safe" cookable="True"
     enabled="1" expression="" rel="stylesheet" rendering="import"
     id="++resource++formcriteria-listing-portlet.css" media="screen"/>
+ <stylesheet title="" cacheable="True" compression="safe" cookable="True"
+    enabled="1" expression="" rel="stylesheet" rendering="import"
+    id="++resource++formcriteria.css" media="screen"/>
 </object>

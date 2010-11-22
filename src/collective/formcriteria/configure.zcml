@@ -47,6 +47,11 @@
      template="comma.pt"
      permission="zope2.View" />
 
+  <browser:resource
+     name="formcriteria.css"
+     file="formcriteria.css"
+     />
+
   <include package=".columns" />
   <include package=".foldercontents" />
   <include package=".csv" />

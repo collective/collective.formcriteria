@@ -9,7 +9,6 @@
     <div class="listingBar"
          metal:define-macro="navigation">
       <form action="."
-            class="enableAutoFocus"
             method="post"
             name="navigation_batches"
             metal:define-macro="form"
@@ -22,8 +21,8 @@
                tal:condition="nocall:form"
                tal:replace="structure python:ZTUtils.make_hidden_input(**form)"
                />
-      <metal:inner
-         define-macro="navigationInner"
+      <div class="listingBarInner"
+           metal:define-macro="navigationInner"
          tal:define="request request|here/request|container/request|nothing;
                      batch batch|nothing;
                      currentpage batch/pagenumber;
@@ -155,7 +154,7 @@
                   tal:content="pagenumber">3457</button>
         </span>
 
-      </metal:inner>
+      </div>
       </form>
     </div>
 
