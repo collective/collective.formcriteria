@@ -4,6 +4,11 @@ Changelog
 2.0a2 - Unreleased
 ------------------
 
+* Fixed a problem with a faulty type assumption regarding
+  DateTimeFields in the FormDateCriterion.  The FormDateCriterion
+  doesn't actually used a DateTimeField.
+  [rossp]
+
 2.0a1 - 2010-11-21
 ------------------
 
