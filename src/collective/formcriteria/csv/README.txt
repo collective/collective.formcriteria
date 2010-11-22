@@ -143,6 +143,26 @@ and query.
     http://nohost/plone/Members/test_user_1_/bar-document-title,Bar Document Title,blah
     http://nohost/plone/Members/test_user_1_/baz-event-title,Baz Event Title,blah blah
 
+It is also possible to change the CSV format by passing in request
+keys with a special 'csv.fmtparam-' prefix.  These values are passed
+into Python's csv.writer() factory as keyword arguments.  For example,
+to use a tab character as a delimiter instead of ",", add a
+'csv.fmtparam-delimiter' key to the request.
+
+    >>> browser.open(foo_topic.absolute_url())
+    >>> export_url = browser.getLink('Export').url
+    >>> browser.open(export_url+'&csv.fmtparam-delimiter=%09')
+    >>> browser.isHtml
+    False
+    >>> print browser.contents
+    Status: 200 OK...
+    Content-Type: text/csv
+    Content-Disposition: attachment;filename=foo-topic-title.csv
+    URL	Title	Description
+    http://nohost/plone/Members/test_user_1_/foo-event-title	Foo Event Title	
+    http://nohost/plone/Members/test_user_1_/bar-document-title	Bar Document Title	blah
+    http://nohost/plone/Members/test_user_1_/baz-event-title	Baz Event Title	blah blah
+
 The export link isn't available if there are no collection columns.
 
     >>> self.loginAsPortalOwner()
