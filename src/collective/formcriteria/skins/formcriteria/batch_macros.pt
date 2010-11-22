@@ -38,7 +38,7 @@
             <button type="submit" name="sort_id" value="True"
                tal:condition="not:sort/selected"
                tal:attributes="name string:${sort/id}:boolean;
-                               value True;"
+                               value python:True;"
                tal:content="sort/name"
                class="formcriteriaSortField">
               Field
