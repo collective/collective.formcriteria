@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0a2 - Unreleased
+2.0a2 - 2010-11-23
 ------------------
 
 * Fixed a problem with a faulty type assumption regarding
