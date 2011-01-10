@@ -4,6 +4,11 @@ Changelog
 2.0a2 - 2010-11-23
 ------------------
 
+* Change the permission for the grouped listing view so that anonymous
+  visitors can access the view when the content is published.
+  Thanks to Larry Pitcher for the report.
+  [rossp] 
+
 * Add support for columns that don't have corresponding catalog
   metadata.  Be aware that using such columns can greatly affect
   performance as export requires looking up every object to retrieve

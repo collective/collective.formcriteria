@@ -29,7 +29,7 @@
      class=".grouped.GroupedListingView"
      name="grouped_listing"
      template="grouped.pt"
-     permission="cmf.ListFolderContents" />
+     permission="zope2.AccessContentsInformation" />
 
   <browser:menuItem
      for=".interfaces.IFormTopic"
