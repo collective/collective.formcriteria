@@ -46,12 +46,22 @@ class ExportView(object):
                 tuple(column['name'] for column in columns))
         for brain in brains:
             row = []
+            obj = None
             for column in columns:
                 field = column['field']
                 if field == 'getPath':
                     value = brain.getURL()
                 else:
-                    value = brain[field]
+                    try:
+                        value = brain[field]
+                    except KeyError:
+                        # If it's not in the catalog brains, try the
+                        # real object
+                        if obj is None:
+                            obj = brain.getObject()
+                        value = getattr(obj, field)
+                        if callable(value):
+                            value = value()
                 row.append(value)
             csvwriter.writerow(row)
 

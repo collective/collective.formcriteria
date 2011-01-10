@@ -4,6 +4,12 @@ Changelog
 2.0a2 - 2010-11-23
 ------------------
 
+* Add support for columns that don't have corresponding catalog
+  metadata.  Be aware that using such columns can greatly affect
+  performance as export requires looking up every object to retrieve
+  the data.
+  [rossp]
+
 * Fixed a problem with a faulty type assumption regarding
   DateTimeFields in the FormDateCriterion.  The FormDateCriterion
   doesn't actually used a DateTimeField.

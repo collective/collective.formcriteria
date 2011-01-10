@@ -163,6 +163,29 @@ to use a tab character as a delimiter instead of ",", add a
     http://nohost/plone/Members/test_user_1_/bar-document-title	Bar Document Title	blah
     http://nohost/plone/Members/test_user_1_/baz-event-title	Baz Event Title	blah blah
 
+It's also possible to add a column for fields that don't have
+corresponding catalog metadata.  Be aware that using such columns can
+greatly affect performance as export requires looking up every object
+to retrieve the data.
+
+    >>> self.loginAsPortalOwner()
+    >>> text_column = columns[columns.invokeFactory(
+    ...     type_name='TopicColumn', id='getText-column',
+    ...     title='Text', link=True)]
+    >>> self.logout()
+
+    >>> browser.open(export_url)
+    >>> browser.isHtml
+    False
+    >>> print browser.contents
+    Status: 200 OK...
+    Content-Type: text/csv
+    Content-Disposition: attachment;filename=foo-topic-title.csv
+    URL,Title,Description,Text
+    http://nohost/plone/Members/test_user_1_/foo-event-title,Foo Event Title,,<p>foo...</p>
+    http://nohost/plone/Members/test_user_1_/bar-document-title,Bar Document Title,blah,<p>bar...</p>
+    http://nohost/plone/Members/test_user_1_/baz-event-title,Baz Event Title,blah blah,
+
 The export link isn't available if there are no collection columns.
 
     >>> self.loginAsPortalOwner()
