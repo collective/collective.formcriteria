@@ -68,7 +68,7 @@ rendered for the index with the default values.
     >>> form.getControl(
     ...     name='form_crit__effective_FormDateRangeCriterion'
     ...     '_start_day').getControl(
-    ...         str(effective_start.day()).zfill(2)).selected
+    ...         value=str(effective_start.day()).zfill(2)).selected
     True
 
     >>> form.getControl(
@@ -82,7 +82,7 @@ rendered for the index with the default values.
     >>> form.getControl(
     ...     name='form_crit__effective_FormDateRangeCriterion'
     ...     '_end_day').getControl(
-    ...         str(effective_end.day()).zfill(2)).selected
+    ...         value=str(effective_end.day()).zfill(2)).selected
     True
 
 By default the hour and minute fields are hidden.
@@ -136,7 +136,7 @@ JavaScript by also changing the value of the hidden inputs.
     >>> form.getControl(
     ... name='form_crit__effective_FormDateRangeCriterion_start_day'
     ...     ).getControl(
-    ...         str((effective_start+2).day()).zfill(2)).selected = True
+    ...         value=str((effective_start+2).day()).zfill(2)).selected = True
     >>> form.getControl(
     ...     name='form_crit__effective_FormDateRangeCriterion_start'
     ...     ).value = str(effective_start+2)
@@ -144,7 +144,7 @@ JavaScript by also changing the value of the hidden inputs.
     >>> form.getControl(
     ...     name='form_crit__effective_FormDateRangeCriterion_end_day'
     ...     ).getControl(
-    ...         str((effective_end+2).day()).zfill(2)).selected = True
+    ...         value=str((effective_end+2).day()).zfill(2)).selected = True
     >>> form.getControl(
     ...     name='form_crit__effective_FormDateRangeCriterion_end'
     ...     ).value = str(effective_end+2)
@@ -247,7 +247,7 @@ Enter form values for all the criteria and submit the search.
     ...         name=
     ...         'form_crit__%s_FormDateRangeCriterion_start_day' % field
     ...         ).getControl(
-    ...             str((now-365).day()).zfill(2)).selected = True
+    ...             value=str((now-365).day()).zfill(2)).selected = True
     ...     form.getControl(
     ...         name=
     ...         'form_crit__%s_FormDateRangeCriterion_start' % field
@@ -264,7 +264,7 @@ Enter form values for all the criteria and submit the search.
     ...         name=
     ...         'form_crit__%s_FormDateRangeCriterion_end_day' % field
     ...         ).getControl(
-    ...             str((now+365).day()).zfill(2)).selected = True
+    ...             value=str((now+365).day()).zfill(2)).selected = True
     ...     form.getControl(
     ...         name=
     ...         'form_crit__%s_FormDateRangeCriterion_end' % field
@@ -298,7 +298,7 @@ The submitted search terms are selected in the widgets.
     ...         name=
     ...         'form_crit__%s_FormDateRangeCriterion_start_day' % field
     ...         )
-    ...     if not ctl.getControl(str((now-365).day()).zfill(2)).selected:
+    ...     if not ctl.getControl(value=str((now-365).day()).zfill(2)).selected:
     ...         ctl
     ...     ctl = form.getControl(
     ...         name=
@@ -322,7 +322,7 @@ The submitted search terms are selected in the widgets.
     ...         name=
     ...         'form_crit__%s_FormDateRangeCriterion_end_day' % field
     ...         )
-    ...     if not ctl.getControl(str((now+365).day()).zfill(2)).selected:
+    ...     if not ctl.getControl(value=str((now+365).day()).zfill(2)).selected:
     ...         ctl
     ...     ctl = form.getControl(
     ...         name=
