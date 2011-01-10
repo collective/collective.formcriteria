@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0a2 - 2010-11-23
+2.0a3 - 2011-01-10
 ------------------
 
 * Change the permission for the grouped listing view so that anonymous
@@ -14,6 +14,9 @@ Changelog
   performance as export requires looking up every object to retrieve
   the data.
   [rossp]
+
+2.0a2 - 2010-11-23
+------------------
 
 * Fixed a problem with a faulty type assumption regarding
   DateTimeFields in the FormDateCriterion.  The FormDateCriterion
