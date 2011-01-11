@@ -59,4 +59,11 @@
     visible="True" i18n:attributes="title">
   <permission value="Change portal topics"/>
  </action>
+ <action title="Export" action_id="csv" category="document_actions"
+    description="Export as a CSV spreadsheet"
+    condition_expr="object/columns/contentValues|nothing"
+    url_expr="string:$object_url/export?${object/export/getCSVQuery}"
+    visible="True" i18n:attributes="title">
+  <permission value="View"/>
+ </action>
 </object>
