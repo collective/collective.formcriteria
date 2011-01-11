@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0a4 - Unreleased
+2.0a4 - 2011-01-11
 ------------------
 
 * Restore the workflow menu which was missing from the topic
