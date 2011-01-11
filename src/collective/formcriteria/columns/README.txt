@@ -106,3 +106,7 @@ form.
     >>> browser.getControl('Table Column Sums')
     Traceback (most recent call last):
     LookupError: label 'Table Column Sums'
+
+A column can be added through the browser.  TODO
+
+    >>> browser.getLink('Columns').click()

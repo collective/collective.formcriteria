@@ -54,6 +54,11 @@
     visible="True" i18n:attributes="title">
   <permission value="Change portal topics"/>
  </action>
+ <action title="Columns" action_id="columnContents" category="object"
+    condition_expr="" url_expr="string:${folder_url}/columns"
+    visible="True" i18n:attributes="title">
+  <permission value="Change portal topics"/>
+ </action>
  <action title="Subfolders" action_id="subtopics" category="object"
     condition_expr="" url_expr="string:${folder_url}/atct_topic_subtopics"
     visible="True" i18n:attributes="title">
