@@ -13,10 +13,15 @@ optionflags = (doctest.NORMALIZE_WHITESPACE |
 def test_suite():
     suite = ZopeTestCase.FunctionalDocFileSuite(
         'README.txt',
+        optionflags=optionflags,
+        test_class=ptc.FunctionalTestCase)
+    suite.layer = testing.content_layer
+
+    topic_suite = ZopeTestCase.FunctionalDocFileSuite(
         'portlet/README.txt',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
-    suite.layer = testing.topic_layer
+    topic_suite.layer = testing.topic_layer
 
     criteria_suite = ZopeTestCase.FunctionalDocFileSuite(
         'criteria/list.txt',
@@ -53,7 +58,8 @@ def test_suite():
     contents_suite.layer = testing.contents_layer
 
     return unittest.TestSuite(
-        [suite, criteria_suite, columns_suite, contents_suite])
+        [suite, topic_suite, criteria_suite, columns_suite,
+        contents_suite])
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')

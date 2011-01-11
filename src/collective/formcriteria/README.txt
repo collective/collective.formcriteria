@@ -56,17 +56,20 @@ untested and may leave your collections broken.
 Form Criteria
 =============
 
-Start with a collection and some content for search results.
+Start with some content for search results.
 
     >>> from Products.PloneTestCase import ptc
     >>> self.login()
-    >>> foo_topic = self.folder['foo-topic-title']
-    >>> foo_topic
-    <Topic at /plone/Members/test_user_1_/foo-topic-title>
     >>> self.folder['bar-document-title']
     <ATDocument at /plone/Members/test_user_1_/bar-document-title>
     >>> self.folder['baz-event-title']
     <ATEvent at /plone/Members/test_user_1_/baz-event-title>
+
+Allow normal users to add collections.
+
+    >>> portal.manage_permission(
+    ...     'Add portal topics', roles=['Member', 'Manager'],
+    ...     acquire=0)
 
 Open a browser and log in as a normal user.
 
@@ -80,9 +83,29 @@ Open a browser and log in as a normal user.
     ...     'Password').value = ptc.default_password
     >>> browser.getControl('Log in').click()
 
+Add and publish a collection.
+
+    >>> browser.open(folder.absolute_url())
+    >>> browser.getLink('Collection').click()
+    >>> browser.getControl('Title').value = 'Foo Topic Title'
+    >>> browser.getControl('Save').click()
+    >>> print browser.contents
+    <...
+    ...Changes saved...
+    >>> foo_topic = folder['foo-topic-title']
+
+
+    >>> browser.getLink('Submit').click()
+    >>> print browser.contents
+    <...
+    ...Item state changed...
+
+    >>> self.loginAsPortalOwner()
+    >>> self.portal.portal_workflow.doActionFor(foo_topic, 'publish')
+    >>> self.login()
+
 Change the display layout of the collection to the "Search Form".
 
-    >>> browser.open(foo_topic.absolute_url())
     >>> browser.getLink('Search Form').click()
     >>> print browser.contents
     <...

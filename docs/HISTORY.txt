@@ -4,6 +4,10 @@ Changelog
 2.0a4 - Unreleased
 ------------------
 
+* Restore the workflow menu which was missing from the topic
+  folder_contents view.  Thanks to Larry Pitcher for the report.
+  [rossp] 
+
 2.0a3 - 2011-01-10
 ------------------
 

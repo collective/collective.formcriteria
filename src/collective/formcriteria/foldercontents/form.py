@@ -287,6 +287,12 @@ class FolderContentsView(FolderContentsMixin,
                          foldercontents.FolderContentsView):
     """List items in a tabular form including object buttons"""
 
+    def __init__(self, context, request):
+        # Bypass the interface request declaration that blocks the
+        # workflow menu
+        super(foldercontents.FolderContentsView, self).__init__(
+            context, request)
+
     def contents_table(self):
         """Use the request as the contentFilter"""
         table = FolderContentsTable(self.context, self.request)
