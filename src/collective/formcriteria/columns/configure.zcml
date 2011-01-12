@@ -11,6 +11,21 @@
      name="columns_view"
      permission="zope2.View" />
 
+  <!-- Folder contents -->
+  <browser:page
+     for=".content.TopicColumns"
+     class=".form.FolderContentsView"
+     name="folder_contents"
+     template="folder_contents.pt"
+     permission="cmf.ListFolderContents" />
+  
+  <browser:page
+     for=".content.TopicColumns"
+     class=".form.FolderContentsKSSView"
+     attribute="update_table"
+     name="foldercontents_update_table"
+     permission="cmf.ListFolderContents" />
+  
   <genericsetup:importStep
       name="formcriteria_columns"
       title="Setup collective.formcriteria Columns"

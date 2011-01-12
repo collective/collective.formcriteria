@@ -65,12 +65,6 @@ Start with some content for search results.
     >>> self.folder['baz-event-title']
     <ATEvent at /plone/Members/test_user_1_/baz-event-title>
 
-Allow normal users to add collections.
-
-    >>> portal.manage_permission(
-    ...     'Add portal topics', roles=['Member', 'Manager'],
-    ...     acquire=0)
-
 Open a browser and log in as a normal user.
 
     >>> from Products.Five.testbrowser import Browser

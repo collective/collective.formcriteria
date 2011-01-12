@@ -17,6 +17,11 @@ class Layer(tcl_ptc.BasePTCLayer):
 
         ZopeTestCase.installPackage('collective.formcriteria')
 
+        # Allow normal users to add collections.
+        self.portal.manage_permission(
+            'Add portal topics', roles=['Member', 'Manager'],
+            acquire=0)
+
         self.addProfile('collective.formcriteria:default')
         self.addProfile('collective.formcriteria:testing')
 
@@ -74,10 +79,10 @@ class TopicLayer(tcl_ptc.BasePTCLayer):
     """Add a simple topic"""
 
     def afterSetUp(self):
-        self.loginAsPortalOwner()
         foo_topic = self.folder[self.folder.invokeFactory(
             type_name='Topic', id='foo-topic-title',
             title='Foo Topic Title')]
+        self.loginAsPortalOwner()
         self.portal.portal_workflow.doActionFor(foo_topic, 'publish')
         self.login()
 

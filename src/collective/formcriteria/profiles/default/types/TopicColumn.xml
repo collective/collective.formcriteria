@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <object name="TopicColumn"
-   meta_type="Factory-based Type Information"
+   meta_type="Factory-based Type Information with dynamic views"
    i18n:domain="plone" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title" i18n:translate="">Topic Column</property>
  <property name="description"
@@ -14,22 +14,18 @@
  <property name="filter_content_types">False</property>
  <property name="allowed_content_types"/>
  <property name="allow_discussion">False</property>
+ <property name="default_view">base_edit</property>
+ <alias from="(Default)" to="base_edit"/>
+ <alias from="view" to="base_edit"/>
  <alias from="edit" to="base_edit"/>
  <action title="View" action_id="view" category="object" condition_expr=""
-    url_expr="string:${object_url}/base_view" visible="True"
+    url_expr="string:${object_url}/base_edit" visible="False"
     i18n:attributes="title">
-  <permission value="View"/>
+  <permission value="Modify portal content"/>
  </action>
  <action title="Edit" action_id="edit" category="object" condition_expr=""
     url_expr="string:${object_url}/base_edit" visible="True"
     i18n:attributes="title">
   <permission value="Modify portal content"/>
- </action>
- <action title="References" action_id="references" category="object"
-    condition_expr="object/archetype_tool/has_graphviz"
-    url_expr="string:${object_url}/reference_graph" visible="False"
-    i18n:attributes="title">
-  <permission value="Modify portal content"/>
-  <permission value="Review portal content"/>
  </action>
 </object>

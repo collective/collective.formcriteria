@@ -4,6 +4,9 @@ Changelog
 2.0a5 - Unreleased
 ------------------
 
+* Added a rudimentary UI for managing collection columns.
+  [rossp]
+
 2.0a4 - 2011-01-11
 ------------------
 

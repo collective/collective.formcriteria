@@ -1,5 +1,6 @@
 from zope import interface
 
+from Products.CMFCore.utils import getToolByName
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import schemata
 from Products.ATContentTypes import criteria
@@ -68,6 +69,11 @@ class FormCriterion(object):
                 format='checkbox')),))
 
     makeFormKey = form.makeFormKey
+
+    def Title(self):
+        """Retrieve the title from the ATCT configuration"""
+        return getToolByName(self, 'portal_atct').getFriendlyName(
+            self.Field())
 
     def getFormFieldValue(self, field_name, raw=False, REQUEST=None,
                           **kw):

@@ -104,14 +104,15 @@ class Topic(topic.ATTopic):
         """Return a list of our query criteria objects.
         """
         return [val for val in self.listCriteria() if not
-                atct_ifaces.IATTopicSortCriterion.isImplementedBy(
+                atct_ifaces.IATTopicSortCriterion.providedBy(
                     val)]
 
     def listQueryCriteriaVocab(self):
         """Return a list of fields for which this topic has query
         criteria."""
-        return [(crit.Field(), crit) for crit in
-                self.listQueryCriteria()]
+        return [('', '')] + [
+            (crit.Field(), crit.Title())
+            for crit in self.listQueryCriteria()]
 
     def listSortCriteria(self):
         """Return a list of our sort criteria objects.
@@ -127,8 +128,9 @@ class Topic(topic.ATTopic):
     def listSortCriteriaVocab(self):
         """Return a list of fields for which this topic has sort
         criteria."""
-        return [(crit.Field(), crit) for crit in
-                self.listSortCriteria()]
+        return [('', '')] + [
+            (crit.Field(), crit.Title())
+            for crit in self.listSortCriteria()]
 
     def getFriendlyName(self, index):
         """Get the friendly name for an index from the tool"""

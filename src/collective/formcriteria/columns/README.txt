@@ -107,6 +107,25 @@ form.
     Traceback (most recent call last):
     LookupError: label 'Table Column Sums'
 
-A column can be added through the browser.  TODO
+Columns can be managed through the browser.
 
     >>> browser.getLink('Columns').click()
+    >>> browser.getLink('Topic Column').click()
+    >>> browser.getControl('Field').getControl(
+    ...     'Creation Date').selected = True
+    >>> browser.getControl('Sort Criterion').getControl(
+    ...     'Modification Date').selected = True
+    >>> browser.getControl('Filter Criterion').getControl(
+    ...     'Modification Date').selected = True
+    >>> browser.getControl('Save').click()
+    >>> print browser.contents
+    <...
+    ...Changes saved...
+
+The tabs when viewing a column are sensible and behave properly.
+
+    >>> TODO
+
+A user is prompted to log in when directly accessing a column's edit link.
+
+    >>> TODO
