@@ -79,6 +79,7 @@ class TopicLayer(tcl_ptc.BasePTCLayer):
     """Add a simple topic"""
 
     def afterSetUp(self):
+        self.login()
         foo_topic = self.folder[self.folder.invokeFactory(
             type_name='Topic', id='foo-topic-title',
             title='Foo Topic Title')]
