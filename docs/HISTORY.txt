@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0a5 - Unreleased
+2.0b1 - 2011-01-11
 ------------------
 
 * Added a rudimentary UI for managing collection columns.
