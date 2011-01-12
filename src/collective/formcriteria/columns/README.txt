@@ -107,9 +107,17 @@ form.
     Traceback (most recent call last):
     LookupError: label 'Table Column Sums'
 
-Columns can be managed through the browser.
+Column order can be managed through the browser.
 
     >>> browser.getLink('Columns').click()
+    >>> print browser.contents
+    <...
+    <tr class="draggable odd"
+    id="folder-contents-item-getPath-column">
+    ...
+
+Columns can be added through the browser.
+
     >>> browser.getLink('Topic Column').click()
     >>> browser.getControl('Field').getControl(
     ...     'Creation Date').selected = True
@@ -122,7 +130,14 @@ Columns can be managed through the browser.
     <...
     ...Changes saved...
 
-The tabs when viewing a column are sensible and behave properly.
+When managing the columns tabs are available for editing the
+collection, managing the criteria, and returning to view the topic.
+
+    >>> TODO
+
+The tabs when managing a column are sensible and behave properly.
+Tabs are also available for editing the collection, managing the
+criteria, and returning to view the topic.
 
     >>> TODO
 

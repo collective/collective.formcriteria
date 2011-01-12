@@ -9,7 +9,7 @@ from collective.formcriteria import contained
 
 
 class TopicColumns(contained.NonRefCatalogMixin,
-                  atapi.BaseFolder):
+                  atapi.OrderedBaseFolder):
     """Contains folder_contents table columns"""
 
     security = ClassSecurityInfo()
