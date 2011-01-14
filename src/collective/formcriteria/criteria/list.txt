@@ -49,7 +49,7 @@ for the field with the default values selected.
 By default the criterion values determine the search results.
 
     >>> browser.getLink('Bar Document Title')
-    <Link text='Bar Document Title'
+    <Link text='...Bar Document Title'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
     >>> browser.getLink('Baz Event Title')
     Traceback (most recent call last):
@@ -79,7 +79,7 @@ Now the default has been overriden by the submitted query.
     Traceback (most recent call last):
     LinkNotFoundError
     >>> browser.getLink('Baz Event Title')
-    <Link text='Baz Event Title'
+    <Link text='...Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
 
 The operator may also be included on the form.
@@ -100,10 +100,10 @@ Use the default "or" search, and query on "bah" and "qux"
 Both objects are returned when since both have "qux".
 
     >>> browser.getLink('Bar Document Title')
-    <Link text='Bar Document Title'
+    <Link text='...Bar Document Title'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
     >>> browser.getLink('Baz Event Title')
-    <Link text='Baz Event Title'
+    <Link text='...Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
 
 Use the "and" and search operator with the same query.
@@ -120,7 +120,7 @@ Use the "and" and search operator with the same query.
 Now only the object with both "bah" and "qux" is returned.
 
     >>> browser.getLink('Bar Document Title')
-    <Link text='Bar Document Title'
+    <Link text='...Bar Document Title'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
     >>> browser.getLink('Baz Event Title')
     Traceback (most recent call last):

@@ -250,7 +250,7 @@ one of the content objects.
 
     >>> anon_browser.open(foo_topic.absolute_url()+'/atct_topic_view')
     >>> anon_browser.getLink('Bar Document Title')
-    <Link text='Bar Document Title'
+    <Link text='...Bar Document Title'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
     >>> anon_browser.getLink('Baz Event Title')
     Traceback (most recent call last):
@@ -288,7 +288,7 @@ other content object.
     Traceback (most recent call last):
     LinkNotFoundError
     >>> anon_browser.getLink('Baz Event Title')
-    <Link text='Baz Event Title'
+    <Link text='...Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
 
 Since the search form has been submitted, the results are rendered on
@@ -328,7 +328,7 @@ listed in "Form Fields".
     ...     '?form_crit__SearchableText_FormSimpleStringCriterion'
     ...     '_value=baz')
     >>> anon_browser.getLink('Bar Document Title')
-    <Link text='Bar Document Title'
+    <Link text='...Bar Document Title'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
     >>> anon_browser.getLink('Baz Event Title')
     Traceback (most recent call last):

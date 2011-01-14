@@ -59,7 +59,7 @@ rendered for the field with the default values selected.
 By default the criterion values determine the search results.
 
     >>> browser.getLink('Bar Document Title')
-    <Link text='Bar Document Title'
+    <Link text='...Bar Document Title'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
     >>> browser.getLink('Baz Event Title')
     Traceback (most recent call last):
@@ -77,7 +77,7 @@ Now the default has been overriden by the submitted query.
     Traceback (most recent call last):
     LinkNotFoundError
     >>> browser.getLink('Baz Event Title')
-    <Link text='Baz Event Title'
+    <Link text='...Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
 
 If no value is set, all results should be returned.
@@ -87,8 +87,8 @@ If no value is set, all results should be returned.
     >>> form = browser.getForm(name="formcriteria_search")
     >>> form.getControl(name='submit').click()
     >>> browser.getLink('Bar Document Title')
-    <Link text='Bar Document Title'
+    <Link text='...Bar Document Title'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
     >>> browser.getLink('Baz Event Title')
-    <Link text='Baz Event Title'
+    <Link text='...Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>

@@ -124,7 +124,7 @@ marked as required on the search form.
 By default the criterion values determine the search results.
 
     >>> browser.getLink('Bar Document Title')
-    <Link text='Bar Document Title'
+    <Link text='...Bar Document Title'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
     >>> browser.getLink('Baz Event Title')
     Traceback (most recent call last):
@@ -158,7 +158,7 @@ Now the default has been overriden by the submitted query.
     Traceback (most recent call last):
     LinkNotFoundError
     >>> browser.getLink('Baz Event Title')
-    <Link text='Baz Event Title'
+    <Link text='...Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
 
 The widget helper JavaScript and CSS will also be included when the
@@ -272,9 +272,9 @@ Enter form values for all the criteria and submit the search.
     >>> form.getControl(name='submit').click()
     >>> print browser.contents
     <...
-                        Foo Topic Title
-                    </h1>
-    ...
+                    <h1...
+                        Foo Topic Title...
+                    </h1>...
 
 The submitted search terms are selected in the widgets.
 
@@ -334,7 +334,7 @@ The submitted search terms are selected in the widgets.
 The search results include all items.
 
     >>> browser.getLink('Foo Event Title')
-    <Link text='Foo Event Title'
+    <Link text='...Foo Event Title'
     url='http://nohost/plone/Members/test_user_1_/foo-event-title'>
 
 Batching page links also work.
@@ -342,23 +342,23 @@ Batching page links also work.
     >>> form = browser.getForm(name="navigation_form")
     >>> form.getControl(name="b_start", index=0).click()
     >>> browser.getLink('Baz Event Title')
-    <Link text='Baz Event Title'
+    <Link text='...Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
 
     >>> form = browser.getForm(name="navigation_form")
     >>> form.getControl(name="b_start", index=0).click()
     >>> browser.getLink('Foo Event Title')
-    <Link text='Foo Event Title'
+    <Link text='...Foo Event Title'
     url='http://nohost/plone/Members/test_user_1_/foo-event-title'>
 
     >>> form = browser.getForm(name="navigation_form")
     >>> form.getControl(name="b_start", index=1).click()
     >>> browser.getLink('Baz Event Title')
-    <Link text='Baz Event Title'
+    <Link text='...Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
 
     >>> form = browser.getForm(name="navigation_form")
     >>> form.getControl(name="b_start", index=1).click()
     >>> browser.getLink('Foo Event Title')
-    <Link text='Foo Event Title'
+    <Link text='...Foo Event Title'
     url='http://nohost/plone/Members/test_user_1_/foo-event-title'>

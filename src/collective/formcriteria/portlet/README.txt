@@ -95,6 +95,7 @@ with the folder_listing template.
                             <span class="summary">
     ...
                                 <a href="http://nohost/plone/Members/test_user_1_/baz-event-title" class="contenttype-event state-published url">
+    ...
                                 Baz Event Title
                                 </a>
                             </span>
@@ -117,7 +118,7 @@ with the folder_listing template.
 Link items render links to the remoteUrl.
 
     >>> owner_browser.getLink('Qux Link Title', index=1)
-    <Link text='Qux Link Title' url='http://foo.com'>
+    <Link text='...Qux Link Title' url='http://foo.com'>
 
 The navigation portlet has also been overridden with one which supports
 linking directly to the remoteUrl.
@@ -131,7 +132,12 @@ linking directly to the remoteUrl.
     >>> self.logout()
 
     >>> owner_browser.open(folder.absolute_url())
-    >>> owner_browser.getLink('Qux Link Title', index=1)
+    >>> from Products.CMFPlone.utils import getFSVersionTuple
+    >>> BBB = getFSVersionTuple()[0] < 4
+    >>> if BBB:
+    ...     owner_browser.getLink('Qux Link Title', index=0)
+    ... else:
+    ...     owner_browser.getLink('Qux Link Title', index=1)
     <Link text='...Qux Link Title' url='http://foo.com'>
     >>> owner_browser.getLink('Qux Link Title', index=2)
     <Link text='...Qux Link Title' url='http://foo.com'>

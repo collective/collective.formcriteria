@@ -64,10 +64,10 @@ listed.
 
     >>> browser.open(bar_document.absolute_url())
     >>> browser.getLink('Bar Document Title')
-    <Link text='Bar Document Title'
+    <Link text='...Bar Document Title'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
     >>> browser.getLink('Baz Event Title')
-    <Link text='Baz Event Title'
+    <Link text='...Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
 
 View another context with different subjects/keywords/categories.  Now

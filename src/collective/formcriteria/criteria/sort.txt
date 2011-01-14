@@ -100,7 +100,7 @@ links also have id's and CSS classes for styling support.
 The results are listed in order of weight.
 
     >>> browser.getLink('Baz Event Title')
-    <Link text='Baz Event Title'
+    <Link text='...Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
     >>> browser.getLink('Bar Document Title')
     Traceback (most recent call last):
