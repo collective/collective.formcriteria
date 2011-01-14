@@ -1,5 +1,6 @@
 <configure
    xmlns="http://namespaces.zope.org/zope"
+   xmlns:zcml="http://namespaces.zope.org/zcml"
    xmlns:browser="http://namespaces.zope.org/browser"
    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
    i18n_domain="collective.formcriteria">
@@ -13,10 +14,19 @@
 
   <!-- Folder contents -->
   <browser:page
+     zcml:condition="installed plone.app.upgrade.v40"
      for=".content.TopicColumns"
      class=".form.FolderContentsView"
      name="folder_contents"
      template="folder_contents.pt"
+     permission="cmf.ListFolderContents" />
+  <!-- BBB Plone 3 compat -->
+  <browser:page
+     zcml:condition="not-installed plone.app.upgrade.v40"
+     for=".content.TopicColumns"
+     class=".form.FolderContentsView"
+     name="folder_contents"
+     template="BBB-folder_contents.pt"
      permission="cmf.ListFolderContents" />
   
   <browser:page

@@ -103,9 +103,13 @@ class Topic(topic.ATTopic):
     def listQueryCriteria(self):
         """Return a list of our query criteria objects.
         """
-        return [val for val in self.listCriteria() if not
-                atct_ifaces.IATTopicSortCriterion.providedBy(
-                    val)]
+        providedBy = getattr(
+            atct_ifaces.IATTopicSortCriterion, 'providedBy', None)
+        if providedBy is None:
+            # BBB Plone 3
+            providedBy = (
+                atct_ifaces.IATTopicSortCriterion.isImplementedBy)
+        return [val for val in self.listCriteria() if not providedBy(val)]
 
     def listQueryCriteriaVocab(self):
         """Return a list of fields for which this topic has query

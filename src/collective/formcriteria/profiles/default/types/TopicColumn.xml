@@ -21,7 +21,10 @@
  <action title="View" action_id="view" category="object" condition_expr=""
     url_expr="string:${object_url}/base_edit" visible="False"
     i18n:attributes="title">
-  <permission value="Modify portal content"/>
+  <!-- BBB For some reason Plone 3 action info when checking the
+       template ID are missing the context so the permission check
+       happens on the portal -->
+  <permission value="View"/>
  </action>
  <action title="Edit" action_id="edit" category="object" condition_expr=""
     url_expr="string:${object_url}/base_edit" visible="True"

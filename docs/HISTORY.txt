@@ -4,6 +4,10 @@ Changelog
 2.0b2 - Unreleased
 ------------------
 
+* Retrofit some Plone 3 compatibility.  Plone 3 is un-supported in
+  version 2+.  The tests pass but the UI hasn't been checked so YMMV.
+  [rossp]
+
 2.0b1 - 2011-01-11
 ------------------
 

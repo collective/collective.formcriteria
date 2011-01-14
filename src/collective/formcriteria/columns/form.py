@@ -1,13 +1,58 @@
 import urllib
 
 from zope.component import getMultiAdapter
+from zope.component import queryMultiAdapter
 from zope.i18n import translate
+
+from plone.memoize import instance
 
 from Acquisition import aq_inner, aq_base
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
-from Products.CMFPlone.utils import pretty_title_or_id, isExpired
+from Products.CMFPlone.utils import pretty_title_or_id
+
+try:
+    from Products.CMFPlone.utils import isExpired
+    isExpired  # pyflakes
+except ImportError:
+
+    from DateTime import DateTime
+    from Products.CMFPlone.utils import base_hasattr
+    from Products.CMFPlone.utils import safe_callable
+
+    # BBB
+    def isExpired(content):
+        """ Find out if the object is expired (copied from skin script) """
+
+        expiry = None
+
+        # NOTE: We also accept catalog brains as 'content' so that the
+        # catalog-based folder_contents will work. It's a little
+        # magic, but it works.
+
+        # ExpirationDate should have an ISO date string, which we need to
+        # convert to a DateTime
+
+        # Try DC accessor first
+        if base_hasattr(content, 'ExpirationDate'):
+            expiry = content.ExpirationDate
+
+        # Try the direct way
+        if not expiry and base_hasattr(content, 'expires'):
+            expiry = content.expires
+
+        # See if we have a callable
+        if safe_callable(expiry):
+            expiry = expiry()
+
+        # Convert to DateTime if necessary, ExpirationDate may return 'None'
+        if expiry and expiry != 'None' and isinstance(expiry, basestring):
+            expiry = DateTime(expiry)
+
+        if isinstance(expiry, DateTime) and expiry.isPast():
+            return 1
+        return 0
 
 from plone.app.content.browser import foldercontents
 
@@ -21,8 +66,9 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
         context = aq_inner(self.context)
         plone_utils = getToolByName(context, 'plone_utils')
         plone_view = getMultiAdapter((context, self.request), name=u'plone')
-        plone_layout = getMultiAdapter(
-            (context, self.request), name=u'plone_layout')
+        plone_layout = queryMultiAdapter(
+            (context, self.request), name=u'plone_layout',
+            default=plone_view)
         portal_workflow = getToolByName(context, 'portal_workflow')
         portal_properties = getToolByName(context, 'portal_properties')
         portal_types = getToolByName(context, 'portal_types')
@@ -115,6 +161,14 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
                 is_expired=isExpired(obj),
             ))
         return results
+
+    # BBB Plone 3 compat
+    if hasattr(foldercontents.FolderContentsTable, 'items'):
+        @property
+        @instance.memoize
+        def items(self):
+            """BBB alias"""
+            return self.folderitems()
 
 
 class FolderContentsView(foldercontents.FolderContentsView):
