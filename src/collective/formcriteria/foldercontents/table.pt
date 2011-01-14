@@ -46,7 +46,7 @@
         <tr tal:condition="python: batch.next or  batch.previous or ids">
           <th colspan="6" class="nosort"
               tal:attributes="colspan colspan;">
-            <div metal:use-macro="context/batch_macros/macros/navigationInner" />
+            <div metal:use-macro="context/form_batch_macros/macros/navigationInner" />
           </th>
         </tr>
         <tr tal:condition="python:view.buttons and not view.selectcurrentbatch">
@@ -195,7 +195,7 @@
         <tr tal:condition="python: batch.next or  batch.previous or ids">
           <th colspan="6" class="nosort"
               tal:attributes="colspan colspan;">
-            <div metal:use-macro="context/batch_macros/macros/navigationInner" />
+            <div metal:use-macro="context/form_batch_macros/macros/navigationInner" />
           </th>
         </tr>
       </tfoot>
