@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0b2 - Unreleased
+2.0b2 - 2011-01-13
 ------------------
 
 * Retrofit some Plone 3 compatibility.  Plone 3 is un-supported in
