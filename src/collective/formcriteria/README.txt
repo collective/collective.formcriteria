@@ -335,6 +335,24 @@ listed in "Form Fields".
     LinkNotFoundError
     >>> crit.setFormFields(['value'])
 
+The search form handles index query parsing errors gracefully
+displaying a message to the user.
+
+    >>> anon_browser.open(foo_topic.absolute_url())
+    >>> form = anon_browser.getForm(name="formcriteria_search")
+    >>> ctl = form.getControl('Search Text')
+    >>> ctl.value = 'bar (baz)'
+    >>> form.getControl(name='submit').click()
+    >>> print anon_browser.contents
+    <...
+    There are currently no results for this search...
+    >>> anon_browser.getLink('Bar Document Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+    >>> anon_browser.getLink('Baz Event Title')
+    Traceback (most recent call last):
+    LinkNotFoundError
+
 The search form portlet successfully renders when viewed on a context
 other than the portlet.
 

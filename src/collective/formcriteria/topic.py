@@ -1,6 +1,8 @@
 from zope import interface
 
 import AccessControl
+from Products.ZCatalog.Lazy import LazyCat
+from Products.ZCTextIndex.ParseTree import ParseError
 
 from Products.Archetypes import atapi
 from Products.ATContentTypes import interfaces as atct_ifaces
@@ -158,5 +160,17 @@ class Topic(topic.ATTopic):
             return [
                 column.Field() for column in columns.contentValues()]
         return columns
+
+    def queryCatalog(self, *args, **kw):
+        """
+        Gracefully handle index query parsing errors.
+
+        Such as those raised by text index queries containing '('.
+        """
+        try:
+            return super(Topic, self).queryCatalog(*args, **kw)
+        except ParseError:
+            return LazyCat([[]])
+
 
 atapi.registerType(Topic, 'collective.formcriteria')

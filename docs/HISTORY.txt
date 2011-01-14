@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.0b3 - 2011-01-14
+------------------
+
+* Handle catalog index ParseErrors gracefully.  Thanks to Larry
+  Pitcher for the report.
+  [rossp]
+
 2.0b2 - 2011-01-13
 ------------------
 
