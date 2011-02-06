@@ -3,7 +3,7 @@ import os
 
 version = '2.0b3'
 
-tests_require = ['collective.testcaselayer>=1.3',
+tests_require = ['collective.testcaselayer>=1.4',
                  'collective.monkeypatcher',
                  'zope.testbrowser>3.3']
 

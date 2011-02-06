@@ -133,23 +133,13 @@ By default the criterion values determine the search results.
 Change the date range and search.  Simulate the effect of the
 JavaScript by also changing the value of the hidden inputs.
 
-    >>> form.getControl(
-    ... name='form_crit__effective_FormDateRangeCriterion_start_day'
-    ...     ).getControl(
-    ...         value=str((effective_start+2).day()).zfill(2)).selected = True
-    >>> form.getControl(
-    ...     name='form_crit__effective_FormDateRangeCriterion_start'
-    ...     ).value = str(effective_start+2)
-
-    >>> form.getControl(
-    ...     name='form_crit__effective_FormDateRangeCriterion_end_day'
-    ...     ).getControl(
-    ...         value=str((effective_end+2).day()).zfill(2)).selected = True
-    >>> form.getControl(
-    ...     name='form_crit__effective_FormDateRangeCriterion_end'
-    ...     ).value = str(effective_end+2)
- 
-    >>> form = browser.getForm(name="formcriteria_search")
+    >>> from collective.testcaselayer import testbrowser
+    >>> ignored = testbrowser.setATDateWidget(
+    ...     form, effective_start + 2,
+    ...     'crit__effective_FormDateRangeCriterion_start')
+    >>> ignored = testbrowser.setATDateWidget(
+    ...     form, effective_end + 2,
+    ...     'crit__effective_FormDateRangeCriterion_end')
     >>> form.getControl(name='submit').click()
 
 Now the default has been overriden by the submitted query.
@@ -235,40 +225,12 @@ Enter form values for all the criteria and submit the search.
     >>> form = browser.getForm(name="formcriteria_search")
     >>> for crit in foo_topic.listSearchCriteria():
     ...     field = crit.Field()
-    ...     form.getControl(
-    ...         name=
-    ...         'form_crit__%s_FormDateRangeCriterion_start_year' % field
-    ...         ).getControl(str((now-365).year())).selected = True
-    ...     form.getControl(
-    ...         name=
-    ...         'form_crit__%s_FormDateRangeCriterion_start_month' % field
-    ...         ).getControl((now-365).Month()).selected = True
-    ...     form.getControl(
-    ...         name=
-    ...         'form_crit__%s_FormDateRangeCriterion_start_day' % field
-    ...         ).getControl(
-    ...             value=str((now-365).day()).zfill(2)).selected = True
-    ...     form.getControl(
-    ...         name=
-    ...         'form_crit__%s_FormDateRangeCriterion_start' % field
-    ...         ).value = str(now-365)
-    ...     form.getControl(
-    ...         name=
-    ...         'form_crit__%s_FormDateRangeCriterion_end_year' % field
-    ...         ).getControl(str((now+365).year())).selected = True
-    ...     form.getControl(
-    ...         name=
-    ...         'form_crit__%s_FormDateRangeCriterion_end_month' % field
-    ...         ).getControl((now+365).Month()).selected = True
-    ...     form.getControl(
-    ...         name=
-    ...         'form_crit__%s_FormDateRangeCriterion_end_day' % field
-    ...         ).getControl(
-    ...             value=str((now+365).day()).zfill(2)).selected = True
-    ...     form.getControl(
-    ...         name=
-    ...         'form_crit__%s_FormDateRangeCriterion_end' % field
-    ...         ).value = str(now+365)
+    ...     ignored = testbrowser.setATDateWidget(
+    ...         form, now - 365,
+    ...         'crit__%s_FormDateRangeCriterion_start' % field)
+    ...     ignored = testbrowser.setATDateWidget(
+    ...         form, now + 365,
+    ...         'crit__%s_FormDateRangeCriterion_end' % field)
     >>> form.getControl(name='submit').click()
     >>> print browser.contents
     <...
