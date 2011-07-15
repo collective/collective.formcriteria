@@ -1,5 +1,5 @@
 <tal:define define="fields view/fields;
-                    portal portal|context/portal_url/getPortalObject;">
+                    portal nocall:portal|context/portal_url/getPortalObject;">
 <metal:block use-macro="here/global_defines/macros/defines" />
 
   <tal:block define="macro context/archetypes_custom_js/macros/javascript_head | nothing"
