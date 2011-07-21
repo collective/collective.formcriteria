@@ -208,8 +208,6 @@ present.
     >>> anon_browser.getForm(name="formcriteria_search")
     Traceback (most recent call last):
     LookupError
-    >>> 'formcriteria-portlet.css' in anon_browser.contents
-    False
 
 Add a simple string criterion for the SearchableText index on the
 criteria tab.
