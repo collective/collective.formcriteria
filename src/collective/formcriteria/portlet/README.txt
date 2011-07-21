@@ -94,9 +94,7 @@ with the folder_listing template.
                 <dt class="vevent">
                             <span class="summary">
     ...
-                                <a href="http://nohost/plone/Members/test_user_1_/baz-event-title" class="contenttype-event state-published url">...
-                                Baz Event Title
-                                </a>
+                                <a href="http://nohost/plone/Members/test_user_1_/baz-event-title" class="contenttype-event state-published url">Baz Event Title</a>
                             </span>
                             <span class="documentByLine">
                                 <span>

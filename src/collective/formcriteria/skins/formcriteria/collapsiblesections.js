@@ -1,14 +1,14 @@
 /*
  * This is the code for the collapsibles. It uses the following markup:
  *
- * <... class="collapsible">
- *   <... class="collapsibleHeader">
+ * <dl class="collapsible">
+ *   <dt class="collapsibleHeader">
  *     A Title
- *   </...>
- *   <... class="collapsibleContent">
+ *   </dt>
+ *   <dd class="collapsibleContent">
  *     <!-- Here can be any content you want -->
- *   </...>
- * </...>
+ *   </dd>
+ * </dl>
  *
  * When the collapsible is toggled, then the dl will get an additional class
  * which switches between 'collapsedBlockCollapsible' and
@@ -34,8 +34,9 @@
  */
 
 function activateCollapsibles() {
-    jq('.collapsible:not([class$=Collapsible])').find('.collapsibleHeader:first').click(function() {
-        var $container = jq(this).parents('.collapsible:first');
+(function($) {
+    $('.collapsible:not([class$=Collapsible])').find('.collapsibleHeader:first').click(function() {
+        var $container = $(this).parents('.collapsible:first');
         if (!$container) return true;
 
         var $type = $container.hasClass('inline') ? 'Inline' :'Block';
@@ -43,11 +44,15 @@ function activateCollapsibles() {
         $container.toggleClass('collapsed' + $type + 'Collapsible')
                   .toggleClass('expanded' + $type + 'Collapsible');
     }).end().each(function() {
-        var $state = jq(this).hasClass('collapsedOnLoad') ?
+        var $state = $(this).hasClass('collapsedOnLoad') ?
                      'collapsed' : 'expanded';
-        var $type = jq(this).hasClass('inline') ? 'Inline' :'Block';
-        jq(this).removeClass('collapsedOnLoad')
+        var $type = $(this).hasClass('inline') ? 'Inline' :'Block';
+        $(this).removeClass('collapsedOnLoad')
                .addClass($state + $type + 'Collapsible');
     });
+})(jQuery);
 };
-jq(activateCollapsibles);
+
+(function($) {
+$(activateCollapsibles);
+})(jQuery);

@@ -22,8 +22,8 @@
                          text python:has_text and context.getText() or ''"
              tal:condition="text"
              tal:attributes="class python:test(context.Format() in ('text/structured',
-                                                   'text/x-rst', ), 'stx' + kss_class, 'plain' + kss_class)">
-            <div metal:define-slot="inside" tal:replace="structure text">The body</div>
+                             'text/x-rst', ), 'stx' + kss_class, 'plain' + kss_class)">
+          <div metal:define-slot="inside" tal:replace="structure text">The body</div>
         </div>
 
         <metal:listingmacro define-macro="listing">
@@ -72,12 +72,13 @@
                         tal:attributes="class python:test(item_type == 'Event', 'vevent', '')">
 
                         <span class="summary">
+                            <img tal:replace="structure item_icon/html_tag" />
                             <a href="#"
                                tal:define="remote_url item/getRemoteUrl|nothing;"
                                tal:attributes="href python:item_type in use_remote_url and remote_url or test(item_type in use_view_action, item_url+'/view', item_url);
-                                               class string:$item_type_class $item_wf_state_class url">
-                            <img tal:replace="structure item_icon/html_tag" />
-                            <tal:title content="item_title_or_id">Item Title</tal:title>
+                                               class string:$item_type_class $item_wf_state_class url"
+                               tal:content="item_title_or_id">
+                              Item Title
                             </a>
                         </span>
 
