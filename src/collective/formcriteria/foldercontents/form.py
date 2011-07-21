@@ -1,4 +1,3 @@
-import os
 import urllib
 
 from zope.component import getMultiAdapter
