@@ -97,14 +97,9 @@ with the folder_listing template.
                                 <a href="http://nohost/plone/Members/test_user_1_/baz-event-title" class="contenttype-event state-published url">Baz Event Title</a>
                             </span>
                             <span class="documentByLine">
-                                <span>
-                                     <abbr class="dtstart" title="...">...</abbr>
-                                </span>
+                                <span>...<abbr class="dtstart" title="...">...</abbr>...</span>
                                     &mdash;
-                                      <span>
-                                        by
-                                      ...bar_creator_id...
-                                      </span>
+                                      <span>...by...bar_creator_id...</span>
                             </span>
                         </dt>
                         <dd>

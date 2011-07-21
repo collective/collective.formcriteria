@@ -53,7 +53,7 @@ either the table head or foot.
     <...
           <thead...
             <tr>
-              <th class="nosort">&#160;</th>
+              <th class="nosort"...>&#160;</th>
               <th class="nosort noSortColumn"
                   id="foldercontents-Title-column">
                     &#160;
@@ -100,34 +100,34 @@ foot.
     <...
           <thead...
             <tr>
-              <th class="nosort">&#160;</th>
-              <th class="nosort noSortColumn"
-                  id="foldercontents-Title-column">
+                <th class="nosort"...>&#160;</th>
+                  <th class="nosort noSortColumn"
+                      id="foldercontents-Title-column">
                     &#160;
                     Title
                     &#160;
                   </th>
-              <th class="nosort noSortColumn"
-                  id="foldercontents-get_size-column">
+                  <th class="nosort noSortColumn"
+                      id="foldercontents-get_size-column">
                     &#160;
                     Size
                     &#160;
                   </th>
-              <th class="nosort noSortColumn"
-                  id="foldercontents-ModificationDate-column">
+                  <th class="nosort noSortColumn"
+                      id="foldercontents-ModificationDate-column">
                     &#160;
                     Modification Date
                     &#160;
                   </th>
-              <th class="nosort noSortColumn"
-                  id="foldercontents-review_state-column">
+                  <th class="nosort noSortColumn"
+                      id="foldercontents-review_state-column">
                     &#160;
                     State
                     &#160;
                   </th>
             </tr>
             <tr>
-                <th class="nosort">&#160;Total&#160;</th>
+                <th class="nosort"...>&#160;Total&#160;</th>
                 <th class="nosort columnSum">
                   &#160;
                 </th>
@@ -145,7 +145,7 @@ foot.
             </tr>...
           <tfoot>
             <tr>
-                <th class="nosort">&#160;Total&#160;</th>
+                <th class="nosort"...>&#160;Total&#160;</th>
                 <th class="nosort columnSum">
                   &#160;
                 </th>

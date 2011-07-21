@@ -342,8 +342,7 @@ displaying a message to the user.
     >>> ctl.value = 'bar (baz)'
     >>> form.getControl(name='submit').click()
     >>> print anon_browser.contents
-    <...
-    There are currently no results for this search...
+    <...There are currently no results for this search...
     >>> anon_browser.getLink('Bar Document Title')
     Traceback (most recent call last):
     LinkNotFoundError

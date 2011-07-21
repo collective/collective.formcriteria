@@ -303,7 +303,7 @@ not be rendered.
     <...
           <thead...
             <tr>
-                <th class="nosort">&#160;</th>
+                <th class="nosort"...>&#160;</th>
                 <th class="nosort sortColumn"
                     id="foldercontents-sortable_title-column">
                       &#160;
