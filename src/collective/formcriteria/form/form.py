@@ -26,7 +26,7 @@ class SearchFormView(object):
     @view.memoize
     def criteriaFields(self):
         criteria = {}
-        fields = []
+        fields = set()
 
         for criterion in self.formCriteria():
             field = criterion.Field()
@@ -40,7 +40,7 @@ class SearchFormView(object):
                 crit_fields.append(new_field)
 
             crit_id = criterion.getId()
-            fields.append(field)
+            fields.add(field)
             criteria[field] = {
                 'id': crit_id,
                 'field': field,
@@ -68,12 +68,17 @@ class SearchFormHeadView(SearchFormView):
 
     @view.memoize
     def formCriteria(self):
-        results = []
+        collections = [
+            portlet.collection() for portlet in self.portlets()]
         if interfaces.IFormTopic.providedBy(self.context):
-            results.extend(self.getFormCriteria(self.context))
-        for portlet in self.portlets():
-            results.extend(self.getFormCriteria(portlet.collection()))
-        return results
+            collections.append(self.context)
+
+        results = {}
+        for collection in collections:
+            results.update(
+                (crit.getPhysicalPath(), crit)
+                for crit in self.getFormCriteria(collection))
+        return results.values()
 
     @view.memoize
     def portlets(self):
