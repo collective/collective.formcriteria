@@ -4,6 +4,9 @@ Changelog
 2.0b3 - Unreleased
 ------------------
 
+* Update chameleon compatibility to the new 2.x branch.
+  [rossp]
+
 * Optimize and improve performancde.
   [rossp]
 
