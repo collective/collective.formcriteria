@@ -14,14 +14,17 @@ def makeFormKey(self, crit_id, field_name):
 
 class SearchFormView(object):
 
-    def getFormCriteria(self, collection):
-        return (
-            criterion for criterion in collection.listCriteria()
-            if getattr(criterion, 'getFormFields', lambda: False)())
+    def collections(self):
+        yield self.context
 
-    @view.memoize
     def formCriteria(self):
-        return list(self.getFormCriteria(self.context))
+        results = {}
+        for collection in self.collections():
+            results.update(
+                (crit.getPhysicalPath(), crit)
+                for crit in collection.listCriteria()
+                if getattr(crit, 'getFormFields', lambda: False)())
+        return results.values()
 
     @view.memoize
     def criteriaFields(self):
@@ -66,21 +69,12 @@ class SearchFormHeadView(SearchFormView):
             return super(SearchFormHeadView, self).render()
         return u''
 
-    @view.memoize
-    def formCriteria(self):
-        collections = [
-            portlet.collection() for portlet in self.portlets()]
+    def collections(self):
+        for portlet in self.portlets():
+            yield portlet.collection() 
         if interfaces.IFormTopic.providedBy(self.context):
-            collections.append(self.context)
+            yield self.context
 
-        results = {}
-        for collection in collections:
-            results.update(
-                (crit.getPhysicalPath(), crit)
-                for crit in self.getFormCriteria(collection))
-        return results.values()
-
-    @view.memoize
     def portlets(self):
         results = []
         for _, manager in component.getUtilitiesFor(
