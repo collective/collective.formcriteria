@@ -4,6 +4,15 @@ Changelog
 2.0b3 - Unreleased
 ------------------
 
+* Optimize and improve performancde.
+  [rossp]
+
+* Various upstream template updates.
+  [rossp, topherh]
+
+* Add remote URL support to folder_summary_view.
+  [topherh]
+
 * Fix an issue with the permission protecting the Export action.
   [rossp]
 
