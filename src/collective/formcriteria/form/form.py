@@ -14,17 +14,10 @@ def makeFormKey(self, crit_id, field_name):
 
 class SearchFormView(object):
 
-    def collections(self):
-        yield self.context
-
     def formCriteria(self):
-        results = {}
-        for collection in self.collections():
-            results.update(
-                (crit.getPhysicalPath(), crit)
-                for crit in collection.listCriteria()
-                if getattr(crit, 'getFormFields', lambda: False)())
-        return results.values()
+        return (
+            crit for crit in self.context.listCriteria()
+            if getattr(crit, 'getFormFields', lambda: False)())
 
     @view.memoize
     def criteriaFields(self):
@@ -62,7 +55,7 @@ class SearchFormView(object):
                           self.context.getFormLayout())
 
 
-class SearchFormHeadView(SearchFormView):
+class SearchFormHeadView(object):
 
     def render(self):
         if self.fields():
@@ -70,10 +63,13 @@ class SearchFormHeadView(SearchFormView):
         return u''
 
     def collections(self):
+        results = {}
         for portlet in self.portlets():
-            yield portlet.collection() 
+            collection = portlet.collection()
+            results[collection.getPhysicalPath()] = collection
         if interfaces.IFormTopic.providedBy(self.context):
-            yield self.context
+            results[self.context.getPhysicalPath()] = self.context
+        return results.values()
 
     def portlets(self):
         results = []
@@ -91,6 +87,9 @@ class SearchFormHeadView(SearchFormView):
     @view.memoize
     def fields(self):
         results = []
-        for criterion in self.criteriaFields()[1].values():
-            results.extend(criterion['fields'])
+        for collection in self.collections():
+            criteria_form = collection.restrictedTraverse('@@criteria_form')
+            criteria = criteria_form.criteriaFields()[1]
+            for criterion in criteria.values():
+                results.extend(criterion['fields'])
         return results
