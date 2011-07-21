@@ -19,7 +19,7 @@
         <span class="portletTopRight"></span>
       </dt>
 
-      <tal:criteria tal:define="criteriaFields python:form.criteriaFields();"
+      <tal:criteria tal:define="criteriaFields form/criteriaFields;"
                     tal:repeat="crit_field python:criteriaFields[0]">
         <tal:criterion tal:define="criterion python:criteriaFields[1][crit_field];">
           <dt class="portletItem">
