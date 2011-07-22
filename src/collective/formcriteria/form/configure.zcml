@@ -14,9 +14,20 @@
 
   <browser:viewlet
      layer="..interfaces.IFormCriteriaLayer"
-     name="collective.formcriteria.htmlhead"
      manager="plone.app.layout.viewlets.interfaces.IHtmlHeadLinks"
+     view="plone.app.layout.globals.interfaces.IViewView"
+     name="collective.formcriteria.htmlhead"
      class=".form.SearchFormHeadView"
+     template="form-htmlhead.pt"
+     permission="zope2.View" 
+     />
+
+  <browser:viewlet
+     layer="..interfaces.IFormCriteriaLayer"
+     manager="plone.app.layout.viewlets.interfaces.IHtmlHeadLinks"
+     view="plone.app.layout.dashboard.dashboard.DashboardView"
+     name="collective.formcriteria.htmlhead"
+     class=".form.SearchFormDashboardHeadView"
      template="form-htmlhead.pt"
      permission="zope2.View" 
      />

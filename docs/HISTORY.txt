@@ -4,6 +4,16 @@ Changelog
 2.0b3 - Unreleased
 ------------------
 
+* Restrict some of the search form portlet support to the left and
+  right column portlet managers on normal plone views, and
+  additionally to the 4 dashboard portlet managers on the dashboard
+  view for performance reasons.  This means if you want to use the
+  search form portlet in a manager for which these registrations don't
+  apply, you'll have to use your own registration like the
+  <browser:viewlet> registrations in
+  collective/formcriteria/form/configure.zcml.
+  [rossp]
+
 * Update chameleon compatibility to the new 2.x branch.
   [rossp]
 

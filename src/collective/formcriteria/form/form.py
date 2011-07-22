@@ -57,6 +57,8 @@ class SearchFormView(object):
 
 class SearchFormHeadView(object):
 
+    portlet_managers = ('plone.leftcolumn', 'plone.rightcolumn')
+
     def render(self):
         if self.fields():
             return super(SearchFormHeadView, self).render()
@@ -73,8 +75,9 @@ class SearchFormHeadView(object):
 
     def portlets(self):
         results = []
-        for _, manager in component.getUtilitiesFor(
-            portelts_ifaces.IPortletManager):
+        for name in self.portlet_managers:
+            manager = component.getUtility(
+                portelts_ifaces.IPortletManager, name=name)
             renderer = manager(
                 self.context, self.request, self._parent)
             if hasattr(renderer, 'portletsToShow'):
@@ -93,3 +96,10 @@ class SearchFormHeadView(object):
             for criterion in criteria.values():
                 results.extend(criterion['fields'])
         return results
+
+
+class SearchFormDashboardHeadView(SearchFormHeadView):
+
+    portlet_managers = SearchFormHeadView.portlet_managers + (
+        'plone.dashboard1', 'plone.dashboard2',
+        'plone.dashboard3', 'plone.dashboard4',) 
