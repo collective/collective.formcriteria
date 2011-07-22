@@ -44,7 +44,8 @@ setup(name='collective.formcriteria',
           'plone.browserlayer',
       ],
       tests_require=tests_require,
-      extras_require={'tests': tests_require},
+      extras_require={'tests': tests_require,
+                      'chameleon': 'five.pt>2.1.1'},
       entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]
