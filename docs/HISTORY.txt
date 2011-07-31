@@ -4,6 +4,10 @@ Changelog
 2.0b3 - Unreleased
 ------------------
 
+* Add missing form criteria support for the recurse field of path
+  criteria.
+  [rossp]
+
 * Restrict some of the search form portlet support to the left and
   right column portlet managers on normal plone views, and
   additionally to the 4 dashboard portlet managers on the dashboard

@@ -12,5 +12,8 @@ class FormRelativePathCriterion(
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['relativePath'], schema['recurse'])
 
+    def Recurse(self, **kw):
+        return self.getFormFieldValue('recurse', **kw)
+
 common.registerCriterion(FormRelativePathCriterion,
                          orig=relativepath.ATRelativePathCriterion)
