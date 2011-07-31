@@ -75,7 +75,8 @@ titles are links to the item.
     ...<span class="state-published">Published</span>...
     >>> from collective.formcriteria import testing
     >>> now = testing.content_layer.now
-    >>> now.ISO() in browser.contents
+    >>> str(portal.restrictedTraverse('@@plone').toLocalizedTime(now)
+    ...     ) in browser.contents
     True
 
     >>> browser.getControl('Bar Document Title')

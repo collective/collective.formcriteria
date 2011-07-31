@@ -5,6 +5,7 @@ from zope.i18n import translate
 
 from Acquisition import aq_inner
 from Missing import MV
+from DateTime.interfaces import IDateTime
 
 from Products.Five.browser import metaconfigure
 from Products.Five.browser import pagetemplatefile
@@ -208,6 +209,9 @@ class FolderContentsTable(foldercontents.FolderContentsTable):
                     value = econtext.evaluate(expr)
                     del econtext.vars['value']
                     del econtext.vars['item']
+
+                if IDateTime.providedBy(value):
+                    value = plone_view.toLocalizedTime(value, long_format=1)
 
                 columns[column['field']] = value
 
