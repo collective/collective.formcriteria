@@ -26,7 +26,6 @@ class FormPortalTypeCriterion(
     schema = portaltype.ATPortalTypeCriterion.schema.copy(
         ) + common.FormCriterion.schema.copy()
     schema['value'].widget.hide_form_label = True
-    schema['operator'].mode = 'r'
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'])
 

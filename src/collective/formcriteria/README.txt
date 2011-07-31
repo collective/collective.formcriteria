@@ -404,12 +404,7 @@ All criteria can also be created using poral_types.constructContent.
     'crit__Date_FormDateRangeCriterion'
     'crit__Type_FormPortalTypeCriterion'
     'crit__Type_FormPortalTypeCheckboxCriterion'
-    'crit__Type_FormPortalTypePulldownCriterion'
-    'crit__UID_FormBooleanCriterion'
-    'crit__UID_FormReferenceCheckboxCriterion'
-    'crit__UID_FormReferenceCriterion'
-    'crit__UID_FormReferencePulldownCriterion'
-    'crit__UID_FormSimpleIntCriterion'
+    'crit__Type_FormPortalTypePulldownCriterion'...
     'crit__path_FormPathCriterion'
     'crit__path_FormRelativePathCriterion'
 

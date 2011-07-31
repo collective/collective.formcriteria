@@ -73,7 +73,6 @@ class FormPortalTypePulldownCriterion(
     schema = portaltype.ATPortalTypeCriterion.schema.copy(
         ) + common.FormCriterion.schema.copy()
     schema.addField(field)
-    del schema['operator']
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'])
 
@@ -92,7 +91,6 @@ class FormReferencePulldownCriterion(
     schema = portaltype.ATPortalTypeCriterion.schema.copy(
         ) + common.FormCriterion.schema.copy()
     schema.addField(field)
-    del schema['operator']
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'])
 
