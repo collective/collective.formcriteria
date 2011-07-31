@@ -4,7 +4,6 @@
      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
      tal:define="sort_info context/@@sort_info/getSortInfo|nothing;"
      i18n:domain="plone">
-  <metal:block use-macro="context/global_defines/macros/defines" />
   <input type="hidden" name="sort_on"
          tal:attributes="value request/sort_on|sort_info/selected/field|string:getObjPositionInParent"
          />
