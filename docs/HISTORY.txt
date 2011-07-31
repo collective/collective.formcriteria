@@ -4,6 +4,9 @@ Changelog
 2.0b3 - Unreleased
 ------------------
 
+* Use localized format for DateTime column values.
+  [rossp]
+
 * Add missing form criteria support for the recurse field of path
   criteria.
   [rossp]
