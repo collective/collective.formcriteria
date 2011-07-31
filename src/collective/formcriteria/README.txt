@@ -88,7 +88,6 @@ Add and publish a collection.
     ...Changes saved...
     >>> foo_topic = folder['foo-topic-title']
 
-
     >>> browser.getLink('Submit').click()
     >>> print browser.contents
     <...
