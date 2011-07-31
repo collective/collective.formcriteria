@@ -10,6 +10,7 @@ Set the batch size to force batching.
 
     >>> foo_topic = self.folder['foo-topic-title']
     >>> foo_topic.update(itemCount=2)
+    >>> foo_topic.crit__path_FormRelativePathCriterion.setRecurse(False)
 
 Change the columns and link columns.
 

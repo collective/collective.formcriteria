@@ -129,6 +129,7 @@ class ContentsLayer(tcl_ptc.BasePTCLayer):
         foo_topic = self.folder['foo-topic-title']
         path_crit = foo_topic.addCriterion(
             'path', 'FormRelativePathCriterion')
+        path_crit.setRecurse(True)
         sort_crit = foo_topic.addCriterion(
             'getPhysicalPath', 'FormSortCriterion')
         foo_topic.setLayout('folder_contents')
