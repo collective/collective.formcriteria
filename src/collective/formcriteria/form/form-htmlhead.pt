@@ -11,7 +11,7 @@
     <script type="text/javascript"
             charset="iso-8859-1"
             tal:condition="python:exists('portal/%s' % item)"
-            tal:attributes="src string:$portal_url/$item">
+            tal:attributes="src string:${context/portal_url}/$item">
     </script>
   </tal:js>
   <tal:block define="macro edit_macros/javascript_head | nothing"
@@ -25,7 +25,7 @@
     <style type="text/css"
            media="all"
            tal:condition="python:exists('portal/%s' % item)"
-           tal:content="structure string:<!-- @import url($portal_url/$item); -->">
+           tal:content="structure string:<!-- @import url(${context/portal_url}/$item); -->">
     </style>
   </tal:css>
   <tal:block define="macro edit_macros/css | nothing"

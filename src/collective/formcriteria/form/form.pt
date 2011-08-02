@@ -8,12 +8,11 @@
   <body>
 
     <metal:main fill-slot="main">
-      <metal:document use-macro="context/document_view/macros/main" />
+      <metal:document use-macro="context/document_view/macros/content-core|context/document_view/macros/main" />
 
       <form action="."
             class="enableAutoFocus"
             method="post"
-            name="formcriteria_search"
             id="formcriteria_search"
             metal:define-macro="form"
             tal:attributes="action form/action;"

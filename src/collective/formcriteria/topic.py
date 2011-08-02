@@ -117,8 +117,13 @@ class Topic(topic.ATTopic):
     def listSortCriteria(self):
         """Return a list of our sort criteria objects.
         """
-        return [val for val in self.listCriteria() if
-                atct_ifaces.IATTopicSortCriterion.isImplementedBy(val)]
+        providedBy = getattr(
+            atct_ifaces.IATTopicSortCriterion, 'providedBy', None)
+        if providedBy is None:
+            # BBB Plone 3
+            providedBy = (
+                atct_ifaces.IATTopicSortCriterion.isImplementedBy)
+        return [val for val in self.listCriteria() if providedBy(val)]
 
     def getFriendlyName(self, index):
         """Get the friendly name for an index from the tool"""

@@ -5,7 +5,9 @@
 
 <metal:head fill-slot="javascript_head_slot">
 <tal:defines define="js python:here.getCriteriaUniqueWidgetAttr('helper_js');
-                     css python:here.getCriteriaUniqueWidgetAttr('helper_css');">
+                     css python:here.getCriteriaUniqueWidgetAttr('helper_css');
+					 portal python:context.portal_url.getPortalObject();
+                     portal_url context/portal_url;">
     <tal:css condition="css"
              repeat="item css">
       <style type="text/css"
