@@ -43,8 +43,8 @@
      template="comma.pt"
      permission="zope2.View" />
 
-  <include package=".foldercontents" />
-  <include package=".csv" />
+  <!--include package=".foldercontents" /-->
+  <!--include package=".csv" /-->
   
   <cmf:registerDirectory name="formcriteria"/>
 

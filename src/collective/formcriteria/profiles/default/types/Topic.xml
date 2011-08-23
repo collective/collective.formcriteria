@@ -4,7 +4,7 @@
    i18n:domain="plone" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title" i18n:translate="">Collection</property>
  <property name="description"
-     i18n:translate="">An automatically updated stored search that can be used to display items matching criteria you specify.</property>
+     i18n:translate="">An always-updated saved search that can be used to display items matching criteria you specify.</property>
  <property name="content_icon"></property>
  <property name="content_meta_type">Topic</property>
  <property name="product">collective.formcriteria</property>
@@ -12,20 +12,18 @@
  <property name="immediate_view">atct_topic_view</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
- <property name="allowed_content_types">
-  <element value="Topic"/>
- </property>
+ <property name="allowed_content_types"></property>
  <property name="allow_discussion">False</property>
  <property name="default_view">atct_topic_view</property>
  <property name="view_methods">
   <element value="folder_listing"/>
   <element value="folder_summary_view"/>
+  <element value="folder_full_view"/>
   <element value="folder_tabular_view"/>
   <element value="atct_album_view"/>
   <element value="atct_topic_view"/>
-  <element value="folder_contents"/>
   <element value="criteria_form"/>
-  <element value="grouped_listing"/>
+  <!--element value="grouped_listing"/-->
  </property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="atct_edit"/>
@@ -41,13 +39,6 @@
     i18n:attributes="title">
   <permission value="Change portal topics"/>
  </action>
- <action title="References" action_id="references" category="object"
-    condition_expr="object/archetype_tool/has_graphviz"
-    url_expr="string:${object_url}/reference_graph" visible="True"
-    i18n:attributes="title">
-  <permission value="Modify portal content"/>
-  <permission value="Review portal content"/>
- </action>
  <action title="Criteria" action_id="criteria" category="object"
     condition_expr="" url_expr="string:${folder_url}/criterion_edit_form"
     visible="True" i18n:attributes="title">
@@ -55,7 +46,7 @@
  </action>
  <action title="Subfolders" action_id="subtopics" category="object"
     condition_expr="" url_expr="string:${folder_url}/atct_topic_subtopics"
-    visible="True" i18n:attributes="title">
+    visible="False" i18n:attributes="title">
   <permission value="Change portal topics"/>
  </action>
 </object>

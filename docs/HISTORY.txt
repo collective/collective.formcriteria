@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.1.0-RT-BRANCH-2 (Unreleased)
+------------------------------
+
+* Plone 4/4.1 compatibility [keul]
+
 1.1.0-RT-BRANCH
 ---------------
 

@@ -34,7 +34,6 @@ class FormPortalTypeCheckboxCriterion(
         ) + common.FormCriterion.schema.copy()
     schema['value'].widget.format = 'checkbox'
     schema['value'].widget.hide_form_label = True
-    schema['operator'].mode = 'r'
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
         schema['value'])
 
@@ -52,8 +51,7 @@ class FormReferenceCheckboxCriterion(
         ) + common.FormCriterion.schema.copy()
     schema['value'].widget.format = 'checkbox'
     schema['value'].widget.hide_form_label = True
-    schema['formFields'].vocabulary = common.makeVocabularyForFields(
-        schema['value'], schema['operator'])
+    schema['formFields'].vocabulary = common.makeVocabularyForFields(schema['value'])
 
 common.registerCriterion(FormReferenceCheckboxCriterion,
                          orig=form_selection.FormReferenceCriterion)
