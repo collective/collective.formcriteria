@@ -19,13 +19,15 @@ class FormDateRangeCriterion(
         return self.getFormFieldValue('start', **kw)
 
     def getRawStart(self, **kw):
-        return self.getFormFieldValue('start', raw=True, **kw)
+        kw['raw'] = True
+        return self.getFormFieldValue('start', **kw)
 
     def getEnd(self, **kw):
         return self.getFormFieldValue('end', **kw)
 
     def getRawEnd(self, **kw):
-        return self.getFormFieldValue('end', raw=True, **kw)
+        kw['raw'] = True
+        return self.getFormFieldValue('end', **kw)
 
 common.registerCriterion(
     FormDateRangeCriterion, orig=daterange.ATDateRangeCriterion)
