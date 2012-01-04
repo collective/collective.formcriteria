@@ -8,8 +8,7 @@ tests_require = ['collective.testcaselayer',
 
 setup(name='collective.formcriteria',
       version=version,
-      description=
-      "Add forms for user enterable search criteria to collections.",
+      description="Add forms for user enterable search criteria to collections.",
       long_description='\n'.join(
           open(os.path.join(*path)).read() for path in [
               ("src", "collective", "formcriteria", "README.txt"),
