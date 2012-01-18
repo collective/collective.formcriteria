@@ -33,8 +33,7 @@
      />
   
   <browser:page
-     for="..interfaces.IFormTopic"
-     layer="..interfaces.IFormCriteriaLayer"
+     for="*"
      name="criteria_form"
      class=".form.SearchFormView"
      template="form.pt"
