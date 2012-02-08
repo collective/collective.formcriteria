@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.1.0-RT-BRANCH-03 (2012-01-04)
+-------------------------------
+
+* fix batch_macros.pt; removed condition for sort that's unused [mirco]
+
 1.1.0-RT-BRANCH-02 (2012-01-04)
 -------------------------------
 

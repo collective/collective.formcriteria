@@ -21,7 +21,7 @@ template with a tal:define="batch_base_url YOUR_BASE_URL" tales expression.
 				 sort_info context/@@sort_info/getSortInfo|nothing;
                  form sort_info/form|nothing;
                  sorts sort_info/sorts|nothing;"
-     tal:condition="python: batch.next or  batch.previous or sorts">
+     tal:condition="python: batch.next or  batch.previous">
 
 	<!--span tal:condition="sorts">
         Sort on:
