@@ -50,7 +50,7 @@ class FormReferenceCheckboxCriterion(
     archetype_name = 'Portal Types Checkbox Criterion'
     shortDesc = 'Check referenced content'
 
-    schema = portaltype.ATPortalTypeCriterion.schema.copy(
+    schema = reference.ATReferenceCriterion.schema.copy(
         ) + common.FormCriterion.schema.copy()
     schema['value'].widget.format = 'checkbox'
     schema['value'].widget.hide_form_label = True
