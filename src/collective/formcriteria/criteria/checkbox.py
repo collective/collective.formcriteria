@@ -47,7 +47,7 @@ class FormReferenceCheckboxCriterion(
     common.FormCriterion, reference.ATReferenceCriterion):
     """A reference checkbox criterion"""
 
-    archetype_name = 'Portal Types Checkbox Criterion'
+    archetype_name = 'Reference Checkbox Criterion'
     shortDesc = 'Check referenced content'
 
     schema = reference.ATReferenceCriterion.schema.copy(
@@ -55,7 +55,7 @@ class FormReferenceCheckboxCriterion(
     schema['value'].widget.format = 'checkbox'
     schema['value'].widget.hide_form_label = True
     schema['formFields'].vocabulary = common.makeVocabularyForFields(
-        schema['value'])
+        schema['value'], schema['operator'])
 
 common.registerCriterion(FormReferenceCheckboxCriterion,
                          orig=form_selection.FormReferenceCriterion)
