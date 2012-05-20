@@ -22,7 +22,8 @@ class SearchFormView(object):
     @view.memoize
     def criteriaFields(self):
         criteria = {}
-        fields = set()
+        #fields = set()
+        fields = []
 
         for criterion in self.formCriteria():
             field = criterion.Field()
@@ -36,7 +37,8 @@ class SearchFormView(object):
                 crit_fields.append(new_field)
 
             crit_id = criterion.getId()
-            fields.add(field)
+            #fields.add(field)
+            fields.append(field)
             criteria[field] = {
                 'id': crit_id,
                 'field': field,
