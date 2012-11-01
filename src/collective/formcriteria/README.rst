@@ -34,7 +34,7 @@ refine their searches.
 
 Multiple sort criteria can also be added that will render user
 selectable sort links on the batch macro.  See
-collective/formcriteria/criteria/sort.txt for more details.
+collective/formcriteria/criteria/sort.rst for more details.
 
 A CSV export action is also provided which provides a link to users
 allowing them to download the collections results, subject to the

@@ -12,47 +12,47 @@ optionflags = (doctest.NORMALIZE_WHITESPACE |
 
 def test_suite():
     suite = ZopeTestCase.FunctionalDocFileSuite(
-        'README.txt',
+        'README.rst',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
     suite.layer = testing.content_layer
 
     topic_suite = ZopeTestCase.FunctionalDocFileSuite(
-        'portlet/README.txt',
+        'portlet/README.rst',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
     topic_suite.layer = testing.topic_layer
 
     criteria_suite = ZopeTestCase.FunctionalDocFileSuite(
-        'criteria/list.txt',
-        'criteria/selection.txt',
-        'criteria/checkbox.txt',
-        'criteria/pulldown.txt',
-        'criteria/daterange.txt',
-        'criteria/comma.txt',
-        'criteria/boolean.txt',
-        'criteria/date.txt',
-        'criteria/path.txt',
-        'criteria/relativepath.txt',
-        'criteria/simpleint.txt',
-        'criteria/sort.txt',
-        'criteria/context.txt',
+        'criteria/list.rst',
+        'criteria/selection.rst',
+        'criteria/checkbox.rst',
+        'criteria/pulldown.rst',
+        'criteria/daterange.rst',
+        'criteria/comma.rst',
+        'criteria/boolean.rst',
+        'criteria/date.rst',
+        'criteria/path.rst',
+        'criteria/relativepath.rst',
+        'criteria/simpleint.rst',
+        'criteria/sort.rst',
+        'criteria/context.rst',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
     criteria_suite.layer = testing.criteria_layer
 
     columns_suite = ZopeTestCase.FunctionalDocFileSuite(
-        'columns/README.txt',
-        'foldercontents/README.txt',
-        'csv/README.txt',
+        'columns/README.rst',
+        'foldercontents/README.rst',
+        'csv/README.rst',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
     columns_suite.layer = testing.columns_layer
 
     contents_suite = ZopeTestCase.FunctionalDocFileSuite(
-        'foldercontents/buttons.txt',
-        'foldercontents/kss.txt',
-        'foldercontents/sum.txt',
+        'foldercontents/buttons.rst',
+        'foldercontents/kss.rst',
+        'foldercontents/sum.rst',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
     contents_suite.layer = testing.contents_layer
