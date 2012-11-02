@@ -214,6 +214,12 @@ class CriteriaFixture(testing.PloneSandboxLayer):
                 topic.getPhysicalPath()[site_path_len:]))
         manager['foo-search-form-portlet'] = assignment
 
+        testing.login(portal, testing.TEST_USER_NAME)
+        folder[folder.invokeFactory(
+            type_name='ATTopic', id='at-topic-title',
+            title='AT Topic Title')]
+        testing.logout()
+
 CRITERIA_FIXTURE = CriteriaFixture()
 
 CRITERIA_INTEGRATION_TESTING = testing.IntegrationTesting(

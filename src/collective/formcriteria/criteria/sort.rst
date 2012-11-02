@@ -181,7 +181,7 @@ batch.
 Ensure that the extended sort criteria work inside previously created
 ATTopic instances.
 
-    >>> topic = portal.events.aggregator
+    >>> topic = folder['at-topic-title']
     >>> topic.setSortCriterion('effective', True)
     >>> topic.queryCatalog()[0].getObject()
     <ATEvent at /plone/Members/test_user_1_/baz-event-title>

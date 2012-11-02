@@ -103,9 +103,9 @@ Columns" field and related fields are not included on the topic edit
 form.
 
     >>> browser.open(foo_topic.absolute_url()+'/edit')
-    >>> browser.getControl('Table Columns')
+    >>> browser.getControl(name='customViewFields')
     Traceback (most recent call last):
-    LookupError: label 'Table Columns'
+    LookupError: name 'customViewFields'
     >>> browser.getControl('Table Column Links')
     Traceback (most recent call last):
     LookupError: label 'Table Column Links'
@@ -125,7 +125,7 @@ Column order can be managed through the browser.
 Columns can be added through the browser.
 
     >>> browser.getLink('Topic Column').click()
-    >>> browser.getControl('Field').getControl(
+    >>> browser.getControl(name='id').getControl(
     ...     'Creation Date').selected = True
     >>> browser.getControl('Sort Criterion').getControl(
     ...     'Modification Date').selected = True
