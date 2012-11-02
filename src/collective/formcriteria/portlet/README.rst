@@ -11,7 +11,13 @@ handling, author information, etc..
 
 Add a criterion to the topic.
 
-    >>> foo_topic = self.folder['foo-topic-title']
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> portal = layer['portal']
+    >>> membership = getToolByName(portal, 'portal_membership')
+
+    >>> from plone.app import testing
+    >>> folder = membership.getHomeFolder(testing.TEST_USER_ID)
+    >>> foo_topic = folder['foo-topic-title']
     >>> path_crit = foo_topic.addCriterion(
     ...     'path', 'FormRelativePathCriterion')
     >>> path_crit.setRecurse(True)
@@ -21,18 +27,21 @@ template to differentiate output.
 
     >>> folder.setLayout('folder_summary_view')
 
+    >>> import transaction
+    >>> transaction.commit()
+
 Login as a user that can manage portlets.
 
-    >>> from Products.Five.testbrowser import Browser
-    >>> from Products.PloneTestCase import ptc
-    >>> owner_browser = Browser()
+    >>> from plone.testing import z2
+    >>> from plone.app import testing
+    >>> owner_browser = z2.Browser(layer['app'])
     >>> owner_browser.handleErrors = False
     >>> owner_browser.open(portal.absolute_url())
     >>> owner_browser.getLink('Log in').click()
     >>> owner_browser.getControl(
-    ...     'Login Name').value = ptc.portal_owner
+    ...     'Login Name').value = testing.SITE_OWNER_NAME
     >>> owner_browser.getControl(
-    ...     'Password').value = ptc.default_password
+    ...     'Password').value = testing.TEST_USER_PASSWORD
     >>> owner_browser.getControl('Log in').click()
 
 Add the collection listing portlet to the folder.
@@ -46,6 +55,7 @@ Add the collection listing portlet to the folder.
     <...
     ...Add Collection Portlet...
 
+    >>> portal = layer['portal']
     >>> header = owner_browser.getControl('Portlet header')
     >>> header.value = 'Foo Collection Listing Portlet Title'
     >>> foo_topic_path = '/'.join(
@@ -61,13 +71,13 @@ Add the collection listing portlet to the folder.
 
 Add a link to test rendering to the target remoteUrl.
 
-    >>> qux_link = self.folder[self.folder.invokeFactory(
+    >>> qux_link = folder[folder.invokeFactory(
     ...     type_name='Link', id='qux-link-title',
     ...     title='Qux Link Title', remoteUrl='http://foo.com')]
-    >>> self.loginAsPortalOwner()
-    >>> self.portal.portal_workflow.doActionFor(
+    >>> z2.login(portal.getPhysicalRoot().acl_users, testing.SITE_OWNER_NAME)
+    >>> layer['portal'].portal_workflow.doActionFor(
     ...     qux_link, 'publish')
-    >>> self.logout()
+    >>> testing.logout()
 
 Allow anonymous users to view the by-line.
 
@@ -75,6 +85,9 @@ Allow anonymous users to view the by-line.
     >>> getToolByName(portal, 'portal_properties'
     ...               ).site_properties.manage_changeProperties(
     ...                   allowAnonymousViewAbout=True)
+
+    >>> import transaction
+    >>> transaction.commit()
 
 The author by-lines, descriptions, and event details are included as
 with the folder_listing template.
@@ -115,13 +128,16 @@ Link items render links to the remoteUrl.
 The navigation portlet has also been overridden with one which supports
 linking directly to the remoteUrl.
 
-    >>> self.login()
-    >>> manager = self.folder.restrictedTraverse(
+    >>> testing.login(portal, testing.TEST_USER_NAME)
+    >>> manager = folder.restrictedTraverse(
     ...     '++contextportlets++plone.leftcolumn')
     >>> from plone.app.portlets.portlets import navigation
     >>> assignment = navigation.Assignment()
     >>> manager['navigation'] = assignment
-    >>> self.logout()
+    >>> testing.logout()
+
+    >>> import transaction
+    >>> transaction.commit()
 
     >>> owner_browser.open(folder.absolute_url())
     >>> from Products.CMFPlone.utils import getFSVersionTuple

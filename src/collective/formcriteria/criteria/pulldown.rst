@@ -10,7 +10,13 @@ FormReferencePulldownCriterion.
 
 We start with a topic.
 
-    >>> foo_topic = self.folder['foo-topic-title']
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> portal = layer['portal']
+    >>> membership = getToolByName(portal, 'portal_membership')
+
+    >>> from plone.app import testing
+    >>> folder = membership.getHomeFolder(testing.TEST_USER_ID)
+    >>> foo_topic = folder['foo-topic-title']
 
 Add a criterion to the topic.
 
@@ -20,9 +26,9 @@ Add a criterion to the topic.
 
 Open a browser as an anonymous user.
 
-    >>> from Products.Five.testbrowser import Browser
-    >>> from Products.PloneTestCase import ptc
-    >>> browser = Browser()
+    >>> from plone.testing import z2
+    >>> from plone.app import testing
+    >>> browser = z2.Browser(layer['app'])
     >>> browser.handleErrors = False
 
 Add a pulldown criterion for the portal type.
@@ -42,6 +48,9 @@ The values set on the criterion are the default values checked on the
 search form.
 
     >>> crit.setValue('Page')
+
+    >>> import transaction
+    >>> transaction.commit()
 
 When viewing the collection in a browser pulldown menus will be
 rendered for the field with the default values selected.
@@ -83,6 +92,10 @@ Now the default has been overriden by the submitted query.
 If no value is set, all results should be returned.
 
     >>> crit.setValue('')
+
+    >>> import transaction
+    >>> transaction.commit()
+
     >>> browser.open(foo_topic.absolute_url())
     >>> form = browser.getForm(name="formcriteria_search")
     >>> form.getControl(name='submit').click()

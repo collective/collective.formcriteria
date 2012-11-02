@@ -17,7 +17,12 @@ Add a simple string criterion for the SearchableText index on the
 criteria tab.  Set a default search term.  Add a sort criteria for
 consistent ordering.
 
-    >>> foo_topic = self.folder['foo-topic-title']
+    >>> from plone.app import testing
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> portal = layer['portal']
+    >>> membership = getToolByName(portal, 'portal_membership')
+    >>> folder = membership.getHomeFolder(testing.TEST_USER_ID)
+    >>> foo_topic = folder['foo-topic-title']
     >>> crit = foo_topic.getCriterion(
     ...     'SearchableText_FormSimpleStringCriterion')
     >>> crit.setValue('bar')
@@ -25,18 +30,20 @@ consistent ordering.
     >>> sort = foo_topic.addCriterion(
     ...     'getPhysicalPath', 'FormSortCriterion')
 
+    >>> import transaction
+    >>> transaction.commit()
+
 Open a browser and log in as a user who can change the display layout
 for the topic.
 
-    >>> from Products.Five.testbrowser import Browser
-    >>> from Products.PloneTestCase import ptc
-    >>> browser = Browser()
+    >>> from plone.testing import z2
+    >>> browser = z2.Browser(layer['app'])
     >>> browser.handleErrors = False
     >>> browser.open(portal.absolute_url())
     >>> browser.getLink('Log in').click()
-    >>> browser.getControl('Login Name').value = ptc.default_user
+    >>> browser.getControl('Login Name').value = testing.TEST_USER_NAME
     >>> browser.getControl(
-    ...     'Password').value = ptc.default_password
+    ...     'Password').value = testing.TEST_USER_PASSWORD
     >>> browser.getControl('Log in').click()
 
 Change the topic's display layout and the search form results layout
@@ -73,8 +80,8 @@ titles are links to the item.
     ...Bar Document Title...
     ...2.9 kB...
     ...<span class="state-published">Published</span>...
-    >>> from collective.formcriteria import testing
-    >>> now = testing.content_layer.now
+    >>> from collective.formcriteria.testing import CONTENT_FIXTURE
+    >>> now = CONTENT_FIXTURE.now
     >>> str(portal.restrictedTraverse('@@plone').toLocalizedTime(now)
     ...     ) in browser.contents
     True
@@ -95,7 +102,7 @@ The first sort criterion is the default sort.
 Select different collection columns and which columns link to the
 result item.
 
-    >>> self.loginAsPortalOwner()
+    >>> z2.login(portal.getPhysicalRoot().acl_users, testing.SITE_OWNER_NAME)
     >>> columns = foo_topic.columns
     >>> columns.manage_delObjects(
     ...     ['ModificationDate-column', 'get_size-column',
@@ -114,7 +121,10 @@ result item.
     ...      'crit__modified_FormDateCriterion',
     ...      'crit__review_state_FormSortCriterion',
     ...      'crit__review_state_FormSelectionCriterion'])
-    >>> self.logout()
+    >>> testing.logout()
+
+    >>> import transaction
+    >>> transaction.commit()
 
 The view renders the contents form with the specified columns.
 
@@ -199,7 +209,7 @@ Add the portlet.
     >>> from plone.i18n.normalizer import (
     ...     interfaces as normalizer_ifaces)
     >>> from collective.formcriteria.portlet import portlet
-    >>> self.login()
+    >>> testing.login(portal, testing.TEST_USER_NAME)
     >>> manager = foo_topic.restrictedTraverse(
     ...     '++contextportlets++plone.rightcolumn')
     >>> site_path_len = len(portal.getPhysicalPath())
@@ -211,12 +221,16 @@ Add the portlet.
     ...     normalizer_ifaces.IIDNormalizer).normalize(
     ...         assignment.title)
     >>> manager[name] = assignment
-    >>> self.logout()
+    >>> testing.logout()
 
 If query criteria are configured for the table columns, a filter table
 head row will be rendered as a search form.
 
     >>> foo_topic.setFormLayout('folder_contents')
+
+    >>> import transaction
+    >>> transaction.commit()
+
     >>> browser.open(foo_topic.absolute_url())
     >>> contents_form = browser.getForm(name="folderContentsForm")
     >>> contents_form.getControl(
@@ -261,7 +275,9 @@ text box.
 
     >>> import re
     >>> regexp = re.compile('http://.*?collapsiblesections.css')
-    >>> browser.open(regexp.search(browser.contents).group())
+    >>> regexp.search(browser.contents).group()
+    'http://nohost/plone/portal_css/Plone%20Default/collapsiblesections.css'
+    >>> browser.open(portal.absolute_url() + '/collapsiblesections.css')
     >>> print browser.contents
     /*...
     #foldercontents-getPath-filter .collapsibleHeader {
@@ -270,9 +286,12 @@ text box.
 The search form is rendered if query criteria are present which are
 not assigned to a column.
 
-    >>> self.loginAsPortalOwner()
+    >>> z2.login(portal.getPhysicalRoot().acl_users, testing.SITE_OWNER_NAME)
     >>> columns['getPath-column'].update(filter='')
-    >>> self.logout()
+    >>> testing.logout()
+
+    >>> import transaction
+    >>> transaction.commit()
 
     >>> browser.open(foo_topic.absolute_url())
     >>> portlet_form = browser.getForm(name="formcriteria_search")
@@ -295,9 +314,12 @@ portlet form.
 If no query criteria are configured, the filter table head row will
 not be rendered.
 
-    >>> self.loginAsPortalOwner()
+    >>> z2.login(portal.getPhysicalRoot().acl_users, testing.SITE_OWNER_NAME)
     >>> columns['Title-column'].update(filter='')
-    >>> self.logout()
+    >>> testing.logout()
+
+    >>> import transaction
+    >>> transaction.commit()
 
     >>> browser.open(foo_topic.absolute_url())
     >>> print browser.contents

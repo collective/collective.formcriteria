@@ -7,8 +7,16 @@ The folder contents buttons are also usable on collections.
 
 Remove the sort criteria.
 
-    >>> self.loginAsPortalOwner()
-    >>> foo_topic = self.folder['foo-topic-title']
+    >>> from plone.testing import z2
+    >>> from plone.app import testing
+    >>> portal = layer['portal']
+    >>> z2.login(portal.getPhysicalRoot().acl_users, testing.SITE_OWNER_NAME)
+
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> membership = getToolByName(portal, 'portal_membership')
+    >>> folder = membership.getHomeFolder(testing.TEST_USER_ID)
+
+    >>> foo_topic = folder['foo-topic-title']
     >>> columns = foo_topic.columns
     >>> columns['Title-column'].update(sort='')
     >>> columns['get_size-column'].update(sort='')
@@ -20,36 +28,36 @@ Remove the sort criteria.
     ...      'crit__modified_FormSortCriterion',
     ...      'crit__review_state_FormSortCriterion'])
     >>> portal.portal_workflow.doActionFor(foo_topic, 'publish')
-    >>> self.logout()
+    >>> testing.logout()
 
 Create a folder and move one item into the folder.
 
-    >>> self.login()
+    >>> import transaction
+    >>> testing.login(portal, testing.TEST_USER_NAME)
     >>> foo_folder = folder[folder.invokeFactory(
     ...     type_name='Folder', id='foo-folder-title',
     ...     title='Foo Folder Title')]
     >>> foo_folder.manage_pasteObjects(
     ...     folder.manage_cutObjects(['bar-document-title']))
     [{'new_id': 'bar-document-title', 'id': 'bar-document-title'}]
-    >>> self.logout()
+    >>> testing.logout()
+    >>> transaction.commit()
 
 Open a browser and log in as a user who can use the folder contents
 buttons on the content listed.
 
-    >>> from Products.Five.testbrowser import Browser
-    >>> from Products.PloneTestCase import ptc
-    >>> browser = Browser()
+    >>> browser = z2.Browser(layer['app'])
     >>> browser.handleErrors = False
     >>> browser.open(portal.absolute_url())
     >>> browser.getLink('Log in').click()
-    >>> browser.getControl('Login Name').value = ptc.default_user
+    >>> browser.getControl('Login Name').value = testing.TEST_USER_NAME
     >>> browser.getControl(
-    ...     'Password').value = ptc.default_password
+    ...     'Password').value = testing.TEST_USER_PASSWORD
     >>> browser.getControl('Log in').click()
 
 Both copies appear in the collection.
 
-    >>> foo_topic = self.folder['foo-topic-title']
+    >>> foo_topic = folder['foo-topic-title']
     >>> browser.open(foo_topic.absolute_url())
     >>> browser.getControl('Baz Event Title')
     <ItemControl name='paths:list' type='checkbox'
@@ -213,11 +221,13 @@ Open a browser and visit the topic anonymously.  If anonymous has the
 "List folder contents" permission, the folder_contents table is
 viewable.
 
+    >>> import transaction
     >>> foo_topic.manage_permission(
     ...     'List folder contents', roles=['Anonymous', 'Manager'],
     ...     acquire=1)
+    >>> transaction.commit()
 
-    >>> anon_browser = Browser()
+    >>> anon_browser = z2.Browser(layer['app'])
     >>> anon_browser.handleErrors = False
     >>> anon_browser.open(foo_topic.absolute_url())
 

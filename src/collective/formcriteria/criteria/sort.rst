@@ -18,20 +18,30 @@ Fixed Sort Criteria
 
 Set the item count to 1 so that batches will only have one item.
 
-    >>> foo_topic = self.folder['foo-topic-title']
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> portal = layer['portal']
+    >>> membership = getToolByName(portal, 'portal_membership')
+
+    >>> from plone.app import testing
+    >>> folder = membership.getHomeFolder(testing.TEST_USER_ID)
+    >>> foo_topic = folder['foo-topic-title']
     >>> foo_topic.setItemCount(1)
+
+    >>> import transaction
+    >>> transaction.commit()
 
 Open a browser and log in as a normal user.
 
-    >>> from Products.Five.testbrowser import Browser
-    >>> from Products.PloneTestCase import ptc
-    >>> browser = Browser()
+    >>> from plone.testing import z2
+    >>> from plone.app import testing
+    >>> portal = layer['portal']
+    >>> browser = z2.Browser(layer['app'])
     >>> browser.handleErrors = False
     >>> browser.open(portal.absolute_url())
     >>> browser.getLink('Log in').click()
-    >>> browser.getControl('Login Name').value = ptc.default_user
+    >>> browser.getControl('Login Name').value = testing.TEST_USER_NAME
     >>> browser.getControl(
-    ...     'Password').value = ptc.default_password
+    ...     'Password').value = testing.TEST_USER_PASSWORD
     >>> browser.getControl('Log in').click()
 
 Load the criteria edit form of a collection.
@@ -74,6 +84,10 @@ criteria.
     >>> foo_topic.addCriterion(
     ...     'SearchableText','FormSimpleStringCriterion'
     ...     ).setFormFields(['value'])
+
+    >>> import transaction
+    >>> transaction.commit()
+
     >>> browser.getLink('View').click()
     >>> form = browser.getForm(name="formcriteria_search")
     >>> form.getControl('Search Text').value = 'blah'
@@ -153,6 +167,10 @@ The batch macro will render the sort links even if there's only one
 batch.
 
     >>> foo_topic.setItemCount(0)
+
+    >>> import transaction
+    >>> transaction.commit()
+
     >>> browser.open(foo_topic.absolute_url()+'/atct_topic_view')
     >>> form = browser.getForm(name="navigation_form")
     >>> form.getControl(
@@ -181,6 +199,9 @@ items.
 
     >>> foo_topic.deleteCriterion('crit__unsorted_FormSortCriterion')
     >>> foo_topic.setSortCriterion('Creator', False)
+
+    >>> import transaction
+    >>> transaction.commit()
 
 Select the layout.
 
@@ -212,6 +233,10 @@ The grouped listing layout requires a sort criterion to render and
 raises an error if one is not present.
 
     >>> foo_topic.deleteCriterion('crit__Creator_ATSortCriterion')
+
+    >>> import transaction
+    >>> transaction.commit()
+
     >>> browser.open(foo_topic.absolute_url())
     Traceback (most recent call last):
     AssertionError: ...
@@ -219,6 +244,10 @@ raises an error if one is not present.
 The batch macros still work for topics that have no sort criteria.
 
     >>> foo_topic.setLayout('criteria_form')
+
+    >>> import transaction
+    >>> transaction.commit()
+
     >>> browser.open(foo_topic.absolute_url())
     >>> form = browser.getForm(name="formcriteria_search")
     >>> form.getControl('Search Text').value = 'blah'

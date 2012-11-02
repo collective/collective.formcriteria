@@ -3,7 +3,7 @@ import os
 
 version = '2.0b3'
 
-tests_require = ['collective.testcaselayer>=1.4',
+tests_require = ['plone.app.testing',
                  'collective.monkeypatcher',
                  'zope.testbrowser>3.3']
 

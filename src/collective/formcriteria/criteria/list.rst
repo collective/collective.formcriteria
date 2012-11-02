@@ -8,13 +8,19 @@ form.
 
 We start with a topic.
 
-    >>> foo_topic = self.folder['foo-topic-title']
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> portal = layer['portal']
+    >>> membership = getToolByName(portal, 'portal_membership')
+
+    >>> from plone.app import testing
+    >>> folder = membership.getHomeFolder(testing.TEST_USER_ID)
+    >>> foo_topic = folder['foo-topic-title']
 
 Open a browser as an anonymous user.
 
-    >>> from Products.Five.testbrowser import Browser
-    >>> from Products.PloneTestCase import ptc
-    >>> browser = Browser()
+    >>> from plone.testing import z2
+    >>> from plone.app import testing
+    >>> browser = z2.Browser(layer['app'])
     >>> browser.handleErrors = False
 
 Add a list criterion for the subject/keywords.
@@ -33,6 +39,9 @@ The values set on the criterion are the default values checked on the
 search form.
 
     >>> crit.setValue(['bah'])
+
+    >>> import transaction
+    >>> transaction.commit()
 
 When viewing the collection in a browser lists will be rendered
 for the field with the default values selected.
@@ -85,6 +94,9 @@ Now the default has been overriden by the submitted query.
 The operator may also be included on the form.
 
     >>> crit.setFormFields(['value', 'operator'])
+
+    >>> import transaction
+    >>> transaction.commit()
 
 Use the default "or" search, and query on "bah" and "qux"
 

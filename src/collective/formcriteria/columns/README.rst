@@ -17,7 +17,13 @@ When a topic is created using the template included in the
 'profile-collective.formcriteria:formcriteria-columns', it has a
 columns container.
 
-    >>> foo_topic = self.folder['foo-topic-title']
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> portal = layer['portal']
+    >>> membership = getToolByName(portal, 'portal_membership')
+
+    >>> from plone.app import testing
+    >>> folder = membership.getHomeFolder(testing.TEST_USER_ID)
+    >>> foo_topic = folder['foo-topic-title']
     >>> foo_topic.columns
     <TopicColumns at
     /plone/Members/test_user_1_/foo-topic-title/columns>
@@ -81,15 +87,15 @@ the selected items.
 Open a browser and log in as a user who can make changes to the
 topic.
 
-    >>> from Products.Five.testbrowser import Browser
-    >>> from Products.PloneTestCase import ptc
-    >>> browser = Browser()
+    >>> from plone.testing import z2
+    >>> portal = layer['portal']
+    >>> browser = z2.Browser(layer['app'])
     >>> browser.handleErrors = False
     >>> browser.open(portal.absolute_url())
     >>> browser.getLink('Log in').click()
-    >>> browser.getControl('Login Name').value = ptc.default_user
+    >>> browser.getControl('Login Name').value = testing.TEST_USER_NAME
     >>> browser.getControl(
-    ...     'Password').value = ptc.default_password
+    ...     'Password').value = testing.TEST_USER_PASSWORD
     >>> browser.getControl('Log in').click()
 
 Since columns are managed in the columns container, the "Table

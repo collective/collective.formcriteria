@@ -1,8 +1,7 @@
 import unittest
 import doctest
 
-from Testing import ZopeTestCase
-from Products.PloneTestCase import ptc
+from plone.testing import layered
 
 from collective.formcriteria import testing
 
@@ -11,19 +10,17 @@ optionflags = (doctest.NORMALIZE_WHITESPACE |
 
 
 def test_suite():
-    suite = ZopeTestCase.FunctionalDocFileSuite(
+    suite = layered(doctest.DocFileSuite(
         'README.rst',
-        optionflags=optionflags,
-        test_class=ptc.FunctionalTestCase)
-    suite.layer = testing.content_layer
+        optionflags=optionflags),
+                    layer=testing.CONTENT_FUNCTIONAL_TESTING)
 
-    topic_suite = ZopeTestCase.FunctionalDocFileSuite(
+    topic_suite = layered(doctest.DocFileSuite(
         'portlet/README.rst',
-        optionflags=optionflags,
-        test_class=ptc.FunctionalTestCase)
-    topic_suite.layer = testing.topic_layer
+        optionflags=optionflags),
+                    layer=testing.TOPIC_FUNCTIONAL_TESTING)
 
-    criteria_suite = ZopeTestCase.FunctionalDocFileSuite(
+    criteria_suite = layered(doctest.DocFileSuite(
         'criteria/list.rst',
         'criteria/selection.rst',
         'criteria/checkbox.rst',
@@ -37,25 +34,22 @@ def test_suite():
         'criteria/simpleint.rst',
         'criteria/sort.rst',
         'criteria/context.rst',
-        optionflags=optionflags,
-        test_class=ptc.FunctionalTestCase)
-    criteria_suite.layer = testing.criteria_layer
+        optionflags=optionflags),
+                    layer=testing.CRITERIA_FUNCTIONAL_TESTING)
 
-    columns_suite = ZopeTestCase.FunctionalDocFileSuite(
+    columns_suite = layered(doctest.DocFileSuite(
         'columns/README.rst',
         'foldercontents/README.rst',
         'csv/README.rst',
-        optionflags=optionflags,
-        test_class=ptc.FunctionalTestCase)
-    columns_suite.layer = testing.columns_layer
+        optionflags=optionflags),
+                    layer=testing.COLUMNS_FUNCTIONAL_TESTING)
 
-    contents_suite = ZopeTestCase.FunctionalDocFileSuite(
+    contents_suite = layered(doctest.DocFileSuite(
         'foldercontents/buttons.rst',
         'foldercontents/kss.rst',
         'foldercontents/sum.rst',
-        optionflags=optionflags,
-        test_class=ptc.FunctionalTestCase)
-    contents_suite.layer = testing.contents_layer
+        optionflags=optionflags),
+                    layer=testing.CONTENTS_FUNCTIONAL_TESTING)
 
     return unittest.TestSuite(
         [suite, topic_suite, criteria_suite, columns_suite,

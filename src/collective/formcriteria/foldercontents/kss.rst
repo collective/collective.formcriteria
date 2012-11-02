@@ -8,13 +8,20 @@ on the columns.
 
 Set the batch size to force batching.
 
-    >>> foo_topic = self.folder['foo-topic-title']
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> portal = layer['portal']
+    >>> membership = getToolByName(portal, 'portal_membership')
+
+    >>> from plone.app import testing
+    >>> folder = membership.getHomeFolder(testing.TEST_USER_ID)
+    >>> foo_topic = folder['foo-topic-title']
     >>> foo_topic.update(itemCount=2)
     >>> foo_topic.crit__path_FormRelativePathCriterion.setRecurse(False)
 
 Change the columns and link columns.
 
-    >>> self.loginAsPortalOwner()
+    >>> from plone.testing import z2
+    >>> z2.login(portal.getPhysicalRoot().acl_users, testing.SITE_OWNER_NAME)
     >>> columns = foo_topic.columns
     >>> columns.manage_delObjects(
     ...     ['ModificationDate-column', 'get_size-column',
@@ -31,19 +38,21 @@ Change the columns and link columns.
     ...      'crit__get_size_FormSortCriterion',
     ...      'crit__modified_FormSortCriterion',
     ...      'crit__review_state_FormSortCriterion'])
-    >>> self.logout()
+    >>> testing.logout()
+
+    >>> import transaction
+    >>> transaction.commit()
 
 Open a browser and log in as a user who can view the topic.
 
-    >>> from Products.Five.testbrowser import Browser
-    >>> from Products.PloneTestCase import ptc
-    >>> browser = Browser()
+    >>> portal = layer['portal']
+    >>> browser = z2.Browser(layer['app'])
     >>> browser.handleErrors = False
     >>> browser.open(portal.absolute_url())
     >>> browser.getLink('Log in').click()
-    >>> browser.getControl('Login Name').value = ptc.default_user
+    >>> browser.getControl('Login Name').value = testing.TEST_USER_NAME
     >>> browser.getControl(
-    ...     'Password').value = ptc.default_password
+    ...     'Password').value = testing.TEST_USER_PASSWORD
     >>> browser.getControl('Log in').click()
 
 Use the browser to load the XML KSS uses to update the table.
@@ -64,8 +73,8 @@ The XML reflects the customized columns
     Bar Document Title" title="Select Bar Document Title" />
     ...Bar Document Title...
     ...blah...
-    >>> from collective.formcriteria import testing
-    >>> now = testing.content_layer.now
+    >>> from collective.formcriteria.testing import CONTENT_FIXTURE
+    >>> now = CONTENT_FIXTURE.now
     >>> (now-2).ISO() in browser.contents
     True
 

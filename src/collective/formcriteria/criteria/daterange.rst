@@ -8,13 +8,19 @@ search form to specify two dates for a date range query.
 
 We start with a topic.
 
-    >>> foo_topic = self.folder['foo-topic-title']
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> portal = layer['portal']
+    >>> membership = getToolByName(portal, 'portal_membership')
+
+    >>> from plone.app import testing
+    >>> folder = membership.getHomeFolder(testing.TEST_USER_ID)
+    >>> foo_topic = folder['foo-topic-title']
 
 Open a browser as an anonymous user.
 
-    >>> from Products.Five.testbrowser import Browser
-    >>> from Products.PloneTestCase import ptc
-    >>> browser = Browser()
+    >>> from plone.testing import z2
+    >>> from plone.app import testing
+    >>> browser = z2.Browser(layer['app'])
     >>> browser.handleErrors = False
 
 Before a criterion requiring JavaScript or CSS helpers has been added,
@@ -44,12 +50,15 @@ Designate the criterion's field as a form field.
 The values set on the criterion are the default values on the search
 form.
 
-    >>> from collective.formcriteria import testing
-    >>> now = testing.content_layer.now
+    >>> from collective.formcriteria.testing import CONTENT_FIXTURE
+    >>> now = CONTENT_FIXTURE.now
     >>> effective_start = now-3
     >>> criterion.setStart(effective_start)
     >>> effective_end = now-1
     >>> criterion.setEnd(effective_end)
+
+    >>> import transaction
+    >>> transaction.commit()
 
 When viewing the collection in a browser the date widgets will be
 rendered for the index with the default values.
@@ -133,11 +142,11 @@ By default the criterion values determine the search results.
 Change the date range and search.  Simulate the effect of the
 JavaScript by also changing the value of the hidden inputs.
 
-    >>> from collective.testcaselayer import testbrowser
-    >>> ignored = testbrowser.setATDateWidget(
+    >>> from collective.formcriteria.testing import setATDateWidget
+    >>> ignored = setATDateWidget(
     ...     form, effective_start + 2,
     ...     'crit__effective_FormDateRangeCriterion_start')
-    >>> ignored = testbrowser.setATDateWidget(
+    >>> ignored = setATDateWidget(
     ...     form, effective_end + 2,
     ...     'crit__effective_FormDateRangeCriterion_end')
     >>> form.getControl(name='submit').click()
@@ -175,9 +184,9 @@ But the helpers are not included when the portlet is not rendered.
 Log in as a user that should see the editable border.
 
     >>> browser.getLink('Log in').click()
-    >>> browser.getControl('Login Name').value = ptc.default_user
+    >>> browser.getControl('Login Name').value = testing.TEST_USER_NAME
     >>> browser.getControl(
-    ...     'Password').value = ptc.default_password
+    ...     'Password').value = testing.TEST_USER_PASSWORD
     >>> browser.getControl('Log in').click()
 
 The editable border still appears when the portlet adds the helpers to
@@ -219,16 +228,19 @@ Set values for all the daterange fields on all the content.
     >>> for event in folder.contentValues(dict(portal_type='Event')):
     ...     event.update(startDate=now, endDate=now, expirationDate=now+30)
 
+    >>> import transaction
+    >>> transaction.commit()
+
 Enter form values for all the criteria and submit the search.
 
     >>> browser.open(foo_topic.absolute_url())
     >>> form = browser.getForm(name="formcriteria_search")
     >>> for crit in foo_topic.listSearchCriteria():
     ...     field = crit.Field()
-    ...     ignored = testbrowser.setATDateWidget(
+    ...     ignored = setATDateWidget(
     ...         form, now - 365,
     ...         'crit__%s_FormDateRangeCriterion_start' % field)
-    ...     ignored = testbrowser.setATDateWidget(
+    ...     ignored = setATDateWidget(
     ...         form, now + 365,
     ...         'crit__%s_FormDateRangeCriterion_end' % field)
     >>> form.getControl(name='submit').click()

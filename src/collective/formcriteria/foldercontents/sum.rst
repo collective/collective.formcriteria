@@ -12,9 +12,16 @@ user to select only columns that can be summed.
 
 Set the batch size to force batching.
 
-    >>> foo_topic = self.folder['foo-topic-title']
+    >>> from plone.testing import z2
+    >>> from plone.app import testing
+    >>> portal = layer['portal']
+    >>> z2.login(portal.getPhysicalRoot().acl_users, testing.SITE_OWNER_NAME)
 
-    >>> self.loginAsPortalOwner()
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> membership = getToolByName(portal, 'portal_membership')
+    >>> folder = membership.getHomeFolder(testing.TEST_USER_ID)
+
+    >>> foo_topic = folder['foo-topic-title']
     >>> foo_topic.update(itemCount=2)
 
 Remove the sort criteria.
@@ -30,19 +37,20 @@ Remove the sort criteria.
     ...      'crit__get_size_FormSortCriterion',
     ...      'crit__modified_FormSortCriterion',
     ...      'crit__review_state_FormSortCriterion'])
-    >>> self.logout()
+    >>> testing.logout()
+
+    >>> import transaction
+    >>> transaction.commit()
 
 Open a browser and log in.
 
-    >>> from Products.Five.testbrowser import Browser
-    >>> from Products.PloneTestCase import ptc
-    >>> browser = Browser()
+    >>> browser = z2.Browser(layer['app'])
     >>> browser.handleErrors = False
     >>> browser.open(portal.absolute_url())
     >>> browser.getLink('Log in').click()
-    >>> browser.getControl('Login Name').value = ptc.default_user
+    >>> browser.getControl('Login Name').value = testing.TEST_USER_NAME
     >>> browser.getControl(
-    ...     'Password').value = ptc.default_password
+    ...     'Password').value = testing.TEST_USER_PASSWORD
     >>> browser.getControl('Log in').click()
 
 If no column is set to calculate sums, no total rows are included in
@@ -88,9 +96,12 @@ either the table head or foot.
 
 Select the size column as a sum column.
 
-    >>> self.loginAsPortalOwner()
+    >>> z2.login(portal.getPhysicalRoot().acl_users, testing.SITE_OWNER_NAME)
     >>> foo_topic.columns['get_size-column'].update(sum=True)
-    >>> self.logout()
+    >>> testing.logout()
+
+    >>> import transaction
+    >>> transaction.commit()
 
 A total sum is now included for the size column in the table head and
 foot.

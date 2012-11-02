@@ -58,23 +58,27 @@ Form Criteria
 
 Start with some content for search results.
 
-    >>> from Products.PloneTestCase import ptc
-    >>> self.login()
-    >>> self.folder['bar-document-title']
+    >>> from plone.app import testing
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> portal = layer['portal']
+    >>> membership = getToolByName(portal, 'portal_membership')
+    >>> folder = membership.getHomeFolder(testing.TEST_USER_ID)
+    >>> testing.login(portal, testing.TEST_USER_NAME)
+    >>> folder['bar-document-title']
     <ATDocument at /plone/Members/test_user_1_/bar-document-title>
-    >>> self.folder['baz-event-title']
+    >>> folder['baz-event-title']
     <ATEvent at /plone/Members/test_user_1_/baz-event-title>
 
 Open a browser and log in as a normal user.
 
-    >>> from Products.Five.testbrowser import Browser
-    >>> browser = Browser()
+    >>> from plone.testing import z2
+    >>> browser = z2.Browser(layer['app'])
     >>> browser.handleErrors = False
     >>> browser.open(portal.absolute_url())
     >>> browser.getLink('Log in').click()
-    >>> browser.getControl('Login Name').value = ptc.default_user
+    >>> browser.getControl('Login Name').value = testing.TEST_USER_NAME
     >>> browser.getControl(
-    ...     'Password').value = ptc.default_password
+    ...     'Password').value = testing.TEST_USER_PASSWORD
     >>> browser.getControl('Log in').click()
 
 Add and publish a collection.
@@ -93,9 +97,12 @@ Add and publish a collection.
     <...
     ...Item state changed...
 
-    >>> self.loginAsPortalOwner()
-    >>> self.portal.portal_workflow.doActionFor(foo_topic, 'publish')
-    >>> self.login()
+    >>> z2.login(portal.getPhysicalRoot().acl_users, testing.SITE_OWNER_NAME)
+    >>> layer['portal'].portal_workflow.doActionFor(foo_topic, 'publish')
+    >>> testing.login(portal, testing.TEST_USER_NAME)
+
+    >>> import transaction
+    >>> transaction.commit()
 
 Change the display layout of the collection to the "Search Form".
 
@@ -106,14 +113,14 @@ Change the display layout of the collection to the "Search Form".
 
 Login as a user that can manage portlets.
 
-    >>> owner_browser = Browser()
+    >>> owner_browser = z2.Browser(layer['app'])
     >>> owner_browser.handleErrors = False
     >>> owner_browser.open(portal.absolute_url())
     >>> owner_browser.getLink('Log in').click()
     >>> owner_browser.getControl(
-    ...     'Login Name').value = ptc.portal_owner
+    ...     'Login Name').value = testing.SITE_OWNER_NAME
     >>> owner_browser.getControl(
-    ...     'Password').value = ptc.default_password
+    ...     'Password').value = testing.TEST_USER_PASSWORD
     >>> owner_browser.getControl('Log in').click()
 
 Add the search form portlet for this collection to the folder.
@@ -197,7 +204,7 @@ Set the query term and save.
 
 Open another browser as an anonymous user.
 
-    >>> anon_browser = Browser()
+    >>> anon_browser = z2.Browser(layer['app'])
     >>> anon_browser.handleErrors = False
 
 Before the topic has any form criteria, the search form is not
@@ -320,6 +327,8 @@ listed in "Form Fields".
     >>> crit = foo_topic.getCriterion(
     ...     'SearchableText_FormSimpleStringCriterion')
     >>> crit.setFormFields([])
+    >>> transaction.commit()
+
     >>> anon_browser.open(
     ...     foo_topic.absolute_url()+'/atct_topic_view'
     ...     '?form_crit__SearchableText_FormSimpleStringCriterion'
@@ -330,7 +339,11 @@ listed in "Form Fields".
     >>> anon_browser.getLink('Baz Event Title')
     Traceback (most recent call last):
     LinkNotFoundError
+
     >>> crit.setFormFields(['value'])
+
+    >>> import transaction
+    >>> transaction.commit()
 
 The search form handles index query parsing errors gracefully
 displaying a message to the user.
@@ -376,7 +389,7 @@ with existing ATTopic instances.
 
 All criteria can also be created using poral_types.constructContent.
 
-    >>> self.loginAsPortalOwner()
+    >>> z2.login(portal.getPhysicalRoot().acl_users, testing.SITE_OWNER_NAME)
     >>> foo_topic.deleteCriterion(
     ...     'crit__SearchableText_FormSimpleStringCriterion')
     >>> foo_topic.deleteCriterion(

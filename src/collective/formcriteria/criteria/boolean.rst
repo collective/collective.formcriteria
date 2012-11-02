@@ -8,13 +8,19 @@ form.
 
 We start with a topic.
 
-    >>> foo_topic = self.folder['foo-topic-title']
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> portal = layer['portal']
+    >>> membership = getToolByName(portal, 'portal_membership')
+
+    >>> from plone.app import testing
+    >>> folder = membership.getHomeFolder(testing.TEST_USER_ID)
+    >>> foo_topic = folder['foo-topic-title']
 
 Open a browser as an anonymous user.
 
-    >>> from Products.Five.testbrowser import Browser
-    >>> from Products.PloneTestCase import ptc
-    >>> browser = Browser()
+    >>> from plone.testing import z2
+    >>> from plone.app import testing
+    >>> browser = z2.Browser(layer['app'])
     >>> browser.handleErrors = False
 
 Add a boolean criterion for the subject/keywords.
@@ -28,6 +34,9 @@ Designate the criterion's field as a form field.
 
     >>> crit = foo_topic.getCriterion('is_folderish_FormBooleanCriterion')
     >>> crit.setFormFields(['bool'])
+
+    >>> import transaction
+    >>> transaction.commit()
     
 When viewing the collection in a browser boolean fields will be
 rendered for the field.

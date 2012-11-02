@@ -5,8 +5,9 @@
    xmlns:monkey="http://namespaces.plone.org/monkey"
    i18n_domain="collective.customer">
   
-  <include package="collective.testcaselayer" file="testing.zcml" />
   <include zcml:condition="installed cmf.pt" package="cmf.pt" />
+
+  <include package="collective.formcriteria" />
 
   <genericsetup:registerProfile
      name="testing"

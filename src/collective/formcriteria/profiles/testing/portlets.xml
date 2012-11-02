@@ -12,4 +12,22 @@
     remove="True"
     />
 
+ <assignment
+     manager="plone.rightcolumn"
+     category="context"
+     key="/"
+     type="portlets.News"
+     name="news"
+     remove="True"
+     />
+
+ <assignment
+     manager="plone.rightcolumn"
+     category="context"
+     key="/"
+     type="portlets.Events"
+     name="events"
+     remove="True"
+     />
+
 </portlets>
