@@ -158,4 +158,4 @@ bottom of the table.
 
 KSS sorting
 
-    >>> TODO
+TODO

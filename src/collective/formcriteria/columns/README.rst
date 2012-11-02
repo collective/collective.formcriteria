@@ -139,14 +139,14 @@ Columns can be added through the browser.
 When managing the columns tabs are available for editing the
 collection, managing the criteria, and returning to view the topic.
 
-    >>> TODO
+TODO
 
 The tabs when managing a column are sensible and behave properly.
 Tabs are also available for editing the collection, managing the
 criteria, and returning to view the topic.
 
-    >>> TODO
+TODO
 
 A user is prompted to log in when directly accessing a column's edit link.
 
-    >>> TODO
+TODO
