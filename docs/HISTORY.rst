@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.0b3 - Unreleased
-------------------
+2.0 - 2012-11-01
+----------------
 
 * Plone 4.2 and 4.3 compatibility.
   [rossp]
