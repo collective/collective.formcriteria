@@ -302,6 +302,12 @@ class FolderContentsView(FolderContentsMixin,
         return table.render()
 
 
-class FolderContentsKSSView(FolderContentsMixin,
-                            foldercontents.FolderContentsKSSView):
+if hasattr(foldercontents, 'FolderContentsKSSView'):
+    # BBB Plone 4.2
+    FolderContentsBrowserView = foldercontents.FolderContentsKSSView
+else:
+    FolderContentsBrowserView = foldercontents.FolderContentsBrowserView
+
+
+class FolderContentsKSSView(FolderContentsMixin, FolderContentsBrowserView):
     table = FolderContentsTable

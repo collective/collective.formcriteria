@@ -4,6 +4,9 @@ Changelog
 2.0b3 - Unreleased
 ------------------
 
+* Plone 4.2 and 4.3 compatibility.
+  [rossp]
+
 * Use localized format for DateTime column values.
   [rossp]
 

@@ -326,13 +326,13 @@ Batching page links also work.
     url='http://nohost/plone/Members/test_user_1_/foo-event-title'>
 
     >>> form = browser.getForm(name="navigation_form")
-    >>> form.getControl(name="b_start", index=1).click()
+    >>> form.getControl(name="b_start", index=0).click()
     >>> browser.getLink('Baz Event Title')
     <Link text='...Baz Event Title'
     url='http://nohost/plone/Members/test_user_1_/baz-event-title'>
 
     >>> form = browser.getForm(name="navigation_form")
-    >>> form.getControl(name="b_start", index=1).click()
+    >>> form.getControl(name="b_start", index=0).click()
     >>> browser.getLink('Foo Event Title')
     <Link text='...Foo Event Title'
     url='http://nohost/plone/Members/test_user_1_/foo-event-title'>

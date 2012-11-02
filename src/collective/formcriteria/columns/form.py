@@ -178,5 +178,12 @@ class FolderContentsView(foldercontents.FolderContentsView):
         return table.render()
 
 
-class FolderContentsKSSView(foldercontents.FolderContentsKSSView):
+if hasattr(foldercontents, 'FolderContentsKSSView'):
+    # BBB Plone 4.2
+    FolderContentsBrowserView = foldercontents.FolderContentsKSSView
+else:
+    FolderContentsBrowserView = foldercontents.FolderContentsBrowserView
+
+
+class FolderContentsKSSView(FolderContentsBrowserView):
     table = FolderContentsTable
