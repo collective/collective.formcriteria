@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.0b4 - Unreleased
+------------------
+
+* Added travis build script
+  [bogdangi]
+
+
 2.0 - 2012-11-01
 ----------------
 
