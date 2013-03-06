@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0b4 - Unreleased
+2.0.1 - Unreleased
 ------------------
 
 * Added travis build script
