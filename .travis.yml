@@ -1,0 +1,12 @@
+language: python
+python:
+    - 2.7
+env:
+    - PLONE_VERSION=4.2
+    - PLONE_VERSION=4.3
+install:
+    - sed -ie "s#http://dist.plone.org/release/4.3-latest#http://dist.plone.org/release/$PLONE_VERSION-latest#" buildout.cfg
+    - python bootstrap.py
+    - ./bin/buildout
+
+script: ./bin/test
