@@ -72,7 +72,7 @@ class FormCriterion(object):
 
     def Title(self):
         """Retrieve the title from the ATCT configuration"""
-        return getToolByName(self, 'portal_atct').getFriendlyName(
+        return self.title or getToolByName(self, 'portal_atct').getFriendlyName(
             self.Field())
 
     def getFormFieldValue(self, field_name, raw=False, REQUEST=None,

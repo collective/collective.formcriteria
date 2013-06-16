@@ -40,8 +40,8 @@ class SearchFormView(object):
             criteria[field] = {
                 'id': crit_id,
                 'field': field,
-                'friendlyName': index.friendlyName or index.index,
-                'description': index.description,
+                'friendlyName': criterion.getField('title').get(criterion) or index.friendlyName or index.index,
+                'description': criterion.getField('description').get(criterion) or index.description,
                 'fields': crit_fields,
                 'criterion': criterion,
                 }
