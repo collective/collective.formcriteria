@@ -7,6 +7,9 @@
    xmlns:plone="http://namespaces.plone.org/plone"
    i18n_domain="collective.formcriteria">
 
+  <include file="deprecated.zcml" />
+  <include package="Products.CMFCore" />
+
   <include package="plone.app.contentmenu" />
 
   <include file="deprecated.zcml" />
@@ -55,7 +58,7 @@
   <include package=".columns" />
   <include package=".foldercontents" />
   <include package=".csv" />
-  
+
   <cmf:registerDirectory name="formcriteria"/>
 
   <genericsetup:registerProfile
@@ -72,7 +75,7 @@
      description="Install a template collection with query criteria,x sort criteria and columns for reproducing the folder_contents table in a collection."
      provides="Products.GenericSetup.interfaces.EXTENSION"
      />
-  
+
   <five:registerPackage package="." initialize=".initialize" />
 
 </configure>
