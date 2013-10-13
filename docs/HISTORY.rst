@@ -7,6 +7,7 @@ Changelog
 * Added travis build script
   [bogdangi]
 
+* Added further Plone 4.3 compatibility [miohtama]
 
 2.0 - 2012-11-01
 ----------------
@@ -68,7 +69,7 @@ Changelog
 
 * Restore the workflow menu which was missing from the topic
   folder_contents view.  Thanks to Larry Pitcher for the report.
-  [rossp] 
+  [rossp]
 
 2.0a3 - 2011-01-10
 ------------------
@@ -76,7 +77,7 @@ Changelog
 * Change the permission for the grouped listing view so that anonymous
   visitors can access the view when the content is published.
   Thanks to Larry Pitcher for the report.
-  [rossp] 
+  [rossp]
 
 * Add support for columns that don't have corresponding catalog
   metadata.  Be aware that using such columns can greatly affect
@@ -124,7 +125,7 @@ Changelog
 * Add a collection listing portlet that makes use of the
   folder_listing macros for a richer portlet. [rossp]
 
-* fix issue producing 
+* fix issue producing
   AttributeError: 'NoneType' object has no attribute 'title_or_id'
   when adding path criterions.
   [hplocher]
@@ -214,7 +215,7 @@ Changelog
 * Clarify selected sort
 * Make portlet usable outside the context of the collection
 * Fix portlet class
-* Don't render hour and minute fields on date 
+* Don't render hour and minute fields on date
 
 0.9.1 - 2009-01-30
 ------------------
