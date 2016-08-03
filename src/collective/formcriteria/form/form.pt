@@ -21,7 +21,7 @@
                         field_macro nocall:form/context/formcriteria_macros/field_macro;
                         errors options/state/getErrors|python:{};">
         <fieldset metal:define-slot="fieldset">
-          <legend i18n:translate="legend_search_terms">Search Terms</legend>
+          <legend i18n:translate="">Search terms</legend>
 
           <dl tal:define="criteriaFields python:form.criteriaFields();"
               tal:condition="python:criteriaFields[0]">
