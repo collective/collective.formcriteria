@@ -7,6 +7,9 @@ Changelog
 * Added travis build script
   [bogdangi]
 
+* Fix issues with title and description inside form view and form criteria edit
+  [bogdangi]
+
 * Added further Plone 4.3 compatibility [miohtama]
 
 * Use existing i18n message ID in form. [icemac]
