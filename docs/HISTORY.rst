@@ -9,6 +9,8 @@ Changelog
 
 * Added further Plone 4.3 compatibility [miohtama]
 
+* Use existing i18n message ID in form. [icemac]
+
 2.0 - 2012-11-01
 ----------------
 
