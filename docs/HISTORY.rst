@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.0.1 - Unreleased
-------------------
+2.1 (2016-08-05)
+----------------
 
 * Added travis build script
   [bogdangi]
