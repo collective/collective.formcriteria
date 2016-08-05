@@ -73,7 +73,7 @@ View one of the contexts with subjects/keywords/categories.  Only
 items matching the subjects/keywords/categories of the context are
 listed.
 
-    >>> browser.open(bar_document.absolute_url())
+    >>> browser.open(foo_topic.absolute_url())
     >>> browser.getLink('Bar Document Title')
     <Link text='...Bar Document Title'
     url='http://nohost/plone/Members/test_user_1_/bar-document-title'>
