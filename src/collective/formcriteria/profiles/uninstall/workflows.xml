@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<object name="portal_workflow" meta_type="Plone Workflow Tool">
+ <bindings>
+  <type remove="True" type_id="FormBooleanCriterion"/>
+  <type remove="True" type_id="FormDateCriterion"/>
+  <type remove="True" type_id="FormDateRangeCriterion"/>
+  <type remove="True" type_id="FormListCriterion"/>
+  <type remove="True" type_id="FormPathCriterion"/>
+  <type remove="True" type_id="FormRelativePathCriterion"/>
+  <type remove="True" type_id="FormPortalTypeCriterion"/>
+  <type remove="True" type_id="FormPortalTypeCheckboxCriterion"/>
+  <type remove="True" type_id="FormPortalTypePulldownCriterion"/>
+  <type remove="True" type_id="FormReferenceCriterion"/>
+  <type remove="True" type_id="FormReferenceCheckboxCriterion"/>
+  <type remove="True" type_id="FormReferencePulldownCriterion"/>
+  <type remove="True" type_id="FormSelectionCriterion"/>
+  <type remove="True" type_id="FormContextCriterion"/>
+  <type remove="True" type_id="FormCheckboxCriterion"/>
+  <type remove="True" type_id="FormPulldownCriterion"/>
+  <type remove="True" type_id="FormSimpleIntCriterion"/>
+  <type remove="True" type_id="FormSimpleStringCriterion"/>
+  <type remove="True" type_id="FormCommaCriterion"/>
+ </bindings>
+</object>

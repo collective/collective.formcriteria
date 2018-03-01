@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="portal_skins" meta_type="Plone Skins Tool">
+ <object 
+    remove="True"
+    name="formcriteria"
+    meta_type="Filesystem Directory View"
+    directory="collective.formcriteria:skins/formcriteria"/>
+  <skin-path name="*">
+    <layer remove="True" name="formcriteria"/>
+  </skin-path>
+</object>

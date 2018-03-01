@@ -4,7 +4,8 @@ Changelog
 2.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Add uninstall profile.
+  [thet]
 
 
 2.1 (2016-08-05)

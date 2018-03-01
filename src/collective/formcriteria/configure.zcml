@@ -63,10 +63,19 @@
 
   <genericsetup:registerProfile
      name="default"
+     directory="profiles/default"
      title="Form Criteria"
      description="Add forms for user enterable search criteria to collections/topic/smart folders."
      provides="Products.GenericSetup.interfaces.EXTENSION"
      />
+  <genericsetup:registerProfile
+     name="uninstall"
+     directory="profiles/uninstall"
+     title="Form Criteria (uninstall)"
+     description="Uninstall Form Criteria."
+     provides="Products.GenericSetup.interfaces.EXTENSION"
+     />
+
 
   <genericsetup:registerProfile
      name="formcriteria-columns"
