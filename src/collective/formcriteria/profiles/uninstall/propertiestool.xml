@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<object name="portal_properties" meta_type="Plone Properties Tool">
+ <object name="navtree_properties" meta_type="Plone Property Sheet">
+  <property name="metaTypesNotToList" purge="False">
+   <element remove="True" value="FormBooleanCriterion"/>
+   <element remove="True" value="FormDateCriterion"/>
+   <element remove="True" value="FormDateRangeCriterion"/>
+   <element remove="True" value="FormListCriterion"/>
+   <element remove="True" value="FormPortalTypeCriterion"/>
+   <element remove="True" value="FormPortalTypeCheckboxCriterion"/>
+   <element remove="True" value="FormPortalTypePulldownCriterion"/>
+   <element remove="True" value="FormReferenceCriterion"/>
+   <element remove="True" value="FormReferenceCheckboxCriterion"/>
+   <element remove="True" value="FormReferencePulldownCriterion"/>
+   <element remove="True" value="FormSelectionCriterion"/>
+   <element remove="True" value="FormContextCriterion"/>
+   <element remove="True" value="FormCheckboxCriterion"/>
+   <element remove="True" value="FormPulldownCriterion"/>
+   <element remove="True" value="FormSimpleIntCriterion"/>
+   <element remove="True" value="FormSimpleStringCriterion"/>
+   <element remove="True" value="FormSortCriterion"/>
+   <element remove="True" value="FormPathCriterion"/>
+   <element remove="True" value="FormRelativePathCriterion"/>
+  </property>
+  <property name="types_not_searched" purge="False">
+   <element remove="True" value="FormBooleanCriterion"/>
+   <element remove="True" value="FormDateCriterion"/>
+   <element remove="True" value="FormDateRangeCriterion"/>
+   <element remove="True" value="FormListCriterion"/>
+   <element remove="True" value="FormPortalTypeCriterion"/>
+   <element remove="True" value="FormPortalTypeCheckboxCriterion"/>
+   <element remove="True" value="FormPortalTypePulldownCriterion"/>
+   <element remove="True" value="FormReferenceCriterion"/>
+   <element remove="True" value="FormReferenceCheckboxCriterion"/>
+   <element remove="True" value="FormReferencePulldownCriterion"/>
+   <element remove="True" value="FormSelectionCriterion"/>
+   <element remove="True" value="FormContextCriterion"/>
+   <element remove="True" value="FormCheckboxCriterion"/>
+   <element remove="True" value="FormPulldownCriterion"/>
+   <element remove="True" value="FormSimpleIntCriterion"/>
+   <element remove="True" value="FormSimpleStringCriterion"/>
+   <element remove="True" value="FormSortCriterion"/>
+   <element remove="True" value="FormPathCriterion"/>
+   <element remove="True" value="FormRelativePathCriterion"/>
+  </property>
+ </object>
+</object>

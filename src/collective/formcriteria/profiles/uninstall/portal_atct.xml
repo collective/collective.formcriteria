@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<atcttool>
+ <topic_indexes>
+  <index name="created" purge="False">
+   <criteria remove="True">FormDateCriterion</criteria>
+   <criteria remove="True">FormDateRangeCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="Creator" purge="False">
+   <criteria remove="True">FormSelectionCriterion</criteria>
+   <criteria remove="True">FormCheckboxCriterion</criteria>
+   <criteria remove="True">FormPulldownCriterion</criteria>
+   <criteria remove="True">FormSimpleStringCriterion</criteria>
+   <criteria remove="True">FormListCriterion</criteria>
+   <criteria remove="True">FormCommaCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="Date" purge="False">
+   <criteria remove="True">FormDateCriterion</criteria>
+   <criteria remove="True">FormDateRangeCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="Description" purge="False">
+   <criteria remove="True">FormSimpleStringCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="effective" purge="False">
+   <criteria remove="True">FormDateCriterion</criteria>
+   <criteria remove="True">FormDateRangeCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="effectiveRange" purge="False">
+   <criteria remove="True">FormDateCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="end" purge="False">
+   <criteria remove="True">FormDateCriterion</criteria>
+   <criteria remove="True">FormDateRangeCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="expires" purge="False">
+   <criteria remove="True">FormDateCriterion</criteria>
+   <criteria remove="True">FormDateRangeCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="getEventType" purge="False">
+   <criteria remove="True">FormListCriterion</criteria>
+   <criteria remove="True">FormCommaCriterion</criteria>
+   <criteria remove="True">FormReferenceCriterion</criteria>
+   <criteria remove="True">FormReferenceCheckboxCriterion</criteria>
+   <criteria remove="True">FormReferencePulldownCriterion</criteria>
+   <criteria remove="True">FormSelectionCriterion</criteria>
+   <criteria remove="True">FormCheckboxCriterion</criteria>
+   <criteria remove="True">FormPulldownCriterion</criteria>
+   <criteria remove="True">FormSimpleIntCriterion</criteria>
+   <criteria remove="True">FormSimpleStringCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="getId" purge="False">
+   <criteria remove="True">FormSimpleStringCriterion</criteria>
+   <criteria remove="True">FormListCriterion</criteria>
+   <criteria remove="True">FormCommaCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="getObjPositionInParent" purge="False">
+   <criteria remove="True">FormSimpleIntCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="get_size" purge="False">
+   <criteria remove="True">FormSimpleIntCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="getRawRelatedItems" purge="False">
+   <criteria remove="True">FormReferenceCriterion</criteria>
+   <criteria remove="True">FormReferenceCheckboxCriterion</criteria>
+   <criteria remove="True">FormReferencePulldownCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="id" purge="False">
+   <criteria remove="True">FormSimpleStringCriterion</criteria>
+   <criteria remove="True">FormListCriterion</criteria>
+   <criteria remove="True">FormCommaCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="is_default_page" purge="False">
+   <criteria remove="True">FormBooleanCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="is_folderish" purge="False">
+   <criteria remove="True">FormBooleanCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="modified" purge="False">
+   <criteria remove="True">FormDateCriterion</criteria>
+   <criteria remove="True">FormDateRangeCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="path" purge="False">
+   <criteria remove="True">FormPathCriterion</criteria>
+   <criteria remove="True">FormRelativePathCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="portal_type" purge="False">
+   <criteria remove="True">FormPortalTypeCriterion</criteria>
+   <criteria remove="True">FormPortalTypeCheckboxCriterion</criteria>
+   <criteria remove="True">FormPortalTypePulldownCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="review_state" purge="False">
+   <criteria remove="True">FormSelectionCriterion</criteria>
+   <criteria remove="True">FormCheckboxCriterion</criteria>
+   <criteria remove="True">FormPulldownCriterion</criteria>
+   <criteria remove="True">FormSimpleStringCriterion</criteria>
+   <criteria remove="True">FormListCriterion</criteria>
+   <criteria remove="True">FormCommaCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="SearchableText" purge="False">
+   <criteria remove="True">FormSimpleStringCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="sortable_title" purge="False">
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="start" purge="False">
+   <criteria remove="True">FormDateCriterion</criteria>
+   <criteria remove="True">FormDateRangeCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="Subject" purge="False">
+   <criteria remove="True">FormSelectionCriterion</criteria>
+   <criteria remove="True">FormCheckboxCriterion</criteria>
+   <criteria remove="True">FormPulldownCriterion</criteria>
+   <criteria remove="True">FormSimpleStringCriterion</criteria>
+   <criteria remove="True">FormListCriterion</criteria>
+   <criteria remove="True">FormCommaCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="Title" purge="False">
+   <criteria remove="True">FormSimpleStringCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+  <index name="Type" purge="False">
+   <criteria remove="True">FormPortalTypeCriterion</criteria>
+   <criteria remove="True">FormPortalTypeCheckboxCriterion</criteria>
+   <criteria remove="True">FormPortalTypePulldownCriterion</criteria>
+   <criteria remove="True">FormSortCriterion</criteria>
+   <criteria remove="True">FormContextCriterion</criteria>
+  </index>
+ </topic_indexes>
+</atcttool>

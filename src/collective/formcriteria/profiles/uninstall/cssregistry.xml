@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object name="portal_css" meta_type="Stylesheets Registry">
+  <stylesheet remove="True" id="collapsiblesections.css"/>
+  <stylesheet remove="True" id="++resource++formcriteria-listing-portlet.css"/>
+  <stylesheet remove="True" id="++resource++formcriteria.css"/>
+  <stylesheet remove="True" id="++resource++formcriteria-portlet.css"/>
+</object>
